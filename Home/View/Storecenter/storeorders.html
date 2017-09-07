@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>91搜墓网-{$topName}</title>
+    <include file="Common::store_center_css"/>
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}storecenter/compiled/tables.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}storecenter/compiled/form-wizard.css" type="text/css" media="screen" />
+</head>
+<body>
+    <include file="Common::store_center_top"/>
+    <!-- end navbar -->
+    <include file="Common::store_center_left"/>
+    <!-- main container -->
+    <div class="content">
+        <div class="container-fluid">
+            <div id="pad-wrapper">
+                <!-- products table-->
+                <div class="products-table section">
+                    <div class="row-fluid head">
+                        <div class="span12">
+                            <h4>91搜墓网平台商家订单</h4>
+                        </div>
+                    </div>
+                    <div class="row-fluid filter-block">
+                        <div class="pull-right btn-group">
+                            <form action="__SELF__">
+                                <input name="name" class="search" value="{$Think.get.name}" type="text" placeholder="客户名称或手机号" />
+                                <button class="glow right">
+                                    <i class="icon-search"></i> 搜索
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <notempty name='Think.session.storecenter.pid'>
+                                        <th width="12%">陵园名称</th>
+                                    <else/>
+                                        <th width="12%">编号</th>
+                                    </notempty>
+                                    <th width="7%">客户名称</th>
+                                    <th width="10%">联系方式</th>
+                                    <th width="15%">预约时间</th>
+                                    <th width="7%">客户短信</th>
+                                    <th width="15%">推荐时间</th>
+                                    <th width="7%">陵园短信</th>
+                                    <th width="7%">订单状态</th>
+                                    <th width="20%">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <php>
+                                    if(in_array('Storecenter/storeorders',session('storecenter.prName'))){
+                                </php>
+                                    <volist name="handOrders" id="handorder">
+                                        <tr>
+                                            <notempty name='Think.session.storecenter.pid'>
+                                                <td>{$handorder.store_name}</td>
+                                            <else/>
+                                                <td>{$handorder.id}</td>
+                                            </notempty>
+                                            <td>{$handorder.buyer}</td>
+                                            <td>{$handorder.mobile}</td>
+                                            <td>
+                                                <notempty name="handorder.appoint_time">
+                                                  {$handorder.appoint_time|date="Y-m-d H:i:s",###}
+                                                </notempty>
+                                            </td>
+                                            <td>
+                                                <php>
+                                                    if(in_array('Storecenter/get_order_msg',session('storecenter.prName'))){
+                                                </php>
+                                                    <notempty name="handorder.CustomMsg">  
+                                                        <a href="javascript:void(0);" class="showMsg" data-id="{$handorder.id}" data-classify="1">[查看]</a>
+                                                    </notempty>
+                                                <php>
+                                                    }
+                                                </php>
+                                            </td>
+                                            <td>
+                                                <notempty name='handorder.pushed_time'>
+                                                    {$handorder.pushed_time|date='Y-m-d H:i:s',###}
+                                                </notempty>
+                                            </td>
+                                            <td>
+                                                <php>
+                                                    if(in_array('Storecenter/get_order_msg',session('storecenter.prName'))){
+                                                </php>
+                                                    <notempty name="handorder.StoreMsg"> 
+                                                        <a href="javascript:void(0);" class="showMsg" data-msg="{$handorder.StoreMsg}" data-id="{$handorder.id}" data-classify="2">[查看]</a>
+                                                    </notempty>
+                                                <php>
+                                                    }
+                                                </php>
+                                            </td>
+                                            <td>
+                                                <switch name="handorder.status">
+                                                    <case value="$Think.config.DELETE_STATUS">
+                                                        <span class="label label-important">
+                                                            购墓失败
+                                                        </span>
+                                                    </case>
+                                                    <case value="$Think.config.DEFAULT_STATUS">
+                                                        <span class="label label-warning">
+                                                            新订单
+                                                        </span>
+                                                    </case>
+                                                    <case value="$orderStatus[SUCCESS]">
+                                                        <span class="label label-success">
+                                                            购墓成功
+                                                        </span>
+                                                    </case>
+                                                    <case value="$orderStatus[STOP]">
+                                                        <span class="label label-success">
+                                                            购墓成功
+                                                        </span>
+                                                    </case>
+                                                    <case value="$orderStatus[OK]">
+                                                        <span class="label label-info">
+                                                            订单确认
+                                                        </span>
+                                                    </case>
+                                                    <case value="$orderStatus[APPLY_BACK]">
+                                                        <span class="label label-inverse">
+                                                            申请退单
+                                                        </span>
+                                                    </case>
+                                                    <case value="$orderStatus[ALLOW]">
+                                                        <span class="label" style="background-color: #434c04;">
+                                                            允许退单
+                                                        </span>
+                                                    </case>
+                                                    <case value="$orderStatus[BACK_SUCCESS]">
+                                                        <span class="label" style="background-color: gray;">
+                                                            退单完成
+                                                        </span>
+                                                    </case>
+                                                    <default/>
+                                                </switch>
+                                            </td>
+                                            <td>
+                                                <php>
+                                                    if(in_array('Storecenter/tomb_address',session('storecenter.prName'))){
+                                                </php>
+                                                    <gt name='handorder.status' value='$Think.config.DEFAULT_STATUS'>
+                                                        <if condition="($handorder['tomb_user'] eq '') && ($handorder['tomb_address'] eq '')">
+                                                            <span data-id="{$handorder.id}" class="btn-flat small store_tomb_info">
+                                                                <i class="icon-plus"> 添加墓位地址</i>
+                                                            </span>
+                                                        </if>
+                                                    </gt>
+                                                <php>
+                                                    }
+                                                    if(in_array('Storecenter/set_order_status',session('storecenter.prName'))){
+                                                </php>
+                                                    <eq name="handorder['status']" value="0">
+                                                        <span data-status="{$orderStatus[OK]}" data-id="{$handorder['id']}" class="btn-flat success small setOrder">
+                                                            <i class="icon-ok"> 购墓成功</i>
+                                                        </span>
+                                                        <span data-status="{$orderStatus[FAIL]}" data-id="{$handorder['id']}" class="btn-flat danger small setOrder">
+                                                            <i class="icon-warning-sign"> 购墓失败</i>
+                                                        </span>
+                                                    </eq>
+                                                <php>
+                                                    }
+                                                </php>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                <php>
+                                    }
+                                </php>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+                        {$page}
+                    </div>
+                </div>
+                <!-- end products table -->
+            </div>
+        </div>
+    </div>
+    <div class="modal hide fade" id="myModal">
+        <form id="saveForm">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">添加墓位地址</h4>
+            </div>
+            <div class="modal-body row-fluid form-wrapper">
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">墓位使用人:</label>
+                    <input type="text" name="tomb_user" class="form-control" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">墓位地址:</label>
+                    <input type="text" name="tomb_address" class="form-control" placeholder="比如:芬芳园玫瑰区一排二号">
+                </div>
+                <input name="id" type="hidden" />
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn-flat primary">提交</button>
+            </div>
+        </form>
+    </div>
+    <!-- end main container -->
+
+    <div class="modal hide fade" id="msgModal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="msgModalLabel">短信列表</h4>
+        </div>
+        <div class="modal-body">
+            <table class="table table-hover">
+                <thead>
+                    <th width="20%">姓名</th>
+                    <th width="30%">手机号</th>
+                    <th width="50%">内容</th>
+                </thead>
+                <tbody class="msgList">
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal hide fade" id="failMsgModal">
+        <form id="failMsgForm">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="failMsgModalLabel">购墓失败原因</h4>
+            </div>
+            <div class="modal-body row-fluid form-wrapper">
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">原因:</label>
+                    <textarea name="reason" class="input-xlarge" rows="4"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="orderId" value=""/>
+                <input type="hidden" name="orderStatus" value=""/>
+                <button type="submit" class="btn-flat primary">提交</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- scripts -->
+    <script src="{$Think.const.JS_URL}storecenter/jquery-latest.js"></script>
+    <script src="{$Think.const.JS_URL}storecenter/jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}storecenter/bootstrap.min.js"></script>
+    <script src="{$Think.const.JS_URL}storecenter/theme.js"></script>
+    <script>
+        /**
+         * 订单完成操作
+         */
+        $('.setOrder').click(function(){
+            var orderStatus = $(this).data('status');
+            var orderId = $(this).data('id');
+            var failStatus = "{$Think.config.ORDER_STATUS.FAIL}";
+            if(orderStatus != failStatus){
+                if(confirm('确定合作已达成，购墓成功？')){
+                    var info = {orderStatus:orderStatus,orderId:orderId};
+                    _setOrderStatus(info);
+                }else{
+                    return false;
+                }
+            }else{
+                $('#failMsgModal textarea[name="reason"]').val('');
+                $('#failMsgModal').modal();
+                $('#failMsgModal input[name="orderId"]').val(orderId);
+                $('#failMsgModal input[name="orderStatus"]').val(failStatus);
+            }
+        });
+
+        $('#failMsgForm textarea[name="reason"]').focus(function(){
+            $(this).next('span').remove();
+        })
+
+        /**
+         * 提交购墓失败原因
+         */
+        $('#failMsgForm').bind('valid.form',function(){
+            var reason = $('#failMsgForm textarea[name="reason"]');
+            if(reason.val() == ''){
+                reason.next('span').remove();
+                reason.after('<span style="display:inline;margin-left:5px;color:red;" class="alert-msg"><i class="icon-remove-sign"></i> 请填写购墓失败原因</span>');
+                return false;
+            }else{
+                _setOrderStatus($(this).serialize());
+            }
+        })
+
+        /**
+         * ajax操作保存订单状态
+         * @param {object} dataInfo 发送到服务器的数据
+         */
+        function _setOrderStatus(dataInfo){
+            $.ajax({
+                url:"{:U('set_order_status')}",
+                type:'post',
+                data:dataInfo,
+                dataType:'JSON',
+                success:function(jsonData){
+                    if(jsonData['code'] == 1){
+                        alert(jsonData['msg']);
+                        window.location.reload();
+                    }else{
+                        alert(jsonData['msg']);
+                    }
+                }
+            })
+        }
+
+        /**
+         * 查看短信
+         */
+        $('.showMsg').click(function(){
+            var id = $(this).data('id');
+            var classify = $(this).data('classify');
+            $.ajax({
+                url:"{:U('get_order_msg')}",
+                type:'get',
+                data:{
+                    id:id,
+                    classify:classify
+                },
+                dataType:'JSON',
+                success:function(info){
+                    if(info['code'] == 1){
+                        var str = '';
+                        var result = info['data'];
+                        for(var val of result){
+                            str += '<tr><td>'+val['name']+'</td><td>'+val['mobile']+'</td><td>'+val['msg']+'</td></tr>';
+                        }
+                        $('.msgList').empty().append(str);
+                        $('#msgModal').modal();
+                    }
+                }
+            })
+        })
+
+        /**
+         * 添加墓位地址
+         */
+        $('.store_tomb_info').click(function(){
+            $('#saveForm')[0].reset();
+            $('#saveForm .alert-msg').remove();
+            var order_id = $(this).data('id');
+            $('#saveForm input[name="id"]').val(order_id);
+            $('#myModal').modal();
+        });
+
+        $('#saveForm input[name="tomb_user"],#saveForm input[name="tomb_address"]').focus(function(){
+            $(this).next('span').remove();
+        })
+        
+        /**
+         * 提交保存墓位地址
+         */
+        $("#saveForm").bind('valid.form',function() {
+            var tombUser = $('#saveForm input[name="tomb_user"]');
+            var tombAddress = $('#saveForm input[name="tomb_address"]');
+            if(tombUser.val().trim() == ''){
+                tombUser.next('span').remove();
+                tombUser.after('<span style="display:inline;margin-left:5px;color:red;" class="alert-msg"><i class="icon-remove-sign"></i> 请填写墓位使用人</span>');
+                return false;
+            }
+
+            if(tombAddress.val().trim() == ''){
+                tombAddress.next('span').remove();
+                tombAddress.after('<span style="display:inline;margin-left:5px;color:red;" class="alert-msg"><i class="icon-remove-sign"></i> 请填写墓位地址</span>');
+                return false;
+            }
+            $.ajax({
+                url : "{:U('tomb_address')}",
+                type : 'POST',
+                data : $(this).serialize(),
+                dataType: "json",
+                success : function(result) {
+                    if(result['code'] == 1){
+                        $('#exampleModal').modal('hide');
+                        alert(result.msg);
+                        location.reload();
+                    }else{
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

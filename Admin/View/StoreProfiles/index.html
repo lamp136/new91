@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+        <style type="text/css">
+            .address{
+                position: absolute;
+                width: 200px;
+                background: #fff;
+                border: 1px solid #666;
+                z-index: 100;
+            }
+            .provincecity{
+                position: relative;
+            }
+        </style>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">合同档案列表</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>陵园档案列表</h4>
+                                    <php>
+                                        if (showHandle('StoreProfiles/add')) {
+                                    </php>
+                                        <span class="tools">
+                                            <a href="{:U('StoreProfiles/add')}" class="icon-plus">添加档案</a>
+                                        </span>
+                                    <php>
+                                        }
+                                    </php>
+                                </div>
+                                <div class="widget-body">
+                                    <form id="quickForm" method="get" class="form-horizontal" autocomplete="off" action='{:U("index")}'>
+                                    <table>
+                                        <tr>
+                                            <td>搜索：</td>
+                                            <td><input type="text" name="show_store_name" value='{$choice[show_store_name]}'  placeholder="商家名称"><td/>
+                                            <td>
+                                                <select name="category_id" class="input-medium">
+                                                    <option value="">请选择商家类型</option>
+                                                    <volist name="merchant" id="member" key="key">
+                                                        <option value="{$member.cid}" <if condition="$member[cid] eq $choice[category_id]">selected</if>>{$member.name}</option>
+                                                    </volist>
+                                                </select>
+                                            <td/>
+                                            <td>
+                                                <select class="input-small m-wrap" tabindex="1" name="search_province" id="province">
+                                                   <option value="0">选择省</option>
+                                                   <volist name="province" id="vo">
+                                                        <option value="{$vo.region_id}" <if condition="$choice['province'] eq $vo['region_id']">selected="selected" </if>>{$vo.region_name}</option>
+                                                   </volist>
+                                               </select>
+                                             </td>
+                                             <td>
+                                               <select class="input-small m-wrap" tabindex="1" name="search_city" id="city">
+                                                   <option value="0">选择市</option>
+                                                   <volist name="city" id="vi">
+                                                        <option value="{$vi.region_id}"  <if condition="$choice['city'] eq $vi['region_id']">selected="selected"</if> >{$vi.region_name}</option>
+                                                   </volist>
+                                               </select>
+                                            </td>
+                                            <td>
+                                                <select name='choicetime' class="input-medium">
+                                                    <option value="">选择合同过期时间</option>
+                                                    <option value="long" <eq name="choice[time]" value="long">selected='selected'</eq>>已过期一月</option>
+                                                    <volist name="Think.config.CHOICE_TIMES" id='vo'>
+                                                        <option value="{$key}" <eq name="choice[time]" value="$key">selected='selected'</eq>>{$vo}</option>
+                                                    </volist>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary">确定</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    </form>
+                                    <div class="form-horizontal">
+                                        <php>
+                                            if (showHandle('StoreProfiles/editprofiles')){
+                                        </php>
+                                            <a class="btn btn-small btn-primary editprofiles" href="javascript:;" ><i class="icon-pencil icon-white"> </i>编辑</a>&nbsp;
+                                        <php>
+                                            }
+                                            if (showHandle('StoreProfiles/delprofiles')){
+                                        </php>  
+                                            <a class="btn btn-danger btn-small delprofiles" href="javascript:void(0)"><i class="icon-remove  icon-white"></i>删除</a>&nbsp;
+                                        <php>
+                                            }
+                                            if (showHandle('StoreProfiles/addProfilesDetail')){
+                                        </php>
+                                            <a href="javascript:;"  class="btn btn-small btn-primary addProfiles"><i class="icon-remove  icon-plus"></i>添加</a>
+                                        <php>
+                                            }
+                                        </php>
+                                    </div>
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" style="text-align:center; width:1%;" >选择</th>
+                                                <th rowspan="2" style="text-align:center; width:12%;" >商家名称</th>
+                                                <th rowspan="2" style="text-align:center; width:7%;">地址</th>
+                                                <th rowspan="2" style="text-align:center; width:5%;" >商家分类</th>
+                                                <th colspan="10" style="text-align:center; width:75%; " >详细信息</th>
+                                            </tr>
+                                            <tr>
+                                                <th width="9%">合同名称</th>
+                                                <th width="4%">商品分类</th>
+                                                <th width="4%">会员类型</th>
+                                                <th width="5%">佣金</th>
+                                                <th width="4%">结算时间</th>
+                                                <th width="12%">联系方式</th>
+                                                <th width="7%">合同时间</th>
+                                                <th width="7%">合同续签</th>
+                                                <th width="5%">备注</th>
+                                                <th width="18%">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <volist name="list" id="vo">
+                                            <notempty name ="vo.StoreProtilesDetail" value="0">
+                                                <tr class='tr'>
+                                                    <td rowspan="{$vo.profiles_detail_num}" style="text-align:center;">
+                                                        <input name="ID_Dele" type="checkbox" class="checkboxs" id="check" value="{$vo.id}"/>
+                                                    </td>
+                                                    <td rowspan="{$vo.profiles_detail_num}" style="text-align:center;">
+                                                        {$vo.show_store_name} 
+                                                        <php>
+                                                            if (showHandle('StoreProfiles/preview')){
+                                                        </php>
+                                                            <span class="preview" data-id = {$vo.id} style="color:blue;cursor: pointer;">【预览】</span>
+                                                        <php>
+                                                            }
+                                                        </php>
+                                                    </td>
+                                                    <td rowspan="{$vo.profiles_detail_num}" style="text-align:center;" class="provincecity">{$vo.Province.region_name}/{$vo.City.region_name}
+                                                        <div class='hide address'>
+                                                            {$vo.address}
+                                                        </div>
+                                                    </td>
+                                                    <td rowspan="{$vo.profiles_detail_num}" style="text-align:center;">
+                                                        <volist name="merchant" id="member" key="key">
+                                                            <if condition="$member[cid] eq $vo[category_id]">{$member.name}</if>
+                                                        </volist>
+                                                    </td>
+                                                </tr>   
+                                            </notempty>
+                                            <volist name ="vo.StoreProtilesDetail"  id='voo'>
+                                                <tr>
+                                                    <td>{$voo.profile_name}</td>
+                                                    <td>
+                                                        <volist name="category" id="cat">
+                                                             <if condition="$cat[cid]  eq  $voo[category_id]">{$cat.name}</if>
+                                                        </volist>
+                                                    </td>
+                                                    <td>
+                                                         <switch name="voo.member_status">
+                                                             <case value="0">否</case>
+                                                             <case value="$Think.config.STOER_MERMBER_V">{$Think.config.STOER_MERMBER_MSG}</case>
+                                                             <case value="$Think.config.STOER_MERMBER">{$Think.config.STOER_MERMBER_MSG}</case>
+                                                             <case value="$Think.config.STOER_MERMBER_PERSON">{$Think.config.STOER_MERMBER_PERSON_MSG}</case>
+                                                             <case value="$Think.config.STOER_MERMBER_AD">{$Think.config.STOER_MERMBER_AD_MSG}</case>
+                                                         </switch>
+                                                     </td>
+                                                     <td>
+                                                         <if condition="$voo.return_amount neq 0" > &nbsp;{$voo.return_amount}%</if>
+                                                     </td>
+                                                     <td>{$voo.settlement_time}</td>
+                                                     <td >{$voo.contact_man}<notempty name="voo.mobile" > ：{$voo.mobile}<br/></notempty><notempty name="voo.telephone" > ：{$voo.telephone}</notempty></td>
+                                                     <td>
+                                                         {$voo.start_time|date='Y-m-d',###}至{$voo.end_time|date='Y-m-d',###}
+                                                     </td>
+                                                     <td>
+                                                         <volist name="vo.StoreProfilesRenew" id="vooo" key="key">
+                                                            <if condition="$voo[id] eq $vooo[store_profiles_detail_id]" >
+                                                                <span>{$key}:{$vooo.renew_start_time|date='Y-m-d',###}至{$vooo.renew_end_time|date='Y-m-d',###} </span><br/>
+                                                                <if condition="$key eq count($vo[StoreProfilesRenew])">
+                                                                    <php> if (showHandle('StoreProfiles/delRenewTime')){ </php>
+                                                                        <a  href="javascript:;" data-id ="{$vooo.id}"  class="delRenewTime" >删除</a>
+                                                                    <php>}</php>
+                                                                </if>
+                                                            </if>
+                                                         </volist>
+                                                     </td>
+                                                     <td>{$voo.remarks}</td>
+                                                     <td>
+                                                        <php>
+                                                            if (showHandle('StoreProfiles/edit')){
+                                                        </php>
+                                                            <a class="btn btn-small btn-primary" href="{:U('StoreProfiles/edit', array('id'=>$voo['id'],'np'=>$nowPage))}"><i class="icon-pencil icon-white"> </i>编辑</a>
+                                                        <php>
+                                                            }
+                                                            if (showHandle('StoreProfiles/renew')){
+                                                        </php>
+                                                            <a class="btn btn-success btn-small renew" href="javascript:void(0)" data-id="{$voo.id}" ><i class="icon-ok  icon-white"> </i>续签</a>
+                                                        <php>
+                                                            }
+                                                            if (showHandle('StoreProfiles/giveup')){
+                                                        </php>
+                                                           <a class="btn btn-danger btn-small giveup" href="javascript:void(0)" data-id="{$voo.id}" data-status="{$Think.config.DELETE_STATUS}" ><i class="icon-remove  icon-white"> </i>放弃</a>
+                                                        <php>
+                                                            }
+                                                            if (showHandle('StoreProfiles/imageList')){
+                                                        </php>
+                                                           <a href="{:U('StoreProfiles/imageList', array('id'=>$voo['id'],'np'=>$nowPage,'showStoreName'=>$vo[show_store_name]))}"  class="btn btn-small"><i class="icon-picture"> </i>图片</a>
+                                                        <php>
+                                                            }
+                                                        </php>
+                                                     </td>
+                                                  </tr>
+                                            </volist>
+                                            </tr>
+                                        </volist>
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span12 center">
+                                            <div class="pagination" id="sample_1_info" >
+                                                <span style="text-align: left">
+                                                    <php>
+                                                        if (showHandle('StoreProfiles/editprofiles')){
+                                                    </php>
+                                                        <a class="btn btn-small btn-primary editprofiles" href="javascript:;" ><i class="icon-pencil icon-white"> </i>编辑</a>&nbsp;
+                                                    <php>
+                                                        }
+                                                        if (showHandle('StoreProfiles/delprofiles')){
+                                                    </php>  
+                                                        <a class="btn btn-danger btn-small delprofiles" href="javascript:void(0)"><i class="icon-remove  icon-white"></i>删除</a>&nbsp;
+                                                    <php>
+                                                        }
+                                                        if (showHandle('StoreProfiles/addProfilesDetail')){
+                                                    </php>
+                                                        <a href="javascript:;"  class="btn btn-small btn-primary addProfiles"><i class="icon-remove  icon-plus"></i>添加</a>
+                                                    <php>
+                                                        }
+                                                    </php>
+                                                </span>
+                                                <span style="text-align: right">
+                                                    {$page}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+    <!--续签信息开始-->
+    <div id="renew" class="modal hide fade in" style='width:650px;'>
+        <form id="renewForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>续签</h3>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>合同名称：</td>
+                            <td class='store_name'></td>
+                        </tr>
+                        <tr>
+                            <td colspan='2'>上次合同结束时间：<span class='last_end_time text-success'></span></td>
+                        </tr>
+                        <tr>
+                            <td>续签开始时间：</td>
+                            <td>
+                                <input type='text' name='renew_start_time' onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" class="Wdate"><span class='text-success'>不选的话默认就是上次合同的结束时间。</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>续签结束时间：</td>
+                            <td>
+                                <input type='text' name='renew_end_time' onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" class="Wdate" data-rule='required' />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type='hidden' id='store_profiles_id' name='store_profiles_detail_id'></input>
+                <input type='hidden'  name='store_profiles_id'></input>
+                <button type="submit" class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--续签信息结束-->
+    
+    <!--模态化弹框添加商家联系人信息-->
+    <div id="giveup" class="modal hide fade in" style="display: none; ">
+        <form id="giaveUpForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>请输入放弃理由</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                    <tr>
+                        <td>放弃理由：</td>
+                        <td>
+                            <textarea name="reason" class="input-xlarge reason" row="3" data-rule="required"></textarea>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type='hidden' id='id' name='id'></input>
+                <input type='hidden' id='status' name='status'></input>
+                <button type="submit" class="btn btn-success" id="sub-giveup">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    
+    <!--模态化弹框-预览功能开始-->
+    <div id="preview" class="modal hide fade in" style="display: none;width:950px;left:35%;">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>合同预览</h3>
+        </div>
+        <div id="previewForm" class="modal-body" style="height:500px;">
+
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </div>
+    <!--模态化弹框-预览功能结束-->
+    
+    <!--图片放大功能开始-->
+    <div id="zoomInImage" class="modal hide fade in" style="display: none;width:950px;left:35%;">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>电子合同图片</h3>
+        </div>
+        <div class="modal-body" style="height:500px;">
+            <img src="" id="zoomInImageImg" >
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </div>
+    <!--图片放大功能结束-->
+    
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}zh-CN.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+        //预览功能
+        $('.preview').click(function(){
+            var store_id = $(this).attr('data-id');
+            $.ajax({
+                url:"{:U('preview')}",
+                type:'post',
+                data:'id='+store_id,
+                success:function(d){
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        var data = result.data;
+                        var length = data.StoreProfilesDetail.length;
+                        var str = '';
+                        str = '<table class="table table-bordered table-hover"><tr><th colspan="4" style="text-align:center;font-size:30px;">合同基本信息</th></tr>';
+                        str +='<tr><td style="text-align:center;width:200px;">商家名称:</td><td >'+data.show_store_name+'</td><td style="text-align:center;">地&nbsp;区:</td><td >'+data.Province.region_name+'/'+data.City.region_name+'</td></tr>';
+                        str +='<tr><td style="text-align:center;">商家地址：</td><td >'+data.address+'</td><td style="text-align:center;">集团所属:</td><td >'+data.category_group_id+'</td></tr>';                      
+                        str +='<tr><td style="text-align:center;">商家类型:</td><td >'+data.category_id+'</td><td></td><td></td></tr><tr><th colspan="4">&nbsp;</th></tr></table>';                    
+                        for(var i=0;i<length;i++ ){
+                            str +='<table class="table table-bordered table-hover"><tr><th style="text-align:center;font-size:30px;">'+data.StoreProfilesDetail[i].category_id+'合同详细信息</th></tr></table>';
+                            str +='<table class="table table-bordered table-hover"><tr><td>合同名称:</td><td>'+data.StoreProfilesDetail[i].profile_name+'</td><td>价格区间：</td><td>'+data.StoreProfilesDetail[i].min_price+data.StoreProfilesDetail[i].max_price+'</td></tr>';
+                            str +='<tr><td>合同时间：</td><td>'+data.StoreProfilesDetail[i].start_time+'至'+data.StoreProfilesDetail[i].end_time+'</td><td>合同续签详情：</td><td>'+data.StoreProfilesDetail[i].Renew+'</td></tr>';
+                            str +='<tr><td>合同负责人：</td><td>'+data.StoreProfilesDetail[i].principal+'</td><td>合同类型:</td><td>'+data.StoreProfilesDetail[i].member_status+'</td></tr>';
+                            str +='<tr><td>接收时间：</td><td>'+data.StoreProfilesDetail[i].receive_time+'</td><td>传真</td><td>'+data.StoreProfilesDetail[i].fax+'</td></tr>';
+                            str +='<tr><td>佣金：</td><td>'+data.StoreProfilesDetail[i].return_amount+'%</td><td>结算日期：</td><td>'+data.StoreProfilesDetail[i].settlement_time+'</td></tr>';
+                            str +='<tr><td>联系方式：</td><td>手机：'+data.StoreProfilesDetail[i].mobile+'<br/>座机：'+data.StoreProfilesDetail[i].telephone+'</td><td>联系人：</td><td>'+data.StoreProfilesDetail[i].contact_man+'</td></tr>'; 
+                            str +='<tr><td>开户行：</td><td>'+data.StoreProfilesDetail[i].bank+'</td><td>开户人</td><td>'+data.StoreProfilesDetail[i].bank_member+'</td></tr>';
+                            str +='<tr><td>银行账号：</td><td>'+data.StoreProfilesDetail[i].bank_account+'</td><td>商家承诺：</td><td>'+data.StoreProfilesDetail[i].commitment+'</td></tr>';
+                            str +='<tr><td>配送区域：</td><td>'+data.StoreProfilesDetail[i].distribution_area+'</td><td>备注：</td><td>'+data.StoreProfilesDetail[i].remarks+'</td></tr>';
+                            str +='<tr><td style="color:green;">价格合同：<br/>(点击大图)</td><td colspan="3">'+data.StoreProfilesDetail[i].imagePrice+'</td></tr>';
+                            str +='<tr><td style="color:green;">电子合同：<br/>(点击大图)</td><td colspan="3">'+data.StoreProfilesDetail[i].imageElec+'</td></tr></table>';
+                        }            
+                        $('#previewForm').empty().append(str);
+                        $('#preview').modal();
+                    } else if(result.flag==0){
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+        //放大图片
+        function zoomInImage(d){
+            var src = $(d).attr('data-image');
+            $('#zoomInImageImg').attr('src',src);
+            $('#zoomInImage').modal();
+        }
+        
+        
+        //添加合同档案
+        $('.addProfiles').click(function(){
+            if($("input[name='ID_Dele']:checked").length == 1){
+                var id = $("input[name='ID_Dele']:checked").val();
+                var np = <?php echo $nowPage ?>; 
+                window.location.href="/system.php/StoreProfiles/addProfilesDetail/id/"+id+'/np/'+np;
+            }else{
+                alert('请选择一个！');
+            }
+        });
+        //移除所有选中
+        $("input[name='ID_Dele']").each(function(){
+            $(this).attr("checked",false);
+        });
+        //编辑合同档案
+        $('.editprofiles').click(function(){
+            if($("input[name='ID_Dele']:checked").length == 1){
+                var id = $("input[name='ID_Dele']:checked").val();
+                var np = <?php echo $nowPage ?>; 
+                //alert(np);
+                window.location.href="/system.php/StoreProfiles/editprofiles/id/"+id+'/np/'+np;
+            }else{
+                alert('请选择一个！');
+            }
+        });
+        //删除档案 
+        $('.delprofiles').click(function(){
+            var str = '';
+            $("input[name='ID_Dele']:checked").each(function(){
+                str += ($(this).val()+',');
+            });
+            if(str.length==0){
+                alert('未选中信息！');
+                return false;
+            }else {
+                if(!window.confirm('确定要删除？')){
+                    event.preventDefault();
+                }else{
+                    $.ajax({
+                        url:"{:U('delprofiles')}",
+                        type:'post',
+                        data:'id='+str,
+                        success:function(d){
+                            var result = eval("(" + d + ")");
+                            if (result.flag == 1) {
+                                alert(result.msg);
+                                window.location.reload();//刷新当前页面.
+                            } else if(result.flag==0){
+                                alert(result.msg);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+        //时间格式化
+        function formatDate(unix) {
+            var now = new Date(parseInt(unix) * 1000);
+            var year=now.getFullYear();
+            var month=now.getMonth()+1;
+            var date=now.getDate();
+            var hour=now.getHours();
+            var minute=now.getMinutes();
+            var second=now.getSeconds();
+            var time = year+"-"+month+"-"+date;
+            return  time.replace(/\b(\w)\b/g, '0$1');
+        } 
+        
+        //续签
+        $('.renew').click(function(){
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url: "/system.php/StoreProfiles/renew/id/"+id,
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        var data = result.data;
+                        $('#renewForm input[name="store_profiles_detail_id"]').val(data.id);
+                        $('#renewForm input[name="store_profiles_id"]').val(data.profiles_id);
+                        $('.store_name').text(data.profile_name);
+                        var unix = data.end_time;
+                        var datetime = formatDate(unix);
+                        $('.last_end_time').text(datetime);
+                        $('#renew').modal();
+                    } else {
+                        alert('操作有误');
+                    }
+                }
+            });
+        });
+        
+        function checkEndTime(){  
+            var startTime=$('.last_end_time').text();  
+            var start=new Date(startTime.replace("-", "/").replace("-", "/"));
+            var reStarTime = $('#renewForm input[name="renew_start_time"]').val(); 
+            var reStart = new Date(reStarTime.replace("-", "/").replace("-", "/"));  
+            var endTime=$('#renewForm input[name="renew_end_time"]').val();  
+            var end=new Date(endTime.replace("-", "/").replace("-", "/")); 
+            if(reStart<start){  
+                alert('请检查续签开始时间是否正确！');
+                return false;  
+            }else if(end<reStart){
+                alert('请检查续签结束时间是否正确！');
+                return false;
+            }else if(end<start){
+                alert('请检查续签结束时间是否正确！');
+                return false;
+            }  
+            return true;  
+        }
+        //提交续签form 表单
+        $('#renewForm').bind('valid.form', function () {
+            if(!checkEndTime()){
+                return false;  
+            }
+            $('#renew').modal('hide');
+            $.ajax({
+                url: "{:U('StoreProfiles/renew')}",
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert('续签成功');
+                        window.location.reload();//刷新当前页面.
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+       
+        //放弃
+        $('.giveup').click(function(){
+            var id = $(this).attr('data-id');
+            var status = $(this).attr('data-status');
+            $.ajax({
+                url: "/system.php/StoreProfiles/giveup/id/"+id,
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    $('.reason').text(result.msg);
+                }
+            });
+            $('#status').val(status);
+            $('#id').val(id);
+            $('#giveup').modal();
+        });
+        $('#giaveUpForm').bind('valid.form', function () {
+            $.ajax({
+                url: "{:U('giveup')}",
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();//刷新当前页面.
+                    } else if(result.flag==0){
+                    	alert(result.msg);
+                    }
+                }
+            });
+        });
+       
+        //省份切换，返回对应的城市
+        $('#province').change(function () {
+            var province_id = $(this).val();
+            if (province_id == 0) {
+                $('#city').empty();
+                var str = "<option value='0'>选择市</option>";
+                $('#city').html(str);
+            } else {
+                $.ajax({
+                    url: "{:U('getCity')}",
+                    type: 'POST',
+                    data: 'province_id=' + province_id,
+                    success: function (d) {
+                        var result = eval("(" + d + ")");
+                        var data = result.data;
+                        var str = "<option value='0'>选择市</option>";
+                        if (result.flag == 1) {
+                            for(var i in data){
+                                str += "<option value="+data[i].region_id+">"+data[i].region_name+"</option>";
+                            }
+                            $('#city').html(str);
+                        }
+                    }
+                });
+            }
+        });
+        //地址移入移出
+        $('.provincecity').hover(function(){
+           $(this).children('div').show(); 
+        },
+        function(){
+            $(this).children('div').hide(); 
+        });
+        
+        //删除续签时间
+        $('.delRenewTime').click(function(){
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url: "{:U('delRenewTime')}",
+                type: 'POST',
+                data: 'id=' + id,
+                success:function(d){
+                    var result = eval("(" + d + ")");
+                    if(result.flag == 1){
+                        alert(result.msg);
+                        window.location.reload();//刷新当前页面.
+                    }else{
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

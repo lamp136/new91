@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head" />
+    <style type="text/css">
+        .address{
+            position: absolute;
+            width: 200px;
+            background: #fff;
+            border: 1px solid #666;
+            z-index: 100;
+        }
+        .view{
+            position: relative;
+        }
+    </style>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+<!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">申请列表</a><span class="divider-last">&nbsp;</span>
+                        </li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4><i class="icon-reorder"></i>申请列表</h4>
+                            </div>
+                            <div class="widget-body">
+                                <form method="get" class="form-horizontal" autocomplete="off" action="{:U('Storage/apply')}">
+                                    搜索：
+                                    <input type="text" name="service_goods_name" class="input-large" placeholder="商品名称" value="{$Think.get.service_goods_name}"/>
+                                    <button class="btn btn-primary">确定</button>
+                                </form>
+                                <table class="table table-striped table-bordered" id="sample_1">
+                                    <thead>
+                                    <tr>
+                                        <th class="hidden-phone">SN</th>
+                                        <th class="hidden-phone">商品</th>
+                                        <th class="hidden-phone">供应商</th>
+                                        <th class="hidden-phone">单价</th>
+                                        <th class="hidden-phone">数量</th>
+                                        <th class="hidden-phone">总价</th>
+                                        <th class="hidden-phone">仓库</th>
+                                        <th class="hidden-phone">申请人</th>
+                                        <th class="hidden-phone">申请时间</th>
+                                        <th class="hidden-phone">状态</th>
+                                        <th class="hidden-phone">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <volist name="list" id="vo">
+                                            <tr class="odd gradeX">
+                                                <td>{$vo.application_sn}</td>
+                                                <td>{$vo.service_goods_name}</td>
+                                                <td>{$vo.supplier_name}</td>
+                                                <td>{$vo.price}</td>
+                                                <td>{$vo.number}</td>
+                                                <td>{$vo.total_price}</td>
+                                                <td>{$vo.storage_name}</td>
+                                                <td>{$vo.applicant}</td>
+                                                <td>{$vo.application_time|date="Y-m-d",###}</td>
+                                                <td>
+                                                    <switch name="vo.status"> 
+                                                        <case value="0">审核中</case>
+                                                        <case value="1">
+                                                            <span class='view' style='color:green;'>审核通过
+                                                                <div class='hide address'>
+                                                                    批复数量：{$vo.reply_number} 批复总额：{$vo.replay_total_price}
+                                                                </div>
+                                                            </span>
+                                                        </case>
+                                                        <case value="2">
+                                                            <span class='view' style='color:green;'>审核未通
+                                                                <div class='hide address'>
+                                                                    {$vo.reason}
+                                                                </div>
+                                                            </span>
+                                                        </case>
+                                                        <case value="3">已入库</case>
+                                                        <default />联系开发人员
+                                                    </switch>
+                                                </td>
+                                                <td>
+                                                    <php>
+                                                        if (showHandle('Storage/editApply')) {
+                                                    </php>
+                                                    <if condition="$vo.status eq 0">
+                                                        <a href="{:U('Storage/editApply',array('id'=>$vo['id'],'p'=>$nowPage))}" class="btn btn-small btn-primary opCat">
+                                                            <i class="icon-pencil icon-white"> </i>编辑
+                                                        </a>
+                                                    </if>
+                                                    <php>
+                                                        }
+                                                        if (showHandle('Storage/delApply')){
+                                                    </php>
+                                                        <if condition="$vo.status eq 0">
+                                                            <button type="button" class="btn btn-danger btn-small del" data-id="{$vo.id}"><i class="icon-remove  icon-white"></i>删除</button>
+                                                        </if>
+                                                    <php>
+                                                        }
+                                                        if (showHandle('Storage/checkApply')){
+                                                    </php>
+                                                        <if condition="$vo.status eq 0">
+                                                            <button type="button" class="btn btn-success btn-small check" data-id="{$vo.id}"><i class="icon-ok  icon-white"></i>审核</button>
+                                                        </if>
+                                                    <php>
+                                                        }
+                                                        if (showHandle('Storage/addInventory')){
+                                                    </php>
+                                                        <if condition="$vo.status eq 1">
+                                                            <button type="button" class="btn btn-success btn-small addInventory" data-id="{$vo.id}"><i class="icon-ok  icon-white"></i>入库</button>
+                                                        </if>
+                                                     <php>
+                                                        }
+                                                    </php>
+                                                </td>
+                                            </tr>
+                                       
+                                        </volist>
+                                    </tbody>
+                                </table>
+                                <div class="row-fluid">
+                                    <div class="span12 center">
+                                        <div class="pagination" id="sample_1_info" style="text-align: center">
+                                            {$page}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- END CONTAINER -->
+
+<!--申请单审核开始-->
+<div id="check" class="modal hide fade in" style='width:650px;'>
+    <form id="checkForm" method="post" class="form-horizontal" autocomplete="off">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>申请单审核</h3>
+        </div>
+        <div class="modal-body">
+            <table class="table table-bordered table-hover">
+                <tbody>
+                    <tr>
+                        <td>审核状态</td>
+                        <td>
+                            <input type='radio' name='info[status]' value='1' class='checkStatus' status='pass' checked>通过
+                            <input type='radio' name='info[status]' value='2' class='checkStatus' status='fail'>未通过
+                        </td>
+                    </tr>
+                 </tbody>
+            </table>
+            <table class="table table-bordered table-hover checkPass">
+                <tbody>
+                    <tr>
+                        <td>商品<br/>名称</td>
+                        <td ><input type='text' name='service_goods_name' readonly></input></td>
+                        <td>供应<br/>商</td>
+                        <td ><input type='text' name='supplier_name' readonly></input></td>
+                    </tr>
+                    <tr>
+                        <td>申请<br/>数量</td>
+                        <td ><input type='text' name='number' readonly></input></td>
+                        <td>批复<br/>数量</td>
+                        <td ><input type='text' name='info[reply_number]' class="addTotalPrice"></input></td>
+                    </tr>
+                    <tr>
+                        <td>申请<br/>总金额</td>
+                        <td ><input type='text' name='total_price' readonly></input></td>
+                        <td>批复<br/>总金额</td>
+                        <td >
+                            <input type='text' name='info[replay_total_price]' readonly></input>
+                            <input type='hidden' name='price'></input>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-bordered table-hover checkFail" style='display:none;'>
+                <tbody>
+                    <tr>
+                        <td>原因</td>
+                        <td>
+                            <textarea name="info[reason]" class="input-xlarge reason" row="3"></textarea>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <input type="hidden" name="action" value="submit">
+            <input type='hidden' id='id' name='info[id]'></input>
+            <button type="submit" class="btn btn-success">提交</button>
+            <a href="#" class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </form>
+</div>
+<!--申请单审核结束-->
+
+<!-- BEGIN FOOTER -->
+<include file="Public::footer"/>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+<script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+<script src="{$Think.const.JS_URL}zh-CN.js"></script>
+<script src="{$Think.const.JS_URL}scripts.js"></script>
+<script>
+    //删除功能
+    $('.del').click(function(){
+        var id = $(this).attr('data-id');
+        if(!window.confirm('确定要执行此操作吗？')){
+            event.preventDefault();
+        }else{
+            $.ajax({
+                url:'{:U("delApply")}',
+                type:'post',
+                data:{'id':id},
+                async:false,
+                success : function(data){
+                    var result = eval("(" + data + ")");
+                    if(result.flag==1){
+                        alert(result.msg);
+                        window.location.reload();//刷新当前页面.
+                    }else{
+                        alert(result.msg);
+                    }
+                }
+            });
+        }
+    });
+    //审核申请
+    $('.check').click(function(){
+        var id = $(this).attr('data-id');
+        var action = 'select';
+        $.ajax({
+            url:'{:U("checkApply")}',
+            type:'post',
+            data:{'id':id,'action':action},
+            async:false,
+            success : function(res){
+                var result = eval("(" + res + ")");
+                if(result.flag==1){
+                    var data = result.data;
+                    $("#checkForm input[name='service_goods_name']").val(data.service_goods_name);
+                    $("#checkForm input[name='supplier_name']").val(data.supplier_name);
+                    $("#checkForm input[name='number']").val(data.number);
+                    $("#checkForm input[name='info[reply_number]']").val(data.number);
+                    $("#checkForm input[name='total_price']").val(data.total_price);
+                    $("#checkForm input[name='info[replay_total_price]']").val(data.total_price);
+                    $("#checkForm input[name='price']").val(data.price);
+                    $('#id').val(id);
+                    $('#check').modal();
+                }else{
+                    alert(result.msg);
+                }
+            }
+        });
+    });
+    $('#checkForm').bind('valid.form', function () {
+        $.ajax({
+            url:'{:U("checkApply")}',
+            type:'post',
+            data: $(this).serialize(),
+            async:false,
+            success : function(data){
+                var result = eval("(" + data + ")");
+                if(result.flag==1){
+                    $('#check').modal('hide');
+                    window.location.reload();//刷新当前页面.
+                }
+            }
+        });
+    });
+    //改变数量
+    $('.addTotalPrice').blur(function(){
+        var price = $("#checkForm input[name='price']").val();
+        var number = $("#checkForm input[name='info[reply_number]']").val();
+        if(price.length && number.length){
+            var total_price = price*number;
+            $("#checkForm input[name='info[replay_total_price]']").val(total_price);
+        }
+    });
+    
+    //是否通过
+    $('.checkStatus').click(function(){
+        var status = $(this).attr('status');
+        if(status == 'pass'){
+            if($(this).is(":checked")){
+                $(".checkPass").show();
+                $(".checkFail").hide();
+            }else{
+                $(".checkPass").hide();
+                $(".checkFail").show();
+            }
+        }else{
+            if($(this).is(":checked")){
+                $(".checkPass").hide();
+                $(".checkFail").show();
+            }else{
+                $(".checkPass").show();
+                $(".checkFail").hide();
+            }
+        }
+    });
+    
+    //地址移入移出
+    $('.view').hover(function(){
+       $(this).children('div').show(); 
+    },
+    function(){
+        $(this).children('div').hide(); 
+    });
+    //入库
+    $('.addInventory').click(function(){
+        var id = $(this).attr('data-id');
+        if(!window.confirm('确定要执行此操作吗？')){
+            event.preventDefault();
+        }else{
+            $.ajax({
+                url:'{:U("addInventory")}',
+                type:'post',
+                data:{'id':id},
+                async:false,
+                success : function(data){
+                    var result = eval("(" + data + ")");
+                    if(result.flag==1){
+                        alert(result.msg);
+                        window.location.reload();//刷新当前页面.
+                    }else{
+                        alert(result.msg);
+                    }
+                }
+            });
+        }
+    });
+</script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

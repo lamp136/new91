@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">部门管理</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>部门管理</h4>
+                                    <span class="tools">
+                                        <php>
+                                            if (showHandle('Department/adddepartment')) {
+                                        </php>
+                                            <a href="javascript:;" class="icon-plus add" >添加部门</a>
+                                        <php>
+                                            }
+                                        </php>
+                                    </span>
+                                </div>
+                                <div class="widget-body">
+                                    <table class="table table-striped table-bordered" id="sample_1">
+                                        <thead>
+                                            <tr>
+                                                <th class="hidden-phone">编号</th>
+                                                <th class="hidden-phone">名称</th>
+                                                <th class="hidden-phone">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <notempty name="list">
+                                            <volist name="list" id="vo" >
+                                                <tr class="odd gradeX">
+                                                    <td>{$vo.id}</td>
+                                                    <td>{$vo.title}</td>
+                                                    <td>
+                                                        <php>
+                                                            if (showHandle('Department/editdepartment')) {
+                                                        </php>
+                                                        <a class="btn btn-small btn-primary edit"  href="javascript:void(0)" data-id="{$vo.id}"><i class="icon-pencil icon-white"> </i> 编辑</a>
+                                                        <php>
+                                                            }
+                                                            if (showHandle('Department/deldepartment')) {
+                                                        </php>
+                                                        <if condition="$Think.config.NORMAL_STATUS eq $vo[status]">
+                                                            <a class="btn btn-danger btn-small del" href="javascript:void(0)" data-id="{$vo.id}" data-status="{$Think.config.DELETE_STATUS}"><i class="icon-remove  icon-white"> </i>删除</a>
+                                                        <else />
+                                                            <a class="btn btn-primary btn-small del" href="javascript:void(0)" data-id="{$vo.id}" data-status="{$Think.config.NORMAL_STATUS}"><i class="icon-pencil icon-white"> </i>开启</a>
+                                                        </if>
+                                                        <php>
+                                                            }
+                                                        </php>
+                                                </td>
+                                                </tr>
+                                            </volist>
+                                            <else />
+                                            <tr class="odd gradeX"><td colspan="3">没有记录</td></tr>
+                                        </notempty>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+
+    <!--添加部门开始-->
+    <div id="add" class="modal hide fade in">
+        <form id="defaultForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>添加部门</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>部门名称：</td>
+                            <td>
+                                <input name="info[title]"  type="text" data-rule='required'>  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>排序：</td>
+                            <td>
+                                <input name="info[sort]"  type="text" value='1' data-rule='required'>越大越靠前
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id='tijiao' class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--添加部门结束-->
+    
+    <!--编辑部门开始-->
+    <div id="edit" class="modal hide fade in">
+        <form id="editForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>编辑部门</h3>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>部门名称：</td>
+                            <td>
+                                <input name="editinfo[title]" id='edittitle'  type="text" data-rule='required' >  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>排序：</td>
+                            <td>
+                                <input name="editinfo[sort]" id='editsort' type="text" data-rule='required'>越大越靠前
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <input name="editinfo[id]"  type="hidden" id='editid' data-rule='required'>
+                <button type="submit" id='tijiao' class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--编辑部门结束-->
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}zh-CN.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+
+        //点击添加部门，弹出添加部门表单
+        $('.add').click(function () {
+            $('#add').modal();
+        });
+
+        //提交添加部门form 表单
+        $('#defaultForm').bind('valid.form', function () {
+            $('#add').modal('hide');
+            $.ajax({
+                url: "{:U('adddepartment')}",
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert('添加成功');
+                        window.location.reload();
+                    } else {
+                        alert('添加失败');
+                    }
+                }
+            });
+        });
+        
+        //点击编辑部门，弹出编辑部门表单
+        $('.edit').click(function () {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url: "{:U('editdepartment')}",
+                type: 'get',
+                data: 'id='+id,
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        var data = result.data;
+                        $('#edittitle').val(data.title);
+                        $('#editsort').val(data.sort);
+                        $('#editid').val(id);
+                        $('#edit').modal();
+                    }
+                }
+            });
+        });
+
+        //提交编辑部门form 表单
+        $('#editForm').bind('valid.form', function () {
+            $('#edit').modal('hide');
+            $.ajax({
+                url: "{:U('editdepartment')}",
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert('修改成功');
+                        window.location.reload();
+                    } else {
+                        alert('修改失败');
+                    }
+                }
+            });
+        });
+        
+        //删除部门
+        $('.del').click(function(){
+            var id = $(this).attr('data-id');
+            var status = $(this).attr('data-status');
+            $.ajax({
+                url: "{:U('deldepartment')}",
+                type: 'POST',
+                data: 'id='+id+'&status='+status,
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert('删除成功');
+                        window.location.reload();
+                    } else {
+                        alert('删除失败');
+                    }
+                }
+            });
+        });
+        
+        
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

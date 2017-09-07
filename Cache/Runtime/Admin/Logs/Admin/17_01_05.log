@@ -1,0 +1,1217 @@
+[ 2017-01-05T11:31:19+08:00 ] 127.0.0.1 /system.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.007000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.008000s ]
+
+[ 2017-01-05T11:31:19+08:00 ] 127.0.0.1 /system.php/Login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.073004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.073004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.019002s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.019002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.009000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.010000s ]
+
+[ 2017-01-05T11:31:20+08:00 ] 127.0.0.1 /system.php/Login/getVerifyCode.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.003001s ]
+
+[ 2017-01-05T11:31:26+08:00 ] 127.0.0.1 /system.php/Login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_admin` [ RunTime:0.0496s ]
+SQL: SELECT * FROM `hgy91_admin` WHERE `pwd` = '1757830625a97296ca2009cb89e1809f' AND `email` = 'xds' LIMIT 1   [ RunTime:0.0390s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0396s ]
+SQL: SHOW COLUMNS FROM `hgy91_role_user` [ RunTime:0.0396s ]
+SQL: SELECT * FROM `hgy91_role_user` WHERE ( user_id=28 )  [ RunTime:0.0406s ]
+SQL: SHOW COLUMNS FROM `hgy91_role` [ RunTime:0.0400s ]
+SQL: SELECT * FROM `hgy91_role` WHERE `status` = 1 AND `id` IN ('13')  [ RunTime:0.0480s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Model\PrivilegeModel.class.php 第 102 行.
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0460s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE `status` = 1 AND `id` IN ('1','7','8','9','11','261','286','287','288','10','12','13','14','250','255','253','256','34','35','36','120','121','122','123','124','125','155','156','157','158','159','161','162','225','153','154','37','126','144','147','149','164','175','176','177','178','179','180','181','182','183','184','185','190','191','192','193','201','218','294','295','300','301','307','309','310','311','326','366','365','367','370','371','420','143','146','148','150','151','152','163','165','171','202','203','219','243','244','245','251','252','396','194','195','213','214','215','216','217','414','136','137','138','140','139','174','142','141','145','374','375','379','380','381','382','384','387','389','401','402','405','416','90','91','92','93','94','95','96','97','98','99','100','101','102','103','104','105','106','173','312','313','314','315','316','317','318','319','320','321','322','323','324','446','447','448','449','108','109','110','168','118','119','166','340','481','111','224','271','285','289','290','292','296','297','298','299','302','376','377','392','397','390','393','394','395','231','254','249','248','262','291','293','368','378','385','386','398','406','417','467','260','359','362','363','364','325','355','356','357','358','335','352','353','354','399','400','404','458','412','413','266','269','265','267','268','459','460','474','475','476','477','478','479','480','342','369','344','346','347','348','349','350','38','39','40','88','89','129','130','131','132','133','134','169','188','303','41','43','46','70','71','127','128','72','73','74','75','76','77','78','79','80','81','82','186','187','189','83','84','85','86','87','107','45','63','65','66','67','64','68','69','44','47','50','51','52','53','48','54','55','56','57','58','49','59','60','61','62','112','113','114','115','116','117','246','247','280','281','282','283','263','264','284','450','451','452','453','454','455','456','482','483','2','3','6','15','16','32','33','438','17','18','19','20','21','4','25','26','27','28','29','30','31','5','22','23','24','339','485','469','470','471','472','491','486','487','488','489','490','196','199','200','204','205','208','206','207','197','198','372','373','209','210','211','270','212','272','220','221','222','273','274','275','409','223','276','277','278','279','457','461','462','463','464','465','466','468','226','227','233','234','235','415','228','236','237','238','230','239','240','241','473','232','242','257','258','259','304','305','306','308','332','333','334','327','328','329','330','331','383','336','337','338','341','343','388','391','418','419','427','429','440','421','424','428','422','423','433','439','425','426','430','431','434','436','442','444','437','435','443','441')  [ RunTime:0.1230s ]
+SQL: SHOW COLUMNS FROM `hgy91_login_logs` [ RunTime:0.0390s ]
+SQL: INSERT INTO `hgy91_login_logs` (`admin_id`,`client_name`,`user_agent`,`login_ip`,`login_time`) VALUES ('28','xds','Chrome 52.0.2743.116','2130706433','1483587086') [ RunTime:0.0390s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2017-01-05T11:31:26+08:00 ] 127.0.0.1 /system.php/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0410s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Index/index' ) LIMIT 1   [ RunTime:0.0410s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=1 ) LIMIT 1   [ RunTime:0.0410s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0440s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: caches D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\a88572b9bdeb7ada3d8fc440912b5bf8.php 第 322 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.167010s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.167010s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:33:57+08:00 ] 127.0.0.1 /system.php/News/inNews.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='News/inNews' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=39 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=38 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=39 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0500s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+SQL: SHOW COLUMNS FROM `hgy91_news` [ RunTime:0.0440s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `hgy91_news` WHERE `category_id` = 3 LIMIT 1   [ RunTime:0.0450s ]
+SQL: SELECT * FROM `hgy91_news` WHERE `category_id` = 3 ORDER BY created_time desc LIMIT 0,10   [ RunTime:0.1810s ]
+SQL: SHOW COLUMNS FROM `hgy91_category` [ RunTime:0.0400s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='3' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SHOW COLUMNS FROM `hgy91_admin` [ RunTime:0.0390s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='18' ) LIMIT 1   [ RunTime:0.0410s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='3' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='18' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='3' ) LIMIT 1   [ RunTime:0.0410s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='18' ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='3' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='18' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='3' ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='18' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='3' ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='18' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='3' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='18' ) LIMIT 1   [ RunTime:0.0370s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='3' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='26' ) LIMIT 1   [ RunTime:0.0460s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='3' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='18' ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='3' ) LIMIT 1   [ RunTime:0.0490s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='18' ) LIMIT 1   [ RunTime:0.0410s ]
+SQL: SHOW COLUMNS FROM `hgy91_category` [ RunTime:0.0630s ]
+SQL: SELECT `pid`,`name` FROM `hgy91_category` WHERE ( cid=3 ) LIMIT 1   [ RunTime:0.0790s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( cid=78 ) LIMIT 1   [ RunTime:0.0930s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: title D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\6546e6c311ae49d00aa3b9c8a86cfbf7.php 第 238 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.082004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.082004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:39:36+08:00 ] 127.0.0.1 /system.php/News/policyLaws.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0400s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='News/policyLaws' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=39 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=38 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=39 ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0460s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+SQL: SHOW COLUMNS FROM `hgy91_news` [ RunTime:0.0400s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `hgy91_news` WHERE `category_id` = 57 LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_news` WHERE `category_id` = 57 ORDER BY created_time desc LIMIT 0,10   [ RunTime:0.1010s ]
+SQL: SHOW COLUMNS FROM `hgy91_category` [ RunTime:0.0420s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='57' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SHOW COLUMNS FROM `hgy91_admin` [ RunTime:0.0410s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='18' ) LIMIT 1   [ RunTime:0.0420s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='57' ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='18' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='57' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='18' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='57' ) LIMIT 1   [ RunTime:0.0410s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='18' ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='57' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='18' ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='57' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='18' ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='57' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='18' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='57' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='23' ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='57' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='23' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( 1=1 AND cid='57' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `nickname` FROM `hgy91_admin` WHERE ( 1=1 AND id='23' ) LIMIT 1   [ RunTime:0.0410s ]
+SQL: SHOW COLUMNS FROM `hgy91_category` [ RunTime:0.0390s ]
+SQL: SELECT `pid`,`name` FROM `hgy91_category` WHERE ( cid=57 ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `name` FROM `hgy91_category` WHERE ( cid=78 ) LIMIT 1   [ RunTime:0.0380s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: title D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\6546e6c311ae49d00aa3b9c8a86cfbf7.php 第 238 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.091006s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.092006s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:43:01+08:00 ] 127.0.0.1 /system.php/News/storeDynamic.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+
+[ 2017-01-05T11:43:34+08:00 ] 127.0.0.1 /system.php/News/storeDynamic.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:43:34+08:00 ] 127.0.0.1 /system.php/Login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:43:34+08:00 ] 127.0.0.1 /system.php/Login/getVerifyCode.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:44:12+08:00 ] 127.0.0.1 /system.php/Login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_admin` [ RunTime:0.0410s ]
+SQL: SELECT * FROM `hgy91_admin` WHERE `pwd` = '1757830625a97296ca2009cb89e1809f' AND `email` = 'xds' LIMIT 1   [ RunTime:0.0380s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0400s ]
+SQL: SHOW COLUMNS FROM `hgy91_role_user` [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_role_user` WHERE ( user_id=28 )  [ RunTime:0.0380s ]
+SQL: SHOW COLUMNS FROM `hgy91_role` [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_role` WHERE `status` = 1 AND `id` IN ('13')  [ RunTime:0.0450s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Model\PrivilegeModel.class.php 第 102 行.
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0450s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE `status` = 1 AND `id` IN ('1','7','8','9','11','261','286','287','288','10','12','13','14','250','255','253','256','34','35','36','120','121','122','123','124','125','155','156','157','158','159','161','162','225','153','154','37','126','144','147','149','164','175','176','177','178','179','180','181','182','183','184','185','190','191','192','193','201','218','294','295','300','301','307','309','310','311','326','366','365','367','370','371','420','143','146','148','150','151','152','163','165','171','202','203','219','243','244','245','251','252','396','194','195','213','214','215','216','217','414','136','137','138','140','139','174','142','141','145','374','375','379','380','381','382','384','387','389','401','402','405','416','90','91','92','93','94','95','96','97','98','99','100','101','102','103','104','105','106','173','312','313','314','315','316','317','318','319','320','321','322','323','324','446','447','448','449','108','109','110','168','118','119','166','340','481','111','224','271','285','289','290','292','296','297','298','299','302','376','377','392','397','390','393','394','395','231','254','249','248','262','291','293','368','378','385','386','398','406','417','467','260','359','362','363','364','325','355','356','357','358','335','352','353','354','399','400','404','458','412','413','266','269','265','267','268','459','460','474','475','476','477','478','479','480','342','369','344','346','347','348','349','350','38','39','40','88','89','129','130','131','132','133','134','169','188','303','41','43','46','70','71','127','128','72','73','74','75','76','77','78','79','80','81','82','186','187','189','83','84','85','86','87','107','45','63','65','66','67','64','68','69','44','47','50','51','52','53','48','54','55','56','57','58','49','59','60','61','62','112','113','114','115','116','117','246','247','280','281','282','283','263','264','284','450','451','452','453','454','455','456','482','483','2','3','6','15','16','32','33','438','17','18','19','20','21','4','25','26','27','28','29','30','31','5','22','23','24','339','485','469','470','471','472','491','486','487','488','489','490','196','199','200','204','205','208','206','207','197','198','372','373','209','210','211','270','212','272','220','221','222','273','274','275','409','223','276','277','278','279','457','461','462','463','464','465','466','468','226','227','233','234','235','415','228','236','237','238','230','239','240','241','473','232','242','257','258','259','304','305','306','308','332','333','334','327','328','329','330','331','383','336','337','338','341','343','388','391','418','419','427','429','440','421','424','428','422','423','433','439','425','426','430','431','434','436','442','444','437','435','443','441')  [ RunTime:0.1220s ]
+SQL: SHOW COLUMNS FROM `hgy91_login_logs` [ RunTime:0.0380s ]
+SQL: INSERT INTO `hgy91_login_logs` (`admin_id`,`client_name`,`user_agent`,`login_ip`,`login_time`) VALUES ('28','xds','Chrome 52.0.2743.116','2130706433','1483587852') [ RunTime:0.0380s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2017-01-05T11:44:12+08:00 ] 127.0.0.1 /system.php/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-05T11:44:46+08:00 ] 127.0.0.1 /system.php/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Index/index' ) LIMIT 1   [ RunTime:0.0370s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0370s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=1 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0480s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: caches D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\a88572b9bdeb7ada3d8fc440912b5bf8.php 第 322 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.051002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.051002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:44:51+08:00 ] 127.0.0.1 /system.php/Logs/loginLog.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Logs/loginLog' ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=209 ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0450s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+SQL: SHOW COLUMNS FROM `hgy91_login_logs` [ RunTime:0.0390s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `hgy91_login_logs` LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_login_logs` ORDER BY id desc LIMIT 0,10   [ RunTime:0.0730s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.149008s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.149008s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:49:01+08:00 ] 127.0.0.1 /system.php/Logs/loginLog.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:49:20+08:00 ] 127.0.0.1 /system.php/Logs/loginLog.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Logs/loginLog' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=209 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0370s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0500s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+SQL: SHOW COLUMNS FROM `hgy91_login_logs` [ RunTime:0.0380s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `hgy91_login_logs` LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_login_logs` ORDER BY id desc LIMIT 0,10   [ RunTime:0.0380s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.064003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.065003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:50:05+08:00 ] 127.0.0.1 /system.php/Login/logout.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:50:05+08:00 ] 127.0.0.1 /system.php/Login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:50:06+08:00 ] 127.0.0.1 /system.php/Login/getVerifyCode.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:50:09+08:00 ] 127.0.0.1 /system.php/Login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_admin` [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_admin` WHERE `pwd` = '1757830625a97296ca2009cb89e1809f' AND `email` = 'xds' LIMIT 1   [ RunTime:0.0380s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0390s ]
+SQL: SHOW COLUMNS FROM `hgy91_role_user` [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_role_user` WHERE ( user_id=28 )  [ RunTime:0.0380s ]
+SQL: SHOW COLUMNS FROM `hgy91_role` [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_role` WHERE `status` = 1 AND `id` IN ('13')  [ RunTime:0.0390s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Model\PrivilegeModel.class.php 第 102 行.
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0450s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE `status` = 1 AND `id` IN ('1','7','8','9','11','261','286','287','288','10','12','13','14','250','255','253','256','34','35','36','120','121','122','123','124','125','155','156','157','158','159','161','162','225','153','154','37','126','144','147','149','164','175','176','177','178','179','180','181','182','183','184','185','190','191','192','193','201','218','294','295','300','301','307','309','310','311','326','366','365','367','370','371','420','143','146','148','150','151','152','163','165','171','202','203','219','243','244','245','251','252','396','194','195','213','214','215','216','217','414','136','137','138','140','139','174','142','141','145','374','375','379','380','381','382','384','387','389','401','402','405','416','90','91','92','93','94','95','96','97','98','99','100','101','102','103','104','105','106','173','312','313','314','315','316','317','318','319','320','321','322','323','324','446','447','448','449','108','109','110','168','118','119','166','340','481','111','224','271','285','289','290','292','296','297','298','299','302','376','377','392','397','390','393','394','395','231','254','249','248','262','291','293','368','378','385','386','398','406','417','467','260','359','362','363','364','325','355','356','357','358','335','352','353','354','399','400','404','458','412','413','266','269','265','267','268','459','460','474','475','476','477','478','479','480','342','369','344','346','347','348','349','350','38','39','40','88','89','129','130','131','132','133','134','169','188','303','41','43','46','70','71','127','128','72','73','74','75','76','77','78','79','80','81','82','186','187','189','83','84','85','86','87','107','45','63','65','66','67','64','68','69','44','47','50','51','52','53','48','54','55','56','57','58','49','59','60','61','62','112','113','114','115','116','117','246','247','280','281','282','283','263','264','284','450','451','452','453','454','455','456','482','483','2','3','6','15','16','32','33','438','17','18','19','20','21','4','25','26','27','28','29','30','31','5','22','23','24','339','485','469','470','471','472','491','486','487','488','489','490','196','199','200','204','205','208','206','207','197','198','372','373','209','210','211','270','212','272','220','221','222','273','274','275','409','223','276','277','278','279','457','461','462','463','464','465','466','468','226','227','233','234','235','415','228','236','237','238','230','239','240','241','473','232','242','257','258','259','304','305','306','308','332','333','334','327','328','329','330','331','383','336','337','338','341','343','388','391','418','419','427','429','440','421','424','428','422','423','433','439','425','426','430','431','434','436','442','444','437','435','443','441')  [ RunTime:0.0990s ]
+SQL: SHOW COLUMNS FROM `hgy91_login_logs` [ RunTime:0.0380s ]
+SQL: INSERT INTO `hgy91_login_logs` (`admin_id`,`client_name`,`user_agent`,`login_ip`,`login_time`) VALUES ('28','xds','Chrome 52.0.2743.116','2130706433','1483588209') [ RunTime:0.0390s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.003000s ]
+
+[ 2017-01-05T11:50:10+08:00 ] 127.0.0.1 /system.php/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Index/index' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=1 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0370s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0510s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: caches D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\a88572b9bdeb7ada3d8fc440912b5bf8.php 第 322 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.049002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.049002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.003001s ]
+
+[ 2017-01-05T11:50:13+08:00 ] 127.0.0.1 /system.php/Logs/loginLog.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0420s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Logs/loginLog' ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=209 ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0490s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+SQL: SHOW COLUMNS FROM `hgy91_login_logs` [ RunTime:0.0400s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `hgy91_login_logs` LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_login_logs` ORDER BY id desc LIMIT 0,10   [ RunTime:0.0400s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.050003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.050003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:52:56+08:00 ] 127.0.0.1 /system.php/Logs/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0430s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Logs/index' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=209 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0430s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+SQL: SHOW COLUMNS FROM `hgy91_logs` [ RunTime:0.0380s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `hgy91_logs` LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_logs` ORDER BY id desc LIMIT 0,10   [ RunTime:0.0470s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.083005s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.083005s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-05T11:53:00+08:00 ] 127.0.0.1 /system.php/Logs/loginLog.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0490s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Logs/loginLog' ) LIMIT 1   [ RunTime:0.0410s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0410s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=209 ) LIMIT 1   [ RunTime:0.0410s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0410s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0710s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+SQL: SHOW COLUMNS FROM `hgy91_login_logs` [ RunTime:0.0410s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `hgy91_login_logs` LIMIT 1   [ RunTime:0.0410s ]
+SQL: SELECT * FROM `hgy91_login_logs` ORDER BY id desc LIMIT 0,10   [ RunTime:0.0410s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+NOTIC: [8] A non well formed numeric value encountered D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\202463817ed4a14f841733f97b18f12a.php 第 240 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.063004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.063004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:54:36+08:00 ] 127.0.0.1 /system.php/Login/logout.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-05T11:54:36+08:00 ] 127.0.0.1 /system.php/Login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-05T11:54:36+08:00 ] 127.0.0.1 /system.php/Login/getVerifyCode.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:54:41+08:00 ] 127.0.0.1 /system.php/Login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_admin` [ RunTime:0.0470s ]
+SQL: SELECT * FROM `hgy91_admin` WHERE `pwd` = '1757830625a97296ca2009cb89e1809f' AND `email` = 'xds' LIMIT 1   [ RunTime:0.0440s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0440s ]
+SQL: SHOW COLUMNS FROM `hgy91_role_user` [ RunTime:0.0440s ]
+SQL: SELECT * FROM `hgy91_role_user` WHERE ( user_id=28 )  [ RunTime:0.0430s ]
+SQL: SHOW COLUMNS FROM `hgy91_role` [ RunTime:0.0440s ]
+SQL: SELECT * FROM `hgy91_role` WHERE `status` = 1 AND `id` IN ('13')  [ RunTime:0.0470s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Model\PrivilegeModel.class.php 第 102 行.
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0500s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE `status` = 1 AND `id` IN ('1','7','8','9','11','261','286','287','288','10','12','13','14','250','255','253','256','34','35','36','120','121','122','123','124','125','155','156','157','158','159','161','162','225','153','154','37','126','144','147','149','164','175','176','177','178','179','180','181','182','183','184','185','190','191','192','193','201','218','294','295','300','301','307','309','310','311','326','366','365','367','370','371','420','143','146','148','150','151','152','163','165','171','202','203','219','243','244','245','251','252','396','194','195','213','214','215','216','217','414','136','137','138','140','139','174','142','141','145','374','375','379','380','381','382','384','387','389','401','402','405','416','90','91','92','93','94','95','96','97','98','99','100','101','102','103','104','105','106','173','312','313','314','315','316','317','318','319','320','321','322','323','324','446','447','448','449','108','109','110','168','118','119','166','340','481','111','224','271','285','289','290','292','296','297','298','299','302','376','377','392','397','390','393','394','395','231','254','249','248','262','291','293','368','378','385','386','398','406','417','467','260','359','362','363','364','325','355','356','357','358','335','352','353','354','399','400','404','458','412','413','266','269','265','267','268','459','460','474','475','476','477','478','479','480','342','369','344','346','347','348','349','350','38','39','40','88','89','129','130','131','132','133','134','169','188','303','41','43','46','70','71','127','128','72','73','74','75','76','77','78','79','80','81','82','186','187','189','83','84','85','86','87','107','45','63','65','66','67','64','68','69','44','47','50','51','52','53','48','54','55','56','57','58','49','59','60','61','62','112','113','114','115','116','117','246','247','280','281','282','283','263','264','284','450','451','452','453','454','455','456','482','483','2','3','6','15','16','32','33','438','17','18','19','20','21','4','25','26','27','28','29','30','31','5','22','23','24','339','485','469','470','471','472','491','486','487','488','489','490','196','199','200','204','205','208','206','207','197','198','372','373','209','210','211','270','212','272','220','221','222','273','274','275','409','223','276','277','278','279','457','461','462','463','464','465','466','468','226','227','233','234','235','415','228','236','237','238','230','239','240','241','473','232','242','257','258','259','304','305','306','308','332','333','334','327','328','329','330','331','383','336','337','338','341','343','388','391','418','419','427','429','440','421','424','428','422','423','433','439','425','426','430','431','434','436','442','444','437','435','443','441')  [ RunTime:0.1530s ]
+SQL: SHOW COLUMNS FROM `hgy91_login_logs` [ RunTime:0.0440s ]
+SQL: INSERT INTO `hgy91_login_logs` (`admin_id`,`client_name`,`user_agent`,`login_ip`,`login_time`) VALUES ('28','xds','Chrome 52.0.2743.116','2130706433','2017-01-05 11:54:41') [ RunTime:0.0430s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2017-01-05T11:54:42+08:00 ] 127.0.0.1 /system.php/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Index/index' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=1 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0500s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: caches D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\a88572b9bdeb7ada3d8fc440912b5bf8.php 第 322 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.056003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.058003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:54:46+08:00 ] 127.0.0.1 /system.php/Logs/loginLog.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Logs/loginLog' ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=209 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0450s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+SQL: SHOW COLUMNS FROM `hgy91_login_logs` [ RunTime:0.0450s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `hgy91_login_logs` LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_login_logs` ORDER BY id desc LIMIT 0,10   [ RunTime:0.0420s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.051003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.051003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:55:07+08:00 ] 127.0.0.1 /system.php/Logs/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0410s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Logs/index' ) LIMIT 1   [ RunTime:0.0460s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=209 ) LIMIT 1   [ RunTime:0.0460s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0510s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+SQL: SHOW COLUMNS FROM `hgy91_logs` [ RunTime:0.0410s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `hgy91_logs` LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_logs` ORDER BY id desc LIMIT 0,10   [ RunTime:0.0510s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.071004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.071004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:55:12+08:00 ] 127.0.0.1 /system.php/Logs/loginLog.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Logs/loginLog' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=209 ) LIMIT 1   [ RunTime:0.2760s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0450s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.1230s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+SQL: SHOW COLUMNS FROM `hgy91_login_logs` [ RunTime:0.0390s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `hgy91_login_logs` LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_login_logs` ORDER BY id desc LIMIT 0,10   [ RunTime:0.0460s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.054003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.054003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2017-01-05T11:57:43+08:00 ] 127.0.0.1 /system.php/Logs/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0410s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Logs/index' ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=209 ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0440s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+SQL: SHOW COLUMNS FROM `hgy91_logs` [ RunTime:0.0410s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `hgy91_logs` LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_logs` ORDER BY id desc LIMIT 0,10   [ RunTime:0.0460s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.068004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.069004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:58:03+08:00 ] 127.0.0.1 /system.php/Member/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Member/index' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=199 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=196 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=199 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0450s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+SQL: SHOW COLUMNS FROM `hgy91_member` [ RunTime:0.0390s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `hgy91_member` LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_member` ORDER BY id desc LIMIT 0,10   [ RunTime:0.0400s ]
+SQL: SHOW COLUMNS FROM `hgy91_member_bank` [ RunTime:0.0450s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='834' )  [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='833' )  [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='832' )  [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='831' )  [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='830' )  [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='829' )  [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='828' )  [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='827' )  [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='826' )  [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='825' )  [ RunTime:0.0390s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: mobile D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 229 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.116007s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.117007s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.006000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.006000s ]
+
+[ 2017-01-05T11:58:10+08:00 ] 127.0.0.1 /system.php/Member/delete.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_logs` [ RunTime:0.0400s ]
+SQL: INSERT INTO `hgy91_logs` (`controller`,`action`,`time`,`admin_id`,`admin_name`,`get_data`,`post_data`,`ip`) VALUES ('Member','delete','1483588690','28','xds','array (
+  \'GET\' => 
+  array (
+  ),
+)','array (
+  \'POST\' => 
+  array (
+    \'id\' => \'833\',
+    \'act\' => \'del\',
+  ),
+)','2130706433') [ RunTime:0.0380s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Member/delete' ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=200 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=199 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=196 ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=200 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=199 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0490s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+SQL: SHOW COLUMNS FROM `hgy91_member` [ RunTime:0.0400s ]
+NOTIC: [8] Undefined index: validate D:\wamp\www\project\www.91soumu.com.new\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\wamp\www\project\www.91soumu.com.new\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: UPDATE `hgy91_member` SET `status`='-1' WHERE `id` = 833 [ RunTime:0.0410s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.003000s ]
+
+[ 2017-01-05T11:58:14+08:00 ] 127.0.0.1 /system.php/Member/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Member/index' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=199 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=196 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=199 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0460s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+SQL: SHOW COLUMNS FROM `hgy91_member` [ RunTime:0.0380s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `hgy91_member` LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_member` ORDER BY id desc LIMIT 0,10   [ RunTime:0.0410s ]
+SQL: SHOW COLUMNS FROM `hgy91_member_bank` [ RunTime:0.0470s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='834' )  [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='833' )  [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='832' )  [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='831' )  [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='830' )  [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='829' )  [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='828' )  [ RunTime:0.0390s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='827' )  [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='826' )  [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_member_bank` WHERE ( 1=1 AND member_id='825' )  [ RunTime:0.0380s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: mobile D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 229 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: categoryId D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 247 行.
+NOTIC: [8] Use of undefined constant config - assumed 'config' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Undefined variable: Think D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [8] Use of undefined constant MEMBER_TYPES - assumed 'MEMBER_TYPES' D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, string given D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\65c404219a70da5234d0aa27db030cc0.php 第 250 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.084005s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.084005s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T11:58:18+08:00 ] 127.0.0.1 /system.php/Logs/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0400s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Logs/index' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=209 ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0430s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+SQL: SHOW COLUMNS FROM `hgy91_logs` [ RunTime:0.0390s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `hgy91_logs` LIMIT 1   [ RunTime:0.0370s ]
+SQL: SELECT * FROM `hgy91_logs` ORDER BY id desc LIMIT 0,10   [ RunTime:0.0470s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.051003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.052003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T12:12:37+08:00 ] 127.0.0.1 /system.php/Logs/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Logs/index' ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0370s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=209 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=210 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0470s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+SQL: SHOW COLUMNS FROM `hgy91_logs` [ RunTime:0.0380s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `hgy91_logs` LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_logs` ORDER BY id desc LIMIT 0,10   [ RunTime:0.0460s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.075004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.076004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-01-05T12:12:40+08:00 ] 127.0.0.1 /system.php/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0420s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Index/index' ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=1 ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0530s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+
+[ 2017-01-05T12:13:32+08:00 ] 127.0.0.1 /system.php/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Index/index' ) LIMIT 1   [ RunTime:0.0370s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=1 ) LIMIT 1   [ RunTime:0.0570s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0370s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0450s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+
+[ 2017-01-05T16:04:52+08:00 ] 127.0.0.1 /system.php/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.044003s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.006001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006001s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0500s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Index/index' ) LIMIT 1   [ RunTime:0.0420s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=1 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0380s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0490s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+
+[ 2017-01-05T16:05:14+08:00 ] 127.0.0.1 /system.php/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0410s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Index/index' ) LIMIT 1   [ RunTime:0.0410s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0390s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=1 ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0450s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.013001s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.013001s ]
+NOTIC: [8] Undefined variable: caches D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\a88572b9bdeb7ada3d8fc440912b5bf8.php 第 322 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.159010s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.160010s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-01-05T16:37:12+08:00 ] 127.0.0.1 /system.php/Category/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0410s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Category/index' ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=1 ) LIMIT 1   [ RunTime:0.0400s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0410s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0440s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+SQL: SHOW COLUMNS FROM `hgy91_category` [ RunTime:0.0400s ]
+SQL: SELECT * FROM `hgy91_category`  [ RunTime:0.0420s ]
+SQL: SHOW COLUMNS FROM `hgy91_category` [ RunTime:0.0490s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.110006s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.110006s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.008001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.008001s ]
+
+[ 2017-01-05T16:37:15+08:00 ] 127.0.0.1 /system.php/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+SQL: SHOW COLUMNS FROM `hgy91_privilege` [ RunTime:0.0420s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( name='Index/index' ) LIMIT 1   [ RunTime:0.0410s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0410s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=1 ) LIMIT 1   [ RunTime:0.0420s ]
+SQL: SELECT `id`,`pid`,`level` FROM `hgy91_privilege` WHERE ( id=7 ) LIMIT 1   [ RunTime:0.0420s ]
+SQL: SELECT * FROM `hgy91_privilege` WHERE ( status=1 and level<=2 ) ORDER BY sort desc,id asc  [ RunTime:0.0480s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\project\www.91soumu.com.new\Admin\Controller\BaseController.class.php 第 54 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: caches D:\wamp\www\project\www.91soumu.com.new\Cache\Runtime\Admin\Cache\Admin\a88572b9bdeb7ada3d8fc440912b5bf8.php 第 322 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.091005s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.091005s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+

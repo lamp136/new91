@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="{:U('index')}">广告管理</a><span class="divider">&nbsp;</span></li>
+                            <li><a href="javascript:void(0)">添加广告</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-body">
+                                    <form id="addForm" method="post" enctype="multipart/form-data" class="form-horizontal" autocomplete="off">
+                                        <div class="modal-header">
+                                            <h3>添加广告</h3>
+                                        </div>
+                                        <div class="" >
+
+                                            <table class="table table-bordered table-hover">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>广告位：<span style="color:red">*</span></td>
+                                                        <td>
+                                                            <select name='ad_position_id' id="ad_position_id">
+                                                                <option value="">请选择广告位</option>
+                                                                <volist name='adpos' id='vo'>
+                                                                    <option value="{$vo.id}" data-width="{$vo.advertising_width}" data-height="{$vo.advertising_height}">{$vo.position_name}</option>
+                                                                </volist>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>广告位省份：<span style="color:red">*</span></td>
+                                                        <td>
+                                                            <select tabindex="1" name="province_id">
+                                                            <option value="0">请选择省</option>
+                                                            <volist name="provinces" id="vo">
+                                                                <option value="{$vo.region_id}">{$vo.region_name}</option>
+                                                            </volist>
+                                                            </select> 
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>广告位类别：<span style="color:red">*</span></td>
+                                                        <td>
+                                                            <select tabindex="1" name="banner_type">
+                                                                <option value="0">选择类别</option>
+                                                                <option value="$bannerType['PC']">pc端</option>
+                                                                <option value="$bannerType['WAP']">手机端</option>
+                                                            </select>
+                                                        </td>                       
+                                                    </tr>
+                                                    <tr>
+                                                        <td>名称：<span style="color:red">*</span></td>
+                                                        <td><input class="input-xxlarge"  name="banner_name" type="text" data-rule="required" >  
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>图片：<span style="color:red">*</span></td>
+                                                        <td>
+                                                            <input class="default" name="image" type="file" data-rule="required"><span id="size"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>链接地址：<span style="color:red">*</span></td>
+                                                        <td><input class="input-xxlarge"  name="banner_link" type="text" data-rule="required" >  
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>在线时间：</td>
+                                                        <td>
+                                                            <input type="text" size="30" name="start_time" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" class="Wdate"/>至
+                                                            <input type="text" size="30" name="end_time" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" class="Wdate"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>状态：</td>
+                                                        <td><input name="status" value="{$Think.config.NORMAL_STATUS}" type="radio" data-rule="checked" checked> 正常 
+                                                            <input name="status" value="{$Think.config.DELETE_STATUS}" type="radio" data-rule="checked"> 下线
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>图片分享：</td>
+                                                        <td><input name="share" value="0" type="radio" data-rule="checked" checked> 不公用
+                                                            <input name="share" value="{$Think.config.SHARE_STATUS}" type="radio" data-rule="checked"> 公用
+                                                            <span style="color:red">是否可以被其他省份使用</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>排序：</td>
+                                                        <td><input name="sort"  type="text" value="1"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan='2'>
+                                                            <input type="submit" class="btn submit" value="提交">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+
+    
+
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}zh-CN.js"></script>
+    <script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+
+
+
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+    //选择分类提示尺寸大小
+    $("#ad_position_id").change(function(){
+        var width = $("#ad_position_id option:selected").attr("data-width");
+        var height = $("#ad_position_id option:selected").attr("data-height");
+        $("#size").css("color","green");
+        
+        if( typeof(width) != 'undefined' && typeof(height) != 'undefined'){
+            $("#size").html('请上传'+width+'×'+height+'的图片');
+        }else{
+            $("#size").html('');
+        }
+        
+    });
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

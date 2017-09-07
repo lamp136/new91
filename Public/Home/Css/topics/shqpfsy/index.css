@@ -1,0 +1,409 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+/*中间内容*/
+.box{
+	width: 100%;
+	height: 4077px;
+	padding-top: 495px;
+	background: url('../../../images/topics/shqpfsy/box_bg.png') no-repeat scroll center center;
+	background: cover;
+}
+/*陵园简介*/
+.introduce{
+	width: 1137px;
+	height: 527px;
+	margin: 0 auto;
+	padding-top: 60px;
+	background: url('../../../images/topics/shqpfsy/introduce_bg.png');
+}
+	/*左侧*/
+.intro_left{
+	float: left;
+}
+#duce{
+	margin: 0 0 0  50px;
+}
+.intor{
+	width: 900px;
+	margin: 30px 0 0 50px;
+}
+.intor p{
+	line-height: 30px;
+}
+.intor p a{
+	color: #9a6736;
+}
+	/*右侧*/
+.intor_right{
+	float: left;
+	margin-left: 28px;
+}
+/*内容*/
+.main{
+	width: 1096px;
+	margin: 0 auto;
+	background: #fff;
+}
+/*园区*/
+.garden{
+	padding: 25px 22px 0 22px;
+}
+.garden .garden_left{
+	width: 155px;
+	margin-left: 12px;
+	float: left;
+}
+	/*园区右侧*/
+.garden .graden_right{ 
+	width: 870px;
+	height: 476px;
+	float: right;
+	overflow:hidden;
+}
+.gra li{
+	width:870px;
+	height:444px;
+	float:left;
+	overflow: hidden;
+}		
+.garnav li{
+	float:left;
+	margin:5px;
+}
+.gra{
+	width:5000px;
+}
+.garnav{
+	margin-top: 20px;
+	margin-left: 660px;
+}	
+.garnav li a{
+	width: 32px;
+	height: 4px;
+	display: block;
+	background: #d6deeb;
+}
+.garnav li .thline{
+	background: #298820;
+}
+.graden_box .gra_main{
+	width: 395px;
+	height: 180px;
+	padding: 22px 20px 0 4px;
+	float: left;
+	margin: 0 32px 40px 0;
+	background: url(../../../images/topics/shqpfsy/gra_main_bg.png) no-repeat;
+}
+.graden_box .last{
+	margin-right: 0;
+}
+.graden_box .tu{
+	width: 156px;
+	height: 156px;
+	float: left;
+	margin-left: 10px;
+}
+.graden_box .tu img{
+	width: 156px;
+	height: 156px;
+	border-radius: 80px;
+}
+.graden_box .describe{
+	width: 184px;
+	height: 140px;
+	float: right;
+	margin-top: 10px;
+	padding-left: 26px;
+	border-left: 1px dashed #d2d2d2;
+}
+.graden_box .describe h2{
+	font-size: 16px;
+	line-height: 46px;
+        font-weight: bold;
+}
+.graden_box .describe p{
+	line-height: 20px;
+}
+/*活动*/
+.activity{
+	width: 1052px;
+	height: 480px;
+	padding: 0 22px;
+	margin-top: 76px;
+	background: url(../../../images/topics/shqpfsy/bg.jpg) no-repeat;
+	background-position: bottom right;
+}
+	/*活动左侧*/
+.activity_left{
+	width: 880px;
+	float: left;
+}
+	/*活动内容*/
+.activity_intor{
+	width: 464px;
+	height: 359px;
+	float: left;
+}
+.activity_intor a{
+	display: block;
+	position: relative;
+}
+.activity_intor img{
+	width: 464px;
+	height: 359px;
+}
+.activity_intor p{
+	width: 440px;
+	padding-left: 24px;
+	background: #5a5a5a;
+	opacity: 0.8;
+	line-height: 52px;
+	filter: alpha(opacity=8);
+	font-size: 16px;
+	font-weight: bold;
+	color: #fff;
+	position: absolute;
+	bottom: 0;
+}
+	/*tab切换标题*/
+.activity_title{
+	float: right;
+}
+.activity_title li{
+	width: 391px;
+	height: 51px;
+	font-size: 16px;
+	line-height: 49px;
+	margin-bottom: 10px;
+	background: url(../../../images/topics/shqpfsy/activity_title_bg.jpg);
+}
+.activity_title li a{
+	display: block;
+}
+.activity_title .last{
+	margin-bottom: 0;
+}
+.activity_title li span{
+	display: inline-block;
+	font-size: 24px;
+	color: #fff;
+	font-family: "Arial";
+	width: 50px;
+	height: 49px;
+	text-align: center;
+	line-height: 49px;
+	margin-right: 25px;
+}
+	/*活动右侧*/
+.activity_right{
+	width: 130px;
+	float: right;	
+}
+/*墓型*/
+.tombtype{
+	width: 1052px;
+	padding: 0 22px;
+}
+.tombtype h1{
+	text-align: center;
+	margin-bottom: 35px;
+}
+.tombtype h1 img{
+	display: inline;
+}
+.tombtype ul li{
+	width: 252px;
+	height: 267px;
+	padding: 1px;
+	background: url(../../../images/topics/shqpfsy/tombtype_li_bg.png);
+	float: left;
+	margin: 0 12px 26px 0;
+}
+.tombtype ul .last{
+	margin-right: 0;
+}
+.tombtype ul li img{
+	width: 250px;
+	height: 200px;
+	margin: 0 0 0 1px;
+}
+.tombtype .describe{
+	padding: 14px 12px 0 12px;
+}
+.tombtype .describe p{
+	font-weight: bold;
+	color: #298820;
+	float: left;
+	line-height: 30px;
+}
+.tombtype .describe a{
+	float: right;
+	width: 90px;
+	height: 30px;
+	font-size: 13px;
+	font-weight: bold;
+	display: block;
+	background: #298820;
+	color: #fff;
+	text-align: center;
+	line-height: 30px;
+	border-radius: 2px;
+}
+	/*墓型查看更多*/
+.tombtype p{
+	font-size: 13px;
+	line-height: 52px;
+	background: #fafbf6;
+	text-align: center;
+}
+.tombtype p a{
+	color: #298820;
+}
+/*名人墓地*/
+.celebrities{
+	width: 1052px;
+	padding: 0 22px;
+	margin-top: 70px;
+}
+	/*名人墓地左侧*/
+.celebrities .celebrities_left{
+	width: 155px;
+	margin-left: 12px;
+	float: left;
+}
+	/*名人墓地右侧*/
+.celebrities_right{
+	width: 860px;
+	float: right;
+}
+	/*名人墓地内容*/
+#cele_focus{
+	width: 860px;
+	height: 484px;
+	overflow:hidden;
+}
+#cele_focus ul{
+	width:1500px;
+}
+#cele_focus img{
+	width: 340px;
+	height: 484px;
+}
+#cele_focus a{
+	display:block;
+	width:162px;
+	height:484px;
+	float:left;
+	margin-right: 10px;
+	overflow: hidden;
+	position: relative;
+}
+#cele_focus .abstract{
+	min-width:340px;
+	margin-right: 0;
+}
+#cele_focus p{
+	width: 271px;
+	padding: 15px 34px;
+	font-weight: bold;
+	line-height: 24px;
+	background: #282828;
+	opacity: 0.7;
+	filter: alpha(opacity=7);
+	color: #fff;
+	position: absolute;
+	bottom: 0;
+	display: none;
+}
+/*葬式介绍*/
+.burialform{
+	width: 1052px;
+	height: 682px;
+	padding: 0 22px;
+	margin-top: 110px;
+	background: url(../../../images/topics/shqpfsy/bg.jpg) no-repeat;
+	background-position: right bottom;
+}
+	/*左侧*/
+.burialform_left{
+	width: 820px;
+	float: left;
+}
+.burialform_left ul li{
+	width: 370px;
+	float: left;
+	margin: 0 80px 28px 0;
+}
+.burialform_left .last{
+	margin-right: 0;
+}
+.burialform_left ul li img{
+	width: 133px;
+	height: 133px;
+	float: left;
+}
+.burialform_left .referral{
+	float: right;
+	width: 215px;
+}
+.burialform_left .referral h2{
+	font-size: 18px;
+	line-height: 36px;
+}
+.burialform_left .referral p{
+	line-height: 22px;
+	color: #99999b;
+	margin-top: 5px;
+}
+	/*右侧*/
+.burialform_right{
+	width: 130px;
+	float: right;
+}
+/*陵园资质*/
+.aptitude{
+	width: 1052px;
+	padding: 0 22px 26px 22px;
+}
+.aptitude h1{
+	text-align: center;
+	margin-top: 28px;
+}
+.aptitude h1 img{
+	display: inline;
+}
+.aptitude_main{
+	height: 164px;
+	margin-top: 30px;
+}
+.aptitude_main ul li{
+	width: 230px;
+	float: left;
+	padding: 8px;
+	border: 1px solid #d5ddea;
+	margin-right: 20px;
+}
+.aptitude_main ul li img{
+	width: 228px;
+	height: 142px;
+}
+#marquee1{
+	height: 164px;
+	position: relative;
+	overflow: hidden;
+}
+/*底部*/
+.topics_footer{
+	width: 100%;
+	height: 100px;
+	background: #fbf4ec;
+}
+.topics_footer p{
+	font-size: 12px;
+	color: #232323;
+	line-height: 100px;
+	text-align: center;
+}

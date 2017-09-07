@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="icon" href="/Public/soumu.ico"  type="image/x-icon">
+    <meta charset="UTF-8">
+    <title>{$newsInfo.title}_{$Think.config.SITE_NAME}</title>
+    <meta name="keywords" content="{$newsInfo.seo_keywords}" />
+    <meta name="description" content="{$newsInfo.seo_description}" />
+    <!--屏蔽百度转码-->
+    <meta http-equiv="Cache-Control" content="no-transform "/>
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="{$Think.const.JS_URL}wap.js"></script>
+    <in name="newsInfo[category_id]" value="$newsType">
+        <link rel="alternate" media="only screen and (max-width: 640px)" href="{$Think.config.WAP_STIE_DOMAIN}/news/detail/{$newsInfo['id']}.html" />
+        <script type="text/javascript">
+            var url = window.location.pathname;
+            var newurl = "{$Think.config.WAP_STIE_DOMAIN}"+url;
+            browserRedirect(newurl);
+        </script>
+    </in>
+</head>
+<body>
+<!-- 引入新闻头部 -->
+<include file="Common:head_news" />
+
+<!-- 中间内容部分 -->
+<div class="nws_main">
+    <div class="contain clearfix">
+        <!-- 面包屑导航 -->
+        <div class="breadcrumb news_breadcrumb">
+            <ul>
+                <li><a href="{:U('/news')}">资讯</a></li>
+                <li>></li>
+                <eq name='newsInfo.category_pid' value='$Think.config.NEWS_CATEGORY_ID'>
+                    <li><a href="{:U('/news/'.$newsInfo['category_id'])}">{$newsInfo.Category.name}</a></li>
+                    <li>></li>
+                <else/>
+                    <li><a href="{:U('/news/'.$newsInfo['category_pid'])}">{$newsInfo.CategoryParent.name}</a></li>
+                    <li>></li>
+                    <li><a href="{:U('/news/'.$newsInfo['category_pid'].'-'.$newsInfo['category_id'])}">{$newsInfo.Category.name}</a></li>
+                    <li>></li>
+                </eq>
+                <li>正文</li>
+            </ul>
+        </div><!-- breadcrumb面包屑导航结束 -->
+        <!-- 左侧资讯列表 -->
+        <div class="news_detale_left nws_left">
+            <!-- 标题 -->
+            <h2>{$newsInfo.title}</h2>
+            <!-- 来源+时间 -->
+            <h3 class="sourcetime">来源：<notempty name='newsInfo.source'><notempty name='newsInfo.source_url'><a href='{$newsInfo.source_url}'  rel="nofollow" target="_blank"><font>{$newsInfo.source}</font></a><else/><font>{$newsInfo.source}</font></notempty><else/><font>91搜墓网</font></notempty>时间：{$newsInfo.published_time|date='Y-m-d',###}<span>阅读量({$newsInfo.hits})</span></h3></h3>
+        <!-- 内容 -->
+            <div class="p_main" >
+                {$newsInfo.content}
+
+                <notempty name="up"><a href="{:U('/news/detail/'.$up['id'])}" title="{$up['title']}">上一篇:{$up['title']|msubstr=0,25}</a><br></notempty>
+                <notempty name="next"><a href="{:U('/news/detail/'.$next['id'])}" title="{$next['title']}">下一篇:{$next['title']|msubstr=0,25}</a></notempty>
+            </div>
+            <!-- 相关阅读 -->
+            <div class="news_reading">
+                <h5>风水推荐：</h5>
+                <ul>
+                    <volist name="fsNews" id="fsNewsList">
+                        <li>
+                            <a target="_blank" href="{:U('news/detail/'.$fsNewsList['id'])}" title="{$fsNewsList.title}">
+                                ·{$fsNewsList.title}
+                            </a>
+                        </li>
+                    </volist>
+                </ul>
+                <span class="read_bg"></span>
+            </div><!-- news_reading相关阅读结束 -->
+        </div><!-- nws_left左侧资讯列表结束 -->
+        <!-- 右侧内容 -->
+        <div class="nws_right">
+            <!-- 广告 -->
+            <div class="news_list_add">
+                 <empty name="ads" >
+                    <a href="{:U('/intro/joinus')}" title="91搜墓网商家加盟合作" target="_blank">
+                        <img src="{$Think.const.IMG_URL}cem_ad.jpg" alt="91搜墓网商家加盟合作"/>
+                    </a>
+                <else/>
+                    <a href="{$ad.banner_link}"  title={$ads.banner_name} target="_blank">
+                        <img src="{$Think.config.IMG_HOST}{$ads.banner_url}" alt="{$ads.banner_name}"/>
+                    </a>
+                </empty>
+            </div><!-- news_list_add end -->
+            <!-- 最新资讯 -->
+            <div class="nws_latest">
+                <h1><i class="latest_i"></i>最新资讯</h1>
+                <ul>
+                    <volist name='lastestNews' id='vo'>
+                        <li class="clearfix">
+                            <notempty name='vo.Img'>
+                            <a href="{:U('/news/detail/'.$vo['id'])}">
+                                <notempty name='vo.Img'>
+                                    <img src="{$vo.Img.thumbnail}" alt='{$vo.title}'/>
+                                    <else/>
+                                    <img src="{$Think.const.IMG_URL}news_default.jpg" alt="{$vo.title}"/>
+                                </notempty>
+                            </a>
+                            <p><a href="{:U('/news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0,25}</a></p>
+                        </li>
+                    </volist>
+                </ul>
+            </div><!-- nws_latest最新资讯结束 -->
+            <!-- 热门文章 -->
+            <div class="nws_article">
+                <h1><i class="article_i"></i>热门文章</h1>
+                <ul>
+                    <volist name='hotnews' id='vo' mod='2'>
+                    <li <eq name='mod' value='0'>class="neodd"</eq>><a href="{:U('news/detail/'.$vo['id'])}">{$vo.title}</a></li>
+                    </volist>
+                </ul>
+            </div><!-- nws_article热门文章结束 -->
+        </div><!-- nws_right右侧内容结束 -->
+    </div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+
+<include file="Common:footer" />
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/news.js"></script>
+</body>
+</html>

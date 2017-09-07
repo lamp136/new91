@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="icon" href="/Public/soumu.ico" type="image/x-icon" />
+    <title><notempty name='storeInfo.seo_title'>{$storeInfo.seo_title}<else/>{$storeInfo.store_name}</notempty>_{$Think.config.SITE_NAME}</title>
+    <meta name="keywords" content="{$seoInfo.seo_keywords}" />
+    <meta name="description" content="{$seoInfo.seo_description}" />
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+    <link href="{$Think.const.CSS_URL}flexslider.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<include file="Common:head_in" />
+<!-- 中间内容部分 -->
+<div class="main">
+    <div class="contain">
+        <!-- 面包屑导航 -->
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="<?php echo getHomeUrl(); ?>">首页</a></li>
+                <li>></li>
+                <li><a href="<?php echo getHomeUrl('funeral'); ?>">殡仪馆</a></li>
+                <li>></li>
+                <li>{$storeInfo.store_name}</li>
+            </ul>
+        </div><!-- breadcrumb面包屑导航结束 -->
+        <!-- 殡仪馆详情 -->
+        <div class="chapeln_details clearfix">
+            <!-- 详情内容 -->
+            <div class="chapdet_main clearfix">
+                <!-- 殡仪馆图片 -->
+                <img class="chapdet_img" src="{$storeInfo.StoreImg.image_url}" alt="{$storeInfo.store_name}"/>
+                <!-- 详情右侧 -->
+                <div class="chapdet_right">
+                    <h1>{$storeInfo.store_name}</h1>
+                    <div class="chapdet_infomain">
+                        <p>{$storeInfo.summary|msubstr=0,100,'utf-8',true} </p>
+                    </div>
+                    <ul>
+                        <notempty name="storeInfo['level']">
+                            <li>
+                                <span>
+                                    <i>等&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：</i>
+                                    <strong>
+                                        {$Think.config.FUNERAL_LEVEL.$storeInfo[level]}
+                                    </strong>
+                                </span>
+                            </li>
+                         </notempty>
+                        <li><span><i>浏&nbsp; 览&nbsp; 量：</i>{$storeInfo.hits}</span></li>
+                        <!--<li><span><i>荣誉称号：</i></span></li>-->
+                        <li><span><i>业务电话：</i>{$storeInfo.StoreContact.tel}</span></li>
+                        <li><span><i>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</i>{$storeInfo.address}</span></li>
+                    </ul>
+                </div><!-- chapdet_right详情右侧结束 -->
+            </div><!-- chapdet_main详情内容结束 -->
+            <!-- 殡仪馆详情左侧 -->
+            <div class="det_left">
+                <h1>殡仪馆简介</h1>
+                <div class="det_synopsis chapdet_synopsis">
+                    {$storeInfo.content}
+                </div><!-- det_synopsis end -->
+                
+                <!-- 陵园地图 -->
+                <notempty name="storeInfo.longitude">
+                    <notempty name="storeInfo.latitude">
+                        <h1>殡仪馆地图</h1>
+                        <a name="map"></a> 
+                        <div id="dituContent" style="border-top: #eee 1px solid; height: 486px; border-right: #eee 1px solid; border-bottom: #eee 1px solid; border-left: #eee 1px solid; width: 823px;margin-top:15px;">&nbsp;</div>
+                    </notempty>
+                </notempty>
+                
+            </div><!-- det_left殡仪馆详情左侧结束 -->
+            <!-- 殡仪馆详情右侧 -->
+            <div class="det_right">
+                <!-- 殡仪馆资质 -->
+                <notempty name="honor">
+                    <div class="det_qualify">
+                        <h1>殡仪馆资质</h1>
+                        <!-- 殡仪馆资质轮播 -->
+                        <div id="qualify" class="flexslider">
+                            <ul class="slides">
+                                <volist name="honor" id="vo">
+                                   <li><div class="img"><img src="{$vo.thumb_image_url}" height="145" width="232"/></div></li>
+                                </volist>
+                            </ul>
+                        </div><!--flexslider end-->
+                    </div><!-- det_qualify殡仪馆资质结束 -->
+                </notempty>
+                <!-- 附近陵园推荐 -->
+                <notempty name="cemetery">
+                    <div class="nearby chapdet_nearby">
+                        <h2>附近陵园推荐</h2>
+                        <ul>
+                            <volist name="cemetery" id="vo" key="k">
+                            <li class="clearfix">
+                                <h3><a href="{:U('/cemetery/detail/'.$vo['store_id'])}"><span>{$k}</span>{$vo.store_name}</a></h3>
+                                <a class="nearby_img" href="{:U('/cemetery/detail/'.$vo['store_id'])}">
+                                    <img src="{$vo.store_banner}"/>
+                                    <in name="vo.member_status" value="$storeMembersYH" >
+                                    <span class="favorable_small"></span>
+                                    </in>
+                                </a>
+                                <div class="nearby_right">
+                                    <p>特色：{$vo.feature|msubstr=0,16}</p>
+                                    <p class="lookmap"><a href="{:U('/cemetery/detail/'.$vo['store_id'].'#map')}"><i></i>点击查看地图</a></p>
+                                </div>
+                            </li>
+                            </volist>
+                        </ul>
+                    </div><!-- nearby附近陵园推荐结束 -->
+                </notempty>
+                <!-- 殡仪馆资讯 -->
+                <notempty name="cemetery_news">
+                    <div class="huimin">
+                        <h2>殡仪馆资讯</h2>
+                        <ul>
+                            <volist name="cemetery_news" id="vo">
+                                <if condition="$i lt 4"><li><a href="#"><span class="led">{$i}</span>{$vo.title}</a></li>
+                                <else /><li><a href="#"><span>{$i}</span>{$vo.title}</a></li>
+                                </if>
+                            </volist>
+                        </ul>
+                    </div><!-- huimin惠民政策结束 -->
+                </notempty>
+                <!-- 广告banner -->
+                <div class="cem_ad">
+                    <img src="{$Think.const.IMG_URL}cem_ad.jpg"/>
+                </div><!-- cem_ad广告banner结束 -->
+            </div><!-- det_right陵园详情右侧结束 -->
+        </div><!-- details陵园详情结束 -->
+    </div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<include file="Common:footer" />
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+<!-- 陵园资质轮播flexslider.js -->
+<script src="{$Think.const.JS_URL}flexslider.js"></script>
+<!--地图-->
+<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.5&ak=d8KknmejUBUmMN6yoCiGVRx0"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}map.js"></script>
+<script type="text/javascript" >
+    //殡仪馆资质轮播
+	$(function(){
+		$('#qualify').flexslider({
+			animation: "slide",
+			direction:"horizontal",
+			easing:"swing"
+		});
+	});
+    //地图
+
+    var longitude = {$storeInfo.longitude};
+	var latitude = {$storeInfo.latitude};
+	var store_name = '{$storeInfo.store_name}';
+	var address = '{$storeInfo.address}';
+	if (longitude && latitude) {
+   	    DATA.CHECK.MAP(longitude,latitude,store_name,address);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<!--
+Template Name: Admin Lab Dashboard build with Bootstrap v2.3.1
+Template Version: 1.2
+Author: Mosaddek Hossain
+Website: http://thevectorlab.net/
+-->
+
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="javascript:void(0)"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="javascript:;">91搜墓网</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">首页</a><span class="divider-last">&nbsp;</span></li>
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                
+                     <div class="row-fluid">
+                        <div class="span12">
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4>控制台--首页</h4>
+                                </div>
+                            
+                                <!-- BEGIN OVERVIEW STATISTIC BARS-->
+                                    <div class="widget-body row-fluid circle-state-overview">
+                                        <div class="span2 responsive clearfix" data-tablet="span3" data-desktop="span2">
+                                            <div class="circle-wrap">
+                                                <a href="javascript:;">
+                                                    <div class="stats-circle turquoise-color">
+                                                        <i class="icon-user"></i>
+                                                    </div>
+                                                </a>
+                                                <p>
+                                                    <strong><font class="badge badge-important">xx</font></strong>
+                                                    <strong>会员陵园</strong>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="span2 responsive" data-tablet="span3" data-desktop="span2">
+                                            <div class="circle-wrap">
+                                                <div class="stats-circle green-color">
+                                                    <i class="icon-shopping-cart"></i>
+                                                </div>
+                                                <p>
+                                                    <strong><font class="badge badge-success">xx</font></strong>
+                                                     <strong>成交量</strong>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="span2 responsive" data-tablet="span3" data-desktop="span2">
+                                            <div class="circle-wrap">
+                                                <div class="stats-circle red-color">
+                                                    <i class="icon-tags"></i>
+                                                </div>
+                                                <p>
+                                                    <strong><font class="badge badge-info">xx</font></strong>
+                                                    <strong>新闻量</strong>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="span2 responsive" data-tablet="span3" data-desktop="span2">
+                                            <div class="circle-wrap">
+                                                <div class="stats-circle gray-color">
+                                                    <i class="icon-comments-alt"></i>
+                                                </div>
+                                                <p>
+                                                    <strong><font class="badge badge-warning">xx</font></strong>
+                                                    <strong>咨询量</strong>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="span2 responsive" data-tablet="span3" data-desktop="span2">
+                                            <div class="circle-wrap">
+                                                <div class="stats-circle purple-color">
+                                                    <i class="icon-eye-open"></i>
+                                                </div>
+                                                <p>
+                                                    <strong><font class="badge badge-inverse">xx</font></strong>
+                                                    <strong>发现</strong>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="span2 responsive" data-tablet="span3" data-desktop="span2">
+                                            <div class="circle-wrap">
+                                                <div class="stats-circle blue-color">
+                                                    <i class="icon-bar-chart"></i>
+                                                </div>
+                                                <p>
+                                                    <strong ><font class="badge">xx</font></strong>
+                                                    <strong>运营分析</strong>
+                                                </p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <!-- END OVERVIEW STATISTIC BARS-->
+                        </div>
+                      </div>
+                    </div>
+                
+                <!--服务器基本信息-->
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN EXAMPLE TABLE widget-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>系统信息</h4>
+                                </div>
+                                <div class="widget-body">
+                                    <div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                       <table class="table table-striped table-bordered dataTable" id="sample_1" aria-describedby="sample_1_info">
+                                           <volist name="server_info" id="vo" key="k">
+                                               <php> if($k%2==1) echo "<tr>";</php>
+                                               <td width="120" align="right">{$key}：</td>
+                                                <td>{$vo}</td>
+                                                <php> if($k%2==0) echo "</tr>";</php>
+                                            </volist>
+                                             <php>if(count($caches)%2==1) echo '<td>&nbsp;</td><td>&nbsp;</td></tr>';</php>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END EXAMPLE TABLE widget-->
+                        </div>
+                    </div>
+                    <!--end 服务器基本信息-->
+                <!--常用操作图标END -->
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+    <include file="Public::footer"/>
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

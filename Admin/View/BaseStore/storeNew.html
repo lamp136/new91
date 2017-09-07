@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head"/>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+<!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                        </li>
+                        <eq name='storeInfo.category_id' value='$Think.config.CATEGORY_CEMETERY_ID'>
+                        <li><a href="{:U('cemeteryList',array('p'=>$np,'sname'=>$sname,'sprovince'=>$sprovince))}">陵园基础信息</a><span class="divider">&nbsp;</span></li>
+                        <else />
+                        <li><a href="{:U('funeralList',array('p'=>$np,'sname'=>$sname,'sprovince'=>$sprovince))}">殡仪馆基础信息</a><span class="divider">&nbsp;</span></li>
+                        </eq>
+                        <li><a href="javascript:void(0)">{$storeInfo.store_name}新闻列表</a><span class="divider-last">&nbsp;</span></li>
+
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4><i class="icon-reorder"></i>商家新闻列表</h4>
+                                <php>
+                                    if (showHandle('BaseStore/addNew')) {
+                                </php>
+                                    <span class="tools">
+                                        <a href="{:U('BaseStore/addNew',array('sid'=>$storeId,'np'=>$np,'sname'=>$sname,'sprovince'=>$sprovince))}" class="icon-plus">添加商家新闻</a>
+                                    </span>
+                                 <php>
+                                    }
+                                </php>
+                            </div>
+                            <div class="widget-body">
+                                <table class="table table-striped table-bordered" id="sample_1">
+                                    <thead>
+                                    <tr>
+                                        <th width="20%">标题</th>
+                                        <th class="hidden-phone" width="10%">所在分类</th>
+                                        <th class="hidden-phone" width="10%">状态</th>
+                                        <th class="hidden-phone" width="20%">发布时间</th>
+                                        <th class="hidden-phone" width="20%">创建时间</th>
+                                        <th class="hidden-phone" width="20%">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="list" id="vo">
+                                        <tr class="odd gradeX">
+                                            <td>{$vo.title}
+                                                <eq name="vo.top" value="1">
+                                                    <img width="19px" src="{$Think.const.IMG_URL}top.png" title="置顶">
+                                                </eq>
+                                                <eq name="vo.is_hot" value="1">
+                                                    <img width="21px" src="{$Think.const.IMG_URL}hot.png" title="热门">
+                                                </eq>
+                                                <eq name="vo.recommend" value="1">
+                                                    <img width="23px" src="{$Think.const.IMG_URL}recommend.png" title="推荐">
+                                                </eq>
+                                            </td>
+                                            <td>{$vo.cateName}</td>
+                                            <td>
+                                                <if condition="$vo.status eq 1">已发布
+                                                    <elseif condition="$vo.status eq 0" />审核中
+                                                    <elseif condition="$vo.status eq -1" />删除
+                                                </if>
+                                            </td>
+                                            <td>{$vo.published_time|date="Y-m-d H:i:s",###}</td>
+                                            <td>{$vo.created_time|date="Y-m-d H:i:s",###}</td>
+                                            <td>
+                                                <php>
+                                                    if (showHandle('BaseStore/editNew')) {
+                                                </php>
+                                                    <a href="{:U('BaseStore/editNew',array('sid'=>$vo['store_id'],'nid'=>$vo['id'],'np'=>$np,'sname'=>$sname,'sprovince'=>$sprovince))}" class="btn btn-primary btn-small">
+                                                       <i class="icon-pencil icon-white"></i> 编辑
+                                                    </a>
+                                                <php>
+                                                    }
+                                                    if (showHandle('BaseStore/deleteNew')) {
+                                                </php>
+                                                     <if condition="$vo['status'] neq -1">
+                                                        <button type="button" class="btn btn-danger btn-small del" data-id="{$vo.id}" data-status="{$Think.config.DELETE_STATUS}">
+                                                            <i class="icon-remove  icon-white"> </i>删除
+                                                        </button>
+                                                        <else/>
+                                                        <a href="javascript:void(0)" class="btn btn-success btn-small start" data-id="{$vo.id}" data-status="{$Think.config.DEFAULT_STATUS}">
+                                                            <i class="icon-ok  icon-white"> </i>启用
+                                                        </a>
+                                                    </if>
+                                                <php>
+                                                    }
+                                                    if (showHandle('BaseStore/newImage')) {
+                                                </php>
+                                                    <a href="{:U('BaseStore/newImage',array('nid'=>$vo['id'],'sid'=>$vo['store_id'],'np'=>$np,'sname'=>$sname,'sprovince'=>$sprovince))}" class="btn btn-info btn-small">
+                                                        图片
+                                                    </a>
+                                                <php>
+                                                    }
+                                                </php>
+                                            </td>
+                                        </tr>
+                                    </volist>
+
+                                    </tbody>
+                                </table>
+                                <div class="row-fluid">
+                                    <div class="span12 center">
+                                        <div class="pagination" id="sample_1_info" style="text-align: center">
+                                            {$page}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- END CONTAINER -->
+
+<!-- BEGIN FOOTER -->
+<include file="Public::footer"/>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+
+<script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+<script src="{$Think.const.JS_URL}zh-CN.js"></script>
+
+<!--地图封装接口 以及一些初始化的数据 -->
+<script src="{$Think.const.JS_URL}scripts.js"></script>
+<!-- ie8 fixes -->
+<!--[if lt IE 9]>
+<script src="js/excanvas.js"></script>
+<script src="js/respond.js"></script>
+<![endif]-->
+<script>
+    //删除开启新闻
+    $('.del').click(function(){
+        var id = $(this).attr('data-id');
+        var status = $(this).attr('data-status');
+        if(!window.confirm('确定要删除？')){
+            return false;
+        }else{
+            $.ajax({
+                url: "{:U('deleteNew')}",
+                type:'post',
+                data:{'id':id,'status':status},
+                async:false,
+                success : function(e){
+                    var result = eval("(" + e + ")");
+                    if(result.flag==1){
+                        alert(result.msg);
+                        window.location.reload();//刷新当前页面.
+                    }else{
+                        alert(result.msg);
+                    }
+                }
+            });
+        }
+    });
+
+    //启用商家新闻
+    $('.start').click(function(){
+        var id = $(this).attr('data-id');
+        var status = $(this).attr('data-status');
+        $.ajax({
+            url: "{:U('deleteNew')}",
+            type:'post',
+            data:{'id':id,'status':status},
+            async:false,
+            success : function(e){
+                var result = eval("(" + e + ")");
+                if(result.flag==1){
+                    alert(result.msg);
+                    window.location.reload();//刷新当前页面.
+                }else{
+                    alert(result.msg);
+                }
+            }
+        });
+    });
+</script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+        <style type='text/css'>
+            .noboder{
+                border: none;
+            }
+            .noboder td{
+                border: none;
+            }
+            .noboder a{
+                margin-left: 8px;
+            }
+        </style>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">菜单列表</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>菜单列表</h4>
+                                    <span class="tools">
+                                        <php>
+                                            if (showHandle('Privilege/addprivilege')) {
+                                        </php>
+                                            <a href="javascript:void(0);" class="icon-plus add" >添加菜单</a>
+                                        <php>
+                                            }
+                                        </php>
+                                    </span>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="space10"></div>
+                                    <div style="float: left;width:120px; padding-left: 20px;">
+                                        <ul class='unstyled'>
+                                            <volist name='privilegeMenu' id='vo'>
+                                                <li><a href="{:U('index',array('id'=>$vo['id']))}"><i class=" icon-book"></i> {$vo.title}</a></li>
+                                            </volist>
+                                        </ul>
+                                    </div>
+                                    <div class="span10">
+                                        <table  class='table table-striped table-bordered table-hover'>
+                                            <thead>
+                                                <tr><th colspan="2" style='text-align:center;'>{$currentPrivilege.title}-功能列表</th></tr>
+                                                <tr>
+                                                    <th width="15%">功能块</th>
+                                                    <th><span>菜单</span> <span style="margin-left: 20%;">操作方法</span></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <volist name='first' id='firstVal'>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="javascript:void(0);"   class="btn btn-small edit" data-id='{$firstVal.id}'>{$firstVal.title}</a>
+                                                            <php>
+                                                                if (showHandle('Privilege/delprivilege')) {
+                                                            </php>
+                                                                <span class="btn btn-danger btn-small del" data-id='{$firstVal.id}'><i class="icon-remove  icon-white"></i></span>
+                                                            <php>
+                                                                }
+                                                            </php>
+                                                        </td>
+                                                        <td>
+                                                            <table width="100%" class='noboder'>
+                                                                <volist name="two[$firstVal['id']]" id='twoVal'>
+                                                                <tr>
+                                                                    <td height='35' width='20%'>
+                                                                        <a href="javascript:void(0);"  class="btn btn-small edit" data-id='{$twoVal.id}'>{$twoVal.title}</a>
+                                                                        <php>
+                                                                            if (showHandle('Privilege/delprivilege')) {
+                                                                        </php>
+                                                                            <span class="btn btn-danger btn-small del" data-id='{$twoVal.id}'><i class="icon-remove  icon-white"></i></span>
+                                                                        <php>
+                                                                            }
+                                                                        </php>
+                                                                    </td>
+                                                                    <td width='80%'>
+                                                                        <volist name="three[$twoVal['id']]" id='threeVal'>
+                                                                            <a href="javascript:void(0)"  class="btn btn-small edit" data-id='{$threeVal.id}'>{$threeVal.title}</a>
+                                                                            <php>
+                                                                                if (showHandle('Privilege/delprivilege')) {
+                                                                            </php>
+                                                                                <span class="btn btn-danger btn-small del" data-id='{$threeVal.id}'><i class="icon-remove  icon-white"></i></span>
+                                                                            <php>
+                                                                                }
+                                                                            </php>
+                                                                        </volist>
+                                                                    </td>
+                                                                </tr>
+                                                                </volist>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </volist>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class='space10'></div>
+                                </div>
+
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+
+    <!--添加菜单开始-->
+    <div id="add" class="modal hide fade in">
+        <form id="defaultForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>添加菜单</h3>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>上级权限：</td>
+                            <td>
+                                <select  name="Privilege[pid]" id="privilege_pid"  data-rule="required">
+
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>权限名称：</td>
+                            <td>
+                                <input name="Privilege[title]"  type="text" data-rule='required'>  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>权限地址：</td>
+                            <td>
+                                <input name="Privilege[name]"  type="text" >控制器/方法
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>地址类型：</td>
+                            <td>
+                                <input type='radio' name='Privilege[type]' value='0' checked />菜单&nbsp;&nbsp;
+                                <input type='radio' name='Privilege[type]' value='1' />方法
+                                <span class="alert alert-info form-inline">菜单：用于显示，方法：不显示。</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>是否启用：</td>
+                            <td>
+                                <input type='radio' name='Privilege[status]' value='1' checked />启用&nbsp;&nbsp;
+                                <input type='radio' name='Privilege[status]' value='-1' />禁用
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>排序：</td>
+                            <td>
+                                <input name="Privilege[sort]"  type="text" value='1' data-rule='required'>越大越靠前
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--添加菜单结束-->
+
+    <!--编辑菜单开始-->
+    <div id="edit" class="modal hide fade in">
+        <form id="editForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>编辑职位</h3>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>上级权限：</td>
+                            <td>
+                                <select  name="editPrivilege[pid]" id="edit_privilege_pid"  data-rule="required">
+
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>权限名称：</td>
+                            <td>
+                                <input name="editPrivilege[title]" id="edit_privilege_title"  type="text" data-rule='required'>  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>权限地址：</td>
+                            <td>
+                                <input name="editPrivilege[name]"  id="edit_privilege_name" type="text" >控制器/方法
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>地址类型：</td>
+                            <td>
+                                <input type='radio' name='editPrivilege[type]'  value='0' checked />菜单&nbsp;&nbsp;
+                                <input type='radio' name='editPrivilege[type]' value='1' />方法
+                                <span class="alert alert-info form-inline">菜单：用于显示，方法：不显示。</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>是否启用：</td>
+                            <td>
+                                <input type='radio' name='editPrivilege[status]' value='1' />启用&nbsp;&nbsp;
+                                <input type='radio' name='editPrivilege[status]' value='-1' />禁用
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>排序：</td>
+                            <td>
+                                <input name="editPrivilege[sort]" id="edit_privilege_sort"  type="text" data-rule='required'>越大越靠前
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <input name="editPrivilege[id]"  type="hidden" id='edit_privilege_id' data-rule='required'>
+                <button type="submit"  class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--编辑菜单结束-->
+
+
+
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}zh-CN.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+
+        //点击添加职位，弹出添加职位表单
+        $('.add').click(function () {
+            $.ajax({
+                url: "{:U('getprivilege')}",
+                type: "get",
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    var str = '';
+                    if (result.flag == 1) {
+                        var data = result.data;
+                        str += '<option value="">--请选择--</option>';
+                        str += '<option  value="0">顶级</option>';
+                        for (i in data) {
+                            if (data[i].level == 0) {
+                                str += '<option value="' + data[i].id + '">|--' + data[i].title + '</option>';
+                            } else if (data[i].level == 1) {
+                                str += '<option value="' + data[i].id + '">&nbsp;&nbsp;|--' + data[i].title + '</option>';
+                            } else if (data[i].level == 2) {
+                                str += '<option value="' + data[i].id + '">&nbsp;&nbsp;&nbsp;&nbsp;|--' + data[i].title + '</option>';
+                            }
+                        }
+
+                    } else {
+                        str += '<option value="">--请选择--</option>';
+                        str += '<option  value="0">顶级</option>';
+                    }
+                    $('#privilege_pid').html(str);
+                    $('#add').modal();
+                }
+            });
+
+        });
+
+        //提交添加菜单的form 表单
+        $('#defaultForm').bind('valid.form', function () {
+            $('#add').modal('hide');
+            $.ajax({
+                url: "{:U('addprivilege')}",
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert('添加成功');
+                        window.location.reload();
+                    } else {
+                        alert('添加失败');
+                    }
+                }
+            });
+        });
+
+        //点击编辑菜单，弹出编辑菜单表单
+        $('.edit').click(function () {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url: "/system.php/Privilege/editprivilege/id/" + id,
+                type: 'GET',
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    var str ='';
+                    if (result.flag == 1) {
+                        $("input[name='editPrivilege[status]']").removeAttr("checked"); 
+                        $("input[name='editPrivilege[type]']").removeAttr("checked"); 
+                        var currentprivilege = result.currentprivilege;
+                        var privilegeTree = result.privilegeTree;
+                        str += '<option value="">--请选择--</option>';
+                        str += '<option  value="0">顶级</option>';
+                        for (i in privilegeTree) {
+                            if (privilegeTree[i].level == 0) {
+                                if(privilegeTree[i].id==currentprivilege.pid){
+                                    str += '<option value="' + privilegeTree[i].id + '" selected>|--' + privilegeTree[i].title + '</option>';
+                                }else{
+                                    str += '<option value="' + privilegeTree[i].id + '">|--' + privilegeTree[i].title + '</option>';
+                                }
+                            } else if (privilegeTree[i].level == 1) {
+                                if(privilegeTree[i].id==currentprivilege.pid){
+                                    str += '<option value="' + privilegeTree[i].id + '" selected>&nbsp;&nbsp;|--' + privilegeTree[i].title + '</option>';
+                                }else{
+                                    str += '<option value="' + privilegeTree[i].id + '">&nbsp;&nbsp;|--' + privilegeTree[i].title + '</option>';
+                                }
+                            } else if (privilegeTree[i].level == 2) {
+                                if(privilegeTree[i].id==currentprivilege.pid){
+                                    str += '<option value="' + privilegeTree[i].id + '" selected>&nbsp;&nbsp;&nbsp;&nbsp;|--' + privilegeTree[i].title + '</option>';
+                                }else{
+                                    str += '<option value="' + privilegeTree[i].id + '">&nbsp;&nbsp;&nbsp;&nbsp;|--' + privilegeTree[i].title + '</option>';
+                                }
+                            }
+                        }
+                        $('#edit_privilege_pid').html(str);
+                        $('#edit_privilege_title').val(currentprivilege.title);
+                        $('#edit_privilege_name').val(currentprivilege.name);
+                        $('#edit_privilege_sort').val(currentprivilege.sort);
+                        $('#edit_privilege_id').val(currentprivilege.id);
+                        $("input[name='editPrivilege[status]'][value="+currentprivilege.status+"]").attr("checked",true); 
+                        $("input[name='editPrivilege[type]'][value="+currentprivilege.type+"]").attr("checked",true); 
+                        $('#edit').modal();
+                    }
+                }
+            });
+        });
+
+        //提交编辑菜单form 表单
+        $('#editForm').bind('valid.form', function () {
+            $('#edit').modal('hide');
+            $.ajax({
+                url: "{:U('editprivilege')}",
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert('修改成功');
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+        //删除菜单
+        $('.del').click(function(){
+            var id = $(this).attr('data-id');
+            if(confirm("你确认要删除么？")){
+                $.ajax({
+                    url: "{:U('delprivilege')}",
+                    type: 'POST',
+                    data: {'id':id},
+                    success:function(d){
+                        var result = eval("(" + d + ")");
+                        if (result.flag == 1) {
+                            alert(result.msg);
+                            window.location.reload();
+                        } else {
+                            alert(result.msg);
+                        }
+                    },
+                });
+            }
+        });
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

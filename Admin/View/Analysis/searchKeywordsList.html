@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">搜索词列表</a><span class="divider-last">&nbsp;</span></li>
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>搜索列表</h4>
+                                </div>
+                                <div class="widget-body">
+                                    <form id="quickForm" method="get" class="form-horizontal" autocomplete="off" action='{:U("searchKeywordsList")}'>
+                                    <table>
+                                        <tr>
+                                            <td>搜索：</td>
+                                            <td>
+                                                <select name='type'>
+                                                    <option value=''>请选择搜索来源</option>
+                                                    <volist name='searchSource' id='vo'>
+                                                    <option value='{$key}' <eq name="key" value="$Think.get.type">selected</eq>>{$vo}</option>
+                                                    </volist>
+                                                </select>
+                                                时间段：<input type="text" name="start_time" class="input-medium Wdate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" value="{$start_time}"/>-
+                                                <input type="text" name="end_time" class="input-medium Wdate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})"  <notempty name="Think.get.end_time">value="{$Think.get.end_time}" <else />  value="{:date('Y-m-d')}" </notempty>/>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary">确定</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    </form>
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>编号</th>
+                                                <th>搜索词</th>
+                                                <th>类型</th>
+                                                <th>省份</th>
+                                                <th>ip</th>
+                                                <th>时间</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <volist name="dataList" id="vo">
+                                            <tr class="odd gradeX">
+                                                <td>{$vo.id}</td>
+                                                <td>{$vo.keyword}</td>
+                                                <td>{$searchSource[$vo['type']]}</td>
+                                                <td><notempty name='vo.province_id'>{$region[$vo['province_id']]}</notempty></td>
+                                                <td>{$vo.ip|long2ip}</td>
+                                                <td>{$vo.created_time|date='Y-m-d H:i:s',###}</td>
+                                            </tr>
+                                        </volist>
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span12 center">
+                                            <div class="pagination" id="sample_1_info" style="text-align: center">
+                                                {$page}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

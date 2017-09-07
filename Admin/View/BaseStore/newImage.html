@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head"/>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+<!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                        </li>
+                        <eq name='storeInfo.category_id' value='$Think.config.CATEGORY_CEMETERY_ID'>
+                        <li><a href="{:U('cemeteryList',array('p'=>$np,'sname'=>$sname,'sprovince'=>$sprovince))}">陵园基础信息</a><span class="divider">&nbsp;</span></li>
+                        <else />
+                        <li><a href="{:U('funeralList',array('p'=>$np,'sname'=>$sname,'sprovince'=>$sprovince))}">殡仪馆基础信息</a><span class="divider">&nbsp;</span></li>
+                        </eq>
+                        <li><a href="{:U('storeNew',array('sid'=>$storeInfo['store_id'],'np'=>$np,'sname'=>$sname,'sprovince'=>$sprovince))}">{$storeInfo.store_name}新闻列表</a><span class="divider">&nbsp;</span></li>
+                        <li><a href="javascript:void(0)">{$newsInfo.title}新闻图片列表</a><span class="divider-last">&nbsp;</span></li>
+
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4><i class="icon-reorder"></i>商家新闻图片列表</h4>
+                                    <php>
+                                        if (showHandle('BaseStore/addNewImage')) {
+                                    </php>
+                                        <span class="tools">
+                                            <a href="javascript:;"  class="icon-plus addNewImage" data-nid="{$newsId}">
+                                                添加图片
+                                            </a>
+                                        </span>
+                                    <php>
+                                        }
+                                    </php>
+                            </div>
+                            <div class="widget-body">
+                                <table class="table table-striped table-bordered" id="sample_1">
+                                    <thead>
+                                    <tr>
+                                        <th>编号</th>
+                                        <th>标题</th>
+                                        <th class="hidden-phone">图片</th>
+                                        <th class="hidden-phone">排序</th>
+                                        <th class="hidden-phone">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="list" id="vo">
+                                        <tr class="odd gradeX">
+                                            <td>{$vo.id}</td>
+                                            <td>{$vo.title}</td>
+                                            <td><img src="{$vo.thumbnail}" alt="" width="88px"/></td>
+                                            <td>{$vo.sort}</td>
+                                            <td>
+                                                <php>
+                                                    if (showHandle('BaseStore/delNewImage')) {
+                                                </php>
+                                                    <a href="javascript:void(0)" class="btn btn-danger btn-small delNewImage" data-id="{$vo.id}">
+                                                        <i class="icon-remove  icon-white"></i>删除
+                                                    </a>
+                                                <php>
+                                                    }
+                                                </php>
+                                            </td>
+                                        </tr>
+                                    </volist>
+
+                                    </tbody>
+                                </table>
+                                <div class="row-fluid">
+                                    <div class="span12 center">
+                                        <div class="pagination" id="sample_1_info" style="text-align: center">
+                                            {$page}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- END CONTAINER -->
+<!--模态化弹框添加商家联系人信息-->
+<div id="addNewImage" class="modal hide fade in" style="display: none; ">
+    <form id="addForm" method="post" class="form-horizontal" autocomplete="off"  enctype="multipart/form-data">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>添加商家新闻相册</h3>
+        </div>
+        <div class="modal-body">
+            <volist name="list" id="v">
+            </volist>
+            <table class="table table-bordered table-hover">
+                <tbody>
+                <tr>
+                    <td>图片标题：</td>
+                    <td>
+                        <input type="text" name="title" class="input-xlarge" data-rule='required'/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>图  片：</td>
+                    <td>
+                        <input type="file" name="image_url" data-rule='required'/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>排序：</td>
+                    <td>
+                        <input type="text" name="sort" value="0" />
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <input type='hidden' id='nid' name='news_id'></input>
+            <button type="submit" class="btn btn-success" id="sub">提交</button>
+            <a href="javascript:;" class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </form>
+</div>
+<!--模态框结束添加商家联系人信息-->
+<!-- BEGIN FOOTER -->
+<include file="Public::footer"/>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+
+<script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+<script src="{$Think.const.JS_URL}zh-CN.js"></script>
+<!-- ie8 fixes -->
+<!--[if lt IE 9]>
+<script src="js/excanvas.js"></script>
+<script src="js/respond.js"></script>
+<![endif]-->
+<script>
+    //添加新闻图片
+    $('.addNewImage').click(function(){
+        var nid = $(this).attr('data-nid');
+        $('#nid').val(nid);
+        $('#addNewImage').modal();
+    });
+    //提交新闻图片
+    $('#addForm').bind('valid.form', function () {
+        $('#addNewImage').modal('hide');
+        var fd = new FormData(document.getElementById("addForm"));
+        
+        $.ajax({
+            url:'{:U("addNewImage")}',
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            data: fd,
+            success: function (d) {
+            	console.log(d);
+                var result = eval("(" + d + ")");
+                if (result.flag == 1) {
+                    alert(result.msg);
+                    window.location.reload();//刷新当前页面.
+                } else if(result.flag==0){
+                    alert(result.msg);
+                }
+            }
+        });
+    });
+   
+    //删除新闻图片
+    $('.delNewImage').click(function(){
+        var id = $(this).attr('data-id');
+        if(!window.confirm('确定要删除？')){
+           event.preventDefault();
+        }else{
+            $.ajax({
+                url: "{:U('delNewImage')}",
+                type: 'post',
+                data:{'id':id},
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            }); 
+        }
+    });
+</script>
+
+
+<!--地图封装接口 以及一些初始化的数据 -->
+<script src="{$Think.const.JS_URL}scripts.js"></script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

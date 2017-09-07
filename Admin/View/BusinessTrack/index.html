@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">商家信息列表</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>跟踪商家列表</h4>
+                                    <php>
+                                        if(showHandle('BusinessTrack/add')){
+                                    </php>
+                                    <span class="tools">
+                                        <a href="{:U('add')}" class="icon-plus">添加</a>
+                                    </span>
+                                    <php>
+                                        }
+                                        if(showHandle('BusinessTrack/importFiles')){
+                                    </php>
+                                    <span class="tools">
+                                        <a href="javascript:void(0);" class="icon-cog import" >导入跟踪信息</a>
+                                    </span>
+                                    <php>
+                                        }
+                                        if(showHandle('BusinessTrack/exportFiles')){
+                                    </php>
+                                    <span class="tools">
+                                        <a href="javascript:void(0);" class="icon-cog export" >导出excel文件</a>
+                                    </span>
+                                    <php>
+                                        }
+                                    </php>
+                                </div>
+                                <div class="widget-body">
+                                    <!-- 搜索 -->
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <form action="__SELF__" method="get" class="form-horizontal">
+                                                <input type="text" placeholder="商家名称" class="input-large" name="search_company"  value="{$getValue['search_company']}">
+                                                <select class="input-small m-wrap" tabindex="1" name="search_province" id="province">
+                                                    <option value="0">选择省</option>
+                                                    <volist name="province" id="vo">
+                                                        <option value="{$vo.region_id}" <eq name="vo[region_id]" value="$Think.get.search_province">selected="selected"</eq>>{$vo.region_name}</option>
+                                                    </volist>
+                                                </select>
+                                                <select class="input-small m-wrap" tabindex="1" name="search_city" id="city">
+                                                    <option value="0">选择市</option>
+                                                    <volist name="city" id="vi">
+                                                        <option value="{$vi.region_id}" <eq name="vi[region_id]" value="$Think.get.search_city">selected="selected"</eq>>
+                                                            {$vi.region_name}
+                                                        </option>
+                                                    </volist>
+                                                </select>
+                                                <select class="input-medium m-wrap" tabindex="1" name="category_id">
+                                                    <option value="0">--商家类型--</option>
+                                                    <volist name='Think.config.BUSINESS_TYPE' id='vo'>
+                                                        <option value="{$key}" <eq name="key" value="$Think.get.category_id">selected="selected"</eq>>{$vo}</option>
+                                                    </volist>
+                                                </select>
+                                                <select class="input-medium m-wrap" tabindex="1" name="search_intention">
+                                                    <option value="0">--意向类型--</option>
+                                                    <volist name="Think.config.INTENTION_TYPE" id="bo" key="k">
+                                                        <option value="{$k}" <eq name="k" value="$Think.get.search_intention">selected="selected"</eq>>{$bo}</option>
+                                                    </volist>
+                                                </select>
+                                                <select class="input-medium m-wrap" tabindex="1" name="search_is_system">
+                                                    <option value="0">--系统情况--</option>
+                                                    <volist name="Think.config.IS_SYSTEM" id="ao" key="k">
+                                                        <option value="{$k}" <eq name="k" value="$Think.get.search_is_system">selected="selected"</eq>>{$ao}</option>
+                                                    </volist>
+                                                </select>
+                                                <button class="btn btn-primary" style="margin-bottom:0px;">
+                                                    <i class="icon-pencil icon-white"></i> 搜索
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <php>
+                                                    if(showHandle('BusinessTrack/changeFlowMan')){
+                                                </php>
+                                                    <a href="javascript:void(0);" data-id="all">全选</a>&nbsp;
+                                                    <a href="javascript:void(0);" data-id="cancel">取消</a>&nbsp;
+                                                    <a href="javascript:void(0);" data-id="antiAll">反选</a>&nbsp;
+                                                    <input type="button" data-id="batchDel" value="选择跟踪人" style="cursor:pointer;"/>
+                                                <php>
+                                                    }
+                                                </php>
+                                                <th class="hidden-phone" width="3%"></th>
+                                                <th class="hidden-phone" width="14%">商家名称</th>
+                                                <th class="hidden-phone" width="9%">系统情况</th>
+                                                <th class="hidden-phone" width="8%">所在地区</th>
+                                                <th class="hidden-phone" width="8%">商家类型</th>
+                                                <th class="hidden-phone" width="8%">意向类型</th>
+                                                <th class="hidden-phone" width="10%">决策人</th>
+                                                <th class="hidden-phone" width="10%">决策影响人</th>
+                                                <th class="hidden-phone" width="9%">录入时间</th>
+                                                <th class="hidden-phone" width="10%">跟踪人</th>
+                                                <th class="hidden-phone" width="11%">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <volist name="list" id="vo">
+                                            <tr class="odd gradeX">
+                                                <td>
+                                                    <php>
+                                                        if(showHandle('BusinessTrack/changeFlowMan')){
+                                                    </php>
+                                                        <input data-name="choice_id" type="checkbox" value="{$vo.id}"/>
+                                                    <php>
+                                                        }
+                                                    </php>
+                                                </td>
+                                                <td>{$vo.company}</td>
+                                                <td>{$Think.config.IS_SYSTEM.$vo[is_system]}</td>
+                                                <td>{$vo.Province.region_name}/{$vo.City.region_name}</td>
+                                                <td>
+                                                    {$Think.config.BUSINESS_TYPE.$vo[category_id]}
+                                                </td>
+                                                <td>{$Think.config.INTENTION_TYPE.$vo[intention]}</td>
+                                                <td>
+                                                    姓名：{$vo.decision_maker}<br/>
+                                                    职务：{$vo.decision_position}<br/>
+                                                    电话：{$vo.decision_phone}
+                                                </td>
+                                                <td>
+                                                    姓名：{$vo.affect_maker}<br/>
+                                                    职务：{$vo.affect_position}<br/>
+                                                    电话：{$vo.affect_phone}
+                                                </td>
+                                                <td>
+                                                    <notempty name="vo.input_time">
+                                                        {$vo.input_time|date="Y-m-d",###}
+                                                    </notempty>
+                                                </td>
+                                                <td>
+                                                    {$email[$vo[flow_man]]}
+                                                    <br/>
+                                                    <php>
+                                                        if(showHandle('BusinessTrack/trackMsg')){
+                                                    </php>
+                                                    <notempty name="vo['flow_man']">
+                                                        <a class="btn btn-small btn-primary msgList" href="javascript:void(0)" data-id="{$vo.id}" data-flow="{$vo.flow_man}" title=""><i class="icon-reorder"> </i>查看</a>
+                                                    </notempty>
+                                                    <php>
+                                                        }
+                                                    </php>
+                                                </td>
+                                                <td>
+                                                    <php>
+                                                        if(showHandle('BusinessTrack/edit')){
+                                                    </php>
+                                                    <a class="btn btn-small"  href="{:U('edit',array('id'=>$vo['id'],'p'=>$getValue['p'],'search_company'=>$getValue['search_company'], 'search_province'=> $getValue['search_province'],'search_city'=>$getValue['search_city']))}"><i class="icon-pencil icon-white"> </i>修改</a>
+                                                    <br/>
+                                                    <php>
+                                                        }
+                                                        if(showHandle('BusinessTrack/delete')){
+                                                    </php>
+                                                        <eq name="vo.status" value="$Think.config.NORMAL_STATUS">
+                                                            <a class="btn btn-danger btn-small del" href="javascript:void(0)" data-id="{$vo.id}" ><i class="icon-remove  icon-white"> </i>删除</a>
+                                                        <else />
+                                                            <a class="btn btn-success btn-small enable" href="javascript:void(0)" data-id="{$vo.id}" ><i class="icon-ok  icon-white"> </i>启用</a>
+                                                        </eq>
+                                                    <php>
+                                                        }
+                                                        if(showHandle('BusinessTrack/addMsg')){
+                                                    </php>
+                                                        <a href="javascript:void(0)" data-id="{$vo.id}" class="btn btn-small btn-inverse addMsg"><i class="icon-plus"> </i>跟踪信息</a>
+                                                    <php>
+                                                        }
+                                                    </php>
+                                                </td>
+                                            </tr>
+                                        </volist>
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span12 center">
+                                            <div class="pagination" id="sample_1_info" style="text-align: center">
+                                                {$page}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <div id="import" class="modal hide fade in">
+        <form id="importForm" method="post" class="form-horizontal" autocomplete="off" enctype="multipart/form-data">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>导入excel数据</h3>
+            </div>
+            <div class="modal-body" >
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="file" name="flow_file">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">提交</button>
+                <a href="javascript:void(0)" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <div id="export" class="modal hide fade in">
+        <form id="exportForm" method="post" class="form-horizontal" autocomplete="off" enctype="multipart/form-data">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>导入excel数据</h3>
+            </div>
+            <div class="modal-body" >
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>
+                                选择格式：
+                            </td>
+                            <td>
+                                <a class="btn btn-small btn-primary click_suffix" href="{:U('exportFiles',array('suffix'=>'xls'))}">xls</a>
+                                <a class="btn btn-small btn-primary click_suffix" href="{:U('exportFiles',array('suffix'=>'xlsx'))}">xlsx</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">提交</button>
+                <a href="javascript:void(0)" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <div id="flow" class="modal hide fade in">
+        <form id="flowForm" method="post" class="form-horizontal" autocomplete="off" enctype="multipart/form-data">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>选择跟踪人</h3>
+            </div>
+            <div class="modal-body" >
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>跟踪人：</td>
+                            <td>
+                                <select class="input-medium m-wrap" name="flow_man" data-id="flow_man">
+                                    <!-- <option value="0">--选择跟踪人--</option>
+                                    <volist name="email" id="flow">
+                                        <option value="{$key}">{$flow}</option>
+                                    </volist> -->
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="id"/>
+                <button type="submit" class="btn btn-success">提交</button>
+                <a href="javascript:void(0)" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <div id="flowMsg" class="modal hide fade in">
+        <form id="flowMsgForm" method="post" class="form-horizontal" autocomplete="off" enctype="multipart/form-data">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>添加信息</h3>
+            </div>
+            <div class="modal-body" >
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>信息：</td>
+                            <td>
+                                <textarea name="message" style="width:406px;height:144px;" class="input"></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="track_id"/>
+                <button type="submit" class="btn btn-success">提交</button>
+                <a href="javascript:void(0)" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <div id="msgList" class="modal hide fade in">
+        <div class="modal-body" >
+            <table class="table table-bordered table-hover">
+                <tr data-id="p-tr">
+                    <th width="31%">时间</th>
+                    <th width="53%">信息</th>
+                    <th width="16%">跟踪人</th>
+                    <!-- <th width="10%">操作</th> -->
+                </tr>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <a href="javascript:void(0)" class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </div>
+    <!-- END CONTAINER -->
+
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+        // 跟踪信息列表
+        $('.msgList').click(function(){
+            var trackId= $(this).attr('data-id');
+            var flowMan = $(this).attr('data-flow');
+            $('.datalist').remove();
+            $.ajax({
+                url:"{:U('trackMsg')}",
+                type:'get',
+                data:{
+                    id:trackId,
+                    flow_man:flowMan,
+                },
+                success:function(info){
+                    var result = eval("("+info+")");
+                    var data = result['data'];
+                    if(result['flag'] == 1){
+                        var length = data.length;
+                        var str = "";
+                        if(length > 0){
+                            for (var i = 0; i < length; i++) {
+                                str += "<tr data-in='"+data[i]['id']+"' class='datalist'><td>"+data[i]['created_time']+"</td><td>"+data[i]['message']+"</td><td>"+data[i]['flow_man']+"</td></tr>";
+                            }
+                        }
+                    }else{
+                        str += "<tr class='datalist'><td colspan='4'>"+result['data']+"</td></tr>";
+                    }
+                    $('#msgList tr[data-id="p-tr"]').after(str);
+                    $('#msgList').modal();
+                }
+            })
+        })
+
+        // function delMsg(){
+        //     $('.msgDel').click(function(){
+        //         if(confirm('操作不可逆，确定删除？')){
+        //             var id = $(this).attr('data-delId');
+        //             $.ajax({
+        //                 url:"{:U('delMsg')}",
+        //                 type:'post',
+        //                 data:{
+        //                     id:id,
+        //                 },
+        //                 success:function(v){
+        //                     var result = eval("("+v+")");
+        //                     if(result['flag'] == 1){
+        //                         $('#msgList tr[data-in="'+id+'"]').remove();
+        //                     }else{
+        //                         alert(result['msg']);
+        //                     }
+        //                 }
+        //             })
+        //         }else{
+        //             return false;
+        //         }
+        //     })
+        // }
+
+        $('.addMsg').click(function(){
+            $('#flowMsgForm')[0].reset();
+            var trackId = $(this).attr('data-id');
+            $('#flowMsgForm input[name="track_id"]').val(trackId);
+            $('#flowMsg').modal();
+        })
+
+        $('#flowMsgForm').bind('valid.form',function(){
+            $.ajax({
+                url:"{:U('addMsg')}",
+                type:'post',
+                data:$(this).serialize(),
+                success:function(o){
+                    var result = eval("("+o+")");
+                    if(result['flag'] == 1){
+                        $('#flowMsg').modal('hide');
+                        alert(result['msg']);
+                    }else{
+                        alert(result['msg']);
+                    }
+                }
+            })
+        })
+        // 导出文件
+        $('.export').click(function(){
+            $('#export').modal();
+        })
+
+        // 选择格式
+        $('.click_suffix').click(function(){
+            $('#export').modal('hide');
+        })
+
+        //全选
+        $('a[data-id="all"]').click(function(){
+            $("input[data-name='choice_id']").each(function(){
+                $(this).attr('checked',true);
+            }); 
+        })
+        //取消全选
+        $('a[data-id="cancel"]').click(function(){
+            $("input[data-name='choice_id']").each(function(){
+                $(this).attr("checked",false);
+            });  
+        })
+        //反选
+        $('a[data-id="antiAll"]').click(function(){
+            $("input[data-name='choice_id']").each(function(){
+                this.checked =! this.checked;
+            });
+        })
+
+        $('input[data-id="batchDel"]').click(function(){
+            var str = '';
+            $("input[data-name='choice_id']:checked").each(function(){
+                str += ($(this).val()+',');
+            });
+            
+            str = str.substring(0,str.lastIndexOf(','));
+
+            if(str == ''){
+                alert('没有选择');return;
+            }
+            $('#flowForm input[name="id"]').val(str);
+
+            $.ajax({
+                url:"{:U('changeFlowMan')}",
+                type:'get',
+                success:function(g){
+                    var ret = eval("("+g+")");
+                    var opt = '<option value="0">--选择跟踪人--</option>';
+                    if(ret.flag == 1){
+                        var users = ret.data;
+                        $.each(users,function(key, val) {
+                            opt += '<option value="'+key+'">'+val+'</option>';
+                        });
+                        $('#flow').modal();
+                    }
+                    $('#flowForm select[data-id="flow_man"]').empty().append(opt);
+                }
+            })
+        });
+
+        // 提交更改跟踪人
+        $('#flowForm').bind('valid.form',function(){
+            $.ajax({
+                url:"{:U('changeFlowMan')}",
+                type:'post',
+                data:$(this).serialize(),
+                success:function(d){
+                    var result = eval("("+d+")");
+                    if(result['flag'] == 1){
+                        alert(result['msg']);
+                        window.location.reload();
+                    }else{
+                        alert(result['msg']);
+                    }
+                }
+            })
+            $('#flow').modal('hide');
+        })
+        // 导入excel
+        $('.import').click(function(){
+            $('#import').modal();
+        })
+
+        // 提交导入
+        $('#importForm').bind('valid.form',function(){
+            $('#import').modal('hide');
+            var importData = new FormData(document.getElementById('importForm'));
+            $.ajax({
+                url:"{:U('importFiles')}",
+                type:'post',
+                data:importData,
+                processData: false,
+                contentType: false,
+                success:function(d){
+                    var result = eval("("+d+")");
+                    if(result['flag'] == 1){
+                        alert(result['msg']);
+                        window.location.reload();
+                    }else{
+                        alert(result['msg']);
+                    }
+                }
+            })
+        });
+
+        //删除
+        $('.del').click(function(){
+            if(confirm('确定删除')){
+                var id = $(this).attr('data-id');
+                var act = 'del';
+                $.ajax({
+                    url: "{:U('delete')}",
+                    type: 'post',
+                    data: {
+                        id:id,
+                        act:act
+                    },
+                    success: function (d) {
+                        var result = eval("(" + d + ")");
+                        if (result.flag == 1) {
+                            alert(result.msg);
+                            window.location.reload();
+                        } else {
+                            alert(result.msg);
+                        }
+                    }
+                });
+            }else{
+                return false;
+            }
+        });
+        
+        //启用
+        $('.enable').click(function(){
+            var id = $(this).attr('data-id');
+            var act = 'enable';
+            $.ajax({
+                url: "{:U('delete')}",
+                type: 'post',
+                data: {
+                    id:id,
+                    act:act
+                },
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+
+        //省份下拉框onchange事件
+        $('#province').change(function(){
+            var provinceId = $('#province').val();
+            getLevelCity('#city',provinceId);
+        })
+
+        function getLevelCity(selectId,provinceId){
+            $.post('{:U("getCityList")}',
+                {province_id:provinceId},
+                function(data){
+                    if(data.length > 0){
+                        var str = "<option value='0'>选择市</option>";
+                        for(var i = 0;i < data.length;i++){
+                            str += "<option value='" + data[i]['region_id'] + "'>" + data[i]['region_name'] + "</option>";
+                        }
+                        $(selectId).empty().append(str);
+                    }
+                },'json');
+        }
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

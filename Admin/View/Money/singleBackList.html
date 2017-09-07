@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">购墓退单列表</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>购墓退单列表</h4>
+                                </div>
+                                <div class="widget-body">
+                                    <form id="quickForm" method="post" class="form-horizontal" autocomplete="off" action='{:U("singleBackList")}'>
+                                        <table>
+                                            <tr>
+                                                <td>搜索：</td>
+                                                <td>
+                                                    <select name='SearchStore' >
+                                                        <option value="">所有退单商家</option>
+                                                        <volist name='Searchlist' id='vo'>
+                                                            <option value='{$key}'<if condition='$key eq $search[SearchStore]'>selected</if>>{$vo}</option>
+                                                        </volist>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="mobile" class="input-medium" placeholder="订单人手机" value="{$search[mobile]}"/>
+                                                    <button class="btn btn-primary">确定</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                    
+                                    <table class="table table-striped table-bordered" id="sample_1">
+                                        <thead>
+                                            <tr>
+                                                <th width="8%" class="hidden-phone">手机号</th>
+                                                <th width="6%" class="hidden-phone">姓名</th>
+                                                <th width="17%" class="hidden-phone">商家名称</th>
+                                                <th width="6%" class="hidden-phone">墓位价格</th>
+                                                <th width="8%" class="hidden-phone">佣金实收金额</th>
+                                                <th width="6%" class="hidden-phone">退单金额</th>
+                                                <th width="6%" class="hidden-phone">返现金额</th>
+                                                <th width="6%" class="hidden-phone">佣金支<br/>付时间</th>
+                                                <th width="9%" class="hidden-phone">申请退<br/>单时间</th>
+                                                <th width="16%" class="hidden-phone">退单原因</th>
+                                                <th width="12%" class="hidden-phone">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <volist name="list" id="vo">
+                                                <tr class="odd gradeX">
+                                                    <td>{$vo.mobile}</td>
+                                                    <td>{$vo.buyer}</td>
+                                                    <td>{$vo.store_name}
+                                                    <eq name="vo.store_status" value="14">
+                                                    <img width="28px" src="{$Think.const.IMG_URL}guang.png" title="广告会员">
+                                                </eq>
+                                                <eq name="vo.store_status" value="16">
+                                                    <img width="28px" src="{$Think.const.IMG_URL}ge.png" title="个人会员">
+                                                </eq>
+                                                <eq name="vo.store_status" value="19">
+                                                    <img width="28px" src="{$Think.const.IMG_URL}ge.png" title="个人会员">
+                                                </eq>
+                                                <eq name="vo.store_status" value="20">
+                                                    <img width="28px" src="{$Think.const.IMG_URL}shang.png" title="商家会员">
+                                                </eq></td>
+                                                    <td>{$vo.tomb_price}</td>
+                                                    <td>{$vo.paid_in_amount}</td>
+                                                    <td>{$vo.back_fact_money}</td>
+                                                    <td>{$vo.return_money}</td>
+                                                    <td>
+                                                        <notempty name="vo.payfor_us_time">
+                                                            {$vo.payfor_us_time|date='Y-m-d',###}
+                                                        </notempty>
+                                                    </td>
+                                                    <td>
+                                                        <notempty name="vo.back_apply_time">
+                                                            {$vo.back_apply_time|date='Y-m-d',###}
+                                                        </notempty>
+                                                    </td>
+                                                    <td>{$vo.back_reason}</td>
+                                                    <td>
+                                                        <if condition='C("ORDER_STATUS.ALLOW") eq $vo[status]'>
+                                                            <php>
+                                                                if(showHandle('Money/paymoney')){
+                                                            </php>
+                                                                <a class="btn btn-success btn-small paymoney"  href="javascript:void(0)" data-id="{$vo.id}">确认退单</a><br/>
+                                                            <php>
+                                                                }
+                                                                if(showHandle('Money/bankMsg')){
+                                                            </php>
+                                                                <a class="btn btn-primary btn-small bankMsg"  href="javascript:void(0)" data-id="{$vo.store_id}">查看银行信息</a>
+                                                            <php>
+                                                                }
+                                                            </php>
+                                                        <else />
+                                                            <php>
+                                                                if(showHandle('Money/bankMsg')){
+                                                            </php>
+                                                                <a class="btn btn-primary btn-small bankMsg"  href="javascript:void(0)" data-id="{$vo.store_id}">查看银行信息</a>
+                                                            <php>
+                                                                }
+                                                            </php>
+                                                        </if>   
+                                                    </td>
+                                                </tr>
+                                            </volist>
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span12 center">
+                                            <div class="pagination" id="sample_1_info" style="text-align: center">
+                                                {$page}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+    
+    <!--填写退单信息开始-->
+    <div id="backorder" class="modal hide fade in">
+        <form id="backorderFrom" method="post" class="form-horizontal" enctype="multipart/form-data" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>退单信息</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>佣金比例:</td>
+                            <td><input  type="text" name="brokerage_percent" disabled></td> 
+                        </tr>
+                        <tr>
+                            <td>佣金金额:</td>
+                            <td><input  type="text" name="brokerage_money" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>实际金额:</td>
+                            <td><input  type="text" name="paid_in_amount" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>返现客户金额:</td>
+                            <td><input  type="text" name="return_money" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>应退陵园金额:</td>
+                            <td><input  type="text" name="back_money" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>实际退还<br/>陵园金额:</td>
+                            <td><input  type="text" name="back_fact_money">应退金额：<span class="back_money"><span></td>
+                        </tr>
+                        <tr>
+                            <td>上传支付凭证：</td>
+                            <td>
+                                <input  name="image" type="file"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="action" value="post"/></input>
+                <input type='hidden' name='id'></input>
+                <button type="submit" class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--填写退单信息结束-->
+    
+    
+    <!--查看银行信息开始-->
+    <div id="bankMsg" class="modal hide fade in">
+        <form id="bankMsgFrom"  class="form-horizontal"  autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>退单银行信息</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>开户行:</td>
+                            <td>
+                                <select name="bank" disabled>
+                                    <option value="0">--请选择-- </option>
+                                    <volist name="Think.config.PAY_TYPE"  id="banks" >
+                                        <option value="{$key}">{$banks}</option>
+                                    </volist>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>开户人:</td>
+                            <td><input  type="text" name="bank_member" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>银行账号:</td>
+                            <td><input  type="text" name="bank_account" disabled></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--查看银行信息结束-->
+    
+    
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ASSETS_URL}chosen-bootstrap/chosen/chosen.jquery.min.js"></script>
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}zh-CN.js"></script>
+    <script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+        //上传支付凭证和财务退款
+        $('.paymoney').click(function(){
+            var orderId = $(this).attr('data-id');
+            var ret = confirm("你确认支付过了么？");
+            var action = 'get';
+            if(ret) {
+                $.ajax({
+                    url: "{:U('paymoney')}",
+                    type:'post',
+                    data:{'id':orderId,'action':action},
+                    success:function(msg){
+                        console.log(msg);
+                        var result = eval("(" + msg + ")");
+                        if(result.flag == 1 ){
+                            var data = result.data;
+                            $('#backorderFrom input[name="brokerage_percent"]').val(data['brokerage_percent']+'%');
+                            $('#backorderFrom input[name="brokerage_money"]').val(data['brokerage_money']);
+                            $('#backorderFrom input[name="paid_in_amount"]').val(data['paid_in_amount']);
+                            $('#backorderFrom input[name="return_money"]').val(data['return_money']);
+                            $('#backorderFrom input[name="back_money"]').val(data['back_money']);
+                            $('#backorderFrom input[name="back_fact_money"]').val(data['back_money']);
+                            $('.back_money').html(data['back_money']);
+                            $('#backorderFrom input[name="id"]').val(orderId);
+                            $('#backorder').modal();
+                        }else{
+                            alert(result.msg);
+                            window.location.reload();//刷新当前页面.
+                        }
+                    }
+                });
+            }
+        });
+        $('#backorderFrom').bind('valid.form', function () {
+            var backorderFrom = new FormData(document.getElementById("backorderFrom"));
+            var back_money = $('#backorderFrom input[name="back_money"]').val();
+            var back_fact_money = $('#backorderFrom input[name="back_fact_money"]').val();
+            if(back_fact_money>back_money){
+                alert('请检查退款金额！');
+                return false;
+            }
+            
+            $.ajax({
+                url: "{:U('paymoney')}",
+                type: 'POST',
+                data:backorderFrom,
+                processData: false,
+                contentType: false,
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        $('#backorder').modal('hide');
+                        alert(result.msg);
+                        window.location.reload();//刷新当前页面.
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+        //查看银行信息
+        $('.bankMsg').click(function(){
+            var storeId = $(this).attr('data-id');
+            $.ajax({
+                url: "{:U('bankMsg')}",
+                type:'post',
+                data:{'id':storeId},
+                success:function(msg){
+                    var result = eval("(" + msg + ")");
+                    if(result.flag == 1 ){
+                        var data = result.data;
+                        $('#bankMsgFrom input[name="bank_account"]').val(data['bank_account']);
+                        $('#bankMsgFrom input[name="bank_member"]').val(data['bank_member']);
+                        $('#bankMsgFrom select[name="bank"]').find('option[value='+data['bank']+']').attr("selected",true);
+                        $('#bankMsg').modal();
+                    }else{
+                        alert(result.msg);
+                        window.location.reload();//刷新当前页面.
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+<!-- END BODY -->
+</html>

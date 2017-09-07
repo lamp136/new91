@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head"/>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+<!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                        </li>
+                        <li><a href="{:U('StoreGoods/index')}">商家商品列表</a><span class="divider">&nbsp;</span></li>
+                        <li><a href="javascript:viod(0);">添加商家商品信息</a><span class="divider-last">&nbsp;</span></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4><i class="icon-reorder"></i>添加商家商品信息</h4>
+                            </div>
+                            <div class="widget-body form">
+                                <!-- BEGIN FORM-->
+                                <form id="defaultForm" method="post"  autocomplete="off" action="{:U('StoreGoods/saveStoreGoods')}" enctype="multipart/form-data">
+                                    <div class="">
+                                        <table class="table table-bordered table-hover">
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label"><span style="color:red">*</span>选择地区:</label>
+                                                </td>
+                                                <td>
+                                                    <select class="input-small m-wrap" tabindex="1" name="info[province_id]" id="province">
+                                                        <option value="0">--请选择--</option>
+                                                        <volist name="province" id="p">
+                                                            <option value="{$p.region_id}">{$p.region_name}</option>
+                                                        </volist>
+                                                    </select>省
+                                                    <select class="input-small m-wrap" tabindex="1" name="info[city_id]" id="city">
+                                                        <option value="0">--请选择-- </option>
+                                                    </select>市/区
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="color:red">*</span>选择商家：</td>
+                                                <td>
+                                                    <select class='chosen' name='info[store_id]' data-id="store_name" data-placeholder="选择商家" data-rule='required' >
+                                                        <option value="">--选择商家--</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label"><span style="color:red">*</span>选择商品:</label>
+                                                </td>
+                                                <td>
+                                                    <select class="input-medium m-wrap" tabindex="1" name="info[category_pid]" id="category_pid" data-rule='required'>
+                                                        <option value="-1">--请选择--</option>
+                                                        <volist name="category" id="cat">
+                                                            <option value="{$cat.cid}">{$cat.name}</option>
+                                                        </volist>
+                                                    </select>
+                                                    <select class="input-medium m-wrap" tabindex="1" name="info[category_id]" id="category_id" style="display:none">
+                                                        
+                                                    </select>
+                                                     <select class="input-medium m-wrap" tabindex="1" name="goods_id" id="goods_id" data-rule='required' style="display:none">
+                                                        
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label"><span style="color:red">*</span>商品名称:</label>
+                                                </td>
+                                                <td>
+                                                    <div class="controls">
+                                                        <input type="text" placeholder="商品名称" id='goodsName' class="input-xxlarge" name="info[service_goods_name]" data-rule='required'>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label"><span style="color:red">*</span>市场价:</label>
+                                                </td>
+                                                <td>
+                                                    <div class="controls">
+                                                        <input type="text" placeholder="市场价" class="input-xxlarge" name="info[market_price]" data-rule='required' >
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label"><span style="color:red">*</span>销售价:</label>
+                                                </td>
+                                                <td>
+                                                    <div class="controls">
+                                                        <input type="text" placeholder="销售价" class="input-xxlarge" name="info[sales_price]" data-rule='required' >
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr style="display:none" id='number'>
+                                                <td>
+                                                    <label class="control-label">数量:</label>
+                                                </td>
+                                                <td>
+                                                    <div class="controls">
+                                                        <input type="text" placeholder="数量" class="input-xxlarge" name="info[number]">
+                                                        <span style="color:red">鲜花的支数</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label">选择仓库:</label>
+                                                </td>
+                                                <td>
+                                                    <select class="input-medium m-wrap" tabindex="1" id='storage' name="info[storage_id]">
+                                                        <option value="0">--请选择--</option>
+                                                        <volist name="storage" id="sto">
+                                                            <option value="{$sto.id}">{$sto.storage_name}</option>
+                                                        </volist>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label">库存:</label>
+                                                </td>
+                                                <td>
+                                                    <div class="controls">
+                                                        <input type="text" placeholder="库存" class="input-xxlarge" name="info[inventory]" readonly="readonly">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr style="display:none" id='images'>
+                                                <td>
+                                                    <label class="control-label">商品图片:</label>
+                                                </td>
+                                                <td>
+                                                    <div class="controls">
+                                                        <img src="" width="80px" height="80px" id='img'>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label"><span style="color:red">*</span>更改商品图片:</label>
+                                                </td>
+                                                <td>
+                                                    <div class="controls">
+                                                        <input type="file" class="default" name="image_url" >
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label">SEO标题:</label>
+                                                </td>
+                                                <td>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <input type="text" placeholder="用于SEO的title" class="input-xxlarge" name="info[seo_title]"> 
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label"><span style="color:red">*</span>关键字:</label>
+                                                </td>
+                                                <td>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <input type="text" placeholder="用于SEO的keywords" class="input-xxlarge" name="info[seo_keywords]" data-rule='required'> 
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label"><span style="color:red">*</span>描述:</label>
+                                                </td>
+                                                <td>
+                                                    <div class="controls">
+                                                        <textarea class="span6 " rows="3"  name="info[seo_description]" style="margin-top: 0px; margin-bottom: 10px; height: 123px;" data-rule='required' placeholder="用于SEO的description"></textarea>
+                                                        
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                          
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label">摘要:</label>
+                                                </td>
+                                                <td  colspan="3">
+                                                    <div class="controls">
+                                                        <textarea class="span7 " rows="3"  name="info[summary]" style="margin-top: 0px; margin-bottom: 10px; height: 123px;"></textarea>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label">寓意:</label>
+                                                </td>
+                                                <td  colspan="3">
+                                                    <div class="controls">
+                                                        <textarea class="span7 " rows="3"  name="info[moral]" style="margin-top: 0px; margin-bottom: 10px; height: 123px;"></textarea>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label"><span style="color:red">*</span>简介:</label>
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        <textarea name="info[introduction]" class="input" id="content" style="width:750px;height: 400px;" data-rule='required'></textarea>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label"><span style="color:red">*</span>能否使用优惠券:</label>
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        <input type="radio" name='info[coupon]' value='1'>能
+                                                        <input type="radio" name='info[coupon]' value='2' checked="ture">不能
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label"><span style="color:red">*</span>状态:</label>
+                                                </td>
+                                                <td>
+                                                    <select class="input-medium m-wrap" tabindex="1" name="info[status]" data-rule='required'>
+                                                        <option value="">---请选择---</option>
+                                                        <volist name='Think.config.SERVICEGOODS_STATUS' id='vo'>
+                                                        <option value="{$key}">{$vo}</option>
+                                                        </volist> 
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-success" id='sub'>提交</button>
+                                    </div>
+                                </form>
+                                <!-- END FORM-->
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- END CONTAINER -->
+
+<!-- BEGIN FOOTER -->
+<include file="Public::footer"/>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+<script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+
+<js href="__PUBLIC__/Admin/kindeditor/kindeditor.js,__PUBLIC__/Admin/kindeditor/lang/zh_CN.js"/>
+
+<script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+<script src="{$Think.const.JS_URL}scripts.js"></script>
+<script src="{$Think.const.JS_URL}zh-CN.js"></script>
+
+<script>
+    //调用KindEditor内容样式
+    var content;
+    KindEditor.ready(function(K) {
+        content = K.create('#content');
+    });
+
+    //获取商品分类
+    $(function() {
+        $("#category_pid").change(function() {
+            $('#number').hide();//隐藏数量输入框
+            
+            var categoryPid = $('#category_pid').val();
+            getCategory('#category_id', categoryPid);
+            //分类为鲜花时显示数量输入框
+            if(categoryPid=="{$Think.config.FLOWER}"){
+                $('#number').show();
+            }
+            $('#images').hide(); //隐藏图片
+        });
+
+        
+        //获取商品子分类和套餐商品
+        function getCategory(selectId, categoryPid) {
+            $.post("{:U('getCategoryList')}",
+                {categoryPid: categoryPid},
+                function(data) {
+                    if (data.flg=='list') {
+                        var str = "<option value='0'>--请选择--</option>";
+                        for (var i = 0; i < data.res.length; i++) {
+                            str += "<option value='" + data['res'][i]['cid'] + "'>" + data['res'][i]['name'] + "</option>";
+                        }
+                        $(selectId).empty().append(str);
+                        $('#goods_id').empty().hide();
+                        $(selectId).show();
+
+                    }else if(data.flg=='goods'){
+                        var str = "<option value='"+categoryPid+"'>--请选择--</option>";
+                        $(selectId).empty().append(str);
+                        $(selectId).hide();
+                        //显示套餐商品
+                        var str = "<option value=''>--请选择--</option>";
+                        for (var i = 0; i < data.res.length; i++) {
+                            str += "<option value='" + data['res'][i]['id'] + "'>" + data['res'][i]['name'] + "</option>";
+                        }
+                        $('#goods_id').empty().append(str);
+                        $('#goods_id').show();
+                    }else{
+                        $(selectId).empty().hide();
+                        $('#goods_id').empty().hide();
+                    }
+                }, 'json');
+        }
+    });
+
+    //获取商品列表
+    $("#category_id").change(function() {
+        var categoryId = $('#category_id').val();
+        $('#images').hide(); //隐藏图片
+        $.post("{:U('getGoodsList')}",
+            {categoryId: categoryId},
+            function(data) {
+                if (data) {
+                    var str = "<option value=''>--请选择--</option>";
+                    for (var i = 0; i < data.length; i++) {
+                        str += "<option value='" + data[i]['id'] + "'>" + data[i]['name'] + "</option>";
+                    }
+                    $('#goods_id').empty().append(str);
+                    $('#goods_id').show();
+                }else{
+                    $('#goods_id').empty().hide();
+                }
+            }, 'json');
+        
+    });
+
+    //选择商品获取商品信息
+    $('#goods_id').change(function(){
+        var goodsId = $('#goods_id').val();
+        $.post("{:U('getGoodsDetail')}",
+            {goodsId: goodsId},
+            function(data) {
+                if (data) {
+                    $("input[name='info[service_goods_name]']").val(data.name);
+                    $("select[name='info[storage_id]']").val(data.storage_id);
+                    $("input[name='info[inventory]']").val(data.inventory);
+                    $("#img").attr('src',data.image_url);
+                    $("textarea[name='info[summary]']").html(data.summary);
+                    $("textarea[name='info[moral]']").html(data.moral);
+                    $("select[name='info[status]']").val(data.status);
+                    content.text(data.introduction);
+                    $('#images').show();
+                    if(!data.inventory){
+                        $("input[name='info[inventory]']").css('border','1px solid red');
+                        $("input[name='info[inventory]']").val(0);
+                    }else{
+                        $("input[name='info[inventory]']").css('border','');
+                    }
+                }
+            }, 'json');
+    });
+
+    //省市下拉框联动
+    $(function() {
+        $("#province").change(function() {
+            var provinceId = $('#province').val();
+            getLevel2City('#city', provinceId);
+        });
+
+        /**
+         * 获取二级地区列表
+         * @param {type} province_id
+         * @returns {undefined}
+         */
+        function getLevel2City(selectId, provinceId) {
+            $.post("{:U('getCityList')}",
+                {province_id: provinceId},
+                function(data) {
+                    if (data.length > 0) {
+                        var str = "<option value='0'>--请选择--</option>";
+                        for (var i = 0; i < data.length; i++) {
+                            str += "<option value='" + data[i]['region_id'] + "'>" + data[i]['region_name'] + "</option>";
+                        }
+                        $(selectId).empty().append(str);
+                    }
+                }, 'json');
+        }
+    });
+
+    /**
+     * 按省份筛选
+     */
+    $("#province").change(function(){
+        var province = $('select[id="province"] > option:selected').val();
+        var data = {'province':province};
+        getStoreList('select[data-id="store_name"]',data);
+    })
+
+    /*
+     *按市区筛选
+     */
+    $('#city').change(function(){
+        var province = $('select[id="province"] > option:selected').val();
+        var city = $('select[id="city"] > option:selected').val();
+        var data = {'province':province,'city':city};
+        getStoreList('select[data-id="store_name"]',data);
+    })
+
+    function getStoreList(selectId,info){
+        $.ajax({
+            url:"{:U('getStoreList')}",
+            type:'get',
+            data:info,
+            success:function(v){
+                var store = eval("("+v+")");
+                var count = store.length;
+                var str = "<option value=''>--选择商家--</option>";
+                if(count > 0){
+                    for (var i = 0; i < count; i++) {
+                        str += "<option value='"+store[i]['store_id']+"'>"+store[i]['store_name']+"</option>";
+                    }
+                    $(selectId).empty().append(str);
+                }else{
+                    $(selectId).empty();
+                }
+            }
+        })
+    }
+
+    //查询库存
+    $('#storage').change(function(){
+        var storageId = $('#storage').val();
+        var goodsId = $('#goods_id').val();
+        if(goodsId && storageId){
+            $.ajax({
+                url:'{:U("getInventory")}',
+                type:'post',
+                data:{'storageId':storageId,'goodsId':goodsId},
+                dataType:'json',
+                success:function(e){
+                    if(e){
+                        $("input[name='info[inventory]']").val(e.inventory);
+                    }else{
+                        $("input[name='info[inventory]']").val('');
+                    }
+                }
+            })
+        }
+    });
+</script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

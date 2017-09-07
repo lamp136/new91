@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head" />
+
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+    <!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                        <span class="settings">
+                            <span class="text">Theme:</span>
+                            <span class="colors">
+                                <span class="color-default" data-style="default"></span>
+                                <span class="color-gray" data-style="gray"></span>
+                                <span class="color-purple" data-style="purple"></span>
+                                <span class="color-navy-blue" data-style="navy-blue"></span>
+                            </span>
+                        </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="javascript:void(0)"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                        </li>
+                        <li><a href="javascript:void(0)">添加订单</a><span class="divider-last">&nbsp;</span></li>
+
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4><i class="icon-reorder"></i>添加订单</h4>
+                            </div>
+                            <div class="widget-body">
+                                <form action="__SELF__ " method="post" enctype="multipart/form-data" id="saveGoods">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped table-bordered">
+                                        <tr>
+                                            <th><span style="color:red">*</span>客户名称：</th>
+                                            <td><input type="text" class="input" size="30" name="info[name]" id="name" data-rule='required'/></td>
+                                        </tr>
+                                        <tr>
+                                            <th><span style="color:red">*</span>客户电话：</th>
+                                            <td><input type="text" class="input" size="30" name="info[mobile]" id="mobile" data-rule="required" placeholder="最好填写手机号"/> <span id="detect"></span>        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><span style="color:red">*</span>预约时间：  </th>
+                                            <td><input type="text" size="30" name="info[appoint_time]" data-rule='required' onClick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'})" value="{:date('Y-m-d H:i:s')}" class="Wdate"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th  width="100"><span style="color:red">*</span>地区：</th>
+                                            <td id='region'>
+                                                <select name="info[province_id]" id="province_id">
+                                                    <option value="0">-请选择省份-</option>
+                                                    <volist name="provinces" id="region">
+                                                        <if condition="$data[province_id] eq $region[region_id]">
+                                                            <option selected="selected" value="{$region.region_id}">{$region.region_name}</option>
+                                                            <else />
+                                                            <option value="{$region.region_id}" name="storeid">{$region.region_name}</option>
+                                                        </if>
+                                                    </volist>
+                                                </select>
+
+                                            <select style="display:none" id="store" name='set[store]' onChange='changeStore()'>
+                                      
+                                            </td>
+                                        </tr> 
+                                            <tr>
+                                                <td> <span style="color:red"></span>会员状态：</td>
+                                                <td><input type="text" class="input"  readonly="readyonly" name="member_status" id="member" ></td>
+                                                <td><input type="text" name="status_num" id="status_num" value="" style="display:none;"></td>
+                                            </tr>
+                                        <tr id="lname">
+                                            <th><span style="color:red">*</span>陵园联系人：</th>
+                                            <td id="contactman"></td>
+                                        </tr>
+                                        <tr id="isfanxian">
+                                            <th><span style="color:red">*</span>是否返现：</th>
+                                            <td>
+                                                <input type="radio" name="apply_return_status" class="no_need_client_cash"  value="0"  checked>客户不需要返现
+                                                <input type="radio" name="apply_return_status" class="client_cash" id="needreturn" value="1">客户需要返现
+                                                <span style="color:red">注意：这里的返现是指返现给客户</span>
+                                            </td>
+                                        </tr>
+                                        <tr id="client_cash" value="">
+                                        </tr>
+                                        <tr id="kehu">
+                                            <th><span style="color:red">*</span>发给客户的短信信息：</th>
+                                            <td>
+                                                <textarea class="input" style="height: 100px; width: 300px;" name="info[msg_customer]" id="msg_customer" ></textarea> <input type="button" class="btn msg_customer" value="获取客户短信">       
+                                            </td>
+                                        </tr>
+                                    </div>  
+                                        
+                                        <tr>
+                                            <th>备注：</th>
+                                            <td>
+                                                <textarea class="input" style="height: 100px; width: 300px;" name="info[remark]"></textarea>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='2'>
+                                               <input type="submit" class="btn submit" id="tijiao" value="提交"><span style="color:red">除了“备注” ,都是必填项</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- END CONTAINER -->
+
+<!--选择客户联系人开始-->
+<div id="choicecontactman" class="modal hide fade in">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>选择客户要联系的陵园人员</h3>
+        </div>
+        <div class="modal-body">
+
+            <table class="table table-bordered table-hover tablecontent">
+                
+            </table>
+
+        </div>
+        <div class="modal-footer">
+            <input type='hidden' id='storeid' name='storeid'>
+            <button type="submit" id='change' class="btn btn-success">确定</button>
+            <a href="#" class="btn" data-dismiss="modal">关闭</a>
+        </div>
+</div>
+<!--选择客户联系人结束-->
+
+<!-- BEGIN FOOTER -->
+<include file="Public::footer"/>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+
+<script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+<script src="{$Think.const.JS_URL}zh-CN.js"></script>
+<script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+<!-- ie8 fixes -->
+<!--[if lt IE 9]>
+<script src="js/excanvas.js"></script>
+<script src="js/respond.js"></script>
+<![endif]-->
+
+<!--地图封装接口 以及一些初始化的数据 -->
+<script src="{$Think.const.JS_URL}scripts.js"></script>
+<script>
+    //选择是否返现
+    $(".no_need_client_cash").click(function(){
+        $('#client_cash').hide(); 
+    });
+
+    //客户选择需要返现
+    $('#needreturn').click(function(){
+     var store_id = $('#store').find("option:selected").attr('data-storeid');
+     if(store_id){
+        $.ajax({
+            url: "{:U('getPesentById')}",
+            type:'post',
+            data:'store_id=' +store_id,
+            dataType:"json",
+            success:function(result) {
+              // var data = eval("(" + result + ")");
+            // console.log(result.return_amount) //    {"return_amount":"10"}  
+             $('.input-mini').html('佣金比例为:'+result.return_amount);
+            } 
+        });
+     }
+    });
+    
+
+
+    $(".client_cash").click(function(){
+         $('#client_cash').show();
+         if($(".client_cash").is(":checked")){ 
+             $('#client_cash').empty().append('<th><span style="color:red">*</span>返现比例：</th><td><input name="return_percent" class="fanhui" value="" type="text"><span readonly="readonly" class=" text-error input-mini" value='+$('#store').find("option:selected").attr('customer_cash')+' name="info[brokerage_percent]"/></span>%</td>');  
+             //返现比例绑定失去焦点事件
+             $('.fanhui').blur(function(){
+                // var percent = $('.fanhui').val();//填写的返现比例
+                var should =  $('.input-mini').html();
+                var reg  = /[1-9][0-9]*/g;
+                var num = should.match(reg);//佣金比例
+                if(parseFloat($('.fanhui').val())>=parseFloat(num)){
+                alert('返现比率不能大于等于佣金比率');
+                return false;
+              }
+            });
+
+        }
+    });
+
+
+    /**获取商家联系人**/
+    function changeStore() {
+        var store_id = $('#store').find("option:selected").attr('data-storeid');
+        $('#msg_customer').val("");
+        //用于是否返现
+        $('#client_cash').show();
+        var return_customer_pasent = $('#store').find("option:selected").attr('customer_cash');
+        $.ajax({
+            url: "{:U('getStoreContact')}",
+            type : 'POST',
+            data : 'store_id=' + store_id,
+            success : function(result) {
+                var result = eval("(" + result + ")");
+                var str='';
+                str += '<ul>';
+                if(result.flag==0){
+                    str += "<li><a href='javascript:void(0)' onclick='addli(this)'>[+]</a><input type='text' class='contactman'  name='contactman[]' /> ";
+                    str += "<input type='text' class='mobile'  name='mobile[]' /> ";
+                    str += "<textarea class='msg_store' class='msg_store' style='height: 100px; width: 300px;' name='msg_store[]'  ></textarea> ";
+                    str += "<input type='button' class='btn btn_msg_store' value='获取商家短信' onclick='getstoremsg(this)'></li>";
+                }else{
+                    data = result.data;
+                    for(var i in data) {
+                        var mobileTel = data[i].mobile;
+                        if (mobileTel == "" && data[i].tel) {
+                            mobileTel = data[i].tel;
+                        }
+                        if(i==0){
+                            str += "<li><a href='javascript:void(0)' onclick='addli(this)'>[+]</a><input type='text' class='contactman'  name='contactman[]'  value='"+data[i].contact_name+"' data-defaultPerson='"+data[i].default_person+"' readonly='readonly' /> ";
+                            str += "<input type='text' class='mobile'  name='mobile[]' value='"+mobileTel+"' readonly='readonly' />";
+                            str += "<textarea class='msg_store'  style='height: 100px; width: 300px;' name='msg_store[]'  ></textarea> ";
+                            str += "<input type='button' class='btn btn_msg_store' value='获取商家短信' onclick='getstoremsg(this)'></li>"
+                        }else{
+                            str += "<li><a href='javascript:void(0)' onclick='addli(this)'>[-]</a><input type='text' class='contactman'  name='contactman[]' value='"+data[i].contact_name+"' data-defaultPerson='"+data[i].default_person+"' readonly='readonly' /> ";
+                            str += "<input type='text' class='mobile'  name='mobile[]' value='"+mobileTel+"' readonly='readonly' /> ";
+                            str += "<textarea class='msg_store'  style='height: 100px; width: 300px;' name='msg_store[]'  ></textarea> ";
+                            str += "<input type='button' class='btn btn_msg_store' value='获取商家短信' onclick='getstoremsg(this)'></li>";
+                        }
+                    }
+                }
+                str +="</ul>";
+                $("#contactman").html(str);
+            }
+        });
+    }
+
+
+  
+    /**获取发送给商家的信息**/
+    function getstoremsg(a){
+        var li = $(a).parent();
+        var customer = $.trim($("#name").val());
+        var mobile = $.trim($("#mobile").val());
+        var appointTime = $.trim($(".Wdate").val());
+        var contactman = $(li).find('.contactman').val();
+        var contactmobile = $(li).find('.mobile').val();
+        
+        if(!contactman){
+            alert("商家联系人名称不能为空");
+            return false;
+        }
+        var reg = /^(1[3|4|5|7|8]\d{9})$/;
+        if(!contactmobile){
+            alert("商家联系人手机号不能为空");
+            return false;
+        }
+        
+        if (!reg.test(contactmobile)) {
+            alert("商家联系人手机号不正确");
+            return false;
+        }
+        
+        if (!customer) {
+            alert("联系人不能为空");
+            return false;
+        }
+        if (!mobile) {
+            alert("联系方式不能为空");
+            return false;
+        }
+        if (!appointTime) {
+            alert("请选择预约时间");
+            return false;
+        }
+        var msg_store = $(li).find('.msg_store');
+        var msgCustomer = "尊敬的会员，您有一条来自91搜墓网的贵宾客户预约信息,客户:"+customer+",预约时间:"+appointTime+",电话:"+mobile+",请及时关注.【91搜墓网】";
+        $(msg_store).val(msgCustomer);
+    }
+    
+    
+    
+    /**增加联系人按钮**/
+    function addli(a){
+        var li = $(a).parent();
+        if($(a).html()=="[+]"){
+            var newli = li.clone();
+            $(newli).find('a').html("[-]");
+            $(newli).find('input').val("");
+            $(newli).find('input').removeAttr('readonly');
+            $(newli).find('.btn_msg_store').val("获取商家信息");
+            li.after(newli);
+        }else{
+            li.remove();
+        }
+    }
+    
+    /**根据省份ID获取商家信息**/
+    $("#province_id").change(function() {
+        var provinceId = $('#province_id').val();
+        $('#other_connect').val('');
+        $('#phone').val('');
+        if(provinceId) {
+            $.ajax({
+                url: "{:U('getStoresByRegionId')}",
+                type : 'POST',
+                data : 'provinceId=' + provinceId,
+                async:false,
+                success : function(result) {
+                    var result = eval("(" + result + ")");
+                    var str ="<option value=''>-请选择-</option>";
+                    $('#store').hide();
+                    if(result.code == 1) {   
+                        data = result.data
+                        
+                        for(var i in data) {
+                            str += "<option value="+provinceId+"_"+data[i]['city_id']+"_"+data[i]['store_id']+"_"+$.trim(data[i]['store_name'])+" data-storeid="+data[i]['store_id']+">";
+                            str += data[i]['store_name'];
+
+                            if(data[i]['member_status'] != 0){
+                               str+= '(会)'
+                            }
+                            str += "</option>";
+                        }          
+                        $('#store').empty();
+                        $('#store').append(str);
+                        $('#store').show();
+    
+                    }
+                }
+            });
+        }
+    });
+    
+    //点击获取用户短信，弹出模态框
+    $('.msg_customer').click(function () {
+        var contactman = $('#contactman li');
+        var str = '';
+        if(contactman.length==0){
+            alert('陵园联系人不能为空');
+        }else if(contactman.length==1){
+            
+            var mobile = $(contactman[0]).find('.mobile').val();
+            var contantman = $(contactman[0]).find('.contactman').val();
+
+            var storename = $.trim($('#store').find("option:selected").text());
+            var appointTime = $.trim($(".Wdate").val());
+            var msgCustomer = "贵宾您好,我们已经将您的需求信息告知陵园，陵园会有专人和您联系，如有任何问题请致电：400-8010-344.感谢您对91搜墓网的信任.【91搜墓网】"; //"贵宾您好,您的预约订单已提交成功,请于"+appointTime+"到"+storename+"进行现场看墓,陵园联系人:"+contantman+"   电话:"+mobile+".感谢您对91搜墓网的信任.【91搜墓网】";
+            $("#msg_customer").val(msgCustomer);
+        }else{
+          
+            $('#contactman li').each(function(i){
+                var mobile = $(this).find('.mobile').val();
+                var contactman = $(this).find('.contactman').val();
+                var defaultPersonStatus = $(this).attr('data-defaultperson');
+                var checkedStatus = "";
+                if (defaultPersonStatus == 1) {
+                    checkedStatus = "checked"
+                }
+                str += "<tr><td>";
+                str += "<input name='contactmaninfo' type='radio' data-contantman='"+contactman+"' data-mobile='"+mobile+"' checked='"+checkedStatus+"' data-rule='checked'> "+contactman +" "+mobile;
+                str += "</td></tr>";
+            });
+            $('.tablecontent').html(str);
+            $('#choicecontactman').modal();
+        }
+            
+    });
+    
+
+    //选择陵园联系人
+    $('#change').click(function(){
+        var selectperson = $('input:radio[name="contactmaninfo"]:checked');
+        var mobile = $(selectperson).attr('data-mobile');
+        var contantman = $(selectperson).attr('data-contantman');
+        var storename = $.trim($('#store').find("option:selected").text());
+        var appointTime = $.trim($(".Wdate").val());
+        
+        if (!storename || storename == '-请选择陵园-') {
+            alert("请选择陵园");
+            return false;
+        }
+        if (!appointTime) {
+            alert("请选择预约时间");
+            return false;
+        }
+        var msgCustomer = "贵宾您好,我们已经将您的需求信息告知陵园，陵园会有专人和您联系，如有任何问题请致电：400-8010-344.感谢您对91搜墓网的信任.【91搜墓网】";//"贵宾您好,您的预约订单已提交成功,请于"+appointTime+"到"+storename+"进行现场看墓,陵园联系人:"+contantman+"   电话:"+mobile+".感谢您对91搜墓网的信任.【91搜墓网】";
+        $("#msg_customer").val(msgCustomer);
+        $('#choicecontactman').modal('hide');
+        
+    });
+
+
+    $("#contactman").change(function() {
+      var store_id = $('#store').find("option:selected").attr('data-storeid');
+      $.post("{:U('handleAdd')}",
+                {store_id:store_id},
+                function(data){
+                    $('#store_id').val(data);  
+                 },'json');
+    });
+    
+
+    //根据商家ID获取会员状态
+    $("#store").change(function(){
+      $('#client_cash').hide();
+      $('.no_need_client_cash').attr('checked',true);
+      var store_id = $('#store').find("option:selected").attr('data-storeid');
+      $.post("{:U('getMemberStatus')}",{store_id:store_id},
+        function(data){
+            $("#member").val(data['member_status']);
+            $("#status_num").val(data['num']);
+            if(data['num'] == 0 ){
+                $('#lname').hide();
+                $('#isfanxian').hide();
+                $('#kehu').hide();
+            }else{
+                $('#lname').show();
+                $('#isfanxian').show();
+                $('#kehu').show();
+            }
+
+        },'json');
+
+     });
+      
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

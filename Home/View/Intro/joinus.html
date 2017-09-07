@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="icon" href="/Public/soumu.ico" type="image/x-icon" />
+    <title>加入91搜墓网_{$Think.config.SITE_NAME}</title>
+    <meta name="keywords" content="商家加盟合作，入住91搜墓网平台" />
+    <meta name="description" content="91搜墓网平台是国内领先的陵园殡仪墓地类信息平台，汇聚全国各省市陵园公墓，期待你的加盟。咨询电话：4008010344" />
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!--引入头部 -->
+<include file="Common:head_in" />
+
+<!-- 底部页面banner -->
+<div class="aboutus_banner">
+    <img src="{$Think.const.IMG_URL}aboutus_banner.jpg" alt="加盟合作"/>
+</div><!-- 底部页面banner结束 -->
+<!-- 底部页面内容导航 -->
+<div class="help_nav">
+    <div class="innerhelp_nav">
+        <ul>
+            <li><a href="{:U('/intro/aboutus')}">91搜墓网</a></li>
+            <li><a href="{:U('/help/guide/gmlc')}">购墓指南</a></li>
+            <li><a href="{:U('/help/security/wzys')}">订单保障</a></li>
+            <li><a href="{:U('/help/issue/xmjq')}">常见问题 </a></li>
+            <li><a href="{:U('/help/common/bzjr')}">殡葬文化</a></li>
+            <li class="last help_nav_led"><a href="{:U('/intro/joinus')}">加盟合作</a></li>
+        </ul>
+    </div>
+</div><!-- help_nav底部页面内容导航结束 -->
+<!-- 中间内容部分 -->
+<div class="main">
+    <div class="league_img1"></div>
+    <div class="league_img2"></div>
+    <div class="league_img3"></div>
+    <!-- 合作陵园 -->
+    <div class="league_cem">
+        <h1>合作陵园</h1>
+        <ul>
+            <li>
+                <a target="_blank" href="{:U('cemetery/detail/118')}">
+                    <img src="{$Think.const.IMG_URL}league_cem_img1.png" alt="上海青浦福寿园"/>
+                </a>
+                <a class="lea_cembtn" target="_blank" href="{:U('cemetery/detail/118')}" title="上海青浦福寿园">上海青浦福寿园</a>
+            </li>
+            <li>
+                <a target="_blank" href="{:U('cemetery/detail/513')}">
+                    <img src="{$Think.const.IMG_URL}league_cem_img2.png" alt="上海海湾寝园"/>
+                </a>
+                <a class="lea_cembtn" target="_blank" href="{:U('cemetery/detail/513')}" title="上海海湾寝园">上海海湾寝园</a>
+            </li>
+            <li>
+                <a target="_blank" href="{:U('cemetery/detail/81')}">
+                    <img src="{$Think.const.IMG_URL}league_cem_img3.png"  alt="苏州山陵文化"/>
+                </a>
+                <a class="lea_cembtn" target="_blank" href="{:U('cemetery/detail/81')}" title="苏州山陵文化">苏州山陵文化</a>
+            </li>
+            <li>
+                <a target="_blank" href="{:U('cemetery/detail/102')}">
+                    <img src="{$Think.const.IMG_URL}league_cem_img4.png" alt="北京天寿陵园"/>
+                </a>
+                <a class="lea_cembtn" target="_blank" href="{:U('cemetery/detail/102')}" title="北京天寿陵园">北京天寿陵园</a>
+            </li>
+            <li class="last">
+                <a target="_blank" href="{:U('cemetery/detail/142')}">
+                    <img src="{$Think.const.IMG_URL}league_cem_img5.png" alt="安徽淮北方山陵园"/>
+                </a>
+                <a class="lea_cembtn" target="_blank" href="{:U('cemetery/detail/142')}" title="安徽淮北方山陵园" >安徽淮北方山陵园</a>
+            </li>
+        </ul>
+    </div><!-- league_cem合作陵园结束 -->
+    <!-- 立即加入 -->
+    <div class="league_join">
+        <div class="contain">
+            <h1>欢迎加入91搜墓网</h1>
+            <ul>
+                <li>
+                    <input class="leag_tex" id="cemetery_name" type="text" placeholder="请填写陵园名称"/>
+                </li>
+                <li>
+                    <input class="leag_tex" id="cemetery_linkman" type="text" placeholder="请填写陵园联系人"/>
+                </li>
+                <li>
+                    <input class="leag_tex" id="cemetery_mobile" type="text" placeholder="请填写陵园手机号"/>
+                </li>
+                <li class="leag_validate">
+                    <p></p>
+                </li>
+                <li>
+                    <a class="leag_joinbtn" href="javascript:;" >立即加入</a>
+                </li>
+                <li>
+                    <p>或拨打  400-8010-344</p>
+                </li>
+            </ul>
+        </div>
+    </div><!-- league_join立即加入结束 -->
+</div><!-- main中间内容部分结束 -->
+<!-- 提示框 -->
+<div class="tooltip_box"></div>
+<div class="tooltip_pers">
+    <div class="clearfix">
+        <img src="{$Think.const.IMG_URL}pers_save.png" />
+        <p id="content"></p>
+    </div>
+    
+    <div class="tooltip_pers_btn">
+        <a class="ack_btn" href="javascript:void(0);">关闭</a>
+    </div>
+    <span class="tooltip_cloce"></span>
+</div>
+<!--底部代码引入-->
+<include file="Common:footer_joinus" />
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/joinus.js"></script>
+</body>
+</html>

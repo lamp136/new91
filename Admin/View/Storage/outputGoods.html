@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head" />
+    <style type="text/css">
+        .address{
+            position: absolute;
+            width: 200px;
+            background: #fff;
+            border: 1px solid #666;
+            z-index: 100;
+        }
+        .provincecity{
+            position: relative;
+        }
+    </style>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+<!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">出库列表</a><span class="divider-last">&nbsp;</span>
+                        </li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-body">
+                                <form method="get" class="form-horizontal" autocomplete="off" action="{:U('Storage/outputGoods')}">
+                                    搜索：
+                                    <select class="input-medium m-wrap" tabindex="1" name="storage_name">
+                                        <option value="0">--选择仓库--</option>
+                                        <volist name="storage" id="vo">
+                                            <if condition="$Think.get.storage_name  eq $key">
+                                                <option value="{$key}" selected="selected">{$vo}</option>
+                                            <else/>
+                                                <option value="{$key}">{$vo}</option>
+                                            </if>
+                                        </volist>
+                                    </select>
+                                    <input type="text" name="order_main_sn" class="input-medium" placeholder="订单号" value="{$Think.get.order_main_sn}"/>
+                                    <button class="btn btn-primary">确定</button>
+                                </form>
+                                <table class="table table-striped table-bordered" id="sample_1">
+                                    <thead>
+                                    <tr>
+                                        <th class="hidden-phone">仓库名称</th>
+                                        <th class="hidden-phone">商品名</th>
+                                        <!--<th class="hidden-phone">流水号</th>-->
+                                        <th class="hidden-phone">数量</th>
+                                        <th class="hidden-phone">订单号</th>
+                                        <th class="hidden-phone">出货时间</th>
+                                        <th class="hidden-phone">出货人</th>
+                                        <th class="hidden-phone">物流单号</th>
+                                        <!--<th class="hidden-phone">收货人</th>
+                                        <th class="hidden-phone">收货人手机</th>
+                                        <th class="hidden-phone">收货人地址</th>-->
+                                        
+                                        <th class="hidden-phone">提货人信息</th>
+                                        
+                                        <th class="hidden-phone">提货时间</th>
+                                        <th class="hidden-phone">状态</th>
+                                        <th class="hidden-phone">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <volist name="list" id="vo">
+                                            <tr class="odd gradeX">
+                                                <td>{$storage[$vo[storage_id]]}</td>
+                                                <td>{$serviceGoods[$vo[skuid]]}</td>
+                                                <!--<td>{$vo.running_series}</td>-->
+                                                <td>{$vo.number}</td>
+                                                <td>{$vo.order_main_sn}</td>
+                                                <td>{$vo.delivery_time| date="Y-m-d H:i",###}</td>
+                                                <td>{$vo.delivery_man}</td>
+                                                <td>{$vo.logistics_number}</td>
+                                                <!--<td>{$vo.consignee}</td>
+                                                <td>{$vo.consignee_mobile}</td>
+                                                <td>{$vo.shipping_address}</td>-->
+                                                <td class="provincecity">
+                                                    <a href="javascript:;" style="color:green;">查看</a>
+                                                    <div class='hide address'>
+                                                        提货人：{$vo.take_stock_people}<br/>
+                                                        手机号：{$vo.take_stock_mobile}<br/>
+                                                        提货时间：{$vo.take_stock_time| date="Y-m-d H:i",###}
+                                                    </div>
+                                                </td>
+                                                
+                                                <td>
+                                                    <switch name="vo.status"> 
+                                                        <case value="1">待出库</case>
+                                                        <case value="2">已出库</case>
+                                                        <default />联系开发人员
+                                                    </switch>
+                                                </td>
+                                                <td>
+                                                    <php>
+                                                        if (showHandle('Storage/outputOrder')) {
+                                                    </php>
+                                                        <if condition="$vo.status eq 1">
+                                                            <button type="button" class="btn btn-small btn-primary output" data-id="{$vo.id}" /><i class="icon-pencil icon-white"></i>出货
+                                                        </if>
+                                                    <php>
+                                                        }
+                                                    </php>
+                                                </td>
+                                            </tr>
+                                       
+                                        </volist>
+                                    </tbody>
+                                </table>
+                                <div class="row-fluid">
+                                    <div class="span12 center">
+                                        <div class="pagination" id="sample_1_info" style="text-align: center">
+                                            {$page}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- END CONTAINER -->
+
+<!--出库开始-->
+<div id="output" class="modal hide fade in" style='width:650px;'>
+    <form id="outputForm" method="post" class="form-horizontal" autocomplete="off">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>填写出库单</h3>
+        </div>
+        <div class="modal-body">
+            <table class="table table-bordered table-hover">
+                <tbody>
+                    <tr>
+                        <td>物流单号：</td>
+                        <td ><input type='text' name='info[logistics_number]' data-rule='required'></input></td>
+                    </tr>
+                    <tr>
+                        <td>提货人：</td>
+                        <td ><input type='text' name='info[take_stock_people]' data-rule='required'></input></td>
+                    </tr>
+                    <tr>
+                        <td>提货手机号：</td>
+                        <td ><input type='text' name='info[take_stock_mobile]' data-rule='required'></input></td>
+                    </tr>
+                    <tr>
+                        <td>出库数量</td>
+                        <td ><input type='text' name='number' readonly></input></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <input type="hidden" name="action" value="submit">
+            <input type='hidden' id='id' name='info[id]'></input>
+            <button type="submit" class="btn btn-success">提交</button>
+            <a href="#" class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </form>
+</div>
+<!--出库结束-->
+
+<!-- BEGIN FOOTER -->
+<include file="Public::footer"/>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+<script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+<script src="{$Think.const.JS_URL}scripts.js"></script>
+<script src="{$Think.const.JS_URL}zh-CN.js"></script>
+<script>
+    //出货
+    $('.output').click(function(){
+        var id = $(this).attr('data-id');
+        var action = 'select';
+        $.ajax({
+            url:'{:U("outputOrder")}',
+            type:'post',
+            data:{'id':id,'action':action},
+            async:false,
+            success : function(res){
+                var result = eval("(" + res + ")");
+                if(result.flag==1){
+                    var data = result.data;
+                    console.log(data);
+                    $('#id').val(data.id);
+                    $('#outputForm input[name="number"]').val(data.number); 
+                    $('#output').modal();
+                }else{
+                    alert(result.msg);
+                }
+            }
+        });
+    });
+    $('#outputForm').bind('valid.form', function () {
+        $.ajax({
+            url:'{:U("outputOrder")}',
+            type:'post',
+            data: $(this).serialize(),
+            async:false,
+            success : function(res){
+                var result = eval("(" + res + ")");
+                if(result.flag==1){
+                    $('#outputInventory').modal('hide');
+                    window.location.reload();//刷新当前页面.
+                }
+            }
+        });
+    });
+    
+    //查看提货人信息
+    $('.provincecity').hover(function(){
+       $(this).children('div').show(); 
+    },
+    function(){
+        $(this).children('div').hide(); 
+    });
+</script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>殡仪馆</title>
+  <link href="{$Think.const.CSS_URL}bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  <link href="__PUBLIC__/Weixin/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <!-- 带有搜索页面头部 -->
+    <header class="headertop_a">
+        <div class="container">
+            <div class="row">
+                <!-- 点击选择地区 -->
+                <div class="col-xs-3">
+                    <a class="city_btn" href="{:U('changeprovince')}">{$provinceName}<span class="city_btn_bg"></span></a>
+                </div> 
+                <!-- 搜索 -->
+                <div class="col-xs-3 col-xs-offset-6 search_btn">
+                    <a href="{:U('search')}"><img src="__PUBLIC__/Weixin/images/search_tex_bg_lg.png" alt="搜索按钮"/></a>
+                </div><!-- 搜索结束 -->
+            </div><!-- row end -->
+        </div><!-- container end -->
+    </header><!-- headertop_a头部结束 -->
+    <!-- 页面进入主体部分 -->
+    <main class="main">
+        <!-- 殡仪馆列表 -->
+        <ul class="funeral_list">
+            <volist name='storeList' id='vo'>
+                <li>
+                    <!-- 列表内容部分 -->
+                    <div class="container">
+                        <div class="row">
+                            <!-- 殡仪馆图片 -->
+                            <div class="col-xs-5 funeral_img">
+                                <a href="{:U('detail',array('store_id'=>$vo['store_id']))}">
+                                    <img src="{$vo.store_banner}" alt="{$vo.store_name}"/>
+                                </a>
+                            </div><!-- cemetery_img end -->
+                            <!-- 殡仪馆地址和联系殡仪馆 -->
+                            <div class="col-xs-7 list_describe">
+                                <h2><a href="{:U('detail',array('store_id'=>$vo['store_id']))}">{$vo.store_name}</a></h2>
+                                <p>{$vo.address}</p>
+                                <notempty name='vo.StoreContact'><a class="funeral_btn" href="tel:{$vo.StoreContact.tel|str_replace='-','',###}"><span></span>联系殡仪馆</a></notempty>
+                            </div><!-- list_describe end -->
+                        </div><!-- row end -->
+                    </div><!-- container end -->
+                </li>
+            </volist>
+        </ul><!-- funeral_list殡仪馆列表结束 -->
+    </main><!-- main end -->
+</body>
+</html>

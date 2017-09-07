@@ -1,0 +1,1 @@
+function search_top(){var a=$('#seacth_top_form input[name="wd"]').val();$.ajax({url:"/searchkeywords.html",type:"POST",async:!1,data:"keyword="+a,success:function(a){}})}

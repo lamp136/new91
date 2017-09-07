@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript：void(0)">地区管理</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>地区管理</h4>
+                                    <span class="tools">
+                                        <php>
+                                            if (showHandle('Region/add')){
+                                        </php>
+                                            <a href="javascript:void(0)" class="icon-plus addregion">添加地区</a>
+                                        <php>
+                                            }
+                                        </php>
+                                    </span>
+                                </div>
+                                <div class="widget-body">
+
+                                    <table class="table  table-bordered table-hover" id="sample_1">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:10%">id</th>
+                                                <th style="width:25%">名称</th>
+                                                <th style="width:20%">首字母</th>
+                                                <th style="width:20%">地区简写</th>
+                                                <th style="width:25%">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <notempty name="region">
+                                            <volist name="region" id="vo" >
+                                                <tr class="{$vo.pid}"  status='off'  <if condition="$vo.level gt 1">style='display:none;'</if>>
+                                                    <td>{$vo.region_id}</td>
+                                                    <td class="onOff" data-id="{$vo.region_id}"><neq name='vo.level' value='0'>{$vo.level|str_repeat='&nbsp;&nbsp;&nbsp;&nbsp;',###}<span style='color:red;'>├</span>{$vo.region_name}<else />{$vo.region_name}</neq></td>
+                                                    <td>{$vo.flag}</td>
+                                                    <td>{$vo.abbreviate}</td>
+                                                    <td>
+                                                        <php>
+                                                            if (showHandle('Region/edit')){
+                                                        </php>
+                                                            <a class="btn btn-small btn-primary edit"  href="javascript:void(0)" data-region_id="{$vo.region_id}"><i class="icon-pencil icon-white"> </i>编辑</a>
+                                                        <php>
+                                                            }
+                                                            if (showHandle('Region/delete')){
+                                                        </php>
+                                                            <eq name="vo.state" value="$Think.config.NORMAL_STATUS">
+                                                                <a class="btn btn-danger btn-small del" href="javascript:void(0)" data-region_id="{$vo.region_id}" ><i class="icon-remove  icon-white"> </i>删除</a>
+                                                            <else />
+                                                                <a class="btn btn-success btn-small enable" href="javascript:void(0)" data-region_id="{$vo.region_id}" ><i class="icon-ok  icon-white"> </i>启用</a>
+                                                            </eq>
+                                                        <php>
+                                                            }
+                                                        </php>
+                                                    </td>
+                                                </tr>
+                                            </volist>
+                                            <else />
+                                            <tr class="odd gradeX"><td colspan="5">没有记录</td></tr>
+                                        </notempty>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+    <!--添加地区-->
+    <div id="addregion" class="modal hide fade in">
+        <form id="addRegionForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>添加地区</h3>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>上级地区：</td>
+                            <td>
+                                <select name='pid' tabindex="1">
+                                    <option value='0'>--顶级地区--</option>
+                                    <volist name='region' id='vo'>
+                                        <elt name="vo.level" value="1">
+                                            <option value='{$vo.region_id}'><neq name='vo.level' value='0'>{$vo.level|str_repeat='&nbsp;&nbsp;&nbsp;&nbsp;',###}├{$vo.region_name}<else />{$vo.region_name}</neq></option>
+                                        </elt>
+                                    </volist>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>地区名称：</td>
+                            <td>
+                                <input type="text" name="region_name" data-rule="required">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>地区首字母：</td>
+                            <td>
+                                <input type="text" name="flag">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>地区缩写：</td>
+                            <td>
+                                <input type="text" name="abbreviate"> 如北京缩写为：bj
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>是否显示</td>
+                            <td><input name="state" value="{$Think.config.NORMAL_STATUS}" type="radio" data-rule="checked" checked> 是 
+                                <input name="state" value="{$Think.config.DELETE_STATUS}" type="radio" data-rule="checked"> 否
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--添加地区-->
+
+    <!--添加地区-->
+    <div id="editregion" class="modal hide fade in">
+        <form id="editRegionForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>编辑地区</h3>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>上级地区：</td>
+                            <td>
+                                <select name='pid' tabindex="1">
+                                    <option value='0'>--顶级地区--</option>
+                                    <volist name='region' id='vo'>
+                                        <elt name="vo.level" value="1">
+                                            <option value='{$vo.region_id}'><neq name='vo.level' value='0'>{$vo.level|str_repeat='&nbsp;&nbsp;&nbsp;&nbsp;',###}├{$vo.region_name}<else />{$vo.region_name}</neq></option>
+                                        </elt>
+                                    </volist>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>地区名称：</td>
+                            <td>
+                                <input type="text" name="region_name" data-rule="required">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>地区首字母：</td>
+                            <td>
+                                <input type="text" name="flag">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>地区缩写：</td>
+                            <td>
+                                <input type="text" name="abbreviate"> 如北京缩写为：bj
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>是否显示</td>
+                            <td><input name="state" value="{$Think.config.NORMAL_STATUS}" type="radio" data-rule="checked"> 是 
+                                <input name="state" value="{$Think.config.DELETE_STATUS}" type="radio" data-rule="checked"> 否
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="region_id">
+                <button type="submit" class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--编辑地区-->
+    
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}zh-CN.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+        //地区展开和收起
+        $('.onOff').click(function(){
+            var status = $(this).parent().attr('status');
+            var id = $(this).attr('data-id');
+            if(status == 'off'){
+                $(this).html($(this).html().replace('├','┬'));
+                $('.'+id).css('display','');
+                $(this).parent().attr('status','on');
+            }else if(status == 'on'){
+                $(this).html($(this).html().replace('┬','├'));
+                $('.'+id).css('display','none');
+                $(this).parent().attr('status','off');
+            }
+        });
+        
+        //点击添加地区，弹出添加地区表单
+        $('.addregion').click(function () {
+            $('#addregion').modal();
+        });
+
+        //提交地区 表单
+        $('#addRegionForm').bind('valid.form', function () {
+            $('#addRegionForm').modal('hide');
+            $.ajax({
+                url: "{:U('add')}",
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert('添加成功');
+                        window.location.reload();//刷新当前页面.
+                    } else {
+                        alert('添加失败');
+                    }
+                }
+            });
+        });
+        
+        //点击编辑地区，弹出编辑地区表单
+        $('.edit').click(function () {
+            var region_id = $(this).attr('data-region_id');
+            $.ajax({
+                url: "/system.php/Region/edit/region_id/"+region_id,
+                type: 'get',
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    var data = result.data;
+                    if (result.flag == 1) {
+                        $('#editRegionForm select[name="pid"]').val(data.pid);
+                        $('#editRegionForm input[name="region_name"]').val(data.region_name);
+                        $('#editRegionForm input[name="flag"]').val(data.flag);
+                        $('#editRegionForm input[name="abbreviate"]').val(data.abbreviate);
+                        $('#editRegionForm input[name="region_id"]').val(data.region_id);
+                        $("#editRegionForm input[name='state'][value="+data.state+"]").attr("checked",true); 
+                        $('#editregion').modal();
+                    } else {
+                        alert('没有该地区');
+                    }
+                }
+            });
+        });
+
+        //提交编辑地区 表单
+        $('#editRegionForm').bind('valid.form', function () {
+            $('#editregion').modal('hide');
+            $.ajax({
+                url: "{:U('edit')}",
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert('操作成功');
+                        window.location.reload();//刷新当前页面.
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+        
+
+        //删除
+        $('.del').click(function () {
+            var region_id = $(this).attr('data-region_id');
+            var act = 'del';
+            $.ajax({
+                url: "{:U('delete')}",
+                type: 'post',
+                data: 'region_id=' + region_id + '&act=' + act,
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+
+        //启用
+        $('.enable').click(function () {
+            var region_id = $(this).attr('data-region_id');
+            var act = 'enable';
+            $.ajax({
+                url: "{:U('delete')}",
+                type: 'post',
+                data: 'region_id=' + region_id + '&act=' + act,
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+
+
+
+
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

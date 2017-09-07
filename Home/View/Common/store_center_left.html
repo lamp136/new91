@@ -1,0 +1,40 @@
+<!-- sidebar -->
+<div id="sidebar-nav">
+    <ul id="dashboard-menu">
+        <volist name="menuData" id="v1">
+            <li <eq name="v1.flag" value="1"> class="active" </eq>>
+                <eq name="v1.flag" value="1">
+                    <div class="pointer">
+                        <div class="arrow"></div>
+                        <div class="arrow_border"></div>
+                    </div>
+                </eq>
+                <a class="dropdown-toggle ui-elements" onclick="arrow({$v1.id})" href="javascript:void(0);">
+                    <i class="icon-globe"></i>
+                    <span>{$v1.title}</span>
+                    <i data-ids="{$v1.id}" class="<eq name='v1.flag' value='1'> icon-chevron-up <else/> icon-chevron-down </eq>"></i>
+                </a>
+                <ul data-uid="{$v1.id}" class="<eq name="v1.flag" value="1"> active </eq> submenu">
+                    <volist name="v1.child" id="v2">
+                        <li>
+                            <a <eq name="v2.name" value="$path"> class="active" </eq> href="{:U($v2['name'])}">{$v2.title}</a>
+                        </li>
+                    </volist>
+                </ul>
+            </li>
+        </volist>
+    </ul>
+</div>
+<script src="{$Think.const.JS_URL}storecenter/jquery-latest.js"></script>
+<script>
+    function arrow(jid){
+        if(jid){
+            if($('ul[data-uid="'+jid+'"]').is(':hidden')){
+                $('i[data-ids="'+jid+'"]').removeClass('icon-chevron-down').addClass('icon-chevron-up');
+            }else{
+                $('i[data-ids="'+jid+'"]').removeClass('icon-chevron-up').addClass('icon-chevron-down');
+            }
+        }
+    }
+</script>
+<!-- end sidebar -->

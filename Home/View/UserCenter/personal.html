@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/Public/soumu.ico"  type="image/x-icon">
+    <title>个人中心-个人资料_{$Think.config.SITE_NAME}</title>
+    <meta name="keywords" content="个人中心,个人资料" />
+    <meta name="description" content="个人中心,个人资料" />
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 提示框 -->
+<div class="tooltip_box"></div>
+<div class="tooltip_pers">
+    <div class="clearfix">
+        <img src="{$Think.const.IMG_URL}pers_save.png" />
+        <p id="content"></p>
+    </div>
+    
+    <div class="tooltip_pers_btn">
+        <a class="ack_btn" href="javascript:void(0);">关闭</a>
+    </div>
+    <span class="tooltip_cloce"></span>
+</div>
+<!-- 引入头部 -->
+<include file="Common:head_in" />
+
+<!-- 中间内容部分 -->
+<div class="main">
+    <div class="contain clearfix">
+        <!-- 面包屑导航 -->
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="<?php echo getHomeUrl(); ?>">首页</a></li>
+                <li>></li>
+                <li><a href="{:U('/personal')}">用户中心</a></li>
+                <li>></li>
+                <li>个人资料</li>
+            </ul>
+        </div><!-- breadcrumb面包屑导航结束 -->
+        <!-- 用户中心左侧导航 -->
+        <div class="user_nav">
+            <h1><i></i>用户中心</h1>
+            <ul>
+                <li><a href="myorder.html">我的订单</a></li>
+                <!-- <li><a href="cashback.html">领取返现</a></li> -->
+                <li><a class="user_led" href="personal.html">个人资料</a></li>
+                <li><a href="collect.html">我的关注</a></li>
+                <li><a href="changepassword.html">修改密码</a></li>
+            </ul>
+        </div><!-- user_nav用户中心左侧导航结束 -->
+        <!-- 用户中心右侧 -->
+        <div class="user_right">
+            <h1>个人资料</h1>
+            <!-- 个人资料 -->
+            <div class="personal">
+                <form name='personalForm' id='personalForm' method='post' action=''>
+                <table class="pers_table" cellspacing="0">
+                    <!-- 姓名 -->
+                    <tr>
+                        <td class="pers_nam"><font>*</font>真实姓名</td>
+                        <td><input class="pers_tex" type="text" name='name' value="{$memberData.name}" /></td>
+                        <td><span id='nameError' class="pers_validate" style='display: none'><i></i>真实姓名不能为空</span></td>
+                    </tr>
+                    <!-- 性别 -->
+                   <!--  <tr>
+                        <td class="pers_nam"><font></font>性<span class="space"></span>别：</td>
+                        <td>
+                            <input type="radio" name='sex' value='{$Think.config.male}' <eq name='memberData.sex' value='$Think.config.male'>checked='checked'</eq> />男
+                            <input type="radio" name='sex' value='{$Think.config.male}' <eq name='memberData.sex' value='$Think.config.female'>checked='checked'</eq> />女
+                        </td>
+                    </tr> -->
+                    <!-- 手机 -->
+                    <tr>
+                        <td class="pers_nam"><font>*</font>手<span class="space"></span>机</td>
+                        <td><input class="pers_tex" type="text" value="{$memberData.mobile}" name='mobile' readonly /></td>
+                    </tr>
+                    <!-- 支付类型 -->
+                    <tr>
+                        <td class="pers_nam"><font></font>支付类型</td>
+                        <td>
+                            <select class="pers_select" name='bank_type' data-rule='required'>
+                                <option value=''>请选择</option>
+                                <volist name='pay_type' id='vo'>
+                                    <option value='{$key}'<eq name='memberBank.bank_type' value='$key'>selected='selected'</eq>>{$vo}</option>
+                                </volist>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- 银行账户 -->
+                    <tr>
+                        <td class="pers_nam"><font></font>银行账户</td>
+                        <td><input class="pers_tex" type="text" name='bank_account' <notempty name="memberBank.bank_account">value="{$memberBank.bank_account|substr_replace='**** **** **** ',0,-4}"</notempty> /></td>
+                        <td><span id='bank_accountError' class="pers_validate" style='display: none'><i></i>请填写正确的银行账户信息</span></td>
+                    </tr>
+                    <!-- 开户人 -->
+                    <tr>
+                        <td class="pers_nam"><font></font>开&nbsp;户&nbsp;人</td>
+                        <td><input class="pers_tex" type="text" name='bank_member' value="{$memberBank.bank_member}" /></td>
+                    </tr>
+                </table>
+                
+                <p>91搜墓网郑重承诺：<br/>我们将尊重您的个人隐私，您的个人信息不会被公开。</p>
+                <!-- 保存按钮 -->
+                <a class="pers_save" href="javascript:void(0)">保存</a>	
+                </form>
+            </div><!-- personal个人资料结束 -->
+        </div><!-- user_right用户中心右侧结束 -->
+    </div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+
+<include file="Common:footer" />
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/common.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/personal.js"></script>
+</body>
+</html>

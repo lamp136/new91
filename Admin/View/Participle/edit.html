@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('index')}">搜索分词列表</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">修改搜索分词</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-body">
+                                    <form action="__SELF__ " method="post" id="myform" onsubmit="return submitCheck();" >
+                                        <table class="table table-bordered table-hover">
+                                         <tr>
+                                                <td width="100"><span style="color:red">*</span>商家类型:</td>
+                                                <td>
+                                                    <select name="store_style" data-rule='required'>
+                                                        <option value="0">--请选择类型--</option>
+                                                        <volist name="Think.config.BUSINESS_TYPE" id="vo">
+                                                        <if condition="$key eq $data['store_style']">
+                                                            <option value="{$key}" selected="selected">{$vo}</option>
+                                                         <else/>
+                                                            <option value="{$key}">{$vo}</option>
+                                                        </if>
+                                                        </volist>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="100"><span style="color:red">*</span>商家名称:</td>
+                                                <td><input type="text" class="input-xlarge" value= "{$data.store_name}" size="30" name="store_name" readonly="readonly" data-rule='required' /></td>
+                                            </tr>
+                                                <tr>
+                                                    <td width="100"><span style="color:red;height:100px;" >*</span>商家别名:</td><td><textarea  name='store_nick_name' class="input-xxlarge" value="{$data.store_nick_name}" data-rule='required'>{$data.store_nick_name}</textarea><p> 命名规则: 河北石家庄古中山陵园，河北石家庄古中山，河北石家庄陵园，古中山陵园,
+                                                古中山，</p></td>
+                                                </tr>
+                                            <tr>
+                                                <td> <span style="color:red"></span>商家名称拼音：</td>
+                                                <td><input type="text" class="input-xlarge" value="{$data.ruby}" name="ruby" ></td>
+                                            </tr>
+                                            <tr>
+                                                <td> <span style="color:red"></span>搜索首选名称：</td>
+                                                <td><input type="text" class="input-xlarge" value="{$data.store_main_name}" size="30" name="store_main_name" ></td>
+                                            </tr>
+                                           
+                                            <tr>
+                                                <td></td>
+                                                <td colspan='2'>
+                                                    <input type="hidden" name="id" value="{$data.id}">
+                                                    <input type="submit" class="btn submit " value="提交">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}zh-CN.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    
+        
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head"/>
+</head>
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+<!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{$Think.config.ADMIN_HOME_URL}"><i class="icon-home"></i>91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                        </li>
+                        <li><a href="javascript:void(0)">乐融留言列表</a><span class="divider-last">&nbsp;</span></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4><i class="icon-reorder"></i>乐融留言列表</h4>
+                            </div>
+       
+                            <div class="widget-body">
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <form action="{:U('Financing/messageList')}" method="get" class="form-horizontal">
+                                            <input type="text" placeholder="号码" class="input-medium" name="mobile"  value="{$Think.get.mobile}">
+                                            <select name="status">
+                                                <option value="">-信息状态-</option>
+                                                <volist name="Think.config.FINANCE_MESSAGE_STATUS" id="vo">
+                                                    <option value="{$key}" <eq name="Think.get.status" value="$key">selected</eq>>{$vo}</option>
+                                                </volist>
+                                            </select>
+                                            <button class="btn btn-primary"><i class="icon-pencil icon-white"></i> 搜索</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                
+                                <table class="table table-striped table-bordered" id="sample_1">
+                                    <thead>
+                                        <tr>
+                                            <th class="hidden-phone" style="width:8%;">姓名</th>
+                                            <th class="hidden-phone" style="width:8%;">号码</th>
+                                            <th class="hidden-phone" style="width:8%;">类型</th>
+                                            <th class="hidden-phone" style="width:15%;">留言内容</th>
+                                            <th class="hidden-phone" style="width:5%;">IP</th>
+                                            <th class="hidden-phone" style="width:7%;">跟踪人</th>
+                                            <th class="hidden-phone" style="width:16%;">备注</th>
+                                            <th class="hidden-phone" style="width:15%;">留言时间</th>
+                                            <th class="hidden-phone" style="width:7%;">信息状态</th>
+                                            <th class="hidden-phone" style="width:8%;">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <volist name="list" id="vo">
+                                            <tr>
+                                            <td>{$vo.name}</td>
+                                            <td>{$vo.mobile}</td>
+                                            <td>
+                                                <if condition="$vo.type eq 1">找项目
+                                                <elseif condition="$vo.type eq 2" />找资金
+                                                </if>
+                                            </td>
+                                            <td>{$vo.content}</td>
+                                            <td>{$vo.ip}</td>
+                                            <td>{$flow_man[$vo[flow_man]]}</td>
+                                            <td>{$vo.remark}</td>
+                                            <td>{$vo.created_time|date="Y-m-d H:i:s",###}</td>
+                                            <td> 
+                                                <php>
+                                                    if (showHandle('Financing/messageEditStatus')) {
+                                                </php>
+                                                <a href="javascript:void(0)" class="btn btn-success btn-small data-status" data-status="{$vo.status}" data-id="{$vo.id}">
+                                                    {$Think.config.FINANCE_MESSAGE_STATUS.$vo[status]}
+                                                </a>
+                                                <php>
+                                                    }
+                                                </php>
+                                            </td>
+                                            <td>
+                                                <php>
+                                                    if (showHandle('Financing/messageEdit')) {
+                                                </php>
+                                                <a href="javascript:;" data-id="{$vo.id}"  class="btn btn-small btn-primary messageEdit">
+                                                    <i class="icon-pencil icon-white"> </i>编辑
+                                                </a>
+                                                <php>
+                                                    }
+                                                </php>
+                                            </td>
+                                            </tr>
+                                        </volist>
+                                    </tbody>
+                                </table>
+                                <div class="row-fluid">
+                                    <div class="span12 center">
+                                        <div class="pagination" id="sample_1_info" style="text-align: center">
+                                            {$page}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- END CONTAINER -->
+
+<!--编辑信息开始-->
+<div id="messageEdit" class="modal hide fade in">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>编辑信息</h3>
+    </div>
+    <div class="modal-body">
+        <table class="table table-bordered table-hover">
+            <tbody>
+                <tr>
+                    <td>留言姓名：</td>
+                    <td id="name">
+                    </td>
+                </tr>
+                <tr>
+                    <td>跟踪人：</td>
+                    <td>
+                        <select  id="flow_man">
+                            <option value="">--未有跟踪人--</option>
+                            <volist name="flow_man" id="vo">
+                                <option value="{$key}">{$vo}</option>
+                            </volist>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>信息状态：</td>
+                    <td id="messageStatus">
+                        <volist name="Think.config.FINANCE_MESSAGE_STATUS" id="vo">
+                            <input type="radio" name="name" value="{$key}">{$vo}
+                        </volist>
+                    </td>
+                </tr>
+                <tr>
+                    <td>备注：</td>
+                    <td>
+                        <textarea rows="3" id='remark' class="input-xlarge"  ></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <input type='hidden' id='id' ></input>
+        <button type="submit" id='tijiao' class="btn btn-success">提交</button>
+        <a href="#" class="btn" data-dismiss="modal">关闭</a>
+    </div>
+</div>
+<!--编辑信息结束-->
+
+<!--编辑信息状态开始-->
+<div id="editMessageStatus" class="modal hide fade in">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>编辑信息状态</h3>
+    </div>
+    <div class="modal-body">
+        <table class="table table-bordered table-hover">
+            <tbody>
+                <tr>
+                    <td>信息状态：</td>
+                    <td id="editStatus">
+                        <volist name="Think.config.FINANCE_MESSAGE_STATUS" id="vo">
+                            <input type="radio" name="name" value="{$key}">{$vo}
+                        </volist>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <input type='hidden' id='messageId' ></input>
+        <button type="submit" id='tijiaoStatus' class="btn btn-success">提交</button>
+        <a href="#" class="btn" data-dismiss="modal">关闭</a>
+    </div>
+</div>
+<!--编辑信息状态结束-->
+
+<!-- BEGIN FOOTER -->
+<include file="Public::footer"/>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+<script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+<script src="{$Think.const.JS_URL}scripts.js"></script>
+<script src="{$Think.const.JS_URL}zh-CN.js"></script>
+<!-- ie8 fixes -->
+<!--[if lt IE 9]>
+<script src="js/excanvas.js"></script>
+<script src="js/respond.js"></script>
+<![endif]-->
+
+
+<script>
+    //获取编辑信息
+    $('.messageEdit').click(function(){
+        var id = $(this).attr('data-id');
+        $.ajax({
+            url:"{:U('Financing/messageEdit')}",
+            type:'post',
+            data:{id:id,'act':'get'},
+            success:function(d){
+                var result = eval("(" + d + ")");
+                if(result.flag == 1){
+                    var data = result.data;
+                    $('#id').val(data.id);
+                    $('#name').html(data.name);
+                    if((data.flow_man != '0') && (data.flow_man != null)){
+                        $('#flow_man').find('option[value="'+data.flow_man.id+'"]').remove();
+                        $('#flow_man').append('<option value="'+data.flow_man.id+'" selected>'+data.flow_man.nickname+'</option>');
+                    }
+                    $('#messageStatus').find('input[value="'+data.status+'"]').attr('checked',true);
+                    $('#remark').html(data.remark);
+                    $('#messageEdit').modal();
+                }else{
+                    alert(result.msg);
+                }
+            }
+        });
+    });
+    //提交编辑信息
+    $("#tijiao").click(function(){
+        var id = $('#id').val();
+        var flow_man = $("#flow_man option:selected").val();
+        var status = $('#messageStatus input:checked').val();
+        var remark = $('#remark').html();
+        $.ajax({
+            url:"{:U('Financing/messageEdit')}",
+            type:'post',
+            data:{id:id,flow_man:flow_man,status:status,remark:remark,'act':'post'},
+            success:function(d){
+                var result = eval("(" + d + ")");
+                if(result.flag==1){
+                    alert(result.msg);
+                    window.location.reload();//刷新当前页面.
+                }else{
+                    alert(result.msg);
+                }
+            }
+        });
+    });
+    
+    //编辑留言信息
+    $('.data-status').click(function(){
+        var id = $(this).attr('data-id');
+        var status = $(this).attr("data-status");
+        $('#messageId').val(id);
+        $('#editStatus').find('input[value="'+status+'"]').attr('checked',true);
+        $('#editMessageStatus').modal();
+    })
+    $('#tijiaoStatus').click(function(){
+        var id = $('#messageId').val();
+        var status = $('#editStatus input:checked').val();
+        $.ajax({
+            url:"{:U('Financing/messageEditStatus')}",
+            type:'post',
+            data:{id:id,status:status},
+            success:function(d){
+                var result = eval("(" + d + ")");
+                if(result.flag==1){
+                    alert(result.msg);
+                    window.location.reload();//刷新当前页面.
+                }else{
+                    alert(result.msg);
+                }
+            }
+        });
+    });
+</script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

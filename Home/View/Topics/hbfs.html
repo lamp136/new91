@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="icon" href="/Public/soumu.ico"  type="image/x-icon">
+    <meta charset="UTF-8">
+    <title>安徽淮北方山陵园_简介_墓型_墓位_陵园景观_陵园风景_公司名誉_{$Think.config.SITE_NAME}</title>
+    <meta name='keywords' content='安徽淮北方山陵园，安徽淮北方山陵园简介，淮北房山陵园墓位墓型' />
+    <meta name="description" content="安徽淮北方山陵园是淮北市民政局主管的合法综合经营性公墓，陵园具有各种艺术墓及传统墓，交通便利，陵园环境良好，是一方极具中国传统择陵标准的风水宝地。" />
+     <link href="{$Think.const.CSS_URL}topics/header.css" media="screen, projection" rel="stylesheet" type="text/css" />
+    <link href="{$Think.const.CSS_URL}topics/hbfs.css" media="screen, projection" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!-- 顶部 -->
+<include file="Common:head_topics" />
+<!-- 导航 -->
+<div class="topics_nav" id="topics_nav">
+    <div class="contain">
+        <ul>
+            <li class="currter"><a href="#">淮北市方山陵园</a></li>
+            <li><a href="#2F">陵园简介</a></li>
+            <li><a href="#3F">推荐墓型</a></li>
+            <li><a href="#4F">陵园风景</a></li>
+            <li><a href="#5F">陵园荣誉</a></li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+</div><!-- topics_nav导航结束 -->
+<!-- banner -->
+<div class="hbfs_banner"></div>
+<!-- 内容 -->
+<div class="hbfs_main">
+    <div class="contain">
+        <!-- 陵园简介 -->
+        <div id="2F" class="hbfs_intro">
+            <h2 class="hbfs_intro_title"></h2>
+            <div class="hbfs_intro_main">
+                <p class="p1">淮北市方山陵园是经安徽省民政批准，淮北市民政局主管的合法综合经营性公墓，安徽省殡葬协会理事单位,坐落于相城北隅地属相山龙脉的方山东麓，处于三面青山环抱之中，藏风聚气，又位于“两山一岗”之间，古有“两山夹一岗，后代出将相”之说。同时，陵园“前有照、后有靠、水中冒泡、招财又进宝”，是一方极具中国传统择陵标准的风水宝地。</p>
+                <p>陵园坐西朝东，西高东底，和中国大的地理环境完全符合，同时迎合了葬经中“头枕高山，脚蹬河湾”之说。陵园大门朝东，背靠两座大山，前方有放生池，符合“前有照，后有靠，水中冒泡，招财又进宝”的风水典故。</p>
+                <p>陵园依自然山势由低及高以皇家陵园的风格向上构筑，气势恢宏。青松苍翠、曲径回廊、亭台楼阁、小桥流水的诗景画意，再现了江南园林的建筑韵味。推崇中华民族之文化观念，集旅游观光、安葬纪念活动为一体，以服务大众为宗旨，致力于创造良好的服务环境，为各界人士提供优质、完善、永久性的服务。</p>
+                <p>陵园用地是淮北市人民政府划拨的国有殡葬专用地，陵园销售的每套墓穴都要上报给市民政局备案。</p>
+                <p>方山陵园距淮北市殡仪馆仅300米，交通方便，市内公交2路、20路可到达殡市仪馆大路口，公交9路方山陵园直通车，每逢周六。。。<a href="{:U('/cemetery/detail/'.$store_id)}">查看详情>></a></p>
+            </div>
+        </div><!-- hbfs_intro陵园简介结束 -->
+        <!-- 墓型展示 -->
+        <div id="3F" class="hbfs_tomb">
+            <h2 class="hbfs_tomb_title"><a href="#">更多</a></h2>
+            <ul>
+                <volist name="goods" id="vo" key="k">
+                <li <if condition="$k%4==0">class="last"</if>>
+                    <a href="{:U('/order/'.$vo['store_id'])}" target="_blank"><img src="{$vo.Img.image_url}" alt="淮北方山墓型"/></a>
+                    <p>{$vo.goods_name|msubstr=0,12}</p>
+                    <a class="hbfs_tomb_btn" href="{:U('/order/'.$vo['store_id'])}" target="_blank">立即预定</a>
+                </li>
+                </volist>
+            </ul>
+        </div><!-- hbfs_tomb墓型展示结束 -->
+        <!-- 陵园风景 -->
+        <div id="4F" class="hbfs_scenery">
+            <h2 class="hbfs_scenery_title"></h2>
+            <ul>
+                <li><img src="{$Think.const.IMG_URL}topics/hbfs/hbfs_scenery_img1.jpg"/></li>
+                <li class="last"><img src="{$Think.const.IMG_URL}topics/hbfs/hbfs_scenery_img2.jpg"/></li>
+            </ul>
+            <ul class="ul_bottom">
+                <li><img src="{$Think.const.IMG_URL}topics/hbfs/hbfs_scenery_img3.jpg"/></li>
+                <li><img src="{$Think.const.IMG_URL}topics/hbfs/hbfs_scenery_img4.jpg"/></li>
+                <li class="last"><img src="{$Think.const.IMG_URL}topics/hbfs/hbfs_scenery_img5.jpg"/></li>
+            </ul>
+        </div><!-- hbfs_scenery陵园风景结束 -->
+        <!-- 陵园荣誉 -->
+        <div id="5F" class="hbfs_aptitude">
+            <h2 class="hbfs_aptitude_title"></h2>
+            <!-- 陵园荣誉内容 -->
+            <div class="aptitude_main">
+                <div id="marquee1">
+                    <ul>
+                        <volist name='zizhi' id='vo'>
+                            <li><img src="{$vo.image_url}" /></li>
+                        </volist>
+                    </ul>
+                </div>
+            </div><!-- aptitude_main陵园荣誉内容结束 -->			
+        </div><!-- hbfs_aptitude陵园荣誉结束 -->
+    </div><!-- contain -->
+</div><!-- hbfs_main内容结束 -->
+<!-- 底部 -->
+<div class="topics_footer">
+	<p>{$Think.config.BEIAN_INFO}</p>
+</div><!-- topics_footer end -->
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<!-- 陵园资质jquery.kxbdMarquee.js -->
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery.kxbdmarquee.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/topics.js"></script>
+</body>
+</html>

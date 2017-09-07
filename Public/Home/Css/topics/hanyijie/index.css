@@ -1,0 +1,238 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/*头部*/
+.hy_header{
+	width: 100%;
+	height: 898px;
+	background: transparent url("../../../images/topics/hanyijie/hy_header_bg.jpg") no-repeat scroll center center;
+}
+.hy_innerheader{
+	width: 1140px;
+	padding-top: 472px;
+	margin: 0 auto;
+}
+/*寒衣节起源*/
+.hy_innerheader h1{
+	text-align: center;
+}
+.hy_origin{
+	padding-top: 50px;
+}
+.hy_origin_left{
+	width: 618px;
+	padding-right: 14px;
+	float: left;
+	background: url("../../../images/topics/hanyijie/hy_origin_left_bg.png") no-repeat;
+	background-position: right top;
+}
+.hy_origin_left h2{
+	font-size: 12px;
+	line-height: 26px;
+}
+.hy_origin_left p{
+	font-size: 12px;
+	line-height: 24px;
+	text-indent: 2em;
+}
+.hy_origin_left a{
+	color: #a70000;
+}
+.hy_origin_right{
+	width: 443px;
+	height: 285px;
+	float: right;
+	background: url(../../../images/topics/hanyijie/hy_origin_right.png);
+}
+.hy_origin_right img{
+	margin: 5px 0 0 5px;
+}
+/*中间内容*/
+.hy_main{
+	width: 100%;
+	background: #fffedf;
+}
+.hy_innermain{
+	width: 1140px;
+	padding-bottom: 78px;
+	margin: 0 auto;	
+}
+/*寒衣节知识*/
+.hy_knowledge{
+	width: 100%;
+	background: url(../../../images/topics/hanyijie/knowledge_h1_bg.png) repeat-x;
+	background-position: 0 47px;
+	margin-bottom: 10px;
+}
+.hy_know{
+	width: 1140px;
+	margin: 0 auto;
+}
+.hy_ledge ul li{
+	width: 560px;
+	float: left;
+	margin: 0 20px 30px 0;
+}
+.hy_ledge ul .last{
+	margin-right: 0;
+}
+.hy_ledge h1{
+	text-align: center;
+	margin-bottom: 10px;
+}
+.hy_ledge p{
+	width: 504px;
+	margin-left: 28px;
+	font-size: 12px;
+	line-height: 22px;
+}
+.hy_ledge a{
+	float: right;
+	color: #a10000;
+}
+.hy_ledge_bg{
+	width: 503px;
+	height: 345px;
+	margin: 5px 0 0 28px;
+	background: url(../../../images/topics/hanyijie/hy_ledge_bg.png);
+}
+.hy_ledge_bg img{
+	margin: 5px 0 0 5px;
+}
+/*祭拜禁忌*/
+.hy_taboo h1{
+	text-align: center;
+	margin-bottom: 30px;
+}
+.hy_taboo_main img{
+	float: left;
+}
+.hy_taboo_main .hy_taboo_describe{
+	width: 660px;
+	margin-top: 50px;
+	float: right;
+}
+.hy_taboo_main img{
+	margin-left: 36px;
+}
+.hy_taboo_main .hy_taboo_describe h2{
+	font-family: "微软雅黑";
+	color: #37861b;
+	font-size: 36px;
+	line-height: 72px;
+	text-align: center;
+	background: url(../../../images/topics/hanyijie/hy_tabooh2_bg.png) no-repeat;
+	background-position: bottom;
+}
+.hy_taboo_main .hy_taboo_describe p{
+	font-family: "微软雅黑";
+	line-height: 24px;
+}
+	/*禁忌第二个*/
+.hy_taboo_mainA img{
+	float: right;
+}
+.hy_taboo_mainA .hy_taboo_describe{
+	width: 660px;
+	margin-top: 50px;
+	float: left;
+}
+.hy_taboo_mainA img{
+	margin-right: 36px;
+}
+.hy_taboo_mainA .hy_taboo_describe h2{
+	font-family: "微软雅黑";
+	color: #37861b;
+	font-size: 36px;
+	line-height: 72px;
+	text-align: center;
+	background: url(../../../images/topics/hanyijie/hy_tabooh2_bg.png) no-repeat;
+	background-position: bottom;
+}
+.hy_taboo_mainA .hy_taboo_describe p{
+	font-family: "微软雅黑";
+	line-height: 24px;
+}
+.hy_taboo_mainA .hy_taboo_describe a{
+	color: #ac0000;
+}
+/*来源与历史传说*/
+.hy_history h1{
+	text-align: center;
+	margin: 50px 0 30px 0;
+}
+.hy_history_main{
+	height: 920px;
+	background: url(../../../images/topics/hanyijie/hy_history_bg.jpg);
+}
+.hy_history_main p{
+	width: 576px;
+	float: right;
+	line-height: 24px;
+}
+.hy_history_main .p_top{
+	margin-top: 18px;
+}
+.hy_history_main a{
+	color: #b80000;
+	float: right;
+}
+/*陵园推荐*/
+.hy_recommend{
+	width: 100%;
+	padding-bottom: 92px;
+	background: #ffdeab;
+}
+.hy_recommend h1{
+	text-align: center;
+	padding: 42px 0;
+}
+.hy_reco_main{
+	width: 1140px;
+	margin: 0 auto;
+}
+.hy_reco_main img{
+	display: block;
+}
+.hy_reco_main ul li{
+	width: 368px;
+	padding: 10px;
+	float: left;
+	background: #fffedf;
+	margin-right: 16px;
+	position: relative;
+}
+.hy_reco_main span{
+	position: absolute;
+	top: 18px;
+	left: 18px;
+}
+.hy_reco_main p{
+	padding: 10px;
+	font-size: 12px;
+	line-height: 20px;
+	background: #dfdfdf;
+}
+.hy_reco_main p a{
+	color: #a10000;
+	margin-left: 30px; 
+}
+#marquee1{
+	height: 343px;
+	position: relative;
+	overflow: hidden;
+}
+/*底部*/
+.hy_footer{
+	width: 100%;
+	height: 168px;
+	border-top: 1px solid #fffedf;
+	background: transparent url("../../../images/topics/hanyijie/hy_footer_bg.jpg") no-repeat scroll center center;
+}
+.hy_footer p{
+	font-size: 12px;
+	color: #38b634;
+	text-align: center;
+	line-height: 94px;
+}

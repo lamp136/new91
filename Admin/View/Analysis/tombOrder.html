@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+       <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">商务人员跟踪购墓订单</a><span class="divider-last">&nbsp;</span></li>
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <form id="quickForm" method="get" class="form-horizontal" autocomplete="off" action='__SELF__'>
+                                    <span>统计时间:</span>
+                                    <input type="text" name="start_time" class="input-medium Wdate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" <notempty name="start_time">value="{$start_time}"<else />value="0000-00-00"</notempty>/>-
+                                    <input type="text" name="end_time" class="input-medium Wdate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" <notempty name="Think.get.end_time">value="{$Think.get.end_time}" <else />  value="{:date('Y-m-d')}" </notempty>/>
+                                    <button class="btn btn-primary">确定</button>
+                                </form>
+                                
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>购墓订单统计图形</h4>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="btn-toolbar">
+                                        <div id="tomb_order" style="width: 1000px; height: 500px; margin: 0 auto">
+                                            <!-- 陵园统计图表  -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>购墓订单统计列表</h4>
+                                </div> 
+                                <div class="widget-body">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>商务人员</th>
+                                                        <th>订单数量</th>
+                                                        <th>完成订单数量</th>
+                                                        <th>意向订单</th>
+                                                        <th>待支付订单</th>
+                                                        <th>待返现订单</th>
+                                                        <th>退单</th>
+                                                        <th>默认订单</th>
+                                                        <th>删除订单</th>
+                                                        <th>统计时间</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <volist name="orderInfo" id="info">
+                                                        <tr class="odd gradeX">
+                                                            <td>
+                                                                <notempty name="user[$key]">{$user[$key]}<else /><span style="color:red;">无跟踪人</span></notempty>
+                                                            </td>
+                                                            <td>{$info.order_total}</td>
+                                                            <td>
+                                                                {$info.order_success_total}
+                                                            </td>
+                                                            <td>
+                                                                {$info.order_interesting_total}
+                                                            </td>
+                                                            <td>
+                                                                {$info.order_sendtofinance_total}
+                                                            </td>
+                                                            <td>
+                                                                {$info.order_waitbackmoney_total}
+                                                            </td>
+                                                            <td>
+                                                                {$info.order_back_total}
+                                                            </td>
+                                                            <td>
+                                                                {$info.order_default_total}
+                                                            </td>
+                                                            <td>
+                                                                {$info.order_fail_total}
+                                                            </td>
+                                                            <td>
+                                                                <notempty name="start_time">{$start_time}<else />0000-00-00</notempty>---<notempty name="Think.get.end_time">{$Think.get.end_time}<else />{:date('Y-m-d')}</notempty>
+                                                            </td>
+                                                        </tr>
+                                                    </volist>
+                                                </tbody>
+                                            </table>
+                                            <div class="row-fluid">
+                                                <div class="span12 center">
+                                                    <div class="pagination" id="sample_1_info" style="text-align: center">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+    <!-- END JAVASCRIPTS -->
+    <script src="{$Think.const.JS_URL}highchars/highcharts.js"></script>
+    <script type="text/javascript">
+        var categories = <?php echo $categories ?>;
+        var series = <?php echo $series ?>;
+        $(function () {
+            $('#tomb_order').highcharts({
+                title: {
+                    text: '购墓订单统计折线图',
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: '数据来自: http://www.91soumu.com',
+                    x: -20
+                },
+                xAxis: {
+                    categories: categories
+                },
+                yAxis: {
+                    title: {
+                        text: '单位 (个)'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: '个'
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: series
+            });
+        });
+    </script>
+</body>
+<!-- END BODY -->
+</html>

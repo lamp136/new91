@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="icon" href="/Public/soumu.ico" type="image/x-icon" />
+    <title>站点地图_{$Think.config.SITE_NAME}</title>
+    <meta name="keywords" content="{$seoInfo.seo_keywords}" />
+    <meta name="description" content="{$seoInfo.seo_description}" />
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!--引入头部 -->
+<include file="Common:head_in" />
+
+<!-- 中间内容部分 -->
+<div class="main">
+    <div class="contain">
+        <volist name="store" id="vo">
+        <div class="webmap webmap_first clearfix">
+            <!-- 左侧城市名称 -->
+            <a href="{:U('/'.strtolower($vo['abbreviate']))}" title="{$vo.region_name}"><h1><img src="{$Think.const.IMG_URL}citytubiao/{$vo.abbreviate|strtolower}.png" />{$vo.region_name}</h1></a>
+            <!-- 右侧内容 -->
+            <div class="webmap_right">
+                <!-- 陵园 -->
+                <div>
+                    <ul>
+                        <volist name="vo[37]" id="v1">
+                        <li>
+                            <a href="{:U('/cemetery/detail/'.$v1['store_id'])}" title="{$v1.store_name}" target='_blank'>{$v1.store_name}</a>
+                            <in name="v1.member_status" value="$storeMember"><span class="hot"></span></in>
+                        </li>
+                        </volist>
+                    </ul>
+                </div>
+                <!-- 殡仪馆 -->
+                <notempty name="vo[38]">
+                    <div class="webmap_byg clearfix">
+                        <ul>
+                            <volist name="vo[38]" id="v2">
+                                <li>
+                                    <a href="{:U('/funeral/detail/'.$v2['store_id'])}" title="{$v2.store_name}" target='_blank'>{$v2.store_name}</a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </notempty>
+            </div><!-- webmap_right右侧内容结束 -->
+        </div><!-- webmap end -->
+        </volist>
+
+    </div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<!-- 底部footer部分-->
+<!--底部代码引入-->
+<include file="Common:footer" />
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+</body>
+</html>

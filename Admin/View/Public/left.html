@@ -1,0 +1,43 @@
+
+<div id="sidebar" class="nav-collapse collapse">
+    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+    <div class="sidebar-toggler hidden-phone"></div>
+    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+
+    <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+    <div class="navbar-inverse">
+        <form class="navbar-search visible-phone">
+            <input type="text" class="search-query" placeholder="Search" />
+        </form>
+    </div>
+    <!-- END RESPONSIVE QUICK SEARCH FORM -->
+    <!-- BEGIN SIDEBAR MENU -->
+    <ul class="sidebar-menu">
+        <volist name='menuData' id='vo'>
+	        <volist name='vo.child' id='v1' key="m">
+	        <li class="has-sub  <neq name='vo.id' value='$currentpriId'>hide</neq> child-menu{$vo.id}">
+	            <a href="javascript:;" class="">
+	                <span class="icon-box">
+	                    <i class="icon-dashboard"></i>
+	                </span> 
+	                {$v1.title}
+	                <span class="arrow"></span>
+	            </a>
+	            <ul class="sub" <eq name='memuId' value='$v1["id"]'>style="display: block;"</eq>>
+	                <volist name='v1.child' id='v2'>
+	                <li <eq name="path" value='$v2.name'>class="active" </eq>>
+	                    <a  href="{:U($v2['name'])}">
+	                        <i class="icon-home"></i>
+	                        {$v2.title}
+	                    </a>
+	                </li>
+	                </volist>
+	            </ul>
+	        </li>
+	        </volist>
+        </volist>
+
+        
+    </ul>
+    <!-- END SIDEBAR MENU -->
+</div>

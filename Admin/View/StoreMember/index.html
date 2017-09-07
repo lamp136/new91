@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+        <link rel="stylesheet" type="text/css" href="{$Think.const.ASSETS_URL}chosen-bootstrap/chosen/chosen.css" />
+        <style type="text/css">
+            .widget-tabs .nav-tabs > li{
+                float: left;
+            }
+            .noborder{
+                border: none;
+            }
+            .noborder td{
+                border: none;
+            }
+            .noborder a{
+                margin-left: 8px;
+            }
+        </style>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">陵园账号</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>陵园账号列表</h4>
+                                    <php>
+                                        if(showHandle('StoreMember/add')){
+                                    </php>
+                                    <span class="tools">
+                                        <a href='javascript:void(0)'  class="icon-plus add">添加陵园账号</a>
+                                    </span>
+                                    <php>
+                                        }
+                                    </php>
+                                </div>
+                                <div class="widget-body">
+                                    <form id="quickForm" method="get" class="form-horizontal" autocomplete="off" action='{:U("index")}'>
+                                    <table>
+                                        <tr>
+                                            <td>搜索：</td>
+                                            <td>
+                                                <select name='store_id' class='chosen' tabindex="100" data-placeholder="选择商家">
+                                                    <option value=""></option>
+                                                    <option value="">所有商家</option>
+                                                    <volist name='store' id='vo'>
+                                                        <option value='{$vo.store_id}' <eq name="vo.store_id" value="$Think.get.store_id">selected</eq>>{$vo.store_name}</option>
+                                                    </volist>
+                                                </select>
+                                                <select name='pid' class='chosen' tabindex="100" data-placeholder="选择集团">
+                                                    <option value=""></option>
+                                                    <option value="">所有集团</option>
+                                                    <volist name='group' id='vo'>
+                                                        <option value='{$vo.cid}' <eq name="vo.cid" value="$Think.get.pid">selected</eq>>{$vo.name}</option>
+                                                    </volist>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary">确定</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    </form>
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th width="5%">编号</th>
+                                                <th width="17%">商家名称</th>
+                                                <th width="10%">所属集团</th>
+                                                <th width="15%">登陆账号</th>
+                                                <th width="20%">添加时间</th>
+                                                <th width="33%">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <volist name="list" id="vo">
+                                            <tr class="odd gradeX">
+                                                <td>{$vo.id}</td>
+                                                <td>
+                                                    <notempty name="vo.sublevel">
+                                                        <i style="cursor:pointer;" class="icon-plus child_level" data-id={$vo.id}></i>
+                                                    </notempty>
+                                                    {$vo.store_name}
+                                                </td>
+                                                <td>{$group[$vo['pid']]['name']}</td>
+                                                <td>{$vo.store_login_name}</td>
+                                                <td>{$vo.created_time}</td>
+                                                <td>
+                                                    <php>
+                                                        if(showHandle('StoreMember/edit')){
+                                                    </php>
+                                                        <a class="btn btn-small edit"  href="javascript:void(0)" data-id="{$vo.id}"><i class="icon-pencil icon-white"> </i>修改密码</a>
+                                                    <php>
+                                                        }
+                                                        if(showHandle('StoreMember/delete')){
+                                                    </php>
+                                                        <eq name="vo.status" value="$Think.config.NORMAL_STATUS">
+                                                            <a class="btn btn-danger btn-small del" href="javascript:void(0)" data-id="{$vo.id}" ><i class="icon-remove  icon-white"> </i>禁用</a>
+                                                        <else />
+                                                            <a class="btn btn-success btn-small enable" href="javascript:void(0)" data-id="{$vo.id}" ><i class="icon-ok  icon-white"> </i>启用</a>
+                                                        </eq>
+                                                    <php>
+                                                        }
+                                                        if(showHandle('StoreMember/getStoreCenterPrivilege')){
+                                                    </php>
+                                                        <a class="btn btn-success btn-small privilege" data-id="{$vo.id}" href="javascript:void(0);" ><i class="icon-ok  icon-white"> </i>权限分配</a>
+                                                    <php>
+                                                        }
+                                                    </php>
+                                                </td>
+                                            </tr>
+                                            <notempty name="vo.sublevel">
+                                                <tbody data-hide="{$vo.id}" class="hide">
+                                                    <tr>
+                                                        <th colspan="3"></th>
+                                                        <th>子账号</th>
+                                                        <th>添加时间</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                    <volist name="vo.sublevel" id="vl">
+                                                        <tr>
+                                                            <td colspan="3"></td>
+                                                            <td>{$vl.store_login_name}</td>
+                                                            <td>{$vl.created_time}</td>
+                                                            <td>
+                                                                <php>
+                                                                    if(showHandle('StoreMember/edit')){
+                                                                </php>
+                                                                    <a class="btn btn-small edit"  href="javascript:void(0)" data-id="{$vl.id}"><i class="icon-pencil icon-white"> </i>修改密码</a>
+                                                                <php>
+                                                                    }
+                                                                    if(showHandle('StoreMember/delete')){
+                                                                </php>
+                                                                    <eq name="vl.status" value="$Think.config.NORMAL_STATUS">
+                                                                        <a class="btn btn-danger btn-small del" href="javascript:void(0)" data-id="{$vl.id}" ><i class="icon-remove  icon-white"> </i>禁用</a>
+                                                                    <else />
+                                                                        <a class="btn btn-success btn-small enable" href="javascript:void(0)" data-id="{$vl.id}" ><i class="icon-ok  icon-white"> </i>启用</a>
+                                                                    </eq>
+                                                                <php>
+                                                                    }
+                                                                    if(showHandle('StoreMember/getStoreCenterPrivilege')){
+                                                                </php>
+                                                                    <a class="btn btn-success btn-small privilege" data-id="{$vl.id}" href="javascript:void(0);" ><i class="icon-ok  icon-white"> </i>权限分配</a>
+                                                                <php>
+                                                                    }
+                                                                </php>
+                                                            </td>
+                                                        </tr>
+                                                    </volist>
+                                                </tbody>
+                                            </notempty>
+                                        </volist>
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span12 center">
+                                            <div class="pagination" id="sample_1_info" style="text-align: center">
+                                                {$page}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+    <!--添加账号开始-->
+    <div id="add" class="modal hide fade in">
+        <form id="addForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>添加商家账号</h3>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>商家：</td>
+                            <td>
+                                <select name='store' class='chosen' tabindex="100" data-placeholder="选择商家">
+                                    <option value=""></option>
+                                    <volist name='store' id='vo'>
+                                        <option value='{$vo.store_id}-{$vo.store_name}'>{$vo.store_name}</option>
+                                    </volist>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>账号：</td>
+                            <td>
+                                <input type="text"  name='store_login_name'  data-rule='required' /> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>密码：</td>
+                            <td>
+                                <input type="password" name='store_login_pwd' data-rule='required' /> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>集团：</td>
+                            <td>
+                                <select name='pid'>
+                                    <option value="">请选择</option>
+                                    <volist name='group' id='vo'>
+                                        <option value='{$vo.cid}'>{$vo.name}</option>
+                                    </volist>
+                                </select>如果是集团账号，陵园可以不选，选择所属集团即可
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <span id='error' style='display: none;color: #ff0000;padding-right: 30px;'>账号必须在一个陵园或是集团下</span>
+                <button type="submit"  class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--添加账号结束-->
+    
+    
+    <!--修改密码开始-->
+    <div id="edit" class="modal hide fade in">
+        <form id="editForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>修改商家的密码</h3>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>账号：</td>
+                            <td>
+                                <input type="text"  name='store_login_name' disabled='disabled' /> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>密码：</td>
+                            <td>
+                                <input type="password"  name='store_login_pwd' data-rule='required'/> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>确认密码：</td>
+                            <td>
+                                <input type="password" name="repassword"  data-rule='required'/> 
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <span class='text-warning'></span>
+                <input type="hidden"  name='id' /> 
+                <button type="submit"  class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--修改密码结束-->
+
+    <!-- 修改权限开始 -->
+    <div id="privilege" class="modal hide fade in" style="width:900px">
+        <form id="privilegeForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>修改商家账号权限</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th width="15%">
+                                <input type="checkbox" value=""  class="lv0"/>全选
+                            </th>
+                            <th>
+                                <span>菜单</span>
+                                <span style="margin-left: 20%;">操作</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="lv">
+                        
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <span class='text-warning'></span>
+                <input type="hidden" name='id' value=""/>
+                <button type="submit"  class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!-- 修改权限结束 -->
+    
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ASSETS_URL}chosen-bootstrap/chosen/chosen.jquery.min.js"></script>
+
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}zh-CN.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+        $('.child_level').click(function() {
+            var id = $(this).data('id');
+            var tbodyTag = $('tbody[data-hide="'+id+'"]');
+            tbodyTag.toggle();
+            // 改变箭头class
+            if(tbodyTag.is(':hidden')){
+                $(this).removeClass('icon-minus').addClass('icon-plus');
+            }else{
+                $(this).removeClass('icon-plus').addClass('icon-minus');
+            }
+        });
+
+        $('.privilege').click(function(){
+            var id = $(this).data('id');
+            $('#privilegeForm input[name="id"]').val(id);
+            $.ajax({
+                url:"{:U('getStoreCenterPrivilege')}",
+                type:'get',
+                data:{
+                    id:id
+                },
+                success:function(d){
+                    var info = eval("("+d+")");
+                    var tag = '';
+                    if(info['flag'] == 1){
+                        setTimeout(function() {
+                            var pri = info['pri'];
+                            $(pri.split(',')).each(function(g,el){
+                                $('#privilegeForm input:checkbox[value="'+el+'"]').prop('checked',true);
+                            })
+                        }, 0);
+                        var data = info['data'];
+                        if(data){
+                            for (var l1 of data) {
+                                tag += '<tr><td><label><input type="checkbox" class="lv1" name="rules[]" value="'+l1['id']+'"/>'+l1['title']+'</label></td><td><table class="noborder" width="100%">';
+                                var lv2 = l1['child'];
+                                if(lv2){
+                                    for (var l2 of lv2) {
+                                        tag += '<tr><td height=30 width="20%"><label><input type="checkbox" class="lv2" name="rules[]" data-pid="'+l1['id']+'" value="'+l2['id']+'"/>'+l2['title']+'</label></td><td>';
+                                        var lv3 = l2['child'];
+                                        if(lv3){
+                                            for (var l3 of lv3) {
+                                                tag += '<input type="checkbox" class="lv3" name="rules[]" data-pid="'+l1['id']+'" data-prev="'+l2['id']+'" value="'+l3['id']+'"/>'+l3['title']+'&nbsp;';
+
+                                            }
+                                        }
+                                        tag += '</td></tr>';
+                                    }
+                                }
+                                tag += '</table></td></tr>';
+                            }
+                        }
+                        $('#privilege').modal();
+                    }
+                    $('.lv').empty().append(tag);
+                    
+                    checkOpera();
+                }
+            })
+        })
+
+        function checkOpera(){
+            var allCheckBox = $('.lv input:checkbox[name="rules[]"]');
+            setTimeout(function() {
+                allChecked(allCheckBox,$('.lv input:checkbox[name="rules[]"]:checked'));
+            }, 0);
+
+            $('.lv0').die().bind('click',function(){
+                if($(this).is(':checked')){
+                    allCheckBox.prop('checked',true);
+                }else{
+                    allCheckBox.prop('checked',false);
+                }
+            });
+
+            $('.lv1').die().bind('click',function(){
+                allChecked(allCheckBox,$('.lv input:checkbox[name="rules[]"]:checked'));
+                var pid = $(this).val();
+                var lv2CheckBox = $('#privilegeForm input:checkbox[data-pid="'+pid+'"]');
+                if($(this).is(':checked')){
+                    lv2CheckBox.prop('checked',true);
+                }else{
+                    lv2CheckBox.prop('checked',false);
+                }
+            });
+
+            $('.lv2').die().bind('click',function(){
+                allChecked(allCheckBox,$('.lv input:checkbox[name="rules[]"]:checked'));
+                _setChecked(this);
+                var prvId = $(this).val();
+                var lv3CheckBox = $('.noborder input:checkbox[data-prev="'+prvId+'"]');
+                if($(this).is(':checked')){
+                    lv3CheckBox.prop('checked',true);
+                }else{
+                    lv3CheckBox.prop('checked',false);
+                }
+            });
+
+            $('.lv3').die().bind('click',function(){
+                allChecked(allCheckBox,$('.lv input:checkbox[name="rules[]"]:checked'));
+                _setChecked(this);
+            });
+        }
+        
+        /**
+         * 设置父级选中
+         * @param {object} obj 全部复选框按钮
+         */
+        function _setChecked(obj){
+            var pid = $(obj).data('pid');
+            var prvId = $(obj).data('prev');
+            if($(obj).is(':checked')){
+                if(pid){
+                    $('.lv input[value="'+pid+'"]').prop('checked',true);
+                }
+                if(prvId){
+                    $('.lv input[value="'+prvId+'"]').prop('checked',true);
+                }
+            }
+        }
+
+        function allChecked(obj,el){
+            if(obj.length == el.length){
+                $('.lv0').prop('checked',true);
+            }else{
+                $('.lv0').prop('checked',false);
+            }
+        }
+
+        $('#privilegeForm').bind('valid.form',function(){
+            var formData = new FormData(document.getElementById("privilegeForm"));
+            $.ajax({
+                url:"{:U('getStoreCenterPrivilege')}",
+                type:'post',
+                data:formData,
+                processData: false,
+                contentType: false,
+                success:function(d){
+                    var result = eval("("+d+")");
+                    if(result['flag'] == 1){
+                        window.location.reload();
+                        alert(result['msg']);
+                    }else{
+                        alert(result['msg']);
+                    }
+                }
+            })
+        })
+        
+        //弹出添加的表单
+        $('.add').click(function(){
+            $('#add').modal();
+        });
+        
+        //提交添加的表单
+        $('#addForm').bind('valid.form', function () {
+            var store = $('#addForm select[name="store"]').val();
+            var pid = $('#addForm select[name="pid"]').val();
+            if(store=='' && pid==''){
+                $('#error').show();
+                return false;
+            }
+            $.ajax({
+                url:"{:U('add')}",
+                type:'post',
+                data:$(this).serialize(),
+                success:function(d){
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        $('#add').modal('hide');
+                        alert(result.msg);
+                        window.location.reload();//刷新当前页面.
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+        
+        //弹出修改密码的表单
+        $('.edit').click(function(){
+            $('#editForm')[0].reset();
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url:"{:U('edit')}",
+                type:'get',
+                data:{
+                    id:id,
+                },
+                success:function(d){
+                    var result = eval("(" + d + ")");
+                    var data = result.data;
+                    if (result.flag == 1) {
+                        $('#editForm input[name="store_login_name"]').val(data.store_login_name);
+                        $('#editForm input[name="id"]').val(data.id);
+                        $('#edit').modal();
+                    } else {
+                        alert('操作失败');
+                    }
+                }
+            });
+        });
+        
+        //提交修改密码的表单
+        $('#editForm').bind('valid.form', function () {
+            var pwd = $('#editForm input[name="store_login_pwd"]').val();
+            var rePwd = $('#editForm input[name="repassword"]').val();
+            if(pwd != rePwd){
+                alert('两次密码输入不一致!');return false;
+            }
+            $.ajax({
+                url:"{:U('edit')}",
+                type:'post',
+                data:$(this).serialize(),
+                success:function(d){
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        $('#edit').modal('hide');
+                        alert('修改成功');
+                    } else {
+                        alert('修改失败');
+                    }
+                }
+            });
+        });
+
+        //删除
+        $('.del').click(function(){
+            var id = $(this).attr('data-id');
+            var act = 'del';
+            _delMember(id,act);
+        });
+        
+        //启用
+        $('.enable').click(function(){
+            var id = $(this).attr('data-id');
+            var act = 'enable';
+            _delMember(id,act);
+        });
+
+        function _delMember(n,e){
+            $.ajax({
+                url: "{:U('delete')}",
+                type: 'post',
+                data: {
+                    id:n,
+                    act:e
+                },
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        }
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

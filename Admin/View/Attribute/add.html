@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('index')}">属性管理</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">添加属性</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                
+                                <div class="widget-body">
+                                    <form action="__SELF__ " method="post" >
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <tr>
+                                                <td><span style="color:red">*</span>属性分类：</td>
+                                                <td>
+                                                    <select name='category_id' data-rule='required'>
+                                                        <option value=''>请选择</option>
+                                                        <volist name='category' id='vo'>
+                                                            <option value='{$vo.cid}'>{$vo.name}</option>
+                                                        </volist>
+                                                    </select>    
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="color:red">*</span>属性名称：</td>
+                                                <td><input type="text" class="input" size="30" name="attr_name" data-rule='required'/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="color:red">*</span>属性默认值：</td>
+                                                <td><input type="text" class="input" size="30" name="def_value" data-rule='required'/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>说明：</td>
+                                                <td><textarea name='description'></textarea></td>
+                                            </tr>
+                                            <tr>
+                                                <td>排序：</td>
+                                                <td><input type="text" class="input" size="30" value='1' name="sort" data-rule='required'/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>是否显示</td>
+                                                <td><input name="is_show" value="{$Think.config.NORMAL_STATUS}" type="radio" data-rule="checked" checked> 是 
+                                                    <input name="is_show" value="{$Think.config.DELETE_STATUS}" type="radio" data-rule="checked"> 否
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan='2' class="form-actions">
+                                                    <input type="submit" class="btn btn-success" value="提交">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}zh-CN.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

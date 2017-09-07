@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="icon" href="/Public/soumu.ico"  type="image/x-icon">
+    <meta charset="UTF-8">
+    <title>售后服务_{$Think.config.SITE_NAME}</title>
+    <meta name='keywords' content="售后服务,墓地售后,陵园售后，91平台以及售后服务" />
+    <meta name='description' content="91搜墓网平台常见问题之陵园墓地售后服务" />
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 顶部 -->
+<include file="Common:head_in" />
+
+<!-- 底部页面banner -->
+<div class="aboutus_banner">
+    <img src="{$Think.const.IMG_URL}help/aboutus_banner.jpg" alt="91搜墓网-常见问题"/>
+</div><!-- 底部页面banner结束 -->
+<!-- 底部页面内容导航 -->
+<include file="Common:help_menu" />
+
+<!-- 中间内容部分 -->
+<div class="main">
+    <div class="contain clearfix">
+        <!-- 底部页面左侧导航 -->
+        <div class="help_leftnav">
+            <img src="{$Think.const.IMG_URL}help/footer_leftnav_logo.png"  alt="91搜墓网-常见问题"/>
+            <h1>常见问题</h1>
+            <p>FAQ</p>
+            <ul>
+                <li><a href="{:U('help/issue/xmjq')}">选墓技巧</a></li>
+                <li><a href="{:U('help/issue/gmxz')}">购墓须知</a></li>
+                <li class="help_leftnav_led"><a href="{:U('help/issue/shfw')}">售后服务</a></li>
+                <li><a href="{:U('help/issue/lqfx')}">领取返现</a></li>
+            </ul>
+        </div><!-- help_leftnav底部页面左侧导航结束 -->
+        <!-- 底部页面右侧 -->
+        <div class="help_right">
+            <h1>售后服务  <span></span></h1>
+            <!-- 售后服务内容 -->
+            <div class="help_aftermarket">
+                <p>91搜墓网是陵园预订信息平台，客户所产生交易都是跟陵园进行结算；91搜墓网会帮助会员跟陵园进行沟通。</p>
+                <p>1、免费预约看墓，可以随时取消、随时预订,不产生任何费用;</p>
+                <p>2、预付定金客户，可免费退换墓地.到陵园**处办理;</p>
+                <p>3、购墓后有要求退墓的按墓穴根据陵园实际情况进行支付退墓手续费,并扣除返点金额;</p>
+                <p>4、购墓后要求调换墓穴的，其损失的材料由购墓者自负;</p>
+                <p>（已下葬的不予退墓、不予调换）详情具体参考当地陵园规定</p>
+            </div><!-- help_aftermarket售后服务内容结束 -->
+        </div><!-- help_right底部页面右侧 -->
+    </div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<!-- 底部footer部分 -->
+<include file="Common:footer" />
+
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+</body>
+</html>

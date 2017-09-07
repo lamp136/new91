@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head" />
+        
+        <link rel="stylesheet" type="text/css" href="{$Think.const.ASSETS_URL}chosen-bootstrap/chosen/chosen.css" />
+        
+        <style type="text/css">
+            .msg{
+                position: absolute;
+                width: 400px;
+                background: #fff;
+                border: 1px solid #666;
+                z-index: 100;
+            }
+            .custom{
+                position: relative;
+            }
+        </style>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+    <!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                        <span class="settings">
+                            <span class="text">Theme:</span>
+                            <span class="colors">
+                                <span class="color-default" data-style="default"></span>
+                                <span class="color-gray" data-style="gray"></span>
+                                <span class="color-purple" data-style="purple"></span>
+                                <span class="color-navy-blue" data-style="navy-blue"></span>
+                            </span>
+                        </span>
+                    </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->   
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="{:U('OrderGrave/notvip')}">非会员预约订单列表</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>非会员预约订单列表</h4>
+                                </div>
+                                <div class="widget-body">
+                                    <form id="quickForm" method="get" class="form-horizontal" autocomplete="off" action='{:U("notvip")}'>
+                                    <table>
+                                        <tr>
+                                            <td>搜索：</td>
+                                            <td>
+                                                <select name='store_id' class='chosen' tabindex="100" data-placeholder="选择商家">
+                                                    <option value=""></option><option value="">所有商家</option>
+                                                    <volist name='store_name' id='vo'>
+                                                        <option value='{$key}' <eq name="key" value="$Think.get.store_id">selected</eq>>{$vo}</option>
+                                                    </volist>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="mobile" class="input-medium" placeholder="预约人手机号" value="{$Think.get.mobile}"/>
+                                              
+                                                <button class="btn btn-primary">确定</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    </form>
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="hidden-phone" style=" width:5%;"><center>手机号</center></th>
+                                                <th class="hidden-phone" style=" width:7%;">姓名</th>
+                                                <th class="hidden-phone" style=" width:9%;">预约时间</th>
+                                                <th class="hidden-phone" style=" width:10%;">商家名称</th>
+                                                <th class="hidden-phone" style=" width:5%;">联系人</th>    
+                                                <th class="hidden-phone" style=" width:9%;">下单时间</th>
+                                                <th class="hidden-phone" style=" width:7%;">跟踪人</th>
+                                                <th class="hidden-phone" style=" width:8%;">跟踪信息</th>
+                                                <th class="hidden-phone" style=" width:32%;"><center>操作</center></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <volist name="list" id="vo">
+                                            <tr class="odd gradeX">
+                                                <td>{$vo.mobile}</td>
+                                                <td class='custom'>{$vo.buyer}
+                                                        {$vo.Custom_msg.msg}
+                                                </td>
+                                                <td> <neq name="vo['created_time']" value="0">{$vo.created_time|date='Y-m-d',###}</neq></td>
+                                                <td>{$vo.store_name}</td>
+                                                <td>
+                                                    <div class='contact'>{$vo.store_contact.contact_name}</div>
+                                                </td>
+
+                                                <td>
+                                                <neq name="vo['created_time']" value="0">{$vo.created_time|date='Y-m-d',###}</neq>
+                                                
+                                                </td>
+                                                <td>
+                                                    <volist name="order_flow" id="flowmans">
+                                                        <if condition="$key eq $vo.order_flow_id ">{$flowmans}</if>
+                                                    </volist>
+                                                </td>
+                                                <td>
+                                                 <php>
+                                                    if (showHandle('OrderGrave/ordersfollow')) {
+                                                    </php>
+                                                    <a class="btn btn-small ordersfollow" href="javascript:void(0)"
+                                                  data-orderId="{$vo.id}">查看信息</a>
+                                                  <php>
+                                                    }
+                                                    </php>
+                                                  </td>
+                                                <td>
+                                                   
+                                                     <php>
+                                                    if (showHandle('OrderGrave/cooperatesuccess')) {
+                                                    </php>
+                                                    <a class="btn btn-success btn-small cooperatesuccess" href="javascript:void(0)" data-orderId="{$vo.id}"><i class="icon-ok icon-white"> </i>购墓成功</a>  
+                                                    <php>
+                                                    }
+                                                    </php>
+                                                     <php>
+                                                    if (showHandle('OrderGrave/cooperatefail')) {
+                                                    </php>
+                                                    <a class="btn btn-danger btn-small cooperatefail"  href="javascript:void(0)"  data-orderId="{$vo.id}"><i class="icon-remove icon-white"> </i>购墓失败</a>
+                                                    <php>
+                                                    }
+                                                    </php>
+
+
+                                                      <php>
+                                                    if (showHandle('OrderGrave/addorderfollow')) {
+                                                    </php>
+                                                    <a class="btn btn-small addorderfollow"  href="javascript:void(0)"  data-orderId="{$vo.id}" data-memberId="{$vo.member_id}" data-ordersn="{$vo.order_sn}"><i class="icon-plus icon-white"> </i>添加跟踪信息</a>
+                                                     <php>
+                                                    }
+                                                    </php>
+                                                      <php>
+                                                    if (showHandle('OrderGrave/editflowman')) {
+                                                    </php>
+                                                    <a class="btn btn-small btn-primary orderAppoint"  href="javascript:;" data-orderId="{$vo.id}" flow-manId="{$vo.order_flow_id}"><i class="icon-user icon-white"></i> 委派</a>
+                                                     <php>
+                                                    }
+                                                    </php>
+                                                      <php>
+                                                    if (showHandle('OrderGrave/appointagin')) {
+                                                    </php>
+                                                    <a class="btn btn-small btn-primary"  href="{:U('appointagin',array('orderid'=>$vo['id']))}"><i class="icon-refresh icon-white"> </i> 再次预约</a>
+                                                    <php>
+                                                    }
+                                                    </php>
+
+
+                                                </td>
+                                            </tr>
+                                        </volist>
+
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span12 center">
+                                            <div class="pagination" id="sample_1_info" style="text-align: center">
+                                                {$page}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+    <!--购墓成功开始-->
+    <div id="cooperatesuccess" class="modal hide fade in" style="display: none; ">
+        <form id="cooperatesuccessForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>确认购墓成功?</h3>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="radio" name="" value="{$Think.config.APPLY_RETURN_STATUS.DEFAULT_STATUS}" data-rule="checked" >确认
+                                <input type="radio" name="" value="">取消
+                                <span style="color:red">注意：这里的返现是指返现给客户</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <input type='hidden' name='orderId'></input>
+                <button type="submit" id='cooperate_success_tijiao' class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--购墓成功结束-->
+    
+    <!--模态化弹框合作失败-->
+    <div id="cooperatefail" class="modal hide fade in" style="display: none; ">
+        <form id="cooperatefailForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>备注</h3>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>备注</td>
+                            <td>
+                                <textarea rows="3" id='reason' name="reason" class="input-xlarge" ></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <input type='hidden' id='order_id' name='orderId'></input>
+                <button type="submit" id='cooperate_form_tijiao' class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--模态框结束合作失败-->
+
+    <!--添加跟踪信息结开始-->
+    <div id="addorderfollowform" class="modal hide fade in">
+        <form id="defaultForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>添加跟踪信息</h3>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>沟通对象:</td>
+                            <td><input name="type" value="1" checked="checked" type="radio" class="client"> 客户 
+                                <input name="type" value="2" type="radio"> 商家
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>沟通问题:</td>
+                            <td>
+                                <textarea rows="3" id='question'  name="question" class="input-xlarge" data-rule="required"></textarea>
+                            </td>
+                        </tr>
+                     
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <input type='hidden' id='orderid' name='orderid'>
+                <input type='hidden' id='member_id' name='member_id'>
+                <input type='hidden' id='ordersn' name='ordersn'>
+                <button type="submit" id='tijiao' class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--添加跟踪信息结束-->
+
+  <!--查看跟踪信息结开始-->
+    <div id="orderfollowform" class="modal hide fade in" style="width:45%;">
+        <form id="lookdefaultForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>查看跟踪信息</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">
+                     <thead>
+                            <tr class="data-message">
+                                 <th style=" width:20%;" >时间</th>
+                                <th style=" width:10%;" class="hidden-phone">对象</th>
+                                <th style=" width:70%;" class="hidden-phone">问题</th>
+                            </tr>
+                     </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--查看跟踪信息结束-->
+
+    <!--订单委派信息结开始-->
+    <div id="orderAppoint" class="modal hide fade in">
+        <form  method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>订单委派信息</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <head>
+                            <td>订单跟踪人</td>
+                            <td>指定委派人</td>
+                        </head>
+                        <tr>
+                            <td>
+                                <select name="" id="select" disabled>
+                                    <option value="">--未有跟踪人--</option>
+                                    <volist name="order_flow" id="vo">
+                                        <option value="{$key}">{$vo}</option>
+                                    </volist>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="order_flow_man">
+                                    <option value="">--请选择--</option>
+                                    <volist name="workmen" id="vo">
+                                        <option value="{$key}">{$vo}</option>
+                                    </volist>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <input type='hidden' id='weipaiorderid' name='orderid'></input>
+                <input type="button" id="weipaisubmit" class="btn btn-success" value="提交"></input>
+                <a href="javascript:;" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--订单委派信息结束-->
+    
+  
+    
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ASSETS_URL}chosen-bootstrap/chosen/chosen.jquery.min.js"></script>
+    
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}zh-CN.js"></script>
+    <script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+    <!-- ie8 fixes -->
+
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+      
+        
+         //定单委派
+        $('.orderAppoint').click(function(){
+            var orderId = $(this).attr('data-orderId');
+            var flowmanId = $(this).attr('flow-manId');
+            $('#weipaiorderid').val(orderId);
+            $('#select').children("option").attr("selected", false);
+            $('#select').children("option[value='"+flowmanId+"']").attr("selected","selected");
+            $('#orderAppoint').modal();
+        });
+        //提交订单委派
+        $('#weipaisubmit').click(function(){
+            $('#orderAppoint').modal('hide');
+            var flow_man = $('#order_flow_man option:selected') .val();
+            var orderId = $('#weipaiorderid').val();
+            $.ajax({
+                url:"{:U('editflowman')}",
+                type:'POST',
+                data: {'flowman':flow_man,'orderId':orderId},
+                success:function(d){
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+       //点击添加跟踪信息按钮，弹出跟踪信息表单
+        $('.addorderfollow').click(function () {
+            $('#question').val('');
+            $('.client').attr('checked','checked');
+            var orderId = $(this).attr("data-orderId");
+            var member_id = $(this).attr("data-memberId");
+            $('#orderid').val(orderId);
+            $('#member_id').val(member_id);
+            $('#addorderfollowform').modal();
+        });
+
+        //提交跟踪信息form 表单
+        $('#defaultForm').bind('valid.form', function () {
+            $('#addorderfollowform').modal('hide');
+            $.ajax({
+                url: "{:U('OrderGrave/addorderfollow')}",
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert('添加成功');
+                    } else {
+                        alert('添加失败');
+                    }
+                }
+            });
+        });
+
+
+        //点击查看跟踪信息按钮，弹出查看跟踪信息表单
+        $('.ordersfollow').click(function () {
+            $('.afterData').remove();//清空以前数据
+            var orderId = $(this).attr("data-orderId");
+            $.ajax({
+                url: "{:U('OrderGrave/ordersfollow')}",
+                type: 'POST',
+                data: 'orderId='+orderId,
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    var data = result.data;
+                    //将得到的跟踪信息插入表格
+                    if(result.flag==0){
+                       str = "<tr></tr>";
+                    }else if(result.flag==1){
+                        var str = '';
+                        var length = data.length;
+                        for(var i=0; i<length; i++){
+                            if(data[i].type == '1'){
+                                str += "<tr class='afterData'><td>"+data[i].created_time+"</td><td>客户</td><td>"+data[i].question+"</td></tr>";
+                            }else{
+                                str += "<tr class='afterData'><td>"+data[i].created_time+"</td><td>商家</td><td>"+data[i].question+"</td></tr>";
+                            }
+                        }
+                    }
+                    $('.data-message').after(str);
+                    $('#orderfollowform').modal();
+                }
+            });
+        });
+
+     
+       
+        
+        
+        
+        //弹出合作成功form表单
+        $('.cooperatesuccess').click(function(){
+            $('#cooperatesuccessForm input[name="apply_return_status"]').removeAttr('checked');
+            var orderId = $(this).attr('data-orderId');
+            //获取原来的返现状态及商家的会员状态
+            $.ajax({
+                url: "{:U('getStoreInfo')}",
+                type: 'POST',
+                data: 'orderId='+orderId,
+                success: function (d) {
+                    
+                    var result = eval("(" + d + ")");
+                    if(result.flag==0){
+                        alert('操作失败');
+                    }else{
+                        var apply_return_status = result.apply_return_status;
+                        var member_status = result.member_status;
+                        var store_member = "{$Think.config.STOER_MERMBER}";
+                        var store_person_member = "{$Think.config.STOER_MERMBER_PERSON}";
+                        if(member_status==store_member || member_status==store_person_member){
+                            var r = confirm("请确认平台会员与客户达成合作，购墓成功?");
+                             if(r==true){
+                                $.ajax({
+                                    url: "{:U('cooperatesuccess')}",
+                                    type: 'POST',
+                                    data: 'orderId='+orderId,
+                                    success: function (d) {
+                                        var result = eval("(" + d + ")");
+                                        alert(result.msg);
+                                        window.location.reload();//刷新当前页面.
+
+                                    }
+                                });
+                            }
+                        }else{
+                            //不是会员单位，直接ajax提交订单
+                            var r=confirm("请确认陵园与客户达成合作，购墓成功?");
+                            if(r==true){
+                                $.ajax({
+                                    url: "{:U('cooperatesuccess')}",
+                                    type: 'POST',
+                                    data: 'orderId='+orderId,
+                                    success: function (d) {
+                                        var result = eval("(" + d + ")");
+                                        alert(result.msg);
+                                        window.location.reload();//刷新当前页面.
+
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+            });
+        });
+        
+        //提交合作成功form表单
+        $('#cooperatesuccessForm').bind('valid.form', function () {
+            var r=confirm("请确认陵园与客户达成合作，购墓成功?");
+            if(r==true){
+                $('#cooperatesuccess').modal('hide');
+                $.ajax({
+                    url: "{:U('cooperatesuccess')}",
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function (d) {
+                        var result = eval("(" + d + ")");
+                        alert(result.msg);
+                        window.location.reload();//刷新当前页面.
+
+                    }
+                });
+            }
+        });
+        
+        //合作失败
+        $('.cooperatefail').click(function(){
+            var orderId = $(this).attr('data-orderId');
+            $("#order_id").val(orderId);
+            $('#cooperatefail').modal();
+        });
+        
+        //提交合作失败表单
+        $('#cooperatefailForm').bind('valid.form', function () {
+            $('#cooperatefail').modal('hide');
+            $.ajax({
+                url: "{:U('cooperatefail')}",
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert('操作成功');
+                        window.location.reload();//刷新当前页面.
+                    } else {
+                        alert('操作失败');
+                    }
+                }
+            });
+        });
+        
+      
+        
+        $('.custom').hover(function(){
+           $(this).children('div').show(); 
+        },
+        function(){
+            $(this).children('div').hide(); 
+        });
+        
+        $('.contact').hover(function(){
+           $(this).children('div').show(); 
+        },
+        function(){
+            $(this).children('div').hide(); 
+        });
+        
+        
+        
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

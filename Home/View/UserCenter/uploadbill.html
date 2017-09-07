@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/Public/soumu.ico"  type="image/x-icon">
+    <title>个人中心-上传票据_{$Think.config.SITE_NAME}</title>
+    <meta name="keywords" content="个人中心,上传票据" />
+    <meta name="description" content="个人中心,上传票据" />
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<!-- 提示框 -->
+<div class="tooltip_box"></div>
+<div class="tooltip_pers">
+    <div class="clearfix">
+        <img src="{$Think.const.IMG_URL}pers_save.png" />
+        <p id="content"></p>
+    </div>
+    
+    <div class="tooltip_pers_btn">
+        <a class="ack_btn" href="javascript:void(0);">关闭</a>
+    </div>
+    <span class="tooltip_cloce"></span>
+</div>
+<!-- 引入头部 -->
+<include file="Common:head_in" />
+<!-- 中间内容部分 -->
+<div class="main">
+    <div class="contain clearfix">
+        <!-- 面包屑导航 -->
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="<?php echo getHomeUrl(); ?>">首页</a></li>
+                <li>></li>
+                <li><a href="{:U('/personal')}">用户中心</a></li>
+                <li>></li>
+                <li>上传票据</li>
+            </ul>
+        </div><!-- breadcrumb面包屑导航结束 -->
+        <!-- 用户中心左侧导航 -->
+        <div class="user_nav">
+            <h1><i></i>用户中心</h1>
+            <ul>
+                <li><a class="user_led" href="{:U('UserCenter/myorder')}">我的订单</a></li>
+                <!-- <li><a href="{:U('UserCenter/cashback')}">领取返现</a></li> -->
+                <li><a href="{:U('UserCenter/personal')}">个人资料</a></li>
+                <li><a href="{:U('UserCenter/collect')}">我的关注</a></li>
+                <li><a href="{:U('UserCenter/changepassword')}">修改密码</a></li>
+            </ul>
+        </div><!-- user_nav用户中心左侧导航结束 -->
+        <!-- 用户中心右侧 -->
+        <div class="user_right">
+            <h1>上传票据</h1>
+            <!-- 修改密码 -->
+            <div class="change">
+                <form name='myform' id='myform' method='post'  enctype="multipart/form-data">
+                    <ul>
+                        <li>
+                            <p>票据</p>
+                            <input  type="file" name='bill[]'/>
+                            <span id='billError' class="pers_validate" style='display: none'><i></i>请上传票据</span>
+                        </li>
+                        <li>
+                            <p>票据</p>
+                            <input  type="file" name='bill[]'/>
+                        </li>
+                        <li>
+                            <p>票据</p>
+                            <input  type="file" name='bill[]'/>
+                        </li>
+                        <li>
+                            <input type="hidden" name='order_id' value='{$Think.get.order_id}' />
+                            <input type="button" class="cha_save" name="b1" value="提交" style='border:none;' />
+                        </li>
+                    </ul>
+                </form>
+            </div><!-- change修改密码结束 -->
+        </div><!-- user_right用户中心右侧结束 -->
+    </div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<include file="Common:footer" />
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/common.js"></script>
+<!-- <script type="text/javascript" src="{$Think.const.JS_URL}home/uploadbill.js"></script> -->
+<<script>
+     $(".cha_save").click(function() {
+        var r = !1,
+        i = $('#myform input[name="bill[]"]').val();
+        if ("" == i && ($("#billError").show(), r = !0), r) return ! 1
+    });
+
+
+    $(".cha_save").click(function(){
+        var addFd = new FormData(document.getElementById("myform"));
+        // var addFd =  new FormData($( "#myform" )); 
+        $.ajax({
+                url:"{:U('uploadbillinfo')}",
+                type:'POST',
+                data:addFd,
+                processData: false,
+                contentType: false,
+                 success:function(j){
+                    var result = eval("("+j+")");
+                    if(result.flag == 1){
+                        $("#content").html(result.msg)
+                        $(".tooltip_pers").css({display:"block"})
+                        $(".tooltip_box").css({display:"block"})
+                        window.location.href="/UserCenter/myorder.html";
+                    }else{
+                        $("#content").html(result.msg)
+                        $(".tooltip_pers").css({display:"block"})
+                        $(".tooltip_box").css({display:"block"})
+                    }
+                }
+            });
+       });
+
+
+        $(".ack_btn").click(function(event){
+            $(".tooltip_pers").css({"display":"none"});
+            $(".tooltip_box").css({"display":"none"});
+        });
+</script>
+
+</body>
+</html>

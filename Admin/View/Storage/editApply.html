@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head"/>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+<!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                        </li>
+                        <li><a href="{:U('Storage/apply')}">申请列表</a><span class="divider">&nbsp;</span></li>
+                        <li><a href="javascript:viod(0);">编辑申请信息</a><span class="divider-last">&nbsp;</span></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4><i class="icon-reorder"></i>编辑申请信息</h4>
+                            </div>
+                            <div class="widget-body form">
+                                <!-- BEGIN FORM-->
+                                <form  method="post"  autocomplete="off" action="{:U('Storage/editApply')}">
+                                    <div>
+                                        <table class="table table-bordered table-hover">
+                                            <tbody>
+                                            <tr>
+                                                <td style="width:20%">
+                                                    <label class="control-label"><span style="color:red">*</span>商品名称:</label>
+                                                </td>
+                                                <td>
+                                                    <select class="input-medium m-wrap" tabindex="1" name="info[service_goods_id]" data-rule='required'>
+                                                        <option value="">---请选择---</option>
+                                                        <volist name="serviceGoods" id="vo">
+                                                            <option value="{$vo.id}" <if condition='$vo[id] eq $data[service_goods_id]'>selected</if>>{$vo.name}</option>
+                                                        </volist>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label"><span style="color:red">*</span>供应商:</label>
+                                                </td>
+                                                <td>
+                                                    <select class="input-medium m-wrap" tabindex="1" name="info[supplier_id]" data-rule='required'>
+                                                        <option value="0">--请选择--</option>
+                                                        <volist name="Think.config.SUPPLIER" id="supplier">
+                                                            <option value="{$key}" <if condition='$key eq $data[supplier_id]'>selected</if>>{$supplier}</option>
+                                                        </volist>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label"><span style="color:red">*</span>商品单价:</label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" placeholder="商品单价" id="price" class="input-medium addTotalPrice" name="info[price]" value='{$data[price]}' data-rule='required'>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label"><span style="color:red">*</span>商品数量:</label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" placeholder="商品数量" id="number" class="input-medium addTotalPrice" name="info[number]" value='{$data[number]}' data-rule='required'>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label"><span style="color:red">*</span>总价:</label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="total_price" class="input-medium" name="info[total_price]" value='{$data[total_price]}' readonly >
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label"><span style="color:red">*</span>仓库:</label>
+                                                </td>
+                                                <td>
+                                                    <select class="input-medium m-wrap" tabindex="1" name="info[storage_id]" data-rule='required'>
+                                                        <option value="0">--请选择--</option>
+                                                        <volist name="storage" id="sto">
+                                                            <option value="{$sto.id}" <if condition='$sto[id] eq $data[storage_id]'>selected</if> >{$sto.storage_name}</option>
+                                                        </volist>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="form-actions">
+                                        <input type="hidden" value="{$data['id']}" name="info[id]" >
+                                        <input type="hidden" name='nowPage' value='{$nowPage}'>
+                                        <input type="submit" class="btn btn-success" value="提交">
+                                    </div>
+                                </form>
+                                <!-- END FORM-->
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- END CONTAINER -->
+
+<!-- BEGIN FOOTER -->
+<include file="Public::footer"/>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+<script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+<script src="{$Think.const.JS_URL}scripts.js"></script>
+<script src="{$Think.const.JS_URL}zh-CN.js"></script>
+<script>
+    $('.addTotalPrice').blur(function(){
+        var price = $('#price').val();
+        var number = $('#number').val();
+        if(price.length && number.length){
+            var total_price = price*number;
+            $('#total_price').val(total_price);
+        }
+    });
+</script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

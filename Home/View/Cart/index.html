@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<!-- 顶部 -->
+<include file="Common:head_in" />
+
+<!-- 中间内容部分 -->
+<div class="main">
+    <div class="contain shopping">
+        <h2>全部商品 {$total_number}</h2>
+        <!-- 全选 -->
+        <div class="shopping_title">
+            <ul class="clearfix">
+                <li class="qx">
+                    <input class="inpche" type="checkbox"/>
+                    <label>全选</label>
+                </li>
+                <li class="spxx">商品信息</li>
+                <li class="dj">单价（元）</li>
+                <li class="num">数量</li>
+                <li class="price">价格（元）</li>
+                <li class="cz">操作</li>
+            </ul>
+        </div><!-- shopping_title 全选 End -->
+        <!-- 商品内容 -->
+        <form action="{:U('orderConfirm')}" method="post">
+        <div class="shopping_main" id="shopcart">
+            <!-- 商家名称 -->
+            <volist name="shopCar" id='vo'>
+                <div class="shopping_main_title">
+                    <input class="main_inpche" type="checkbox"/>
+                    <label>{$vo.store_name}</label>
+                    <span>领取方式：到陵园指定处领取</span>
+                </div>
+                <!-- 商品购买内容 -->
+                <volist name='vo.sn' id='res'>
+                    <div class="shopping_main_nr shopping_main_nrled">
+                        <!-- 商品1 -->
+                        <ul class="clearfix">
+                            <if condition="$Think.config.DELETE_STATUS eq $res[goods_status]">
+                                <li class="licheck">
+                                    <img src="{$Think.const.IMG_URL}shopping_inpche_xj.png">
+                                    <p>已下架</p>
+                                </li>
+                            <else/>
+                                <!-- 选择 -->
+                                <li class="licheck"><input class="inpche" name="goods[]" value="{$res.store_goods_sn}" type="checkbox"/></li>
+                            </if>
+                            <!-- 图片 -->
+                            <li class="liimg">
+                                <a href="#"><img src="{$res.thumb_url}"/></a>
+                            </li>
+                            <!-- 描述 -->
+                            <li class="litext">
+                                <h3><a href="#">{$res.goods_name}</a></h3>
+                                <notempty name="res[Single]">
+                                    <span style="font-size:5px">该套餐包含<span>
+                                    <volist name="res[Single]" id='si'>
+                                        <span style="font-size:5px">{$si.service_goods_name}{$si.number}{$unit[$si['skuid']]},</span>
+                                    </volist>
+                                </notempty>
+                                <p>颜色：黄色<span>枝数：11枝</span></p>
+                            </li>
+                            <!-- 单价 -->
+                            <li class="lipric"><span>¥ </span><span class="price" style="font-size:20px">{$res.price}</span></li>
+                            <!-- 数量加减 -->
+                            <li class="lishopnumb" goodsSn="{$res.store_goods_sn}">
+                                <div class="shop_numb" id="shop_numb">
+                                    <input type="button" value="-" />
+                                    <input type="text" value="{$res.num}"/>
+                                    <input type="button" value="+" />
+                                </div>
+                            </li>
+                            <!-- 价格 -->
+                            <li class="liprice"  name='a'>¥ <span class="totalPrice">{$res.total_price}</span></li>
+                            <!-- 删除 收藏 -->
+                            <li class="libtn">
+                                <a href="#">删除</a>
+                                <a href="#">收藏</a>
+                            </li>
+                        </ul>
+                    </div><!-- shopping_main_nr 商品购买内容 End -->
+                </volist>
+            </volist>
+            
+            <!-- 去结算 -->
+            <div class="shopping_settlement clearfix">
+                <ul>
+                    <li class="licheck">
+                        <input class="inpche" type="checkbox"/>
+                        <label>全选</label>
+                    </li>
+                    <li><a href="#">删除选中商品</a></li>
+                    <li><a href="#">清除下架商品</a></li>
+                    <li><a href="#">移动到我的收藏</a></li>
+                    <li class="liyxsp">已选商品<span> 4 </span>件</li>
+                    <li class="lijg">价格合计：<span>¥</span><span class ='allGoodsPrice'>{$allGoodsPrice}</span></li>
+                    <button><li class="settlement_btn"><a>去结算</a></li></button>
+                </ul>
+            </div><!-- shopping_settlement 去结算 End -->
+        </div><!-- shopping_main 商品内容 End -->
+        </form>
+        <!-- 猜您想看的 -->
+        <div class="shopping_look">
+            <h5>猜您想看的</h5>
+            <ul class="clearfix">
+                <volist name="recommend" id='vo'>
+                    <if condition="$key eq 3">
+                        <li class="last">
+                            <a href="{:U('service/detail/'.$vo['store_goods_sn'])}"><img src="{$vo.thumb_url}"/></a>
+                            <h3><a href="{:U('service/detail/'.$vo['store_goods_sn'])}">{$vo.service_goods_name}</a></h3>
+                            <p>{$vo.moral}</p>
+                            <p class="ls">隶属：{$vo.store_name}</p>
+                            <p class="price"><span>{$vo.sales_price}</span>元</p>
+                        </li>
+                    <else/>
+                        <li>
+                            <a href="{:U('service/detail/'.$vo['store_goods_sn'])}"><img src="{$vo.thumb_url}"/></a>
+                            <h3><a href="{:U('service/detail/'.$vo['store_goods_sn'])}">{$vo.service_goods_name}</a></h3>
+                            <p>{$vo.moral}</p>
+                            <p class="ls">隶属：{$vo.store_name}</p>
+                            <p class="price"><span>{$vo.sales_price}</span>元</p>
+                        </li>
+                    </if>
+                </volist>
+            </ul>
+        </div><!-- shopping_look 猜您想看的 End -->
+    </div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<!-- 底部footer部分 -->
+<include file="Common:footer" />
+
+<!-- 搜索提示 -->
+<script type="text/javascript" src="{$Think.const.JS_URL}hit.js"></script>
+<!-- 返回顶部JS -->
+<script src="{$Think.const.JS_URL}backtop.js"></script>
+
+
+<script type="text/javascript">
+    
+    $(document).ready(function(){
+
+        //选择城市
+        $(document).ready(function(){
+            //头部地址
+            $(".c_down").click(function(){
+                $(".search_city").css("display","block");
+            })
+            //选择城市关闭
+            $(".search_close,.city_box ul li").click(function(){
+                $(".search_city").hide();
+            })
+        });
+
+        //tab切换
+        jQuery.jqtab = function(tabtit,tabcon) {
+                $(tabcon).hide();
+                $(tabtit+" li:first").addClass("thistab").show();
+                $(tabcon+":first").show();
+            
+                $(tabtit+" li").click(function() {
+                    $(tabtit+" li").removeClass("thistab");
+                    $(this).addClass("thistab");
+                    $(tabcon).hide();
+                    var activeTab = $(this).find("a").attr("tab");
+                    $("#"+activeTab).fadeIn();
+                    return false;
+                });
+                
+            };
+            /*调用方法如下：*/
+            $.jqtab("#city_nav",".city_box");
+    });
+
+function getByClass(clsName,parent){
+    var oParent = parent?document.getElementById(parent):document,
+        eles = [],
+        aElements = oParent.getElementsByTagName("*");
+    for(var i=0; i<aElements.length; i++){
+        if(aElements[i].className == clsName){
+            eles.push(aElements[i]);
+        }
+    }
+    return eles;
+}
+
+window.onload = function(){
+    var aNum = getByClass("shop_numb","shopcart");
+    
+    // 数量加减
+    for(var i=0; i<aNum.length; i++){
+        fn1(aNum[i]);
+    }
+}
+// 数量加减
+function fn1(oNum){
+    // 数量加减
+    var oSubtract = oNum.getElementsByTagName("input")[0], // -号
+        oNumber = oNum.getElementsByTagName("input")[1], // 数量
+        oAdd = oNum.getElementsByTagName("input")[2],
+        n1 = Number(oNumber.value); // +号
+    
+    // 点击 -号
+    oSubtract.onclick = function(){
+        n1--;
+        if(oNumber.value <= 1){
+            n1 = 1;
+        }else{
+            oNumber.value = n1;
+             //改变数量修改数据库
+            var objTotalPrice = $(this).parents('.lishopnumb').siblings('.liprice').find('.totalPrice');
+            var goodsSn =  $(this).parents('.lishopnumb').attr('goodsSn');
+            updateShoppingCar(n1,goodsSn,objTotalPrice);
+        }    
+    }
+    // 点击 +号
+    oAdd.onclick = function(){
+        n1 = Number(oNumber.value);
+        n1++;
+       
+        var maxNumber = "{$Think.config.MAX_NUMBER}"
+        if(n1>maxNumber){
+            alert('商品数量不能大于'+maxNumber);
+            oNumber.value = maxNumber;
+        }else{
+            oNumber.value = n1;
+            //改变数量修改数据库
+            var objTotalPrice = $(this).parents('.lishopnumb').siblings('.liprice').find('.totalPrice');
+            var goodsSn =  $(this).parents('.lishopnumb').attr('goodsSn');
+            updateShoppingCar(n1,goodsSn,objTotalPrice);
+        };
+    }
+
+    oNumber.onblur = function(){
+        var number = oNumber.value;
+        if(number > "{$Think.config.MAX_NUMBER}"){
+            alert('商品数量不能大于'+"{$Think.config.MAX_NUMBER}");
+            oNumber.value = n1;
+
+        }else if(number <= 0){
+            alert('商品数量不能小于0');
+            oNumber.value = n1;
+        }else{
+            //改变数量修改数据库
+            var objTotalPrice = $(this).parents('.lishopnumb').siblings('.liprice').find('.totalPrice');
+            var goodsSn =  $(this).parents('.lishopnumb').attr('goodsSn');
+            updateShoppingCar(number,goodsSn,objTotalPrice);
+        }
+    }
+}
+
+//改变数量修改购物车表数据
+function updateShoppingCar(num,goodsSn,objTotalPrice){
+    $.ajax({
+        url:"{:U('saveCar')}",
+        data:{num:num,goodsSn:goodsSn},
+        type:'post',
+        dataType:'json',
+        success:function(d){
+            if(d.msg==1){
+                $(objTotalPrice).html(d.total_price);
+                $('.allGoodsPrice').html(d.allGoodsPrice);
+            }
+        }
+    })
+}
+</script>
+</body>
+</html>

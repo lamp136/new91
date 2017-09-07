@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+<!-- BEGIN HEADER -->
+
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid sidebar-closed" style="margin-top: 0px">
+    <!-- BEGIN SIDEBAR -->  
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content" style="margin-left: 0px">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4><i class="icon-reorder"></i>订单详情</h4>
+                            </div>
+                            <div class="widget-body">
+                                <table class="table table-hover" id="sample_1" style="border:0px">
+                                    <thead>
+                                    <tr>
+                                        <th class="hidden-phone">订单号</th>
+                                        <th class="hidden-phone">商家名称</th>
+                                        <th class="hidden-phone">总价</th>
+                                        <th class="hidden-phone">优惠金额</th>
+                                        <th class="hidden-phone">收货人信息</th>
+                                        <th class="hidden-phone">提货人信息</th>
+                                        <th class="hidden-phone">下单时间</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <volist name="detail" id="vo">
+                                        <tr>
+                                            <td>{$vo.order_son_sn}</td>
+                                            <td>{$vo.store_name}</td>
+                                            <td >{$vo.total_price}</td>
+                                            <td >{$vo.coupon_price}</td>
+                                            <td >{$vo.consignee}<br/>{$vo.shipping_address}<br/>{$vo.consignee_mobile}</td>
+                                            <td >{$vo.take_stock_people}<br/>{$vo.take_stock_mobile}<br/>{$vo.actual_stock_time}</td>
+                                            <td >{$vo.order_service_time|date="Y-m-d",###}</td>
+                                           
+                                        </tr>
+                                        <tbody>
+                                            <tr >
+                                                <th></th>
+                                                <th></th>
+                                                <th>图片</th>
+                                                <th>商品名称</th>
+                                                <th>单价</th>
+                                                <th>数量</th>
+                                                <th>总价</th>
+                                            </tr>
+                                            <volist name="vo['child']" id='vs'>
+                                                    <tr>
+                                                        <td style="border:0px"></td>
+                                                        <td style="border:0px"></td>
+                                                        <td style="border:0px"><img src="{$vs.thumb_url}" width='40px'/></td>
+                                                        <td style="border:0px">{$vs.goods_name}</td>
+                                                        <td style="border:0px">{$vs.price}</td>
+                                                        <td style="border:0px">{$vs.number}</td>
+                                                        <td style="border:0px">{$vs.total_price}</td>
+                                                    </tr>
+                                            </volist>
+                                        </tbody> 
+                                    </volist>
+            
+                                    </tbody>
+                                </table>
+                                <div class="row-fluid">
+                                    <div class="span12 center">
+                                        <div class="pagination" id="sample_1_info" style="text-align: center">
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- BEGIN FOOTER -->
+
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+<script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+<script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+<script src="{$Think.const.JS_URL}scripts.js"></script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

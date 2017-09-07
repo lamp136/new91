@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head_no_valid" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+<!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                        <span class="settings">
+                            <span class="text">Theme:</span>
+                            <span class="colors">
+                                <span class="color-default" data-style="default"></span>
+                                <span class="color-gray" data-style="gray"></span>
+                                <span class="color-purple" data-style="purple"></span>
+                                <span class="color-navy-blue" data-style="navy-blue"></span>
+                            </span>
+                        </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="#"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="#">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                        </li>
+                        <li><a href="#">用户列表</a><span class="divider-last">&nbsp;</span></li>
+                         
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4><i class="icon-reorder"></i>用户列表</h4>
+                                <span class="tools">
+                                    <php>
+                                        if (showHandle('Admin/addAdmin')) {
+                                    </php>
+                                        <a href="{:U('addAdmin')}" class="icon-plus add" >添加用户</a>
+                                    <php>
+                                        }
+                                    </php>
+                                </span>
+                            </div>
+                            <div class="widget-body">
+                                
+                                <form method="get" action="{:U('adminList')}">
+                                    <table>
+                                        <tr>
+                                            <td>用户状态：</td>
+                                            <td>
+                                                <select name='data'>
+                                                    <option value={$Think.config.NORMAL_STATUS}' <eq name='Think.get.data' value='$Think.config.NORMAL_STATUS' >selected</eq> >正常用户</option>
+                                                    <option value='{$Think.config.DELETE_STATUS}' <eq name='Think.get.data' value='$Think.config.DELETE_STATUS' >selected</eq>>禁用用户</option>
+                                                    <option value='all' <if condition='$Think.get.data eq all'>selected</if>>全部用户</option>
+                                                </select>
+                                            </td>
+                                            <td><input type='submit'  value='确定'></td>
+                                        </tr>
+                                    </table>
+                                </form>
+                                
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:5%;">ID</th>
+                                        <th style="width:10%;">用户名称</th>
+                                        <th style="width:10%;">登录名称</th>
+                                        <th style="width:7%;">状态</th>
+                                        <th style="width:17%;">电子邮箱</th>
+                                        <th style="width:18%;">创建时间</th>
+                                        <th style="width:28%;">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <volist name="list" id="vo">
+                                            <tr class="odd gradeX">
+                                                <td>{$vo.id}</td>
+                                                <td>{$vo.nickname}</td>
+                                                <td>{$vo.email}</td>
+                                                <td>
+                                                    <if condition="$Think.config.ADMIN_EMAIL eq $vo['email']">
+                                                        <span style="color:green;">超级用户</span>
+                                                    <else/>
+                                                        
+                                                        <if condition="$Think.config.NORMAL_STATUS eq $vo[status]">启用</span>
+                                                            <else/>禁用</span>
+                                                        </if>
+                                                       
+                                                    </if>
+                                                </td>
+                                                <td>{$vo.email_address}</td>
+                                                <td>{$vo.created_time}</td>
+                                                <td>
+                                                    <php>
+                                                    if (showHandle('Admin/editPassword')) {
+                                                    </php>
+                                                        <span class="edit" data-id="{$vo.id}">
+                                                            <button class="btn btn-primary"><i class="icon-pencil icon-white"></i> 修改密码</button>
+                                                        </span>
+                                                    <php>
+                                                        }
+                                                        if (showHandle('Admin/updateStatus')) {
+                                                    </php>
+                                                    <if condition="$Think.config.ADMIN_EMAIL neq $vo['email']">
+                                                        <span onclick="changeStatus({$vo.status},{$vo.id})" id="name">
+                                                            <if condition="$Think.config.NORMAL_STATUS eq $vo[status]">
+                                                                <span class="btn btn-primary"><i class="icon-pencil icon-white"></i>禁用</span>
+                                                            <else/>
+                                                                <span class="btn btn-danger"><i class="icon-pencil icon-white"></i>启用</span>
+                                                            </if>
+                                                        </span>
+                                                    </if>
+                                                    <php>
+                                                        }
+                                                        if (showHandle('Admin/editAdmin')) {
+                                                    </php>
+                                                        <a class="btn btn-small btn-primary editAdmin" href="javascript:;" data-id="{$vo.id}"><i class="icon-pencil icon-white"></i>编辑</a>
+                                                    <php>
+                                                        }
+                                                    </php>
+                                                </td>
+                                            </tr>
+                                        </volist>
+                                    </tbody>
+                                </table>
+                                <div class="row-fluid">
+                                    <div class="span12 center">
+                                        <div class="pagination" id="sample_1_info" style="text-align: center">
+                                            {$page}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- END CONTAINER -->
+
+<!--修改密码开始-->
+    <div id="edit" class="modal hide fade in">
+        <input type="hidden" name="id" value=""/>
+        <span method="post" id="editForm"  class="form-horizontal" >
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>修改密码</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>新密码：</td>
+                            <td>
+                                <input name="pwd" id='pwd'  type="password" required>  
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button  class="btn btn-success submit">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </span>
+    </div>
+    <!--修改密码结束-->
+
+    <!--编辑用户信息开始-->
+    <div id="editAdmin" class="modal hide fade in" style="display: none; ">
+        <form id="editAdminForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>编辑管理员信息</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>用户名称：</td>
+                            <td>
+                                <input type="text" name="nickname"  class="nickname"  required>  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>登录名称：</td>
+                            <td>
+                                <input type="text" name="email"  class="email" required>  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>电子邮箱：</td>
+                            <td>
+                                <input type="text" name="email_address"  class="email_address">  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> 状&nbsp;&nbsp;态：</td>
+                            <td class="status">
+                                <input type="radio" name="status"  value="1"/>启用 
+                                <input type="radio" name="status"  value="-1"/>禁用 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> 备&nbsp;&nbsp;注：</td>
+                            <td>
+                                <textarea name="remark" class="remark" ></textarea>  
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type='hidden' class="id"  name='id'></input>
+                <input type='hidden'  name='action' value="post"></input>
+                <button type="submit" class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--编辑用户信息结束-->    
+    
+
+<!-- BEGIN FOOTER -->
+<include file="Public::footer"/>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+<!-- ie8 fixes -->
+<!--[if lt IE 9]>
+<script src="js/excanvas.js"></script>
+<script src="js/respond.js"></script>
+<![endif]-->
+
+<!--地图封装接口 以及一些初始化的数据 -->
+<script src="{$Think.const.JS_URL}scripts.js"></script> 
+<script>
+    //修改密码
+    $('.submit').click(function(){
+        var dataId = $('#edit input[name="id"]').val();
+        var pwd =$('#pwd').val().replace(/(^\s*)|(\s*$)/g, "");
+        if(pwd.length == 0){
+            alert('不能为空！');
+            return false;
+        }
+        $.ajax({
+            url:'{:U("editPassword")}',
+            type:'post',
+            data:{'pwd':pwd,'dataId':dataId},
+            success:function(d) {
+                var res = eval("(" + d + ")");
+                if(res.flag == 1){
+                    alert(res.msg);
+                    $('#edit').modal('hide');
+                }else{
+                    alert(res.msg);
+                }
+            },
+        });
+    });
+    $('.edit').click(function(){
+        $('#edit input[name="id"]').val($(this).attr('data-id'));
+        $('#edit').modal();
+    });
+    
+    
+    //修改用户状态
+    function changeStatus(status,id) {
+        if(confirm("确定此次操作吗？")){
+            $.ajax({
+                url : "{:U('updateStatus')}",
+                type : 'POST',
+                data : {'status':status,'id':id},
+                async:false,
+                success : function(d) {
+                    var data = eval("(" + d + ")");
+                    if (data.flag == 1) {
+                        alert(data.result);
+                        window.location.reload();
+                    } else {
+                        alert(data.result);
+                    }
+                }
+            });
+        }
+    }
+    //编辑用户信息
+    $('.editAdmin').click(function(){
+        var dataId = $(this).attr('data-id');
+        var action = 'get';
+        $.ajax({
+            url : "{:U('editAdmin')}",
+            type : 'POST',
+            data : {'id':dataId,'action':action},
+            async:false,
+            success : function(d) {
+                var result= eval("(" + d + ")");
+                if (result.flag == 1) {
+                    var data = result.data;
+                    $('.nickname').val(data['nickname']);
+                    $('.email').val(data['email']);
+                    $('.email_address').val(data['email_address']);
+                    $('.status input[value='+data['status']+']').attr("checked","checked");
+                    $('.remark').val(data['remark']);
+                    $('.id').val(data['id']);
+                    $('#editAdmin').modal();
+                } else {
+                    alert(result.msg);
+                }
+            }
+        });
+    });
+    $('#editAdminForm').bind('valid.form', function () {
+        $.ajax({
+            url: "{:U('editAdmin')}",
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function (d) {
+                var result = eval("(" + d + ")");
+                alert(result.msg);
+                window.location.reload();
+            }
+        });
+    });
+</script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

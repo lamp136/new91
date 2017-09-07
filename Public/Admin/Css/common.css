@@ -1,0 +1,20 @@
+/*登录*/
+.control-wrap h4{
+	margin: 10px 0 60px 0;
+    font-size: 26px;
+}
+#input-codename{
+	width: 92px;
+}
+.codeimg{
+	margin-left: 8px;
+	margin-top: 2px;
+    width:104px;
+    height: 40px;
+}
+#loginform{
+	width: 412px;
+}
+/*顶部导航*/
+.top-menu .tnav_i{
+}

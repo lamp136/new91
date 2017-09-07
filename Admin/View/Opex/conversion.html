@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head"/>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+    <!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                        <span class="settings">
+                            <span class="text">Theme:</span>
+                            <span class="colors">
+                                <span class="color-default" data-style="default"></span>
+                                <span class="color-gray" data-style="gray"></span>
+                                <span class="color-purple" data-style="purple"></span>
+                                <span class="color-navy-blue" data-style="navy-blue"></span>
+                            </span>
+                        </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                        </li>
+                        <li><a href="javascript:void(0)">关键词转化跟踪列表</a><span class="divider-last">&nbsp;</span></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4><i class="icon-reorder"></i>关键词转化跟踪</h4>
+                                <php>
+                                    if (showHandle('Opex/addConversion')){
+                                </php>
+                                    <span class="tools">
+                                        <a href="javascript:void(0);" class="icon-plus add">添加记录</a>
+                                    </span>
+                                <php>
+                                    }
+                                </php>
+                                <span class="tools">
+                                <php>
+                                    if(showHandle('Opex/importConversion')) {
+                                </php>
+                                    <a href="javascript:void(0);" class="icon-cog import" >导入数据</a>
+                                </span>
+                                <php>
+                                    }
+                                    if(showHandle('Opex/exportConversion')){
+                                </php>
+                                <span class="tools">
+                                    <a class="icon-cog" href="{:U('exportConversion')}">导出数据</a>
+                                </span> 
+                                <php>
+                                    }
+                                </php>
+                            </div>
+                            <div class="widget-body">
+                                <form id="quickForm" method="get" class="form-horizontal" autocomplete="off" action='{:U("Opex/conversion")}'>
+                                    <table>
+                                        <tr>
+                                            <td>搜索：&nbsp;</td>
+                                            <td>
+                                                时间：<input type="text" name="start_time" class="input-medium Wdate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" <notempty name="Think.get.start_time">value="{$Think.get.start_time}"<else /></notempty>/>-
+                                                <input type="text" name="end_time" class="input-medium Wdate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" <notempty name="Think.get.end_time">value="{$Think.get.end_time}" <else /> </notempty>/>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary">确定</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th width="8%">时间</th>
+                                            <th width="6%">星期</th>
+                                            <th width="15%">预约陵园名称</th>
+                                            <th width="7%">来源类型</th>
+                                            <th width="7%">搜索引擎</th>
+                                            <th width="15%">来源</th>
+                                            <th width="10%">搜索词</th>
+                                            <th width="12%">关键词</th>
+                                            <th width="6%">是否同地区</th>
+                                            <th width="6%">用户地区</th>
+                                            <th width="8%">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="list" id="vo">
+                                        <tr class="odd gradeX">
+                                            <td>
+                                                <notempty name="vo.time">
+                                                    {$vo.time|date="Y-m-d",###}
+                                                </notempty>
+                                            </td>
+                                            <td>{$vo.week}</td>
+                                            <td>{$vo.cemetery_name}</td>
+                                            <td>
+                                                {$Think.config.SOURCE_TYPE.$vo[type]}
+                                            </td>
+                                            <td>{$vo.search_engine}</td>
+                                            <td>{$vo.source}</td>
+                                            <td>{$vo.search_term}</td>
+                                            <td>{$vo.keywords}</td>
+                                            <td>
+                                                <if condition="$vo.user_region_same eq 1">
+                                                    是
+                                                <elseif condition="$vo.user_region_same eq 2"/>
+                                                    否    
+                                                </if>
+                                            </td>
+                                            <td>{$vo.user_region}</td>
+                                            <td>
+                                            <php>
+                                                if (showHandle('Opex/editConversion')) {
+                                            </php>
+                                                <a class="btn btn-small btn-primary edit"  href="javascript:void(0)" data-id="{$vo.id}"><i class="icon-pencil icon-white"> </i>编辑</a>
+                                            <php>
+                                                }
+                                                if (showHandle('Opex/delConversion')) {
+                                            </php>
+                                                <eq name="vo.status" value="1">
+                                                    <a class="btn btn-danger btn-small del" href="javascript:void(0)" data-delId="{$vo.id}" >
+                                                        <i class="icon-remove  icon-white"> </i>删除
+                                                    </a>
+                                                <else />
+                                                    <a class="btn btn-success btn-small enable" href="javascript:void(0)" data-delId="{$vo.id}" >
+                                                        <i class="icon-ok  icon-white"> </i>启用
+                                                    </a>
+                                                </eq>
+                                            <php>
+                                                }
+                                            </php>                    
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                                <div class="row-fluid">
+                                    <div class="span12 center">
+                                        <div class="pagination" id="sample_1_info" style="text-align: center">
+                                            {$page}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- END CONTAINER -->
+
+<!--添加开始-->
+<div id="add" class="modal hide fade in">
+    <form id="addForm" method="post" class="form-horizontal" autocomplete="off">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>添加记录</h3>
+        </div>
+        <div class="modal-body" >
+            <table class="table table-bordered table-hover">
+                <tbody>
+                    <tr>
+                        <td>时间：</td>
+                        <td><input class="input Wdate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" value="{:date('Y-m-d')}" name="time" type="text" data-rule="required" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>预约陵园名称：</td>
+                        <td><input class="input"  name="cemetery_name" type="text" data-rule="required" class="amount">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>来源类型：</td>
+                        <td>
+                            <select name="type" id="categoryChang">
+                                <option value="0">--请选择--</option>
+                                <volist name='Think.config.SOURCE_TYPE' id='mu'>
+                                    <option value="{$key}">{$mu}</option>
+                                </volist>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>搜索引擎：</td>
+                        <td><input class="input"  name="search_engine" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>来源：</td>
+                        <td><input class="input"  name="source" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>搜索词：</td>
+                        <td><input class="input"  name="search_term" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>关键词：</td>
+                        <td><input class="input"  name="keywords" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>是否同地区：</td>
+                        <td>
+                            <input type="radio" name="user_region_same" value="1">是
+                            <input type="radio" name="user_region_same" value="2" checked>否
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>用户所在地区:</td>
+                        <td>
+                            <select name="user_region" id="categoryChang">
+                                <option value="0">--请选择--</option>
+                                <volist name='region' id='vo'>
+                                    <option value="{$key}">{$vo}</option>
+                                </volist>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>状态：</td>
+                        <td>
+                            <input type="radio" name="status" value="{$Think.config.NORMAL_STATUS}" checked>正常
+                            <input type="radio" name="status" value="{$Think.config.DELETE_STATUS}">删除
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注：</td>
+                        <td><textarea name="remark"></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="submit"  class="btn btn-success">提交</button>
+            <a href="#" class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </form>
+</div>
+<!--添加结束-->
+
+<!--编辑开始-->
+<div id="edit" class="modal hide fade in">
+    <form id="editForm" method="post"  class="form-horizontal" autocomplete="off">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>编辑信息</h3>
+        </div>
+        <div class="modal-body" >
+            <table class="table table-bordered table-hover">
+                <tbody>
+                    <tr>
+                        <td>时间：</td>
+                        <td><input class="input Wdate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" value="{:date('Y-m-d')}" name="time" type="text" data-rule="required" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>预约陵园名称：</td>
+                        <td><input class="input"  name="cemetery_name" type="text" data-rule="required" class="amount">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>来源类型：</td>
+                        <td>
+                            <select name="type" id="categoryChang">
+                                <option value="0">--请选择--</option>
+                                <volist name='Think.config.SOURCE_TYPE' id='mu'>
+                                    <option value="{$key}">{$mu}</option>
+                                </volist>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>搜索引擎：</td>
+                        <td><input class="input"  name="search_engine" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>来源：</td>
+                        <td><input class="input"  name="source" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>搜索词：</td>
+                        <td><input class="input"  name="search_term" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>关键词：</td>
+                        <td><input class="input"  name="keywords" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>是否同地区：</td>
+                        <td>
+                            <input type="radio" name="user_region_same" value="1">是
+                            <input type="radio" name="user_region_same" value="2" checked>否
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>用户所在地区:</td>
+                        <td>
+                            <select name="user_region" id="categoryChang">
+                                <option value="0">--请选择--</option>
+                                <volist name='region' id='vo'>
+                                    <option value="{$key}">{$vo}</option>
+                                </volist>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>状态：</td>
+                        <td>
+                            <input type="radio" name="status" value="{$Think.config.NORMAL_STATUS}" checked>正常
+                            <input type="radio" name="status" value="{$Think.config.DELETE_STATUS}">删除
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注：</td>
+                        <td><textarea name="remark"></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="modal-footer">
+            <input type="hidden" name='id' /> 
+            <button type="submit" class="btn btn-success">提交</button>
+            <a href="#" class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </form>
+</div>
+<div id="import" class="modal hide fade in">
+        <form id="importForm" method="post" class="form-horizontal" autocomplete="off" enctype="multipart/form-data">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>导入excel数据</h3>
+            </div>
+            <div class="modal-body" >
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="file" name="excel_file">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="submit"  class="btn btn-success">提交</button>
+                <a href="javascript:void(0)" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+<!--编辑结束-->
+
+<!-- BEGIN FOOTER -->
+<include file="Public::footer"/>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+
+<script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+<script src="{$Think.const.JS_URL}zh-CN.js"></script>
+<script src="{$Think.const.JS_URL}scripts.js"></script>
+<script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+<script>
+    // 导入excel
+    $('.import').click(function(){
+        $('#import').modal();
+    })
+
+    // 提交导入excel
+    $('#importForm').bind('valid.form',function(){
+        $('#import').modal('hide');
+        var importData = new FormData(document.getElementById('importForm'));
+        $.ajax({
+            url:"{:U('importConversion')}",
+            type:'post',
+            data:importData,
+            processData: false,
+            contentType: false,
+            success:function(d){
+                var result = eval("("+d+")");
+                if(result['flag'] == 1){
+                    alert(result['msg']);
+                    window.location.reload();
+                }else{
+                    alert(result['msg']);
+                }
+            }
+        })
+    })
+
+    //添加关键字转化 
+    $('.add').click(function () {
+        document.getElementById('addForm').reset();//清空表单
+        $('#add').modal();
+        
+    });
+    
+    //提交添加关键词转化 表单
+    $('#addForm').bind('valid.form', function () {
+        $('#add').modal('hide');
+        $.ajax({
+            url: "{:U('addConversion')}",
+            type: "POST",
+            data: $(this).serialize(),
+            success: function(d) {
+                var result = eval("(" + d + ")");
+                if (result.flag == 1) {
+                    alert(result.msg);
+                    window.location.reload();//刷新当前页面.
+                } else {
+                    alert(result.msg);
+                }
+            }
+        }); 
+    });
+
+    //修改关键词转化 表单
+    $('.edit').click(function () {
+        var id = $(this).attr('data-id');
+        var same = $('#editForm input[name="user_region_same"]');
+        var status = $('#editForm input[name="status"]');
+        $.ajax({
+            url: "{:U('editConversion')}",
+            type: 'get',
+            data:{
+                id:id,
+            },
+            success: function (d) {
+                var result = eval("(" + d + ")");
+                var data = result.msg;
+                if (result.flag == 1) {
+                    $('#editForm input[name="time"]').val(data.time);
+                    $('#editForm input[name="cemetery_name"]').val(data.cemetery_name);
+                    $('#editForm select[name="type"] option[value="'+data.type+'"]').attr("selected","selected");
+                    $('#editForm input[name="search_engine"]').val(data.search_engine);
+                    $('#editForm input[name="source"]').val(data.source);
+                    $('#editForm input[name="search_term"]').val(data.search_term);
+                    $('#editForm input[name="keywords"]').val(data.keywords);
+                    $('#editForm select[name="user_region"] option[value="'+data.user_region+'"]').attr("selected","selected");
+                    $('#editForm input[name="remark"]').val(data.remark);
+                    $('#editForm input[name="id"]').val(id);
+                    for(var i=0; i<same.length; i++){
+                        if(same[i].value == data['user_region_same']){
+                            same[i].checked = true;
+                            break;
+                        }
+                    }
+                    for (var i = 0; i < status.length; i++) {
+                            if(status[i].value == data['status']){
+                                status[i].checked = true;
+                                break;
+                            }
+                        }
+                    $('#edit').modal();
+                } else {
+                    alert('操作失败');
+                }
+            }
+        });
+    });
+
+    //提交修改专题的表单
+    $('#editForm').bind('valid.form', function () {
+        $('#edit').modal('hide');
+        $.ajax({
+            url: "{:U('editConversion')}",
+            type: "POST",
+            data: $(this).serialize(),
+            success: function (d) {
+                var result = eval("(" + d + ")");
+                console.log(result);
+                if (result.flag == 1) {
+                    alert(result.msg);
+                    window.location.reload();//刷新当前页面.
+                } else {
+                    alert(result.msg);
+                }
+            }
+        });
+    });
+
+    //禁用
+        $('.del').click(function () {
+            var id = $(this).attr('data-delId');
+            var act = 'del';
+            $.ajax({
+                url: "{:U('delConversion')}",
+                type: 'post',
+                data: {
+                    id:id,
+                    act:act
+                },
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+
+        //启用
+        $('.enable').click(function () {
+            var id = $(this).attr('data-delId');
+            var act = 'enable';
+            $.ajax({
+                url: "{:U('delConversion')}",
+                type: 'post',
+                data: {
+                    id:id,
+                    act:act
+                },
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+
+</script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

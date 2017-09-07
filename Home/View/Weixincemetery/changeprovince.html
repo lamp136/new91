@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>选择城市</title>
+    <link href="{$Think.const.CSS_URL}bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="__PUBLIC__/Weixin/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 带有返回箭头页面头部 -->
+<header class="headertop_a">
+    <div class="container">
+        <div class="row">
+            <!-- 返回箭头 -->
+            <div class="col-xs-2">
+                <a class="getback" href="javascript:history.go(-1)"></a>
+            </div> 
+            <!-- 标题 -->
+            <div class="col-xs-8 title">
+                选择城市
+            </div><!-- 搜索结束 -->
+        </div><!-- row End -->
+    </div><!-- container End -->
+</header><!-- headertop_a头部结束 -->
+<!-- 页面进入主体部分 -->
+<main class="main">
+    <!-- 陵园分布省份标题 -->
+    <div class="city_title">
+        <div class="container">
+            <h2>陵园分布省份</h2>
+        </div><!-- container End -->
+    </div><!-- city_title陵园分布省份标题结束 -->
+    <!-- 城市列表 -->
+    <div class="container">
+        <ul class="city_list">
+            <volist name='region' id='vo'>
+            <li>
+                <a href="{:U('index',array('province'=>$vo['region_id']))}">{$vo.region_name}</a>
+            </li>
+            </volist>
+        </ul><!-- city_list End -->
+    </div><!-- container End -->
+</main><!-- main End -->
+</body>
+</html>

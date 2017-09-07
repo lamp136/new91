@@ -1,0 +1,343 @@
+@charset "UTF-8";
+/*浏览器样式重置*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+.index-sprite, .navbar_top .nav_top li i, .navbar_top .nav_top .scan .toolbar-layer, .header .search .btn, .header .header_phone span, .city .sele .sele_bg, .city_list .ci_title .c_close {
+  background-image: url('../../../images/topics/zhongyuanjie/index-s3bfb6e9628.png');
+  background-repeat: no-repeat;
+}
+
+a {
+  color: #333333;
+}
+
+a, a:hover {
+  text-decoration: none;
+}
+
+.clear {
+  clear: both;
+}
+
+.clearfix {
+  overflow: hidden;
+  *zoom: 1;
+}
+
+body, p, h1, h2, h3, h4, h5, h6 {
+  font-family: "宋体";
+  font-size: 14px;
+  color: #333333;
+}
+
+.contain {
+  width: 1110px;
+  margin: 0 auto;
+}
+
+/*顶部*/
+.navbar_top {
+  line-height: 34px;
+  background: #fafafa;
+  color: #999999;
+  font-size: 12px;
+  border-bottom: 1px solid #eeeeee;
+}
+.navbar_top .greet {
+  float: left;
+}
+.navbar_top .greet span {
+  margin-right: 68px;
+}
+.navbar_top .greet a {
+  margin-right: 14px;
+  color: #999999;
+}
+.navbar_top .greet .login {
+  color: #ff6d00;
+}
+.navbar_top .nav_top {
+  float: right;
+}
+.navbar_top .nav_top li {
+  margin-right: 24px;
+  float: left;
+}
+.navbar_top .nav_top li a {
+  color: #999999;
+}
+.navbar_top .nav_top li i {
+  background-position: 0 -10px;
+  height: 4px;
+  width: 7px;
+  display: inline-block;
+  margin-left: 3px;
+}
+.navbar_top .nav_top li img {
+  vertical-align: middle;
+  margin-bottom: 2px;
+}
+.navbar_top .nav_top .last {
+  margin-right: 0;
+}
+.navbar_top .nav_top .scan {
+  position: relative;
+  cursor: pointer;
+}
+.navbar_top .nav_top .scan:hover .toolbar-layer {
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+.navbar_top .nav_top .scan .toolbar-layer {
+  display: inline-block;
+  background-position: 0 -92px;
+  height: 168px;
+  width: 129px;
+  -moz-transform-origin: 98% 0;
+  -ms-transform-origin: 98% 0;
+  -webkit-transform-origin: 98% 0;
+  transform-origin: 98% 0;
+  position: absolute;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  -moz-transform: scale(0.01);
+  -ms-transform: scale(0.01);
+  -webkit-transform: scale(0.01);
+  transform: scale(0.01);
+  -moz-transition: all 1s;
+  -o-transition: all 1s;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  z-index: 999;
+  right: 0;
+  top: 35px;
+}
+
+/*header*/
+.header {
+  height: 84px;
+}
+.header .logo {
+  padding-top: 8px;
+  float: left;
+}
+.header .logo img {
+  margin: 6px 10px 0 0;
+}
+.header h1 {
+  float: left;
+  font-size: 18px;
+  font-family: "微软雅黑";
+  line-height: 46px;
+  border-left: 1px solid #eeeeee;
+  padding-left: 20px;
+  margin: 20px 0 0 10px;
+}
+.header .search {
+  width: 348px;
+  float: left;
+  padding-top: 30px;
+  margin-left: 100px;
+}
+.header .search .tex {
+  width: 202px;
+  float: left;
+  height: 28px;
+  line-height: 28px\9;
+  border: 1px solid #fbb784;
+  -moz-border-radius: 5px 0 0 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px 0 0 5px;
+}
+.header .search .btn {
+  float: left;
+  border: none;
+  background-position: 0 -16px;
+  height: 32px;
+  width: 44px;
+}
+.header .header_phone {
+  float: right;
+  padding-top: 24px;
+}
+.header .header_phone span {
+  float: left;
+  display: block;
+  margin-right: 6px;
+  background-position: 0 -50px;
+  height: 40px;
+  width: 40px;
+}
+.header .header_phone .phone {
+  float: left;
+}
+.header .header_phone .phone .ph1 {
+  color: #999999;
+  line-height: 20px;
+  font-family: "宋体";
+  font-size: 12px;
+}
+.header .header_phone .phone .ph2 {
+  color: #4a94f5;
+  line-height: 20px;
+  font-family: Arial;
+  font-size: 18px;
+}
+.header .contain {
+  position: relative;
+}
+
+.city {
+  width: 90px;
+  float: left;
+  position: relative;
+  line-height: 32px;
+}
+.city .sele {
+  cursor: pointer;
+  color: #333333;
+}
+.city .sele .sele_bg {
+  display: inline-block;
+  background-position: 0 -262px;
+  height: 5px;
+  width: 7px;
+  margin-left: 3px;
+}
+
+.city_list {
+  width: 398px;
+  background: #fff;
+  position: absolute;
+  border: 1px solid #999999;
+  display: none;
+  z-index: 9999;
+}
+.city_list .ci_title {
+  position: relative;
+}
+.city_list .ci_title ul {
+  padding-left: 8px;
+  margin-top: 4px;
+  height: 24px;
+  border-bottom: 1px solid #999999;
+}
+.city_list .ci_title ul li {
+  float: left;
+  font-size: 12px;
+}
+.city_list .ci_title ul li a {
+  display: block;
+  line-height: 24px;
+  color: #618365;
+  padding: 0 14px;
+}
+.city_list .ci_title ul .thistab a {
+  line-height: 24px;
+  background: #fff;
+  border: 1px solid #999999;
+  border-bottom: none;
+}
+.city_list .ci_title .c_close {
+  display: inline-block;
+  background-position: 0 0;
+  height: 8px;
+  width: 7px;
+  position: absolute;
+  top: 5px;
+  right: 12px;
+  cursor: pointer;
+}
+.city_list .list_box ul {
+  margin: 10px 0 15px 32px;
+}
+.city_list .list_box ul li {
+  width: 70px;
+  float: left;
+  font-size: 12px;
+  line-height: 22px;
+}
+
+/*专题导航*/
+.topics_nav {
+  background: #996533;
+  width: 100%;
+  height: 40px;
+  z-index: 99999;
+  top: 0;
+}
+.topics_nav ul li {
+  float: left;
+  font-size: 16px;
+  font-weight: bold;
+}
+.topics_nav ul li a {
+  display: block;
+  width: 125px;
+  line-height: 40px;
+  color: #f2ddca;
+  text-align: center;
+}
+.topics_nav .currter a {
+  background: #f2ddca;
+  color: #996533;
+}
+

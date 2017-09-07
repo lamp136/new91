@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+<!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                        </li>
+                       
+                        <li>
+                            <a href="javasript:void(0)">陵园推广人员</a><span class="divider-last">&nbsp;</span>
+                        </li>
+                     
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4><i class="icon-reorder"></i>陵园推广人员</h4>
+                            </div>
+                            <div class="widget-body">
+                                <form id="quickForm" method="get" class="form-horizontal" autocomplete="off" action="__SELF__">搜索：
+                                    <input type="text" name="mobile" class="input-large" placeholder="请输入手机号或名字" value="{$Think.get.mobile}"/>
+                                    <button class="btn btn-primary">确定</button>
+                                </form>
+                                <table class="table table-striped table-bordered" id="sample_1">
+                                    <thead>
+                                    <tr>
+                                        <th width="6%">姓名</th>
+                                        <th width="8%">手机号</th>
+                                        <th width="4%">注册类型</th>
+                                        <th width="6%">手机验证</th>
+                                        <th width="6%">银行信息</th>
+                                        <th width="11%">注册时间</th>
+                                        <th width="12">上期结算金额</th>
+                                        <th width="16">上期结算时间</th>
+                                        <th width="4">旗下会员数量</th>
+                                        <th width="37%">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="members" id="vo">
+                                        <tr class="odd gradeX">
+                                            <td>{$vo.name}</td>
+                                            <!-- <if condition="$categoryId eq 14">
+                                                <td>{$vo.name.name}</td>
+                                            </if> -->
+                                            <td>{$vo.mobile}</td>
+                                            <td>
+                                                <php>
+                                                if (array_key_exists($vo['member_type'], $Think.config.MEMBER_TYPES)){
+                                                    echo C('MEMBER_TYPES')[$vo['member_type']];
+                                                } else {
+                                                    echo "未知";
+                                                }
+                                                </php>
+                                            </td>
+                                            <td>
+                                               <if condition="$vo.check_mobile eq 1">
+                                                   <span>已验证</span>
+                                               <else/>
+                                                   <span>未验证</span>
+                                               </if>
+                                            </td>
+                                            <td>
+                                                <php>
+                                                    $count = count($vo['MebmerBank']);
+                                                    if ($count > 0) {
+                                                        echo "有";
+                                                    } else {
+                                                        echo "无";
+                                                    }
+                                                </php>
+                                            </td>
+                                            <td>{$vo.created_time}</td>
+                                            <td>{$vo.Relation.last_captial_num}</td>
+                                            <td>{$vo.Relation.capital_settlement_time|date='Y-m-d',###}</td>
+                                            <td>{$vo.Relation.member_num_bysender}</td>
+                                            <td>
+                                            <php>
+                                                if (showHandle('Member/editMemberBank')) {
+                                             </php>
+                                                <a class="btn btn-small edit"  href="javascript:void(0)" data-id="{$vo.id}" data-name="{$vo.name}" data-mobile="{$vo.mobile}"><i class="icon-pencil icon-white"> </i>修改银行卡信息</a>
+                                             <php>
+                                             }
+                                                if (showHandle('Member/resetpwd')) {
+                                             </php>
+                                                <a class="btn btn-small resetpwd"  href="javascript:void(0)" data-id="{$vo.id}"><i class="icon-refresh icon-white"> </i>重置密码</a>
+                                                <php>
+                                             }
+                                                if (showHandle('Member/delete')) {
+                                             </php> 
+                                                <eq name="vo.status" value="$Think.config.NORMAL_STATUS">
+                                                <a class="btn btn-danger btn-small del" href="javascript:void(0)" data-id="{$vo.id}" ><i class="icon-remove  icon-white"> </i>禁用</a>
+                                                <else />
+                                                <a class="btn btn-success btn-small enable" href="javascript:void(0)" data-id="{$vo.id}" ><i class="icon-ok  icon-white"> </i>启用</a>
+                                                </eq>
+                                                <php>
+                                                    }
+                                                </php>
+                                                
+                                                <eq name="vo.member_type" value="$Think.config.FROM_TYPE_WORKER">
+                                                 <php>
+                                                    if (showHandle('Member/delsender')) {
+                                                     
+                                                 </php>
+                                                <a class="btn btn-danger btn-small delsender" href="javascript:void(0)" data-id="{$vo.id}" ><i class="icon-remove  icon-white"> </i>取消陵园推广人资格</a>
+                                                <php>
+                                                }
+                                                </php>
+                                                <else />
+                                                <php>
+                                                    if (showHandle('Member/sender')) {
+                                                </php>  
+                                                 
+                                                <a class="btn btn-success btn-small sender" href="javascript:void(0)" data-id="{$vo.id}" ><i class="icon-ok  icon-white"> </i>赋予陵园推广人资格</a>
+                                                <php>}</php>
+                                                </eq>
+
+
+                                                <a class="btn btn-success btn-small lookmember " href="javascript:void(0)" data-id="{$vo.id}" ><i class="icon-ok  icon-white"> </i>查看旗下所有会员</a>
+
+
+                                                <a class="btn btn-success btn-small  " href="{:U('clearmoney',array('id'=>$vo[id]))}" data-id="{$vo.id}" ><i class="icon-ok  icon-white"> </i>查看未结算会员</a>
+                                            </td>
+                                        </tr>
+                                    </volist>
+
+                                    </tbody>
+                                </table>
+                                <div class="row-fluid">
+                                    <div class="span12 center">
+                                        <div class="pagination" id="sample_1_info" style="text-align: center">
+                                            {$pages}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- END CONTAINER -->
+
+<!--修改银行卡信息开始-->
+    <div id="edit" class="modal hide fade in">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>银行卡信息</h3>
+        </div>
+        <table class="table table-striped table-bordered">
+            <tr class="memberBank">
+                <th>开户行</th>
+                <th>开户人</th>
+                <th>银行账号</th>
+                <th>默认卡</th>
+                <th>操作</th>
+            </tr>
+  
+        </table>
+        <form id="editForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-body" >
+
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>会员基本信息：</td>
+                            <td id='memberInfo'></td>
+                        </tr>
+                        <tr>
+                            <td>支付类型：</td>
+                            <td>
+                                <select name='bank_type' data-rule='required'>
+                                    <option value=0>请选择</option>
+                                        <volist name="Think.config.PAY_TYPES" id="payType" key="paytypeKey">
+                                            <option value={$paytypeKey}>{$payType}</option>
+                                        </volist>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>开户行：</td>
+                            <td>
+                                <select name='bank' data-rule='required'>
+                                    <option value=0>请选择</option>
+                                        <volist name="Think.config.PAY_TYPE" id="payBank" key="payBankKey">
+                                            <option value={$payBankKey}>{$payBank}</option>
+                                        </volist>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>银行卡号：</td>
+                            <td>
+                                <input type="text" name='bank_account' data-rule='required' /> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>开户人：</td>
+                            <td>
+                                <input type="text"  name='bank_member' data-rule='required' /> 
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name='id' /> 
+                <input type="hidden" name='member_id' /> 
+                <button type="submit"  class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--修改银行卡信息结束-->
+
+   <!--转为有意向订单开始-->
+    <div id="LookMember" class="modal hide fade in">
+        <form id="LookMemberForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>旗下会员信息</h3>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                      <tr class="data-message">
+                        <th>会员ID</th>
+                        <th>加入时间</th>
+                        <th>结算状态</th>
+                      </tr>
+                     
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <input type='hidden'  data-id='orderid' name='orderid'>
+                <button type="submit" id='tijiao' class="btn btn-success">保存</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--转为有意向订单结束-->
+
+
+<!-- BEGIN FOOTER -->
+<include file="Public::footer"/>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+<script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+<script src="{$Think.const.JS_URL}scripts.js"></script>
+ <script>
+//重置密码
+$('.resetpwd').click(function(){
+    var id = $(this).attr('data-id');
+    $.ajax({
+        url: "{:U('resetpwd')}",
+        type: 'post',
+        data: 'id='+id,
+        success: function (d) {
+            var result = eval("(" + d + ")");
+            alert(result.msg);
+        } 
+    });
+});
+
+//禁用
+$('.del').click(function () {
+    var id = $(this).attr('data-id');
+    var act = 'del';
+    $.ajax({
+        url: "{:U('delete')}",
+        type: 'post',
+        data: 'id=' + id + '&act=' + act,
+        success: function (d) {
+            var result = eval("(" + d + ")");
+            if (result.flag == 1) {
+                alert(result.msg);
+                window.location.reload();
+            } else {
+                alert(result.msg);
+            }
+        }
+    });
+});
+
+//启用
+$('.enable').click(function(){
+    var id = $(this).attr('data-id');
+    var act = 'enable';
+    $.ajax({
+        url: "{:U('delete')}",
+        type: 'POST',
+        data: 'id='+id+'&act='+act,
+        success: function (d) {
+            var result = eval("(" + d + ")");
+            if (result.flag == 1) {
+                alert(result.msg);
+                window.location.reload();
+            } else {
+                alert(result.msg);
+            }
+        }
+    });
+});
+
+    //查看该会员旗下会员数量
+    $('.lookmember').click(function(){
+        var id = $(this).attr('data-id');
+        $('.afterData').remove();//清空以前数据
+
+        $.ajax({
+            url:"{:U('lookmember')}",
+            type:'POST',
+            data:'member_id='+id,
+            success:function(d){
+                var result = eval("(" + d + ")");
+                var data = result.data;
+                //将得到的跟踪信息插入表格
+                if(result.flag==0){
+                   str = "<tr></tr>";
+                }else if(result.flag==1){
+                    var str = '';
+                    var length = data.length;
+                    for(var i=0; i<length; i++){
+                            var status = '';
+                            if(data[i].customer_status == {$Think.config.CMONEY_STATUS.DEFAULT}){
+                                status = '尚未结算';
+                            }else{
+                                status = '已经结算';
+                            }
+                            var time = data[i].created_time;
+                            if(data[i].created_time == null){
+                                time = '数据不存在';
+                            }
+                            str += "<tr class='afterData'><td>"+data[i].member_id+"</td><td>"+time+"</td><td>"+status+"</td></tr>";
+                    }
+                }
+                $('.data-message').after(str);
+                $('#LookMember').modal();
+            }
+
+        });
+    });
+
+ //将会员设为陵园推广人员
+$('.sender').click(function(){
+    var id = $(this).attr('data-id');
+    $.ajax({
+        url:"{:U('sender')}",
+        type:'POST',
+        data:'member_id='+id,
+        success:function(d){
+            var result = eval("("+d+")");
+            if(result.flag == 1){
+                alert('设为陵园推广人成功');
+                window.location.reload();
+            }
+        }
+    });
+
+});
+
+
+ //将会员设为陵园推广人员
+$('.delsender').click(function(){
+    var id = $(this).attr('data-id');
+    $.ajax({
+        url:"{:U('delsender')}",
+        type:'POST',
+        data:'member_id='+id,
+        success:function(d){
+            var result = eval("("+d+")");
+            if(result.flag==1){
+                alert('取消陵园推广人资格成功');
+                window.location.reload();
+            }
+        }
+    });
+
+});
+
+
+
+//修改银行卡信息
+$('.edit').click(function () {
+    var mid = $(this).attr('data-id');
+    var name = $(this).attr('data-name');
+    var mobile = $(this).attr('data-mobile')
+    $('.afterData').remove();//清空以前的数据
+    $('#memberInfo').html('');
+    $.ajax({
+        url: "{:U('memberBankList')}",
+        type: 'post',
+        data:'member_id='+mid,
+        success: function (msg) {
+            var result = eval("(" + msg + ")");
+            var data = result.data;
+             if (result.flag == 1) {
+                 var length = data.length;
+                 var str = '';
+                 for(var i=0; i<length; i++) {
+                	 str += '<tr class="afterData"><td>'+data[i].bank_name+'</td><td>'+data[i].bank_member+'</td><td>'+data[i].bank_account+'</td><td>'+data[i].status+'</td><td><a data-bank_id='+data[i].id+' data-bank='+data[i].bank+' data-bank_member='+data[i].bank_member+' data-bank_account='+data[i].bank_account+' data-bank_type='+data[i].bank_type+' href="javascript:void(0)" class="bankEdit">编辑 </a>| <a data-bank_id='+data[i].id+' href="javascript:void(0)" class="bankDel">删除</a></td></tr>'
+                 }
+            } else {
+            	str += '<tr class="afterData"><td colspan=5>暂无银行卡信息</td></tr>'
+            }
+             var personInfo = '姓名：'+name+',手机号：'+mobile;
+             $('#memberInfo').html(personInfo);
+             $('#editForm input[name="member_id"]').val(mid);
+             $('.memberBank').after(str);
+             $('#edit').modal();
+             $('#editForm')[0].reset();  
+             bankClick();
+        }
+    });
+});
+//提交修改银行卡信息的表单
+$('#editForm').bind('valid.form', function () {
+	$('#edit').modal('hide');
+    $.ajax({
+    	url: "{:U('editMemberBank')}",
+        type: 'post',
+        data: $(this).serialize(),
+        success: function (msg) {
+        	 var result = eval("(" + msg + ")");
+        	 alert(result.msg);
+             if (result.flag == 1) {
+                 window.location.reload();//刷新当前页面.
+             }
+        }
+    });
+});
+		
+//银行卡信息修改绑定的方法
+function bankClick(){
+	$('.bankEdit').click(function(){
+		var dataBankId = $(this).attr('data-bank_id');
+	    var dataBank = $(this).attr('data-bank');
+	    var dataBankMember = $(this).attr('data-bank_member');
+	    var dataBankAccount = $(this).attr('data-bank_account');
+	    var dataBankType = $(this).attr('data-bank_type');
+	    
+	    $('#editForm select[name="bank_type"]').val(dataBankType);
+        $('#editForm select[name="bank"]').val(dataBank);
+        $('#editForm input[name="bank_account"]').val(dataBankAccount);
+        $('#editForm input[name="bank_member"]').val(dataBankMember);
+        $('#editForm input[name="id"]').val(dataBankId);
+	});
+	
+	$(".bankDel").click(function() {
+		var id = $(this).attr('data-bank_id');
+		$.ajax({
+			url:"{:U('deleteMemberBank')}",
+			type:'post',
+			data:'id='+id,
+			success:function(msg){
+				var result = eval("(" + msg + ")");
+	            var data = result.data;
+	            alert(result.msg);
+	             if (result.flag == 1) {
+	            	 //删除成功，刷新当前页面
+	                 window.location.reload();
+	             } 
+			}
+		});
+	});
+}
+</script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

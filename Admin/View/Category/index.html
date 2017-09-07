@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">分类管理</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>分类管理</h4>
+                                </div>
+                                <div class="widget-body">
+                                    <php>
+                                        if (showHandle('Category/saveCateggory')){
+                                    </php>
+                                        <form id="quickForm" method="post" class="form-horizontal" autocomplete="off">
+                                            添加分类：<input type="hidden" value="add" name="act">
+                                            <select name='pid'>
+                                                <option value="0">--顶级分类--</option>
+                                                <volist name='list' id='vo'>
+                                                    <option value="{$vo.cid}"><neq name='vo.level' value='0'>{$vo.level|str_repeat='&nbsp;&nbsp;&nbsp;&nbsp;',###}├{$vo.name}<else />{$vo.name}</neq></option>
+                                                </volist>
+                                            </select>
+                                            <input type="text" value="" name="name" class="input" id="newName" placeholder="你要添加的分类名称">
+                                            <button class="btn btn-primary add">确定添加</button>
+                                        </form>
+                                    <php>
+                                        }
+                                    </php>
+
+                                    <table class="table table-striped table-bordered table-hover" id="sample_1">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:4%">原分类CID</th>
+                                                <th style="width:22%">名称</th>
+                                                <th style="width:15%">操作方法</th>
+                                                <th style="width:15%">新分类</th>
+                                                <th style="width:15%">修改后的名称</th>
+                                                <th style="width:9%">排序</th>
+                                                <th style="width:20%">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <notempty name="list">
+                                            <volist name="list" id="vo" >
+                                                <tr class="{$vo.pid}"  status='off'  <if condition="$vo.pid gt 0">style='display:none;'</if>>
+                                                    <td>{$vo.cid}</td>
+                                                    <td class='onOff' data-cid='{$vo.cid}'>{$vo.level|str_repeat='&nbsp;&nbsp;&nbsp;&nbsp;',###}<span style="color:green;">►</span><span name="name" style="color:green;">{$vo.name}</span></td>
+                                                    <td>
+                                                        <select class="act" name="act" style="width:150px;">
+                                                            <option value="edit" selected="selected">修改该分类</option>
+                                                            <option value="add">在该分类中添加子类</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select name='pid'  style="width:150px;">
+                                                            <option value="0">顶级分类</option>
+                                                        <volist name='list' id='v1'>
+                                                            <option value="{$v1.cid}" <eq name='v1.cid' value='$vo.cid'> selected </eq>><neq name='v1.level' value='0'>{$v1.level|str_repeat='&nbsp;&nbsp;&nbsp;&nbsp;',###}├{$v1.name}<else />{$v1.name}</neq></option>
+                                                        </volist>
+                                                    </td>
+                                                    <td><input style="width:150px;" type="text" placeholder="你要修改分类的新名称" class="input" name="name" value=""></td>
+                                                    <td><input type="text" style="width:40px;" name="sort" value="{$vo.sort}"/></td>
+                                                    <td>
+                                                        <php>
+                                                            if (showHandle('Category/saveCateggory')){
+                                                        </php>
+                                                            <a class="btn btn-small btn-primary opCat"  href="javascript:void(0)" data-cid="{$vo.cid}"><i class="icon-pencil icon-white"> </i> 确定</a>
+                                                            <eq name="vo.is_show" value="$Think.config.NORMAL_STATUS">
+                                                            <a class="btn btn-danger btn-small del" href="javascript:void(0)" data-cid="{$vo.cid}" ><i class="icon-remove  icon-white"> </i>删除</a>
+                                                            <else />
+                                                            <a class="btn btn-success btn-small enable" href="javascript:void(0)" data-cid="{$vo.cid}" data-pid="{$vo.pid}"><i class="icon-ok  icon-white"> </i>启用</a>
+                                                            </eq>
+                                                        <php>
+                                                            }
+                                                        </php>
+                                                    </td>
+                                                </tr>
+                                            </volist>
+                                            <else />
+                                            <tr class="odd gradeX"><td colspan="3">没有记录</td></tr>
+                                        </notempty>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+        //地区展开和收起开始
+        $('.onOff').click(function(){
+            var status = $(this).parent().attr('status');
+            var id = $(this).attr('data-cid');
+            if(status == 'off'){
+                $(this).html($(this).html().replace('►','▼'));
+                $('.'+id).css('display','');
+                $(this).parent().attr('status','on');
+            }else if(status == 'on'){
+                limit(id);
+                $(this).html($(this).html().replace('▼','►'));
+                $('.'+id).css('display','none');
+                $(this).parent().attr('status','off');
+            }
+        });
+        function limit(id){
+            $('.'+id).each(function(){
+                if($(this).attr('status')=='on'){
+                    var tmp = $(this).children("td").html();//获取cid(第一个td中的内容)
+                    limit(tmp);
+                    $(this).find('.onOff').trigger('click');
+                }
+            });
+        }
+        //地区展开和收起结束
+        
+        
+        $('#quickForm').submit(function () {
+            var newName = $('#newName').val();
+            if (newName == '') {
+                alert('分类名称不能为空');
+                return false;
+            }
+            $.ajax({
+                url: "{:U('saveCateggory')}",
+                type: 'post',
+                data: $('#quickForm').serialize(),
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+            return false;
+        });
+        
+        $('.opCat').click(function(){
+            var obj = $(this).parent().parent();
+            var name = (obj.find('input[name="name"]')).val();
+            var act = (obj.find('select[name="act"]')).val();
+            var pid = (obj.find('select[name="pid"]')).val();
+            var sort = (obj.find('input[name="sort"]')).val();
+            var cid = $(this).attr('data-cid');
+            if(name == ''){
+                name = (obj.find('span[name="name"]')).html();
+            }
+            if(name=='' && act=='add'){
+                alert('分类名称不能为空！');
+                return false;
+            }
+            if(sort.length == 0){
+                alert('排序不能这空！');
+                return false;
+            }
+            $.ajax({
+                url: "{:U('saveCateggory')}",
+                type: 'post',
+                data: 'name='+name+'&act='+act+'&pid='+pid+'&cid='+cid+'&sort='+sort,
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        $('input[name="name"]').val('');
+                        alert(result.msg);
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+        
+        //删除
+        $('.del').click(function(){
+            var cid = $(this).attr('data-cid');
+            var act = 'del';
+            $.ajax({
+                url: "{:U('saveCateggory')}",
+                type: 'post',
+                data: 'cid='+cid+'&act='+act,
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+        
+        //启用
+        $('.enable').click(function(){
+            var cid = $(this).attr('data-cid');
+            var pid = $(this).attr('data-pid');
+            var act = 'enable';
+            $.ajax({
+                url: "{:U('saveCateggory')}",
+                type: 'post',
+                data: 'cid='+cid+'&act='+act+'&pid='+pid,
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+
+
+
+
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

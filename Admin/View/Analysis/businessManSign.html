@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+       <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">商务人员签订合同统计</a><span class="divider-last">&nbsp;</span></li>
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>商务人员签单列表</h4>
+                                </div> 
+                                <div class="widget-body">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <form id="quickForm" method="get" class="form-horizontal" autocomplete="off" action='__SELF__'>
+                                                <span>搜索：</span>
+                                                时间段：<input type="text" name="start_time" class="input-medium Wdate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" value="{$Think.get.start_time}"/>-
+                                                <input type="text" name="end_time" class="input-medium Wdate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})"  <notempty name="Think.get.end_time">value="{$Think.get.end_time}" <else />  value="{:date('Y-m-d')}" </notempty>/>
+                                                <button class="btn btn-primary">确定</button>
+                                            </form>
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>商务人员</th>
+                                                        <th>签单数量</th>
+                                                        <th>地区分布</th>
+                                                        <th>合同名称</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <volist name="datalist" id="vo">
+                                                        <tr class="odd gradeX">
+                                                            <td>{$key}</td>
+                                                            <td>{$vo.total}</td>
+                                                            <td>
+                                                                <a href="javascript:void(0)" data-value="{$vo.profiles_id}" class="viewRegion">查看</a>
+                                                            </td>
+                                                            <td>
+                                                                <a href="javascript:void(0)" data-value="{$vo.profile_name}" class="viewName">查看</a>
+                                                            </td>
+                                                        </tr>
+                                                    </volist>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <div id="profilesRegion" class="modal hide fade in" style="text-align:center;width:500px;">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>档案省份分布</h3>
+        </div>
+        <div class="modal-body" data-id="province_num">
+
+        </div>
+        <div class="modal-footer">
+            <a href="javascript:void(0)" class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </div>
+    <!-- END CONTAINER -->
+    
+    <!--查看合同名称开始-->
+    <div id="viewProfilesName" class="modal hide fade in" style="text-align:center;width:400px;">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>查看合同名称</h3>
+        </div>
+        <div class="modal-body" id="viewProfilesContent">
+        </div>
+        <div class="modal-footer">
+            <a href="javascript:void(0)" class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </div>
+    <!--查看合同名称结束-->
+    
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+    <!-- END JAVASCRIPTS -->
+    <script src="{$Think.const.JS_URL}highchars/highcharts.js"></script>
+    <script type="text/javascript">
+        $('.viewRegion').click(function(){
+            var profileId = $(this).attr('data-value');
+            $.ajax({
+                url:"{:U('signData')}",
+                type:'post',
+                data:{
+                    profileId:profileId,
+                },
+                success:function(d){
+                    var result = eval("("+d+")");
+                    var str = '';
+                    var data = result['data'];
+                    if(result['flag'] == 1){
+                        var j = 1;
+                        for(var key in data){
+                            if(j%6){
+                                str += '<span style="color:green;cursor: pointer;">'+key+'('+data[key]+')</span>&nbsp;&nbsp;';
+                            }else{
+                                str += '<span style="color:green;cursor: pointer;">'+key+'('+data[key]+')</span><br/>';
+                            }
+                            j++;
+                        }
+                    }else if(result['flag'] == 0){
+                        str = data;
+                    }
+                    $('div[data-id="province_num"]').empty().append(str);
+                    $('#profilesRegion').modal();
+                }
+            });
+        });
+        
+        //查看合同名称
+        $('.viewName').click(function(){
+            var profileName = $(this).attr('data-value');
+            var strs= new Array(); //定义一数组
+            var str = '';
+            strs=profileName.split(":"); //字符分割
+            for (i=0;i<strs.length ;i++ ){
+                str += strs[i]+'<hr/>';
+            } 
+            //console.log(str);
+            $('#viewProfilesContent').empty().append(str);
+            $('#viewProfilesName').modal();
+            
+        });
+    </script>
+</body>
+<!-- END BODY -->
+</html>

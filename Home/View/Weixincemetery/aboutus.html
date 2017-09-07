@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>关于我们</title>
+        <link href="{$Think.const.CSS_URL}bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="__PUBLIC__/Weixin/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+    </head>
+    <body style="background: #fff7d8;">
+        <!-- 关于我们banner -->
+        <div class="about_banner">
+            <img src="__PUBLIC__/Weixin/images/about_banner.jpg"/>
+        </div>
+        <!-- 页面进入主体部分 -->
+        <main>
+            <!-- 公司简介标题 -->
+            <div class="about_title">
+                <div class="container">
+                    <span class="pa">公司简介</span>
+                    <span class="pb">Company Profile</span>
+                </div><!-- container End -->
+            </div><!-- about_title公司简介标题结束 -->
+            <!-- 公司简介内容 -->
+            <div class="container">
+                <!-- 关于我们第一点：卉格苑科技旗下的殡葬行业电子商务类网站 -->
+                <div class="about_main">
+                    <h2 class="title_bg">殡葬行业中的电子商务</h2>
+                    <div class="p_main">
+                        91搜墓网是卉格苑(北京)科技有限公司旗下的殡葬行业电子商务类网站。卉格苑科技是由海外知名人士、大型陵园企业及知名互联网技术人员、商务高管共同创办的高新技术企业，拥有中国殡葬协会会员单位，中国青年工作委员会主任单位等荣誉，地处于有着“中国硅谷”之称的中关村，致力于成为殡葬行业的信息化管理专家以及最专业的陵园互联网平台服务提供商（旨在打造国内最大的网络搜墓平台）。
+                    </div>
+                    <span class="about_bg"></span>
+                </div><!-- about_main End -->
+                <!-- 关于我们第二点：中国最领先的陵园信息服务平台 -->
+                <div class="about_main">
+                    <h2 class="title_bg">中国最领先的陵园信息服务平台</h2>
+                    <div class="p_main">
+                        我们致力于为用户提供全面实时的墓地信息，涵盖各个陵园的环境、墓型、交通以及最新的陵园动态等。我们拥有一支最专业的顾问团队，对客户咨询的问题进行一一沟通解答，让每一个用户得到最满意的服务。平台的合作伙伴已遍布华北、华南、东南、西南、西北等多个地区，其中包括大型陵园、公墓、殡仪馆，也包括殡葬行业的企业商家等，不断的促进平台的稳定发展，把殡葬行业推向更宽广的方向，形成健康、光明的道路。
+                    </div>
+                    <span class="about_bg"></span>
+                </div><!-- about_main End -->
+                <!-- 关于我们第三点：全国各地的陵园汇总 -->
+                <div class="about_main">
+                    <h2 class="title_bg">全国各地的陵园汇总</h2>
+                    <!-- 陵园汇总内容 -->
+                    <div class="about_summary">
+                        <i></i>
+                        <ul>
+                            <volist name='region' id='vo'>
+                                <li><a href="{:U('Weixincemetery/index', array('province'=>$vo['region_id']))}">{$vo.region_name}</a></li>
+                            </volist>
+                        </ul>
+                    </div><!-- about_summary陵园汇总内容结束 -->
+                    <span class="about_bg"></span>
+                </div><!-- about_main End -->
+                <!-- 关于我们第四点：91搜墓网一站式服务 -->
+                <div class="about_main">
+                    <h2 class="title_bg">91搜墓网一站式服务</h2>
+                    <div class="p_main">
+                        同时如果客户直接和陵园签订了正规购墓合同，墓地价格以陵园挂牌价格为准，通过91搜墓网平台成功预订会员陵园，可享受平台返现优惠，过程真实透明。91搜墓网一站式服务，方便客户更快速便捷的搜索到需要购买的陵园墓地。
+                    </div>
+                    <span class="about_bg"></span>
+                </div><!-- about_main End -->
+                <!-- 91搜墓联系方式 -->
+                <div class="about_main">
+                    <h2 class="title_bg">91搜墓网联系方式</h2>
+                    <div class="p_main">
+                        <p>电话：400-8010-344</p>
+                        <p>邮箱：hgy@huigeyuan.com</p>
+                        <p>QQ：2542292091</p>
+                        <p>公司地址：北京市海淀区中关村东路18号财智国际大厦C座1907室</p>
+                    </div>
+                    <span class="about_bg"></span>
+                </div><!-- about_main End -->
+            </div><!-- container End -->
+        </main><!-- main end -->
+    </body>
+</html>

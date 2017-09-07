@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="icon" href="/Public/soumu.ico"  type="image/x-icon">
+    <meta charset="UTF-8">
+    <title>苏州山陵文化_{$Think.config.SITE_NAME}</title>
+    <meta name='keywords' content='91搜墓网,网上公墓,网上预订,预约看墓,购墓,墓地陵园价格,陵园风水,行业动态,搜索平台 殡葬行业,陵园,墓地,风水,陵园环境,墓地价格,公墓,墓型,殡葬协会,生态陵园' />
+    <meta name="description" content="山陵文化产业管理委员会下辖资源：凤凰公墓（凤凰、凤凰池、凤凰南三、南四区、尧峰、和合山、永安、七子8个墓区）、灵天线公墓（苏州公墓、灵岩公墓、天灵公墓、天平公墓）及塔陵一座。秉承着做优做精做深殡葬文化的理念，旨在通过墓区景观改造，资源整合，服务提升" />
+    <link href="{$Think.const.CSS_URL}topics/header.css" media="screen, projection" rel="stylesheet" type="text/css" />
+    <link href="{$Think.const.CSS_URL}topics/slwh.css" media="screen, projection" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<include file="Common:head_topics" />
+<!-- 导航 -->
+<div class="topics_nav" id="topics_nav">
+    <div class="contain">
+        <ul>
+            <li class="currter"><a href="javascript:void(0)">山陵文化</a></li>
+            <li><a href="#2F">陵园简介</a></li>
+            <li><a href="#3F">墓区介绍</a></li>
+            <li><a href="#4F">墓型推荐</a></li>
+            <li><a href="#5F">代客祭扫</a></li>
+            <li><a href="#6F">陵园荣誉</a></li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+</div><!-- topics_nav导航结束 -->
+<!-- banner -->
+<div class="slwh_banner">
+    <div class="slwh_swf">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0">
+            <param name="movie">
+            <param name="quality" value="high"><param name="allowFullScreen" value="true">
+            <param name="FlashVars" value="-1">
+            <embed src="{$Think.const.IMG_URL}topics/slwh/slwh.swf" allowfullscreen="true" flashvars="vcastr_file=http://www.91soumu.com/Public/bfq.flv" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="518" height="300">
+        </object>
+    </div>
+</div>
+<!-- 简介 -->
+<div class="slwh_intro" id="2F">
+    <div class="contain clearfix">
+        <!-- 左侧简介 -->
+        <div class="slwh_intro_left">
+            <h1>陵园简介</h1>
+            <p>木渎山陵文化产业管理委员会是木渎镇人民政府的直辖机构。</p>
+            <p>管委会于2009年2月21日正式挂牌成立，下辖资源：凤凰公墓（凤凰、凤凰池、凤凰南三、南四区、尧峰、和合山、永安、七子8个墓区）、灵天线公墓（苏州公墓、灵岩公墓、天灵公墓、天平公墓）及塔陵一座。</p>
+            <p>管委会秉着做优做精做深殡葬文化的理念，旨在通过墓区景观改造，资源整合，服务提升，在融入宗教信仰与殡葬文化的基础上，把墓区建设成为风景优美的花园、公园、园林，并成为弘扬爱国主义和崇尚孝道文化的教育基地。</p>
+        </div><!-- slwh_intro_left end -->
+        <!-- 右侧图片 -->
+        <div class="slwh_intro_right">
+            <img src="{$Think.const.IMG_URL}topics/slwh/slwh_intro_img.jpg"/>
+            <p>地点：苏州</p>
+        </div><!-- slwh_intro_right end -->
+    </div><!-- contain end -->
+</div><!-- slwh_intro简介结束 -->
+<!-- 墓区介绍 -->
+<div class="slwh_area" id="3F">
+    <div class="contain clearfix">
+        <!-- 标题 -->
+        <div class="slwh_area_title">
+            <img src="{$Think.const.IMG_URL}topics/slwh/slwh_area_title.png" alt="苏州山陵文化-91搜墓网"/>
+        </div><!-- slwh_area_title end -->
+        <!-- 右侧墓区内容 -->
+        <div class="slwh_area_right">
+            <h1>各 墓 区 介绍</h1>
+            <p>做优、做精、做深、殡葬文化</p>
+            <p class="p2">把墓区建设成为风景优美的花园、公园、园林</p>
+            <ul>
+                <volist name="storeData" id="vo" key='k'>
+                <li <if condition='$k%5 eq 0'> class='last'</if>>
+                    <a href="{:U('cemetery/detail/'.$vo['store_id'])}" target="_blank">
+                        <empty name='vo.StoreImg'>
+                            <img src="{$Think.const.IMG_URL}topics/slwh/slwh_area_img1.jpg" alt="{$vo.store_name}" />
+                        <else />
+                            <img src="{$vo.StoreImg.image_url}" alt="{$vo.store_name}" />
+                        </empty>
+                    </a>
+                    <p>
+                        <a href="{:U('cemetery/detail/'.$vo['store_id'])}" title="{$vo.store_name}" target="_blank" >
+                        {$vo.store_name|msubstr=0,7}
+                        </a>
+                    </p>
+                </li>
+                </volist>
+            </ul>
+        </div><!-- slwh_area_right右侧墓区内容结束 -->
+    </div><!-- contain end -->
+</div><!-- slwh_area墓区介绍结束 -->
+<!-- 墓型推荐+代客祭扫+陵园荣誉 -->
+<div class="slwh_bottom" id="4F">
+    <div class="contain">
+        <!-- 墓型推荐 -->
+        <h1>墓型推荐</h1>
+        <div id="slwh_tomb" class="scroll_horizontal">
+            <div class="box">
+                <ul class="list">
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="{$Think.const.IMG_URL}topics/slwh/slwh_tomb_img1.jpg" alt="山陵文化陵园墓型"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="{$Think.const.IMG_URL}topics/slwh/slwh_tomb_img2.jpg" alt="山陵文化陵园墓型"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="{$Think.const.IMG_URL}topics/slwh/slwh_tomb_img3.jpg" alt="山陵文化陵园墓型"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="{$Think.const.IMG_URL}topics/slwh/slwh_tomb_img4.jpg" alt="山陵文化陵园墓型"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="{$Think.const.IMG_URL}topics/slwh/slwh_tomb_img5.jpg" alt="山陵文化陵园墓型"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="{$Think.const.IMG_URL}topics/slwh/slwh_tomb_img6.jpg" alt="山陵文化陵园艺术墓型"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="{$Think.const.IMG_URL}topics/slwh/slwh_tomb_img7.jpg" alt="山陵文化陵园草坪葬墓型"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="{$Think.const.IMG_URL}topics/slwh/slwh_tomb_img8.jpg" alt="山陵文化陵园艺术墓型"/>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="scroll_btn plus"><img src="{$Think.const.IMG_URL}topics/slwh/slwh_left_btn.png" ></div>
+            <div class="scroll_btn minus"><img src="{$Think.const.IMG_URL}topics/slwh/slwh_right_btn.png"></div>
+        </div><!-- scroll_horizontal墓型推荐 -->
+        <!-- 代客祭扫服务 -->
+        <div class="slwh_sweep" id="5F">
+            <h1>代客祭扫服务</h1>
+            <img src="{$Think.const.IMG_URL}topics/slwh/slwh_sweep_img.png" alt="苏州山陵文化-代客祭扫服务"/>
+        </div><!-- slwh_sweep代客祭扫服务结束 -->
+        <!-- 陵园荣誉 -->
+        <div class="slwh_aptitude" id="6F">
+            <h1>陵园荣誉</h1>
+            <!-- 陵园荣誉内容 -->
+            <div class="aptitude_main">
+                <div id="marquee1">
+                    <ul>
+                        <li>
+                            <img src="{$Think.const.IMG_URL}topics/slwh/1.jpg" alt="苏州山陵文化管理委员会荣誉证书"/>
+                        </li>
+                        <li>
+                            <img src="{$Think.const.IMG_URL}topics/slwh/2.jpg" alt="山陵文化荣誉"/>
+                        </li>
+                        <li>
+                            <img src="{$Think.const.IMG_URL}topics/slwh/3.jpg" alt="山陵文化荣誉"/>
+                        </li>
+                        <li>
+                            <img src="{$Think.const.IMG_URL}topics/slwh/4.jpg" alt="山陵文化荣誉"/>
+                        </li>
+                        <li>
+                            <img src="{$Think.const.IMG_URL}topics/slwh/5.jpg" alt="山陵文化荣誉"/>
+                        </li>
+                        <li>
+                            <img src="{$Think.const.IMG_URL}topics/slwh/6.jpg" alt="山陵文化荣誉"/>
+                        </li>
+                        <li>
+                            <img src="{$Think.const.IMG_URL}topics/slwh/7.jpg" alt="山陵文化荣誉"/>
+                        </li>
+                        <li>
+                            <img src="{$Think.const.IMG_URL}topics/slwh/8.jpg" alt="山陵文化荣誉"/>
+                        </li>
+                        <li>
+                            <img src="{$Think.const.IMG_URL}topics/slwh/9.jpg" alt="山陵文化荣誉"/>
+                        </li>
+                        <li>
+                            <img src="{$Think.const.IMG_URL}topics/slwh/10.jpg" alt="山陵文化荣誉"/>
+                        </li>
+                        <li>
+                            <img src="{$Think.const.IMG_URL}topics/slwh/11.jpg" alt="山陵文化荣誉"/>
+                        </li>
+                        <li>
+                            <img src="{$Think.const.IMG_URL}topics/slwh/12.jpg" alt="山陵文化荣誉"/>
+                        </li>
+                        <li>
+                            <img src="{$Think.const.IMG_URL}topics/slwh/13.jpg" alt="山陵文化荣誉"/>
+                        </li>
+                        <li>
+                            <img src="{$Think.const.IMG_URL}topics/slwh/14.jpg" alt="山陵文化荣誉"/>
+                        </li>
+                        <li>
+                            <img src="{$Think.const.IMG_URL}topics/slwh/15.jpg" alt="山陵文化荣誉"/>
+                        </li>
+                        <li>
+                            <img src="{$Think.const.IMG_URL}topics/slwh/16.jpg" alt="山陵文化荣誉"/>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div><!-- aptitude_main陵园荣誉内容结束 -->
+        </div><!-- slwh_aptitude陵园荣誉结束 -->
+    </div><!-- contain end -->
+</div><!-- slwh_bottom墓型推荐+代客祭扫+陵园荣誉结束 -->
+<!-- 底部 -->
+<div class="topics_footer">
+	<p>{$Think.config.BEIAN_INFO}</p>
+</div><!-- topics_footer end -->
+    <script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<!-- 墓型推荐轮播jquery.cxscroll.js -->
+<script src="{$Think.const.JS_URL}jquery.cxscroll.js"></script>
+<!-- 陵园资质jquery.kxbdMarquee.js -->
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery.kxbdmarquee.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/topics.js"></script>
+<script type="text/javascript">
+    $(function(){
+    //墓型推荐轮播
+        $("#slwh_tomb").cxScroll();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head" />
+        <link rel="stylesheet" type="text/css" href="{$Think.const.ASSETS_URL}chosen-bootstrap/chosen/chosen.css" />
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">完成的订单列表</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>完成的订单列表</h4>
+                                </div>
+                                <div class="widget-body">
+                                    <form id="quickForm" method="get" class="form-horizontal" autocomplete="off" action='{:U("finish")}'>
+                                    <table>
+                                         <tr>
+                                            <td>搜索：</td>
+                                            <td>
+                                                <input type="text" name="order_son_sn" class="input-medium" placeholder="子订单号" value="{$Think.get.order_son_sn}"/>
+                                            </td>
+                                             <td>
+                                                <input type="text" name="store_name" class="input-medium" placeholder="商家名称" value="{$Think.get.store_name}"/>
+                                            </td>
+                                              <td>
+                                                <input type="text" name="take_stock_people" class="input-medium" placeholder="提货人姓名" value="{$Think.get.take_stock_people}"/>
+                                                
+                                            </td>
+                                            <td>
+                                                <input type="text" name="take_stock_mobile" class="input-medium" placeholder="提货人电话" value="{$Think.get.take_stock_mobile}"/>
+                                                
+                                                <button class="btn btn-primary">确定</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    </form>
+                                    <table class="table table-striped table-bordered" id="sample_1">
+                                        <thead>
+                                            <tr>
+                                                <th width="8%" class="hidden-phone">主订单号</th>
+                                                <th width="8%" class="hidden-phone">子订单号</th>
+                                                <th width="13%" class="hidden-phone">订单总额</th>
+                                                <th width="8%" class="hidden-phone">优惠总额</th>
+                                                <th width="12%" class="hidden-phone">下单人</th>
+                                                <th width="12%" class="hidden-phone">下单人电话</th>
+                                                <th width="5%" class="hidden-phone">下单时间</th>
+                                                <th width="5%" class="hidden-phone">完成时间</th>
+                                               
+                                                <th width="13%" class="hidden-phone">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <volist name="info" id="vo">
+                                            <tr class="odd gradeX">
+                                                <td class="hidden-phone" width="10%">{$vo.order_main_sn}</td>
+                                                <td class="hidden-phone" width="10%">{$vo.order_son_sn}</td>
+                                                <td class="hidden-phone" width="8%">{$vo.total_price}</td>
+                                                <td class="hidden-phone" width="8%">{$vo.coupon_price}</td>
+                                                <td class="hidden-phone" width="8%">{$vo.main.member_name}</td>
+                                                <td class="hidden-phone" width="8%">{$vo.main.member_contact}</td>
+                                                <td class="hidden-phone" width="10%">{$vo.order_service_time|date="Y-m-d",###}</td>
+                                                <td class="hidden-phone" width="10%">{$vo.actual_stock_time|date="Y-m-d",###}</td>
+                                                <td class="hidden-phone" width="28%">
+
+
+                                                     <a class="btn btn-small btn-primary"  href="{:U('details',array('ordersn'=>$vo['order_son_sn']))}"><i class="icon-success icon-white"> </i> 查看详情</a>
+
+
+                                                    <if condition="$vo['status'] neq C('SERVICE_ORDER_STATUS.STOP')">
+                                                        <neq name='vo["brokerage_money"]' value='0'>
+                                                            <a  class="btn btn-danger btn-small backorder "  href="javascript:void(0)" data-orderId="{$vo.order_son_sn}"><i class="icon-remove icon-white"> </i>退单</a>
+                                                        </neq>
+                                                    </if>
+                                             </td>
+                                            </tr>
+                                        </volist>
+
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span12 center">
+                                            <div class="pagination" id="sample_1_info" style="text-align: center">
+                                                {$page}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+    
+    <!--填写退单信息开始-->
+    <div id="backorder" class="modal hide fade in">
+        <form id="backorderFrom" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>退单信息</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">      
+                    <tbody>
+                        <tr>
+                            <td>订单SN:</td>
+                            <td><input  type="text" name="order_son_sn" disabled></td> 
+                        </tr>
+                        <tr>
+                            <td>总价:</td>
+                            <td><input  type="text" name="total_price" disabled></td>
+                        </tr>
+
+                        <tr>
+                            <td>优惠金额:</td>
+                            <td><input  type="text" name="coupon_price" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>退款金额:</td>
+                            <td><input  type="text" name="back_money" ></td>
+                        </tr>
+                        <tr>
+                            <td>支付类型:</td>
+                            <td><input  type="text" name="pay_type" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>实际支付时间:</td>
+                            <td><input  type="text" name="order_service_time" disabled></td>
+                        </tr>
+                                                <tr>
+                            <td>申请退款时间:</td>
+                            <td><input  type="text" name="back_apply_time" disabled></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>开户行:</td>
+                            <td>
+                                <select name="bank">
+                                    <option value="0">--请选择-- </option>
+                                    <volist name="Think.config.PAY_TYPE"  id="banks" >
+                                        <option value="{$key}">{$banks}</option>
+                                    </volist>
+                                </select>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type='hidden' name='profilesId'></input>
+                <input type='hidden' name='id' id="order_sn"></input>
+                <button type="submit" class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--填写退单信息结束-->
+      <!--模态化弹框 查看审核票据-->
+    <div id="details" class="modal hide fade in" style="display: none; ">
+        <form id="detailsForm" method="post"  class="form-horizontal form-item" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>查看详情</h3>
+            </div>
+            <div class="modal-body">
+                <div class='orderbill-table'></div>
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>订单号:</td>
+                            <td>
+                                <input type="text" id="total" name="order_son_sn" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>商家:</td>
+                            <td>
+                                <input type="text" name="store_name" data-rule="required" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>总金额</td>
+                            <td>
+                                <input type="text" name="total_price"  id="total_price">
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>商品名称</td>
+                            <td>
+                                <input type="text" name="goods_name" readonly="readonly" value="" id="goods_name" >
+                            </td>
+                        </tr>
+                         
+
+                        <tr>
+                            <td>商品单价</td>
+                            <td>
+                                <input type="text" name="goods_price"  id="goods_price" value="" readonly="readonly"> 
+                            </td>
+                        </tr>
+                        <!-- <tr  id="client_cash"> -->
+
+                    
+                        <tr>
+                            <td>商品数量</td>
+                            <td>
+                                <input type="text" id="goods_num"   readonly="readonly"  value=""  name="number"/>
+                            </td>
+                        </tr>
+                        
+                        
+
+                        <tr>
+                            <td>商品总额</td>
+                            <td>
+                                <input type="text" name="price" value="">
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>提货人:</td>
+                            <td>
+                                <input type="text" name="take_stock_people" value="">
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>提货时间:</td>
+                            <td>
+                                <input type="text" name="take_stock_time" value="">
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>确认人:</td>
+                            <td>
+                                <input type="text" name="feedback_member_name" value="">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+           
+        </form>
+    </div>
+    <!--模态框结束 查看审核票据-->
+
+ 
+       
+   <!--添加跟踪信息结开始-->
+    <div id="addorderfollowform" class="modal hide fade in">
+        <form id="defaultForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>添加跟踪信息</h3>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>沟通对象:</td>
+                            <td><input name="type" value="1" checked="checked" type="radio" class="client"> 客户 
+                                <input name="type" value="2" type="radio"> 商家
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>沟通问题:</td>
+                            <td>
+                                <textarea rows="3" id='question'  name="question" class="input-xlarge" data-rule="required"></textarea>
+                            </td>
+                        </tr>
+                     
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <input type='hidden' id='orderid' name='orderid'>
+                <input type='hidden' id='member_id' name='member_id'>
+                <input type='hidden' id='ordersn' name='ordersn'>
+                <button type="submit" id='tijiao' class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--添加跟踪信息结束-->
+
+   <!--查看跟踪信息结开始-->
+    <div id="orderfollowform" class="modal hide fade in" style="width:45%;">
+        <form id="lookdefaultForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>查看跟踪信息</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">
+                     <thead>
+                            <tr class="data-message">
+                                 <th style=" width:20%;" >时间</th>
+                                <th style=" width:10%;" class="hidden-phone">对象</th>
+                                <th style=" width:70%;" class="hidden-phone">问题</th>
+                            </tr>
+                     </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--查看跟踪信息结束-->
+    
+ 
+    
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ASSETS_URL}chosen-bootstrap/chosen/chosen.jquery.min.js"></script>
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}zh-CN.js"></script>
+    <script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script type="text/javascript">
+     
+      
+        
+        //将申请发送给财务
+        $('.sendtofinance').click(function () {
+            var r=confirm("确认要将订单推送给财务进行返现吗？");
+            if(r==true){
+                var orderId = $(this).attr('data-orderId');
+                $.ajax({
+                    url: "{:U('appointsendtofinance')}",
+                    type: 'POST',
+                    data: 'orderId=' + orderId,
+                    success: function (d) {
+                        var result = eval("(" + d + ")");
+                        if (result.flag == 1) {
+                            alert(result.msg);
+                            window.location.reload();//刷新当前页面.
+                        } else {
+                            alert(result.msg);
+                        }
+                    }
+                });
+            }
+        });
+        
+        //退单操作
+        $(".backorder").click(function(){
+            var orderId = $(this).attr('data-orderid');
+            var ret = confirm("你确认要退单么？");
+            if(ret) {
+                $.ajax({
+                    url:'/system.php/OrderService/orderback/id/' + orderId,
+                    type:'get',
+                    success:function(msg){
+                        var result = eval("(" + msg + ")");
+                        if(result.flag == 2 ){
+                            var data = result.data;
+                            $('#backorderFrom input[name="order_son_sn"]').val(data['order_son_sn']);
+                            $('#backorderFrom input[name="total_price"]').val(data['total_price']);
+                            $('#backorderFrom input[name="coupon_price"]').val(data['coupon_price']);
+                            $('#backorderFrom input[name="pay_type"]').val(data['pay_type']);
+
+                            $('#backorderFrom textarea[name="order_service_time"]').val(data['order_service_time']);
+                            $('#backorderFrom input[name="back_apply_time"]').val(data['back_apply_time']);
+                           
+                            $('#backorder').modal();
+                        }else{
+                            alert(result.msg);
+                            window.location.reload();//刷新当前页面.
+                        }
+                    }
+                });
+            }
+        });
+        //退单金额判断
+        function back(){
+            var total_price = $('#backorderFrom input[name="total_price"]').val();
+            var coupon_price = $('#backorderFrom input[name="coupon_price"]').val();
+            var back_money = $('#backorderFrom input[name="back_money"]').val();
+            if((total_price - coupon_price) < back_money){
+                return false;
+            }else {
+                return true;
+            }
+        }
+        //提交退单操作
+        $('#backorderFrom').bind('valid.form', function () {
+            var orderId = $('.backorder').attr('data-orderid');
+            if(!back()){
+                alert('检查退单金额是否正确！');
+            
+                return false;
+            }
+            $.ajax({
+                // url: "{:U('singleBack')}",
+                url:'/system.php/OrderService/singleBack/id/' + orderId,
+
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    alert(result.msg);
+                    if (result.flag == 1) {
+                        $('#backorder').modal('hide');
+                        window.location.reload();//刷新当前页面.
+                    }                
+                }
+            });
+        });
+      
+      
+
+  
+    
+   
+    
+    </script>
+</body>
+<!-- END BODY -->
+</html>

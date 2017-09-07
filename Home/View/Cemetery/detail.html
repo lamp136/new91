@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="icon" href="/Public/soumu.ico"  type="image/x-icon">
+    <meta charset="UTF-8">
+    <title><notempty name='storeInfo.seo_title'>{$storeInfo.seo_title}<else/>{$storeInfo.store_name}</notempty>_{$Think.config.SITE_NAME}</title>
+    <meta name='keywords' content="{$storeInfo.seo_keywords}" />
+    <meta name='description' content="{$storeInfo.seo_description}" />
+    <meta name="location" content="province={$province.region_name};city={$city.region_name};" />
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="{$Think.config.WAP_STIE_DOMAIN}/cemetery/detail/{$storeId}.html" />
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+    <!-- 陵园景观点击小图弹出大图jquery.fancybox.css -->
+    <link href="{$Think.const.CSS_URL}jquery.fancybox.css" rel="stylesheet" type="text/css"/>
+    <!-- 陵园资质轮播样式flexslider.css -->
+    <link href="{$Think.const.CSS_URL}flexslider.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="{$Think.const.JS_URL}wap.js"></script>
+    <script type="text/javascript">
+        var url = window.location.pathname;
+        var newurl = "{$Think.config.WAP_STIE_DOMAIN}"+url;
+        browserRedirect(newurl);
+    </script>
+</head>
+<body>
+    <!-- 提示框 -->
+    <div class="tooltip_box"></div>
+    <div class="tooltip_pers">
+        <div class="clearfix">
+            <img src="{$Think.const.IMG_URL}pers_save.png" />
+            <p id="content"></p>
+        </div>
+
+        <div class="tooltip_pers_btn">
+            <a class="ack_btn" href="javascript:void(0);">关闭</a>
+        </div>
+        <span class="tooltip_cloce"></span>
+    </div>
+
+   <include file="Common:head_in" />
+    <!-- 中间内容部分 -->
+    <div class="main">
+        <div class="contain">
+            <!-- 面包屑导航 -->
+            <div class="breadcrumb">
+                <ul>
+                    <li><a href="<?php echo getHomeUrl(); ?>">首页</a></li>
+                    <li>></li>
+                    <li><a href="<?php echo getBreadUrl($storeInfo['province_id']) ?>">陵园</a></li>
+                    <li>></li>
+                    <li>{$storeInfo.store_name}</li>
+                </ul>
+            </div><!-- breadcrumb面包屑导航结束 -->
+            <!-- 陵园详情 -->
+            <div class="details clearfix">
+                <!-- 详情内容 -->
+                <div class="det_main clearfix">
+                    <!-- 陵园图片 -->
+                    <img class="det_img" src="{$storeInfo.StoreImg.image_url}" alt="{$storeInfo.store_name}"/>
+                    <!-- 详情右侧 -->
+                    <div class="det_detail">
+                        <h1>{$storeInfo.store_name}
+                            <if condition="$storeInfo['member_status'] gt C('DEFAULT_STATUS') && $storeInfo['member_status'] neq C('STOER_MERMBER_PERSON')">
+                                <span class="member"></span>
+                            </if>
+                            <span class="det_h_right">
+                                <!-- 添加关注 -->
+                                <a href="javascript:void(0)" <empty name="judge">class="det_collect"</empty> data-cimg="{$Think.const.IMG_URL}" data-sid="{$Think.session.member_name}" storeid='{$storeInfo.store_id}' ><img title="关注" alt="关注" id='collect_src' <empty name="judge">src="{$Think.const.IMG_URL}collect_a.png"<else /> src="{$Think.const.IMG_URL}collect_b.png"</empty> />关注</a>
+                                
+                                <img src="{$Think.const.IMG_URL}grade_img{$storeScore}.png" alt="{$storeInfo.store_name}--91搜墓网会员单位"/>
+                            </span>
+                        </h1>
+                        <!-- 参考价+描述 -->
+                        <ul class="det_intor">
+                            <li class="pric">
+                                参考价：<gt name="storeInfo.min_price" value="0"><font>￥{$storeInfo['min_price']}</font>万起<else/>--</gt>
+                            </li>
+                            <neq name="storeInfo.province_id" value="41">
+                                <gt name="storeInfo.member_status" value="0">
+                                    <li>
+                                        <span class="fan">返</span>优惠返现：通过91搜墓网预约并达成交易，可享平台返利
+                                    </li>
+                                </gt>
+                            </neq>
+                            <li>
+                                <span class="te">特</span>特&nbsp;&nbsp;色：{$storeInfo.feature|msubstr=0,30}
+                            </li>
+                            <li>
+                                <span class="feng">风</span>陵园风水：{$storeInfo.geomantic|msubstr=0,30}
+                            </li>
+                            <li>
+                                <span class="huan">环</span>陵园环境：{$storeInfo.environment|msubstr=0,30}
+                            </li>
+                        </ul>
+                        <!-- 位置 -->
+                        <ul class="det_location clearfix">
+                            <li>
+                                <h2>行政区域</h2>
+                                <p>{$city.region_name}</p>
+                            </li>
+                            <li>
+                                <h2>距离市区</h2>
+                                <p>{$storeInfo.distance}</p>
+                            </li>
+                            <li>
+                                <h2>陵园地址</h2>
+                                <p><a href="#map">查看地图</a></p>
+                            </li>
+                            <li class="last">
+                                <h2>浏览量</h2>
+                                <p>{$storeInfo.hits}</p>
+                            </li>
+                        </ul>
+                        <!-- 预约看墓+QQ资讯+购墓热线 -->
+                        <ul class="det_answer_btn">
+                            <li>
+                                <eq name="storeInfo[status]" value="2">
+                                    <a class="yuy no_btn" href="javascript:void(0);" title="停售">停售</a>
+                                <else/>
+                                    <a class="yuy" href="{:U('order/'.$storeInfo['store_id'])}" title="预约看墓">预约看墓</a>
+                                </eq>
+                            </li>
+                            <!--<li><a href="javascript:void(0)" onclick="TQKF.kefuimg.Distrabute()"><img src="{$Think.const.IMG_URL}zxzx.png" title="在线咨询"/></a></li>-->
+                            <li>
+                                <a target="_blank" href="http://p.qiao.baidu.com/im/index?siteid=8935186&amp;ucid=20177439">
+                                    <img src="{$Think.const.IMG_URL}zxzx.png" alt="91搜墓网客服" title="您好，91搜墓网客服为您服务，有什么可以帮到您。"/>
+                                </a>
+                            </li>
+                            <li>
+                                <p>购墓热线：<span>400-8010-344</span></p>
+                            </li>
+                        </ul>
+                    </div><!-- details_right详情右侧结束 -->
+                    
+                </div><!-- det_main详情内容结束 -->
+                <!-- 陵园详情左侧 -->
+                <div class="det_left">
+                    <!-- 陵园简介 -->
+                    <h1>陵园简介</h1>
+                    <div class="det_synopsis">
+                        {$storeInfo.content}
+                    </div><!-- det_synopsis end -->
+                    <!-- 陵园景观 -->
+                    <notempty name='lyjg'>
+                    <h1>陵园景观<img src="{$Think.const.IMG_URL}del_h1_img1.png" alt="{$storeInfo.store_name}"/></h1>
+                    <div id="det_landscape" class="scroll_horizontal">
+                        <div class="box">
+                            <ul class="list">
+                                <volist name="lyjg" id="vo">
+                                    <li>
+                                        <a class="fancybox" href="{$vo.image_url}" data-fancybox-group="gallery">
+                                            <img src="{$vo.image_url}" alt="{$storeInfo.store_name}-陵园景观"/>
+                                        </a>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </div>
+                        <div class="scroll_btn plus"><img src="{$Think.const.IMG_URL}s_left_btn.png" alt="上一张"></div>
+                        <div class="scroll_btn minus"><img src="{$Think.const.IMG_URL}s_right_btn.png" alt="下一张"></div>
+                    </div><!-- scroll_horizontal end -->
+                    </notempty>
+                    <!-- 名人墓地 -->
+                    <notempty name="mrmd">
+                    <h1>名人墓地
+                         <img src="{$Think.const.IMG_URL}del_h1_img2.png" alt="{$storeInfo.store_name}-名人墓地"/>
+                        <a href="{:U('cemetery/famous-'.$storeInfo['store_id'])}" target="_blank">更多>></a>
+                    </h1>
+                    <ul class="det_celebrity clearfix">
+                        <volist name="mrmd" id="vo" key="k">
+                            <li <eq name="k" value="3"> class='last'</eq>>
+                                <a href="{:U('cemetery/famous-d-'.$vo['id'])}" target="_blank">
+                                    <img src="{$vo.image_url}" alt="{$vo.name}-{$storeInfo.store_name}"/>
+                                </a>
+                                <div class="det_abstract">
+                                    <h2><a href="{:U('cemetery/famous-d-'.$vo['id'])}" title="{$vo.name}-{$storeInfo.store_name}" target="_blank">{$vo.name}</a></h2>
+                                    <p>{$vo.born_in}-{$vo.died_in}</p>
+                                    <p>{$vo.summary|msubstr=0,25}</p>
+                                </div>
+                            </li>
+                        </volist>
+                    </ul><!-- det_celebrity end -->
+                    </notempty>
+                    <!-- 墓型展示 -->
+                    <h1>墓型展示
+                        <img src="{$Think.const.IMG_URL}del_h1_img3.png" alt="{$storeInfo.store_name}-墓型"/>
+                        <a href="{:U('cemetery/tomb-'.$storeInfo['store_id'])}" target="_blank">更多>></a>
+                    </h1>
+                    <ul class="det_tombtype clearfix">
+                        <!-- 墓型内容 -->
+                        <volist name='goods' id='vo' key="k">
+                        <li <eq name="k" value="3">class="det_tomb last"<else/>class="det_tomb"</eq>
+                            <!-- 墓型图片 -->
+                            <img src="{$vo.Img.image_url}" alt="{$vo.goods_name}-{$storeInfo.store_name}"/>
+                            <!-- 墓型描述 -->
+                            <div class="det_depict">
+                                <h2>{$vo.goods_name}</h2>
+                                <!--<h4>价格：￥<notempty name="vo.Area.price">{$vo.Area.price}<else/>--</notempty></h4>-->
+                            <ul class="clearfix">
+                                <li>
+                                    <h3>外观大小</h3>
+                                    <p><notempty name="vo.WAIGUAN">{$vo.WAIGUAN.attr_value}<else/>整理中</notempty></p>
+                                </li>
+                                <li class="last">
+                                    <h3>材质</h3>
+                                    <p><notempty name="vo.Material">{$vo.Material.attr_value}<else/>大理石</notempty></p>
+                                </li>
+                            </ul>
+                                <neq name="storeInfo[status]" value="2">
+                                    <!-- 预约看墓按钮 -->
+                                    <a class="det_looktomb" href="{:U('order/'.$vo['store_id'])}">免费预约看墓</a>
+                                </neq>
+                            </div><!-- det_depict墓型描述结束 -->
+                        </li>
+                        </volist>
+                    </ul><!-- det_tombtype end -->
+                    <!-- 陵园地图 -->
+                    <notempty name="storeInfo.longitude">
+                        <notempty name="storeInfo.latitude">
+                            <h1>陵园地图</h1>
+                            <a name="map"></a> 
+                            <div id="dituContent" style="border-top: #eee 1px solid; height: 486px; border-right: #eee 1px solid; border-bottom: #eee 1px solid; border-left: #eee 1px solid; width: 823px;margin-top:15px;">&nbsp;</div>
+                        </notempty>
+                    </notempty>
+                    
+                    <!-- 陵园点评 -->
+                    <h1>陵园点评<img src="{$Think.const.IMG_URL}del_h1_img3.png" alt="{$storeInfo.store_name}-评论"/></h1>
+                    <div class="det_remark">
+                        <!-- 与描述相符+星星 -->
+                        <div class="det_star clearfix">
+                            <div class="coincide">
+                                <p>与描述相符</p>
+                                <h2>{$storeScore}</h2>
+                            </div>
+                            <ul>
+                                <li>环境：<span class="pf" id="hj" data-value="{$storeInfo.review_ambient}"></span>{$storeInfo.review_ambient}分</li>
+                                <li class="last">价格：<span class="pf" id="jg" data-value="{$storeInfo.review_price}"></span>{$storeInfo.review_price}分</li>
+                                <li>交通：<span  class="pf" id="jt" data-value="{$storeInfo.review_traffic}"></span>{$storeInfo.review_traffic}分</li>
+                                <li class="last">服务：<span  class="pf" id="fw" data-value="{$storeInfo.review_service}"></span>{$storeInfo.review_service}分</li>
+                            </ul>
+                        </div>
+                        <!-- 点评内容 -->
+                        <table class="remark_main">
+                            <volist name='comment' id='vo' key='k'>
+                            <tr>
+                                <td class="det_name"><empty name="vo.mobile">匿名<else/>{$vo.mobile|substr_replace='****',3,4}</empty></td>
+                                <td class="det_review">{$vo.content}</td>
+                                <td class="det_startime">
+                                    <span id="commentScore{$k}"></span>
+                                    <p>{$vo.comment_time}</p>
+                                    <script>var review_ambient = {$vo.score}; $("#commentScore{$k}").raty({readOnly: true, score: review_ambient});</script>
+                                </td>
+                            </tr>
+                            </volist>
+                        </table>
+                    </div><!-- det_remark end -->
+                </div><!-- det_left陵园详情左侧结束 -->
+                <!-- 陵园详情右侧 -->
+                <div class="det_right">
+                    <!-- 陵园资质 -->
+                    <notempty name='aptitude'>
+                    <div class="det_qualify">
+                        <h1>陵园资质</h1>
+                        <!-- 陵园资质轮播 -->
+                        <div id="qualify" class="flexslider">
+                            <ul class="slides">
+                                <volist name='aptitude' id='vo'>
+                                    <li>
+                                        <div class="img">
+                                            <img src="{$vo.image_url}" height="145" width="232" alt="{$vo.title}"  alt="{$vo.title}-{$storeInfo.store_name}"/>
+                                        </div>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </div><!--flexslider end-->
+                    </div><!-- det_qualify陵园资质结束 -->
+                    </notempty>
+                    <!-- 陵园动态 -->
+                    <notempty name='storeNews'>
+                    <div class="det_dynamic">
+                        <h2>陵园动态</h2>
+                        <ul>
+                            <volist name='storeNews' id='vo' mod='2'>
+                                <li <eq name='mod' value='1'>class='even'</eq>>
+                                    <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0,18}</a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div><!-- det_dynamic陵园动态结束 -->
+                    </notempty>
+                    <!-- 惠民政策 -->
+                    <div class="huimin">
+                        <h2>惠民政策</h2>
+                        <ul>
+                            <volist name='hmzc' id='vo' key='k'>
+                                <li>
+                                    <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}"><span <elt name='k' value='3'>class="led"</elt>>{$k}</span>{$vo.title|msubstr=0,16}</a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div><!-- huimin惠民政策结束 -->
+                    <!-- 广告banner -->
+                    <div class="cem_ad">
+                         <empty name="ads" >
+                    <a href="{:U('/intro/joinus')}" title="91搜墓网商家加盟合作" target="_blank">
+                        <img src="{$Think.const.IMG_URL}cem_ad.jpg" alt="91搜墓网商家加盟合作"/>
+                    </a>
+                <else/>
+                    <a href="{$ad.banner_link}"  title={$ads.banner_name} target="_blank">
+                        <img src="{$Think.config.IMG_HOST}{$ads.banner_url}" alt="{$ads.banner_name}"/>
+                    </a>
+                </empty>
+                    </div><!-- cem_ad广告banner结束 -->
+                    <!-- 风水文化 -->
+                    <div class="funeral">
+                        <h2>风水文化</h2>
+                        <ul>
+                            <li class="first clearfix">
+                                <a href="{:U('news/detail/'.$fswhtj[id])}">
+                                    <empty name='fswhtj.Img'>
+                                        <img src="{$Think.const.IMG_URL}news_default.jpg" alt="{$fswhtj.title}"/>
+                                    <else />
+                                        <img src="{$fswhtj.Img.thumbnail}" alt="{$fswhtj.title}"/>
+                                    </empty>
+                                    <p>{$fswhtj.title}</p>
+                                </a>
+                            </li>
+                            <volist name='fswh' id='vo' key='k'>
+                                <li>
+                                    <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0,16}</a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div><!-- funeral风水文化结束 -->
+                </div><!-- det_right陵园详情右侧结束 -->
+            </div><!-- details陵园详情结束 -->
+        </div><!-- contain -->
+    </div><!-- main中间内容部分结束 -->
+    <!-- 底部footer部分 -->
+<include file="Common:footer" />
+
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<script src="{$Think.const.JS_URL}raty/jquery.raty.js"></script>
+<script>
+$('.pf').each(function(){
+       var pfvalue = $(this).attr('data-value');
+       $(this).raty({readOnly: true, score: pfvalue});
+    }
+);
+</script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+
+<!-- 陵园景观间歇式轮播jquery.cxscroll.js -->
+<script src="{$Think.const.JS_URL}jquery.cxscroll.js"></script>
+<!-- 陵园资质轮播flexslider.js -->
+<script src="{$Think.const.JS_URL}flexslider.js"></script>
+
+<!-- 陵园景观点击小图弹出大图jquery.fancybox.js -->
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery.fancybox.js"></script>
+
+<!--私有的JS -->
+<script type="text/javascript" src="{$Think.const.JS_URL}home/cemeterydetail.js"></script>
+
+<!--地图及评分-->
+<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.5&ak=d8KknmejUBUmMN6yoCiGVRx0"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}map.js"></script>
+
+<script type="text/javascript" >
+    var longitude = "<php>if($storeInfo['longitude']) {echo $storeInfo['longitude'];} else {echo 0;}</php>";
+    var latitude = "<php>if($storeInfo['latitude']) {echo $storeInfo['latitude'];} else {echo 0;}</php>";
+    
+    if (longitude !="0" && latitude != "0") {
+        var store_name = '{$storeInfo.store_name}';
+        var address = '{$storeInfo.address}';
+        DATA.CHECK.MAP(longitude,latitude,store_name,address);
+    }   
+</script>
+<!--地图-->
+</body>
+</html>

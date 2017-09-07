@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="icon" href="/Public/soumu.ico" type="image/x-icon" />
+    <title>{$seoInfo.seo_title}_{$Think.config.SITE_NAME}</title>
+    <meta name="keywords" content="{$seoInfo.seo_keywords}" />
+    <meta name="description" content="{$seoInfo.seo_description}" />
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!--引入头部 -->
+<include file="Common:head_in" />
+
+<!-- 中间内容部分 -->
+<div class="main">
+    <div class="contain clearfix">
+        <!-- 陵园左侧 -->
+        <div class="cem_left">
+            <!-- 筛选条件 -->
+            <div class="cem_sifting">
+                <!-- 筛选条件结果显示 -->
+                <div class="criteria">
+                    <ul>
+                        <li class="sif">筛选条件</li>
+                        <li>></li>
+                        <notempty name="provincename">
+                            <neq name="provinceId" value="$Think.config.CHINA_NUM">
+                            <li class="if">
+                                <a rel="nofollow" href="/c-search?wd={$wd}">{$provincename}<span></span></a>
+                            </li>
+                            <else/>
+                            <li>{$provincename}</li>
+                            </neq>
+                        </notempty>
+                        <notempty name="cityname">
+                            <li class="if">
+                                <a rel="nofollow" href="/c-search?wd={$wd}&province={$provinceId}">{$cityname}<span></span></a>
+                            </li>
+                        </notempty>
+                        <notempty name="wd">
+                            <li>{$wd}</li>
+                        </notempty>
+                        <notempty name="selectDistance">
+                            <li class="if">
+                                <a rel="nofollow" href="{:U('/c-search')}?province={$provinceId}&city={$cityId}">{$selectDistance}<span></span></a>
+                            </li>
+                        </notempty>
+                        <li class="number">共<span>{$total}</span>结果</li>
+                    </ul>
+                </div>
+                <!--陵园地区 -->
+                <notempty name="provinces">
+                <div class="area">
+                    <ul class="filter clearfix">
+                        <li class="tiel">陵园省份</li>
+                        <volist name="provinces" id="provincename" offset="0" length='12'>
+                            <li>
+                                <a rel="nofollow" href="/c-search?wd={$wd}&province={$key}">{$provincename}</a>
+                            </li>
+                        </volist>
+                        <!-- 显示按钮 -->
+                        <gt name="totalProvinces" value="12">
+                        <li class="more_btn"><span></span></li>
+                        </gt>
+                    </ul>
+                    <!-- 陵园地区展开内容 -->
+                    <ul class="filter more_main clearfix">
+                        <li class="tiel"></li>
+                         <volist name="provinces" id="provincename"  offset="12" length='12'>
+                            <li <eq name="provinceId" value="key"> class="fil_led" </eq> >
+                                <a rel="nofollow" href="/c-search?wd={$wd}&province={$key}">{$provincename}</a>
+                            </li>
+                        </volist>
+                    </ul>
+                    <ul class="filter more_main clearfix">
+                        <li class="tiel"></li>
+                         <volist name="provinces" id="provincename" key="k" offset="24" length='12'>
+                            <li>
+                                <a rel="nofollow" href="/c-search?wd={$wd}&province={$k}">{$provincename}</a>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+                </notempty>
+                <!-- 服务地区 -->
+                <notempty name="cities">
+                <div class="area_main clearfix">
+                    <div class="area_left" >
+                        <span class="tiel">服务区域</span>
+                    </div>
+                    <ul class="filter clearfix">
+                        <volist name="cities" id="citiesname" offset="0" length='12'>
+                            <li <eq name="cityId" value="$key"> class="fil_led" </eq>>
+                                <a rel="nofollow" href="/c-search?wd={$wd}&province={$provinceId}&city={$key}">{$citiesname}</a>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+                </notempty>
+            </div><!-- cem_sifting筛选条件结束 -->
+            <!-- 陵园列表 -->
+            <div class="cem_list">
+                <!-- 1 -->
+                <volist name="stores" id="vo">
+                <div class="cem_list_main clearfix">
+                    <!-- 陵园图片 -->
+                    <a href="{:U('cemetery/detail/'.$vo['store_id'])}" class="cem_pho" title="{$vo.store_name}">
+                        <img src="{$vo.store_banner}" alt="{$vo.store_name}" alt="平台优惠"/>
+                        <!--判断是否优惠(上海除外)-->
+                        <neq name="vo.province_id" value="41">
+                            <in name="vo.member_status" value="$storeMembersYH">
+                                 <span class="favorable"></span>
+                            </in>
+                        </neq>
+                     </a>
+                    <!-- 描述 -->
+                    <div class="depict">
+                        <h1>
+                            <a href="{:U('cemetery/detail/'.$vo['store_id'])}" title="{$vo.store_name}">
+                            {$vo.store_name}
+                            </a>
+                            <in name="vo.member_status" value="$memberStatus">
+                                <span class="member"></span>
+                            </in>
+                        </h1>
+                        <ul class="feature">
+                            <li><span>特色</span> {$vo.feature|msubstr=0, 28}</li>
+                            <li><span>简介</span> {$vo.summary|msubstr=0, 28}</li>
+                        </ul>
+                        <ul class="cem_btn">
+                            <li class="subscribe_btn">
+                                <eq name="vo[status]" value="2">
+                                    <a class="no_btn" href="javascript:void(0);" title="停售">停售</a>
+                                <else/>
+                                    <a href="{:U('/order/'.$vo['store_id'])}" title="预约看墓">预约看墓</a>
+                                </eq>
+                            </li>
+                            <!--<li class="online_btn"><a href="javascript:void(0)" onclick="TQKF.kefuimg.Distrabute()">在线咨询</a></li>-->
+                            <!--<li class="qq"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2542292091&site=qq&menu=yes" title="您好，91搜墓网客服为您服务，有什么可以帮到您。"></a></li> -->
+                            <li>
+                                <a target="_blank" href="http://p.qiao.baidu.com/im/index?siteid=8935186&amp;ucid=20177439">
+                                    <img src="{$Think.const.IMG_URL}zxzx.png" alt="91搜墓网客服" title="您好，91搜墓网客服为您服务，有什么可以帮到您。"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 价格 -->
+                    <div class="price">
+                        <img src="{$Think.const.IMG_URL}grade_img<php>echo round(($vo[review_price]+$vo[review_traffic]+$vo[review_ambient]+$vo['review_service'])/4)</php>.png"/>
+                        <h2>参考价</h2>
+                        <p><gt name="vo.min_price" value="0"><span>￥{$vo['min_price']}</span>万起<else/>--</gt></p>
+                        <a href="{:U('/cemetery/detail/'.$vo['store_id'].'#map')}"><i></i>查看地图</a>
+                    </div>
+                </div>
+                </volist>
+              
+            </div><!-- cem_list陵园列表结束 -->
+            <!-- 分页 -->
+            <div class="pagination">
+                {$page}
+            </div><!-- page分页结束 -->
+        </div><!-- cem_left陵园左侧结束 -->
+        <!-- 陵园右侧 -->
+        <div class="cem_right">
+            <!-- 预约 -->
+            <div class="yuyue">
+                <h1>预约看墓</h1>
+                <div class="yuyue_main">
+                    <input class="yu_tex" id="yu_name" type="text" maxlength="5" placeholder="您的姓名（必填）"/>
+                    <input class="yu_tex" id="yu_mobile" type="text" maxlength="12" placeholder="请输入个人手机号（必填）"/>
+                    <button class="yu_btn">立即预约</button>
+                    <p>免费拨打<span>400-8010-344</span></p>
+                </div>
+            </div><!-- yuyue预约结束 -->
+            <!-- 惠民政策 -->
+            <div class="huimin">
+                <h2>惠民政策</h2>
+                <ul>
+                    <volist name='hmzc' id='vo' key='k'>
+                        <li><a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}"><span <elt name='k' value='3'>class="led"</elt>>{$k}</span>{$vo.title|msubstr=0,16}</a></li>
+                    </volist>
+                </ul>
+            </div><!-- huimin惠民政策结束 -->
+            <!-- 广告banner -->
+            <div class="cem_ad">
+                 <empty name="ads" >
+                    <a href="{:U('/intro/joinus')}" title="91搜墓网商家加盟合作" target="_blank">
+                        <img src="{$Think.const.IMG_URL}cem_ad.jpg" alt="91搜墓网商家加盟合作"/>
+                    </a>
+                <else/>
+                    <a href="{$ad.banner_link}"  title={$ads.banner_name} target="_blank">
+                        <img src="{$Think.config.IMG_HOST}{$ads.banner_url}" alt="{$ads.banner_name}"/>
+                    </a>
+                </empty>
+            </div><!-- cem_ad广告banner结束 -->
+            <!-- 殡葬文化 -->
+            <div class="funeral">
+                <h2>殡葬文化</h2>
+                <ul>
+                 <notempty name="bzwhtj">
+                    <li class="first clearfix">
+                        <a href="{:U('news/detail/'.$bzwhtj[id])}">
+                            <empty name='bzwhtj.Img'>
+                                <img src="{$Think.const.IMG_URL}geomantic_img1.jpg"/>
+                            <else />
+                                <img src="{$bzwhtj.Img.thumbnail}"/>
+                            </empty>
+                            <p>{$bzwhtj.title}</p>
+                        </a>
+                    </li>
+                    </notempty>
+                    <volist name='bzwh' id='vo' key='k'>
+                        <li><a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0,16}</a></li>
+                    </volist>
+                </ul>
+            </div><!-- funeral殡葬文化结束 -->
+        </div><!-- cem_right陵园右侧结束 -->
+    </div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<!--底部代码引入-->
+<include file="Common:footer" />
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/cemetery.js"></script>
+$(document).ready(function(){
+    //陵园地区点击展示更多地区
+    $(".more_btn").click(function() {
+        $(".more_main").toggle();
+    });
+});
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head"/>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+<!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="{:U('StoreProfiles/index',array('p'=>$np))}">合同档案列表</a><span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="javascript:;">{$showStoreName}  合同电子档案</a><span class="divider-last">&nbsp;</span>
+                        </li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4><i class="icon-reorder"></i>电子档案相册列表</h4>
+                                    <span class="tools">
+                                        <php>
+                                            if (showHandle('StoreProfiles/imageAdd')){
+                                        </php>
+                                            <a href="{:U('StoreProfiles/imageAdd',array('id'=>$id))}" class="icon-plus">添加合同相册</a>
+                                        <php>
+                                            }
+                                        </php>
+                                    </span>
+                            </div>
+
+                            <div class="widget-body">
+                                <table class="table table-striped table-bordered" id="sample_1">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:15%;">
+                                            <a href="javascript:;" id="all">全选</a>&nbsp;
+                                            <a href="javascript:;" id="delAll">取消</a>&nbsp;
+                                            <a href="javascript:;" id="antiAll">反选</a>&nbsp;
+                                            <php>
+                                                if (showHandle('StoreProfiles/imageSmallDel')){
+                                            </php>
+                                                <input type="button" class="batchDel" value="删除" style="cursor:pointer;" sign='small' />
+                                            <php>
+                                                }
+                                            </php>
+                                        </th>
+                                        <th class="hidden-phone" style="width:15%;">图片名称</th>
+                                        <th class="hidden-phone" style="width:20%;">缩略图(单击放大)</th>
+                                        <th class="hidden-phone" style="width:10%;">图片类型</th>
+                                        <th class="hidden-phone" style="width:10%;">排序</th>
+                                        <th class="hidden-phone" style="width:20%;">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="list" id="vo">
+                                        <tr class="odd gradeX">
+                                            <td align="center">
+                                                <input name="ID_Dele" type="checkbox" id="check" value="{$vo.id}"/>&nbsp;
+                                            </td>
+                                            <td>{$vo.image_name}</td>
+                                            <td class="zoomIn" data-image="{$vo.image}"><img src="{$vo.thumb_image}"/></td>
+                                            <td>
+                                                <volist name="Think.config.PROFILES_IMAGE_TYPE" id="voo">
+                                                    <if condition="$vo.type eq $key">{$voo}</if>
+                                                </volist>
+                                            </td>
+                                            <td>{$vo.sort}</td>
+                                            <td id="w">
+                                                <php>
+                                                    if (showHandle('StoreProfiles/imageEdit')){
+                                                </php>
+                                                    <a href="{:U('StoreProfiles/imageEdit',array('id'=>$vo[id]))}" class="btn btn-small btn-primary opCat">
+                                                        <i class="icon-pencil icon-white"></i> 编辑
+                                                    </a>
+                                                <php>
+                                                    }
+                                                    if (showHandle('StoreProfiles/imageSmallDel')){
+                                                </php>
+                                                    <a href="javascript:;" class="btn btn-danger btn-small batchDel" data-id ='{$vo.id}' sign='one'><i class="icon-remove  icon-white"> </i>删除</a>
+                                                <php>
+                                                    }
+                                                </php>
+                                            </td>
+                                        </tr>
+                                    </volist>
+
+                                    </tbody>
+                                </table>
+                                <div class="row-fluid">
+                                    <div class="span12 center">
+                                        <div class="pagination" id="sample_1_info" style="text-align: center">
+                                            {$page}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- END CONTAINER -->
+
+<!--电子合同图片信息开始-->
+<div id="zoomIn" class="modal hide fade in">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>电子合同图片</h3>
+    </div>
+    <div class="modal-body">
+        <img id="zoomInImage" src=""/>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">关闭</a>
+    </div>
+</div>
+<!--电子合同图片信息结束-->
+
+<!-- BEGIN FOOTER -->
+<include file="Public::footer"/>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+
+<script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+<script src="{$Think.const.JS_URL}zh-CN.js"></script>
+<!-- ie8 fixes -->
+<!--[if lt IE 9]>
+<script src="js/excanvas.js"></script>
+<script src="js/respond.js"></script>
+<![endif]-->
+<!--地图封装接口 以及一些初始化的数据 -->
+<script src="{$Think.const.JS_URL}scripts.js"></script>
+<script>
+    //全选
+    $('#all').click(function(){
+        $("input[name='ID_Dele']").each(function(){
+            $(this).attr('checked',true);
+        }); 
+    });
+    //取消全选
+    $("#delAll").click(function(){  
+        $("input[name='ID_Dele']").each(function(){
+            $(this).attr("checked",false);
+        });  
+    });
+    //反选
+    $("#antiAll").click(function(){
+        $("input[name='ID_Dele']").each(function(){
+            this.checked=!this.checked;              
+        });
+    });
+    //批量删除图片
+    $(".batchDel").click(function(){
+        if(!window.confirm('确定要删除？')){
+            event.preventDefault();
+        }else{
+            var str = '';
+            var sign = $(this).attr('sign');
+            if(sign == 'small'){
+                $("input[name='ID_Dele']:checked").each(function(){
+                    str += ($(this).val()+',');
+                });
+                str=str.substring(0,str.lastIndexOf(','));
+                if(str==''){
+                    alert('没有选择删除的图片');return;
+                }
+            }else if(sign == 'one'){
+                str = $(this).attr('data-id');
+            }
+            $.ajax({
+                url : '/system.php/StoreProfiles/imageSmallDel',
+                type : 'POST',
+                data : 'id=' + str,
+                async:false,
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();//刷新当前页面.
+                    } else if(result.flag==0){
+                    	alert(result.msg);
+                    }
+                    
+                }
+            });
+        }
+    });
+    
+    //放大图片
+    $('.zoomIn').click(function(){
+        var src = $(this).attr('data-image');
+        $('#zoomInImage').attr('src',src);
+        $('#zoomIn').modal();
+    });
+</script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

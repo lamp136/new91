@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+<!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                        </li>
+                        <eq name="info['secondCategory']" value=''>
+                        <li><a href="{:U('News/'.lcfirst($info['name']))}">{$info['firstCategory']}</a><span class="divider">&nbsp;</span></li>
+                        <else />
+                        <li>
+                            <a href="javascript:void(0)">{$info['firstCategory']}</a> <span class="divider">&nbsp;</span>
+                        </li>
+                        <li><a href="{:U('News/'.lcfirst($info['name']))}">{$info['secondCategory']}</a><span class="divider">&nbsp;</span></li>
+                        </eq>
+                        <li><a href="{:U('News/newsImage',array('news_id'=>$info['news_id'],'name'=>$info['name'],'firstCategory'=>$info['firstCategory'],'secondCategory'=>$info['secondCategory']))}">{$info.title}</a><span class="divider">&nbsp;</span></li>
+                        <li><a href="javascript:void(0)">添加图片</a><span class="divider-last">&nbsp;</span></li>
+
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4><i class="icon-reorder"></i>添加新闻图片</h4>
+                            </div>
+                            <div class="widget-body form">
+                                <!-- BEGIN FORM-->
+                                <form id="defaultForm" method="post"  autocomplete="off" action="{:U('News/saveNewsImage')}" enctype="multipart/form-data">
+                                    <div class="">
+                                        <table class="table table-bordered table-hover">
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label">标题:</label>
+                                                </td>
+                                                <td>
+                                                    <div class="controls">
+                                                        <input type="type" class="input-xxlarge" name="info[title]">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label">图片:</label>
+                                                </td>
+                                                <td>
+                                                    <div class="controls">
+                                                        <input type="file" class="default" name="image_url">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="control-label">排序:</label>
+                                                </td>
+                                                <td>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <input type="text" placeholder="排序" class="input-large" name="info[sort]" value="0">
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="form-actions">
+                                        <input type="hidden" name="info[news_id]" value="{$info['news_id']}"/>
+                                        <input type="hidden" name="name" value="{$info['name']}"/>
+                                        <input type="hidden" name="firstCategory" value="{$info['firstCategory']}"/>
+                                        <input type="hidden" name="secondCategory" value="{$info['secondCategory']}"/>
+                                        
+                                        <button type="submit" class="btn btn-success" id="sub">提交</button>
+                                    </div>
+                                </form>
+                                <!-- END FORM-->
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- END CONTAINER -->
+
+<!-- BEGIN FOOTER -->
+<include file="Public::footer"/>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+
+
+<script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+<script src="{$Think.const.JS_URL}zh-CN.js"></script>
+<!-- ie8 fixes -->
+<!--[if lt IE 9]>
+<script src="js/excanvas.js"></script>
+<script src="js/respond.js"></script>
+<![endif]-->
+
+
+
+<!--地图封装接口 以及一些初始化的数据 -->
+<script src="{$Think.const.JS_URL}scripts.js"></script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

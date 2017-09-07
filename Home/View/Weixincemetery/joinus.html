@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>加盟合作</title>
+    <link href="{$Think.const.CSS_URL}bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="__PUBLIC__/Weixin/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body style="background: #daf269;">
+    <!-- 加盟合作banner -->
+    <div class="join_banner">
+        <img src="__PUBLIC__/Weixin/images/join_banner.jpg" alt="加入我们"/>
+    </div>
+    <!-- 页面进入主体部分 -->
+    <main>
+        <!-- 加盟合作内容 -->
+        <div class="container">
+            <!-- 加盟合作内容 -->
+            <div class="join_main">
+                <!-- 91简介 -->
+                <div class="p_mian">
+                    <p>91搜墓网是目前国内最大的殡葬行业的信息化管理平台，涵盖了上千家陵园，合作伙伴已超过百余家，其中包括上海青浦福寿园、北京天寿陵园、北京归山陵园、河北灵山宝塔陵园等。</p>
+                    <p>91搜墓网具有专业的技术团队、商务团队，拥有大量的用户群体，稳定的前行并在持续上升中，发展前景稳定且可观。如您有意向与我们合作可拨打我们的<br/>合作热线：<a href="tel:4008010344">400-8010-344</a>。</p>
+                    <p>也可留下您的姓名与联系方式，我们的商务人员会主动与您联系。</p>
+                </div><!-- p_mian End -->
+                <!-- 加盟联系 -->
+                <div class="join_us">
+                    <!-- 姓名 -->
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
+                            <p>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</p>
+                        </div>
+                        <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
+                            <input class="join_tex" id='cemetery_linkman' type="text" placeholder="请输入姓名"/>
+                        </div>
+                    </div>
+                    <!-- 联系方式 -->
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
+                            <p>联系方式：</p>
+                        </div>
+                        <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
+                            <input class="join_tex" id='cemetery_mobile' type="text" placeholder="请输入手机号"/>
+                        </div>
+                    </div>
+                    <!-- 公司名称 -->
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
+                            <p>公司名称：</p>
+                        </div>
+                        <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
+                            <input class="join_tex" id='cemetery_name' type="text" placeholder="请输入公司名称"/>
+                        </div>
+                    </div>
+                    <!-- 提交提示信息 -->
+                    <p class="join_hint"></p>
+                    <!-- 提交按钮 -->
+                    <a class="join_btn" href="javascript:void(0)">提 交</a>
+                </div><!-- join_us End -->
+            </div><!-- join_main End -->
+        </div><!-- container End -->
+    </main><!-- main end -->
+    <script type='text/javascript' src='{$Think.const.JS_URL}jquery-1.9.1.min.js'></script>
+    <script type='text/javascript'>
+    //去除字符串两边的空格函数
+    function trimStr(str) {
+        return str.replace(/(^\s*)|(\s*$)/g, "");
+    }
+    //陵园合作申请
+    $('.join_btn').click(function () {
+        var cemetery_name = trimStr($('#cemetery_name').val());
+        var cemetery_linkman = trimStr($('#cemetery_linkman').val());
+        var cemetery_mobile = trimStr($('#cemetery_mobile').val());
+        //正则匹配mobile和中文
+        var pattern = /^1((3\d)|(47)|(5[0-35-9])|(7[01789])|(8\d))\d{8}$/;
+        var pattern_name = /^[\u4e00-\u9fa5]{0,}$/;
+        var error = false;
+        $('.join_hint').empty();
+        if(cemetery_name==''){
+            $('.join_hint').append('陵园名称不能为空！<br />');
+            error = true;
+        }else if(!pattern_name.test(cemetery_name)){
+            $('.join_hint').append('请输入中文陵园名称！<br />');
+            error = true;
+        }
+        if(cemetery_linkman==''){
+            $('.join_hint').append('联系人不能为空！<br />');
+            error = true;
+        }else if(!pattern_name.test(cemetery_linkman)){
+            $('.join_hint').append('请输入中文联系人名称！<br />');
+            error = true;
+        }
+        if (!pattern.test(cemetery_mobile)){
+            $('.join_hint').append('请输入正确的手机号！<br />');
+            error = true;
+        }
+        if(error){
+            
+        }else{
+            $.ajax({
+                url: '{:U("collaborate")}',
+                type: 'post',
+                data: {name: cemetery_name, linkman: cemetery_linkman, mobile: cemetery_mobile},
+                dataType: 'json',
+                success: function (res) {
+                    if (res['status']) {
+                        alert(res['msg']);
+                    } else {
+                        alert(res['msg']);
+                    }
+                    $('#cemetery_name').val('');
+                    $('#cemetery_linkman').val('');
+                    $('#cemetery_mobile').val('');
+                },
+                error: function () {
+                    alert("申请失败,请重新申请!");
+                },
+            });
+        }
+    });
+    
+    
+    $(':input').focus(function(){
+        $('.join_hint').empty();
+    });
+    
+    </script>
+</body>
+</html>

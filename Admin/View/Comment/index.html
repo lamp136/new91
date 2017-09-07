@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">评论</a><span class="divider-last">&nbsp;</span></li>
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>评论</h4>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <form action="__SELF__" method="get">
+                                                <select class="input-medium m-wrap" tabindex="1" name="comment_status">
+                                                    <option value="0">--审核状态--</option>
+                                                    <option value="{$Think.config.COMMENT_STATUS.UNPASS}"<if condition="$getMap eq -1">selected="selected"</if>>未通过</option>
+                                                    <option value="{$Think.config.COMMENT_STATUS.PASS}"<if condition="$getMap eq 1">selected="selected"</if>>已通过</option>
+                                                </select>  
+                                                <button class="btn btn-small btn-primary"><i class="icon-pencil icon-white"></i> 搜索</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th width="14%">陵园名称</th>
+                                                <th width="10%">评论人</th>
+                                                <th width="10%">手机号</th>
+                                                <th width="21%">内容</th>
+                                                <th width="5%">环境</th>
+                                                <th width="5%">服务</th>
+                                                <th width="5%">价格</th>
+                                                <th width="5%">交通</th>
+                                                <th width="15%">时间</th>
+                                                <th width="10%">审核操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <volist name="comment" id="vo">
+                                            <tr class="odd gradeX">
+                                                <td>{$vo.Store.store_name}</td>
+                                                <td>{$vo.Member.name}</td>
+                                                <td>{$vo.Member.mobile}</td>
+                                                <td>{$vo.content}</td>
+                                                <td>{$vo.environment}分</td>
+                                                <td>{$vo.service}分</td>
+                                                <td>{$vo.price}分</td>
+                                                <td>{$vo.traffic}分</td>
+                                                <td>{$vo.comment_time}</td>
+                                                <td>
+                                                    <php>
+                                                        if(showHandle('Comment/editStatus')){
+                                                    </php>
+                                                        <if condition='$vo.comment_status eq 1'>
+                                                            <a class="btn btn-success btn-small edit" data-id="{$vo.id}"><i class="icon-ok  icon-white"> </i> 已通过</a>
+                                                        <elseif condition='$vo.comment_status eq -1'/>
+                                                            <a class="btn btn-danger btn-small edit"  data-id="{$vo.id}"><i class="icon-remove  icon-white"></i> 未通过</a>
+                                                        <else/>
+                                                            <a class="btn btn-small btn-warning edit"  data-id="{$vo.id}"><i class="icon-cog  icon-white"> 审核中</i></a>
+                                                        </if>
+                                                    <php>
+                                                        }
+                                                    </php>
+                                                </td>
+                                            </tr>
+                                        </volist>
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span12 center">
+                                            <div class="pagination" id="sample_1_info" style="text-align: center">
+                                                {$page}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+    <!--编辑SEO信息开始-->
+    <div id="edit" class="modal hide fade in">
+        <form id="editForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>编辑信息</h3>
+            </div>
+            <div class="modal-body" >
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>选择审核状态：</td>
+                            <td>
+                                <input name="comment_status" value="{$Think.config.COMMENT_STATUS.PASS}" type="radio" data-rule="checked"> 通过审核 
+                                <input name="comment_status" value="{$Think.config.COMMENT_STATUS.UNPASS}" type="radio" data-rule="checked"> 未通过
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name='id'/> 
+                <button type="submit"  class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--编辑SEO信息结束-->
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}zh-CN.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+        //修改状态
+        $('.edit').click(function () {
+            var comment_status = $('#editForm input[name="comment_status"]');
+            var id = $(this).attr('data-id');
+            $('#editForm').attr('data-id',id);
+            $.ajax({
+                url:"{:U('editStatus')}",
+                type:'get',
+                data:{
+                    id:id,
+                },
+                success:function(d){
+                    var result = eval("(" + d + ")");
+                    var data = result['data'];
+                    if(result.flag == 1){
+                        for (var i = 0; i < comment_status.length; i++) {
+                            if(comment_status[i].value == data['comment_status']){
+                                comment_status[i].checked = true;
+                                break;
+                            }
+                        }
+                        $('#edit').modal();
+                    }
+                }
+            })
+        });
+        //保存状态
+        $('#editForm').bind('valid.form', function () {
+            $('#edit').modal('hide');
+            var id = $(this).attr('data-id');
+            //alert(id);
+            $("input[name='id']").attr("value",id);
+            $.ajax({
+                url: "{:U('editStatus')}",
+                type: 'post',
+                data: $(this).serialize(),
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();//刷新当前页面.
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="icon" href="/Public/soumu.ico" type="image/x-icon" />
+    <title>会员专栏，陵园公墓定制化信息展示_{$Think.config.SITE_NAME}</title>
+    <meta name="keywords" content="会员陵园公墓定制化信息展示,丧葬节日常识" />
+    <meta name="description" content="91搜墓网平台的会员专栏为陵园公墓殡仪馆等商家提供专业的定制化信息展示，给客户提供更为详尽的节日丧葬习俗常识，更好的展示陵园墓地的详细信息。咨询电话：4008010344" />
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+    <!-- 轮播图样式slide.css -->
+    <link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}special-slide.css"/>
+</head>
+<body style="min-width: 1288px;">
+<!--引入头部 -->
+<include file="Common:head_in" />
+
+<!-- 会员专栏banner -->
+<div class="special_banner">
+    <div id="imageShow">
+        <ul class="imagebg" id="imagebg">
+            <volist name="carousellist" id="in">
+                <li data-sPic="{$in.thumb_image}" title="{$in.name}">
+                    <a target="_blank" href="{:U('topics/'.$in['tag_name'])}" title="{$in.name}" class="bannerbg_main" style="background:url('{$in.image}') center top no-repeat;" ></a>
+                </li>
+            </volist>
+        </ul>
+        <div class="scrollbg">
+            <div class="scroll">
+                <a id="left_img_btn" class="s_pre" href="javascript:void(0)"></a>
+                <div class="current" id="current"></div>
+                <div class="outScroll_pic">
+                    <ul class="scroll_pic cls" id="small_pic"></ul>
+                </div>
+                <a id="right_img_btn" class="s_next" href="javascript:void(0)"></a>
+            </div>
+        </div>
+    </div>
+</div><!-- special_banner -->
+<!-- 中间内容部分 -->
+<div class="special_main">
+    <div class="contain">
+        <!-- 会员陵园专题 -->
+        <h2 class="special_member_title">会员陵园专题</h2>
+        <div class="special_member clearfix">
+            <div class="member_zs">
+                <img src="{$Think.const.IMG_URL}specialtopics/special_member.png" alt="会员陵园专题"/>
+            </div>
+            <ul>
+                <volist name="cemeterylist" id="vo">
+                    <li <if condition="$i %3 eq 0"> class="last"</if>>
+                        <h3><a target="_blank"  href="{:U('/topics/'.$vo['tag_name'])}">{$vo.name}</a></h3>
+                        <a target="_blank" href="{:U('/topics/'.$vo['tag_name'])}" title="{$vo.name}">
+                            <img src="{$vo.image}" alt="{$vo.name}"/>
+                        </a>
+                        <p>{$vo.summary}</p>
+                    </li>
+                </volist>
+                <li class="last">
+                    <h3><a target="_blank" href="{:U('intro/joinus')}">虚位以待</a></h3>
+                    <a href="{:U('intro/joinus')}" target="_blank" title="加盟合作">
+                        <img src="{$Think.const.IMG_URL}specialtopics/special_member_xwyd.jpg" alt="加盟合作"/>
+                    </a>
+                </li>
+            </ul>
+        </div><!-- special_member会员陵园专题结束 -->
+        <!-- 节日、活动专题 -->
+        <h2 class="special_activities_title">节日、活动专题</h2>
+        <div class="special_topics">
+            <ul>
+                <volist name="festivallist" id="vi">
+                    <li <if condition="$i %2 eq 0">class="last"</if>>
+                        <a target="_blank" href="{:U('/topics/'.$vi['tag_name'])}">
+                            <img src="{$vi.image}" alt="{$vi.name}"/>
+                        </a>
+                        <div class="topics_right">
+                            <h3><a><span></span>{$vi.name}</a></h3> 
+                            <p>{$vi.summary}</p>
+                            <a class="lookbtn" target="_blank" href="{:U('/topics/'.$vi['tag_name'])}" title="{$vi.name}"></a>
+                        </div>
+                    </li>
+                </volist>
+            </ul>
+        </div><!-- special_topics节日、活动专题结束 -->
+    </div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<!--底部代码引入-->
+<include file="Common:footer" />
+    <script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+	<!-- 会员专栏banner轮播special-imgSlider.js -->
+	<script src="{$Think.const.JS_URL}special-imgSlider.js"></script>
+	<script type="text/javascript" src="{$Think.const.JS_URL}home/specialtopics.js"></script>
+	
+</body>
+</html>

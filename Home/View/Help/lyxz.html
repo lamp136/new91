@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <link rel="icon" href="/Public/soumu.ico" type="image/x-icon" />
+	<title>陵园选择_{$Think.config.SITE_NAME}</title>
+        <meta name='keywords' content="陵园选择" />
+        <meta name='description' content="91搜墓网平台陵园选择" />
+	<link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!--引入头部 -->
+<include file="Common:head_in" />
+
+<!-- 底部页面banner -->
+<div class="aboutus_banner">
+	<img src="{$Think.const.IMG_URL}aboutus_banner.jpg" alt="91搜墓网-陵园选择"/>
+</div><!-- 底部页面banner结束 -->
+<!-- 底部页面内容导航 -->
+<include file="Common:help_menu" />
+<!-- 中间内容部分 -->
+<div class="main">
+	<div class="contain clearfix">
+		<!-- 底部页面左侧导航 -->
+		<div class="help_leftnav">
+			<img src="{$Think.const.IMG_URL}help/footer_leftnav_logo.png" alt="91搜墓网-关于91搜墓网"/>
+			<h1>关于91搜墓网</h1>
+			<p>ABOUT 91 SOUMU</p>
+			<ul>
+				<li><a href="{:U('/help/guide/gmlc')}">购墓流程</a></li>
+				<li class="help_leftnav_led"><a href="{:U('/help/guide/lyxz')}">陵园选择</a></li>
+				<li><a href="{:U('/help/guide/mdxz')}">墓地选择</a></li>
+				<li><a href="{:U('/help/guide/yysh')}">预约商户</a></li>
+			</ul>
+		</div><!-- help_leftnav底部页面左侧导航结束 -->
+		<!-- 底部页面右侧 -->
+		<div class="help_right">
+			<h1>陵园选择  <span></span></h1>
+			<!-- 陵园选择内容 -->
+			<div class="help_cemechoice">
+				<h3>陵园环境是任何一个购买墓地的客户都非常关心的问题，甚至是首选问题，在这里我们为您做一个介绍，考察一个墓地的环境主要从以下三个方面：</h3>
+				<h3>一是陵园的自然环境。</h3>
+				<p>从地势上讲无非是山地或平地。两种地势各有特点：山地曲径通幽、别有洞天，平地视野开阔、规整肃目，如何选择要看您的喜好了，只要幽静、清新、优美就可以了。</p>
+				<h3>二是陵园的管理服务环境。</h3>
+				<p>这方面您着重要考察的是陵园的环境卫生状况。看看陵园内无论是园区还是墓区是否干净整洁，有无垃圾、残枝败叶等杂物。如果状况好，说明这家陵园基本的管理服务是好的，反之您则要谨慎一些了，您将亲人安放到不能保障基本卫生的陵园，想必您的亲人也不能得到很好的照顾。同时看看这家陵园的绿化美化环境做得怎样，花草树木是否有人经常修剪维护。另外就是看看园区内是否有基本服务设施，如供客户休息的座椅、垃圾桶、导向指示牌等，这些细节也能反应出一家陵园的管理服务水平。</p>
+				<h3>三是看这家陵园的人文环境。</h3>
+				<p>现代陵园更加注重情感纪念和文化传播等社会服务功能的建设，陵园里除了墓碑，还会建设一些各种风格、各种主题的文化景观，在您凭吊亲人的同时也会得到一定的文化熏陶，特别是有些陵园修建了非常漂亮的艺术墓，也许还有一些名人名墓，这些都是好陵园的佐证。</p>
+				<p>这些观察方法都是透过现象看本质，您要通过细心的观察环境来选择陵园。为亲人选择一家好的陵园也是一种情感的延续。</p>
+				<img src="{$Think.const.IMG_URL}help/cemechoice.jpg" alt="陵园图片" />
+			</div><!-- cemechoice陵园选择内容结束 -->
+		</div><!-- help_right底部页面右侧 -->
+	</div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<!--底部代码引入-->
+<include file="Common:footer" />
+
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+</body>
+</html>

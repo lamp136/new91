@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>预约_{$Think.config.SITE_NAME}</title>
+    <link rel="icon" href="/Public/soumu.ico"  type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name='keywords' content="陵园预约看墓" />
+    <meta name='description' content="陵园预约看墓" />
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 提示框 -->
+<div class="tooltip_box"></div>
+<div class="tooltip_pers">
+    <div class="clearfix">
+        <img src="{$Think.const.IMG_URL}pers_save.png" />
+        <p id="content"></p>
+    </div>
+    
+    <div class="tooltip_pers_btn">
+        <a class="ack_btn" href="javascript:void(0);">关闭</a>
+    </div>
+    <span class="tooltip_cloce"></span>
+</div>
+<include file="Common:head_in" />
+<div class="breadcrumb">
+    <div class="contain">
+        <ul>
+            <li><a href="/">首页</a></li>
+            <li>></li>
+            <li><a href="cemetery.html">陵园</a></li>
+            <li>></li>
+            <li><a href="{:U('cemetery/detail/'.$storeInfo['store_id'])}">{$storeInfo.store_name}</a></li>
+            <li>></li>
+            <li>预约</li>
+        </ul>        
+    </div>
+</div><!-- breadcrumb面包屑导航结束 -->
+<!-- 中间内容部分 -->
+<div class="main">
+    <!-- 预约+banner -->
+    <div class="subsbanner">
+        <div class="contain clearfix">
+            <!-- 左侧banner -->
+            <div class="subs_left">
+                <img src="{$Think.const.IMG_URL}subsbanner.jpg"/>
+            </div>
+            <!-- 右侧预约 -->
+            <div class="subscribe">
+                <h1 class="appoint_cemetery_name" data-value="{$storeInfo.store_name}">{$storeInfo.store_name|msubstr=0,10}</h1>
+                <form name="appointForm" id="appointForm" action="" method="post">
+                <ul>
+                    <li>
+                        <input class="subs_tex" type="text" placeholder="您的姓名" name="buyer" value="{$Think.session.member_name}"/>
+                        <p id="buyerError" style="display: none"><i></i>姓名不可为空</p>
+                    </li>
+                    <li>
+                        <input class="subs_tex" type="text" placeholder="请输入手机号" name="mobile" value="{$Think.session.member_mobile}" />
+                        <input class="getcode_btn" <notempty name="Think.session.member_mobile"> style="display: none"  </notempty> type="button" id="getting" value="获取验证码">
+                        <p id="mobileError" style="display: none"><i></i>手机号不可为空</p>
+                    </li>
+                    
+                        <li class="msgcode" <notempty name="Think.session.member_mobile"> style="display: none"  </notempty>>
+                            <input class="subs_tex" type="text" placeholder="请输入手机动态码" name="msgcode"/>
+                            <p id="msgcodeError" style="display: none"><i></i>手机动态码不可为空</p>
+                        </li>
+                    <!--<li>
+                        <input class="subs_tex" type="text" placeholder="请选择预约时间" name="appoint_time" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" class="Wdate" />
+                        <p id="appointtimeError" style="display: none"><i></i>预约时间不可为空</p>
+                    </li>-->
+                    <li class="last">
+                        <input  type="hidden" name="store_id" value="{$storeInfo.store_id}"/>
+                        <button type="submit" class="subs_btn">立即预约</button>
+                    </li>
+                </ul>
+                </form>
+            </div><!-- subscribe右侧预约结束 -->
+        </div><!-- contain -->
+    </div><!-- subsbanner预约+banner结束 -->
+    <div class="subs_adv contain">
+        <!-- 优势 -->
+        <div class="advantage clearfix">
+            <ul>
+                <li>
+                    <span class="photo-value"></span>
+                    <h1>超值优惠</h1>
+                    <p>优惠信息100%真实</p>
+                </li>
+                <li>
+                    <span class="photo-major"></span>
+                    <h1>专业团队</h1>
+                    <p>资深的企业，专业的咨询团队</p>
+                </li>
+                <li>
+                    <span class="photo-message"></span>
+                    <h1>信息全面</h1>
+                    <p>涵盖全国上千家公墓信息</p>
+                </li>
+                <li>
+                    <span class="photo-capacity"></span>
+                    <h1>智能服务</h1>
+                    <p>多种线上咨询、预约服务</p>
+                </li>
+                <li class="last">
+                    <span class="photo-integrity"></span>
+                    <h1>诚信保障</h1>
+                    <p>交易透明，诚信商家，安全保障</p>
+                </li>
+            </ul>
+        </div><!-- advantage优势结束 -->        
+    </div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<include file="Common:footer" />
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<!-- 获取验证码jquery.cookie.js -->
+<script src="{$Think.const.JS_URL}jquery.cookie.js"></script>
+<script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/common.js"></script>
+<script> 
+var sm = "{$Think.session.member_mobile}";
+</script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/appoint.js"></script>
+
+</body>
+</html>

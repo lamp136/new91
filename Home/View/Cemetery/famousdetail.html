@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>{$celebrityinfo.name}_名人墓位_{$Think.config.SITE_NAME}</title>
+    <link rel="icon" href="/Public/soumu.ico"  type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="keywords" content="{$celebrityinfo.seo_keywords}" />
+    <meta name="description" content="{$celebrityinfo.seo_description}" />
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<include file="Common:head_in" />
+<!-- 中间内容部分 -->
+<div class="main">
+    <div class="contain clearfix">
+        <!-- 面包屑导航 -->
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="<?php echo getHomeUrl(); ?>">首页</a></li>
+                <li>></li>
+                <li><a href="<?php echo getBreadUrl($storeInfo['province_id']) ?>">陵园</a></li>
+                <li>></li>
+                <li><a href="{:U('cemetery/detail/'.$celebrityinfo['store_id'])}">{$celebrityinfo.Store.store_name}</a></li>
+                <li>></li>
+                <li><a href="{:U('cemetery/famous-'.$celebrityinfo['store_id'])}">名人墓地</a></li>
+                <li>></li>
+                <li>{$celebrityinfo.name}</li>
+            </ul>
+        </div><!-- breadcrumb面包屑导航结束 -->
+        <!-- 左侧生平经历 -->
+        <div class="celeb_undergo">
+            <h1>生平经历</h1>
+            <!-- 摘要 -->
+            <p class="abstract">
+                {$celebrityinfo.summary}
+                <span></span>
+            </p>
+            <!-- 图片 -->
+            <div class="undergo_img">
+                <img src="{$celebrityinfo.image_url}" alt="{$celebrityinfo.name}"/>
+                <p>{$celebrityinfo.name}</p>
+            </div>
+            <div class="p_main">
+                {$celebrityinfo.content}
+            </div>
+        </div><!-- celeb_undergo左侧生平经历结束 -->
+        <!-- 右侧内容 -->
+        <div class="celedet_right">
+            <!-- 名人简介+陵园图片 -->
+            <div class="resume">
+                <h1>{$celebrityinfo.name}</h1>
+                <p>生卒：{$celebrityinfo.born_in}-{$celebrityinfo.died_in}</p>
+                <p>葬入陵园：
+                    <span>
+                        <a href="{:U('/cemetery/detail/'.$storeImg['store_id'])}">{$storeImg.store_name}</a>
+                        <in name="storeImg.member_status" value="$storeMembersVip">
+	                        <img class="vip" src="{$Think.const.IMG_URL}vip.png" alt="平台会员"/>
+	                    </in>
+                    </span>
+                </p>
+                <a href="{:U('/cemetery/detail/'.$storeImg['store_id'])}">
+                    <img src="{$storeImg.store_banner}" alt="{$storeImg.store_name}"/>
+                </a>
+            </div>
+            <!-- 葬入此陵园其他名人 -->
+            <div class="other">
+                <h2>葬入此陵园其他名人</h2>
+                <ul>
+                    <volist name='otheCelebrity' id='vo'>
+                        <li><a href="{:U('cemetery/famous-d-'.$vo['id'])}">{$vo.name}</a><span><i></i>{$vo.born_in}-{$vo.died_in}</span></li>
+                    </volist>
+                </ul>
+            </div>
+            <!-- 大家都在关注 -->
+            <div class="other attention">
+                <h2>大家都在关注</h2>
+                <ul>
+                    <volist name='attentionCelebrity' id='vo'>
+                        <li><a href="{:U('cemetery/famous-d-'.$vo['id'])}">{$vo.name}</a><span><i></i>{$vo.born_in}-{$vo.died_in}</span></li>
+                    </volist>
+                </ul>
+            </div>
+        </div><!-- celedet_right右侧内容结束 -->
+    </div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<include file="Common:footer" />
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/common.js"></script>
+</body>
+</html>

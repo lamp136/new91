@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>提交订单</title>
+	<link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<!-- 头部加导航 -->
+	<include file="Common:head_in" />
+<!-- 中间内容部分 -->
+<div class="main">
+	<div class="contain clearing">
+		<h2>确认订单信息<a href="{:U('/cart')}">返回购物车修改</a></h2>
+		<div class="clearing_title clearfix">
+			<ul>
+				<li class="spxx">商品信息</li>
+				<li class="dj">单价（元）</li>
+				<li class="num">数量</li>
+				<li class="jgxj">价格小计（元）</li>
+			</ul>
+		</div>
+		<!-- 结算内容 -->
+		<volist name="list" id='vo'>
+		<div class="clearimg_main">
+			<!-- 商家名称 -->
+			<div class="shopping_main_title">
+				<p>{$vo.store_name}</p>
+			</div>
+			<!-- 商品购买内容 -->
+			<div class="shopping_box">
+			<volist name="vo.sn" id='res'>
+				<div class="shopping_main_nr shopping_main_nrled">
+					<!-- 商品1 -->
+					<ul class="clearfix">
+						<!-- 图片 -->
+						<li class="liimg">
+							<a href="#"><img src="{$res.thumb_url}"/></a>
+						</li>
+						<!-- 描述 -->
+						<li class="litext">
+							<h3><a href="#">{$res.goods_name}</a></h3>
+							<notempty name="res[Single]">
+                                <span style="font-size:5px">该套餐包含<span>
+                                <volist name="res[Single]" id='si'>
+                                    <span style="font-size:5px">{$si.service_goods_name}{$si.number}{$unit[$si['skuid']]},</span>
+                                </volist>
+                            </notempty>
+							<p>颜色：黄色<span>枝数：11枝</span></p>
+						</li>
+						<!-- 单价 -->
+						<li class="lipric">¥ <span>{$res.price}</span></li>
+						<!-- 数量加减 -->
+						<li class="lishopnumb">{$res.num}</li>
+						<!-- 价格小计 -->
+						<li class="liprice">¥ <span>{$res.total_price}</span></li>
+					</ul>
+				</div><!-- shopping_main_nr End -->
+				</volist>
+				<!-- 领取方式 备注 合计 -->
+				<div class="remark">
+					<p class="lqfs">领取方式：根据您收到的提示信息到陵园指定处领取。</p>
+					<div class="remark_main">
+						<label class="re_lable">订单备注：</label>
+						<textarea class="re_tareas" placeholder="您可以在此处填写对本次购买的详细需求，限制50个字以内。"></textarea>
+					</div>
+					<p class="price">{$vo.store_name}商品合计： <span>¥ {$vo.storePrice}</span></p>
+				</div><!-- remark 领取方式 备注 合计 End -->
+			</div><!-- shopping_box 商品购买内容 End -->
+			</volist>
+		</div><!-- clearimg_main 结算内容 End -->
+		
+		<!-- 使用优惠券  -->
+		<div class="clearing_favorable">
+			<h3>使用优惠券</h3>
+			<div class="favorable">
+				<span class="yhq">66666</span>
+				<a class="qt_favorable_btn" href="javascript:void(0)">选择其他优惠券></a>
+				<div class="clear"></div>
+				<p class="sy">使用该优惠券可以抵扣 <span>100</span> 元现金。</p>
+				<!-- 选择其他优惠券 -->
+				<div class="qt_favorable">
+					<div class="close_btn"></div>
+					<h4>选择其它优惠券></h4>
+					<ul>
+						<li>
+							<p class="youhm">优惠码：<span class="span_yh">66666</span> 金额：<span>100</span>元</p>
+							<p class="time">有效期：2017.05.01-2017.05.07</p>
+						</li>
+						
+					</ul>
+				</div><!-- qt_favorable选择其他优惠券 End  -->
+			</div><!-- favorable End  -->
+		</div><!-- clearing_favorable 使用优惠券 End  -->
+		<!-- 合计提交订单 -->
+		<div class="clearing_total">
+			<div class="sp">
+				<p>共 {$total_number} 件商品，合计：<span>¥ {$allGoodsPrice}</span></p>
+				<p>使用优惠券：<span>- ¥ 100.00</span></p>
+				<p>运费：<span>+ ¥ 10.00</span></p>
+				<p class="yf">应付总额：<span>¥ {$allGoodsPrice}</span></p>
+				<div class="clear"></div>
+			</div>
+			<div class="total">
+				<p>应付总额：<span>¥ {$allGoodsPrice}</span></p>
+				<a href="payment.html">提交订单</a>
+			</div>
+		</div><!-- clearing_total 合计提交订单 End -->
+	</div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<!-- 底部footer部分 -->
+<include file="Common:footer" />
+<!-- 搜索提示 -->
+<script type="text/javascript" src="{$Think.const.JS_URL}hit.js"></script>
+<!-- 返回顶部JS -->
+<script src="{$Think.const.JS_URL}backtop.js"></script>
+
+
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+
+		//选择城市
+		$(document).ready(function(){
+			//头部地址
+			$(".c_down").click(function(){
+				$(".search_city").css("display","block");
+			})
+			//选择城市关闭
+			$(".search_close,.city_box ul li").click(function(){
+				$(".search_city").hide();
+			})
+
+			// 选择其他优惠券
+			$(".qt_favorable_btn").click(function(){
+				$(".qt_favorable").css("display","block");
+			})
+
+			$(".close_btn, .qt_favorable ul li").click(function(){
+				$(".qt_favorable").css("display","none");
+			})
+		});
+
+		//tab切换
+		jQuery.jqtab = function(tabtit,tabcon) {
+		        $(tabcon).hide();
+		        $(tabtit+" li:first").addClass("thistab").show();
+		        $(tabcon+":first").show();
+		    
+		        $(tabtit+" li").click(function() {
+		            $(tabtit+" li").removeClass("thistab");
+		            $(this).addClass("thistab");
+		            $(tabcon).hide();
+		            var activeTab = $(this).find("a").attr("tab");
+		            $("#"+activeTab).fadeIn();
+		            return false;
+		        });
+		        
+		    };
+		    /*调用方法如下：*/
+		    $.jqtab("#city_nav",".city_box");
+	});
+
+</script>
+</body>
+</html>

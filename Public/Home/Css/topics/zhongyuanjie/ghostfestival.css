@@ -1,0 +1,171 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/*头部*/
+.g_header{
+	width: 100%;
+	height: 454px;
+	background: transparent url("../../../images/topics/zhongyuanjie/header_img.png") no-repeat scroll center center;
+}
+/*中间内容*/
+.g_main{
+	width: 960px;
+	background: #c4996f;
+	margin: 0 auto;
+	padding-top: 5px;
+}
+.g_mainimg{
+	background: #fff;
+	border: 5px solid #fbe6bb;
+	border-radius: 5px 5px 0 0;
+	padding: 15px 18px 12px 18px;
+}
+/*中元节来历*/
+.g_origin{
+	width: 521px;
+	float: left;
+}
+/*中元节禁忌*/
+.g_taboo{
+	width: 360px;
+	float: right;
+}
+.g_taboo ul{
+	margin: 20px 0 0 8px;
+}
+.g_taboo ul li{
+	font-size: 12px;
+	line-height: 24px;
+}
+/*中元节民俗*/
+.g_folkcustom{
+	width: 915px;
+	height: 359px;
+	margin-top: 10px;
+	background: url(../../../images/topics/zhongyuanjie/g_folkcustom_bg.jpg);
+}
+.g_folkcustom h1{
+	height: 55px;
+}
+.g_folkcustom h1 img{
+	padding: 12px 0 0 20px;
+}
+.g_folkcustom ul li{
+	width: 424px;
+	height: 128px;
+	padding: 0 10px 15px 20px;
+	margin-top: 16px;
+	float: left;
+}
+.g_folkcustom ul .li_bottom{
+	height: 114px;
+}
+.g_folkcustom ul li img{
+	float: left;
+	padding: 1px;
+	border: 1px solid #8d5024;
+	margin-top: 4px;
+}
+.g_folkcustom .introduce{
+	width: 252px;
+	float: right;
+}
+.g_folkcustom .introduce h2{
+	font-size: 18px;
+	font-family: "微软雅黑";
+	font-weight: normal;
+}
+.g_folkcustom .introduce p{
+	font-size: 12px;
+	line-height: 20px;
+	margin-top: 3px;
+	color: #8d5024;	
+}
+/*中元节的发展*/
+.g_develop{
+	width: 875px;
+	height: 602px;
+	margin-top: 28px;
+	padding: 0 20px;
+	background: url(../../../images/topics/zhongyuanjie/g_develop_bg.jpg);
+}
+.g_develop h1{
+	height: 55px;
+}
+.g_develop h1 img{
+	padding: 12px 0 0 22px;
+}
+.g_develop ul li{
+	padding: 17px 0;
+	border-bottom: 1px dashed #d7c1a4;
+}
+.g_develop ul .last{
+	border-bottom: none;
+}
+.g_develop ul li img{
+	float: left;
+}
+.g_develop .theme{
+	width: 600px;
+	float: right;
+}
+.g_develop .theme h2{
+	font-size: 18px;
+	font-family: "微软雅黑";
+	font-weight: normal;
+}
+.g_develop .theme p{
+	font-size: 12px;
+	line-height: 24px;
+	margin-top: 6px;
+}
+/*图说中元节*/
+.g_picture{
+	width: 875px;
+	height: 456px;
+	margin-top: 22px;
+	padding: 0 20px;
+	background: url(../../../images/topics/zhongyuanjie/g_picture_bg.jpg);
+}
+.g_picture h1{
+	height: 55px;
+	margin-bottom: 18px;
+}
+.g_picture h1 img{
+	padding: 9px 0 0 14px;
+}
+.g_picture .left{
+	width: 250px;
+	float: left;
+}
+.g_picture .center{
+	width: 360px;
+	float: left;
+	margin: 0 34px 0 28px;
+}
+.g_picture .center ul li{
+	float: left;
+}
+.g_picture .center .pictu{
+	margin-right: 18px;
+}
+.g_picture .center .last{
+	margin-top: 35px;
+}
+.g_picture .right{
+	width: 201px;
+	float: left;
+}
+.g_picture .right .last{
+	margin-top: 35px;
+}
+/*底部*/
+.g_footer{
+	width: 960px;
+	margin: 0 auto;
+}
+.g_footer p{
+	text-align: center;
+	margin: 50px 0 122px 0;
+}

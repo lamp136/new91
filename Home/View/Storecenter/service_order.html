@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>91搜墓网-{$topName}</title>
+    <include file="Common::store_center_css"/>
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}storecenter/compiled/tables.css" type="text/css" media="screen" />
+</head>
+<body>
+    <include file="Common::store_center_top"/>
+    <!-- end navbar -->
+    <include file="Common::store_center_left"/>
+    <!-- main container -->
+    <div class="content">
+        <div class="container-fluid">
+            <div id="pad-wrapper">
+                <!-- products table-->
+                <div class="products-table section">
+                    <div class="row-fluid head">
+                        <div class="span12">
+                            <h4>91搜墓网平台服务订单</h4>
+                        </div>
+                    </div>
+                    <div class="row-fluid filter-block">
+                        <div class="pull-right btn-group">
+                            <form action="__SELF__">
+                                <input name="search_name" class="search" value="{$Think.get.search_name}" type="text" <empty name="Think.session.storecenter.pid"> placeholder="订单号" <else/> placeholder="商家名称" </empty> />
+                                <button class="glow right">
+                                    <i class="icon-search"></i> 搜索
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <notempty name='Think.session.storecenter.pid'>
+                                        <th width="17%">陵园名称</th>
+                                    <else/>
+                                        <th width="17%">订单号</th>
+                                    </notempty>
+                                    <th width="15%">下单时间</th>
+                                    <th width="16%">支付时间</th>
+                                    <th width="17%">收货信息</th>
+                                    <th width="17%">提货信息</th>
+                                    <th width="7%">订单状态</th>
+                                    <th width="11%">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="orderList" id="vo">
+                                    <tr>
+                                        <td>
+                                            <notempty name="vo.GrandChild">
+                                                <i style="cursor:pointer;" class="icon-chevron-down order_detail" data-id={$vo.id}>
+                                            </notempty>
+                                            <notempty name='Think.session.storecenter.pid'>
+                                                &nbsp;{$vo.store_name}<br/>
+                                                &nbsp;订单号：
+                                            </notempty>
+                                                {$vo.order_son_sn}
+                                            <notempty name="vo.GrandChild">
+                                                </i>
+                                            </notempty>
+                                        </td>
+                                        <td>
+                                            <notempty name="vo.order_service_time">  
+                                                {$vo.order_service_time|date="Y-m-d H:i:s",###}
+                                            </notempty>
+                                        </td>
+                                        <td>
+                                            <notempty name="vo.pay_time">  
+                                                {$vo.pay_time|date="Y-m-d H:i:s",###}
+                                            </notempty>
+                                        </td>
+                                        <td>
+                                            姓名：{$vo.consignee}<br/>
+                                            电话：{$vo.consignee_mobile}<br/>
+                                            地址：{$vo.shipping_address}
+                                        </td>
+                                        <td>
+                                            姓名：{$vo.take_stock_people}<br/>
+                                            电话：{$vo.take_stock_mobile}<br/>
+                                            时间：<notempty name="vo.take_stock_time">{$vo.take_stock_time|date="Y-m-d H:i:s",###}</notempty>
+                                        </td>
+                                        <td>
+                                            <switch name="vo.status">
+                                                <case value="$serviceOrderStatus[OK]">
+                                                    <span class="label label-warning">
+                                                        支付成功
+                                                    </span>
+                                                </case>
+                                                <case value="$serviceOrderStatus[SUCCESS]">
+                                                    <span class="label label-success">
+                                                        订单完成
+                                                    </span>
+                                                </case>
+                                                <case value="$serviceOrderStatus[STOP]">
+                                                    <span class="label label-gray">
+                                                        不允许退单
+                                                    </span>
+                                                </case>
+                                                <case value="$serviceOrderStatus[APPLY_BACK]">
+                                                    <span class="label label-default">
+                                                        申请退单
+                                                    </span>
+                                                </case>
+                                                <case value="$serviceOrderStatus[ALLOW]">
+                                                    <span class="label label-info">
+                                                        可以退单
+                                                    </span>
+                                                </case>
+                                                <case value="$serviceOrderStatus[BACK_SUCCESS]">
+                                                    <span class="label label-inverse">
+                                                        退单完成
+                                                    </span>
+                                                </case>
+                                                <case value="$serviceOrderStatus[DELETE_FORWARD]">
+                                                    <span class="label btn-danger">
+                                                        前端删除
+                                                    </span>
+                                                </case>
+                                            </switch>
+                                        </td>
+                                        <td>
+                                            <php>
+                                                if(in_array('Storecenter/confirm_receiving',session('storecenter.prName'))){
+                                            </php>
+                                                <eq name="vo.status" value="$Think.config.NORMAL_STATUS">
+                                                    <span data-id={$vo.id} class="btn-flat success small confirm">
+                                                        <i class="icon-ok">确认收货</i>
+                                                    </span>
+                                                </eq>
+                                            <php>
+                                                }
+                                            </php>
+                                        </td>
+                                    </tr>
+                                    <notempty name="vo.GrandChild">
+                                        <tbody data-jid={$vo.id} class="hide">
+                                            <tr>
+                                                <th colspan="1"></th>
+                                                <th>商品图片</th>
+                                                <th>商品名字</th>
+                                                <th>数量</th>
+                                                <th>备注</th>
+                                                <th>地区</th>
+                                                <th></th>
+                                            </tr>
+                                            <volist name="vo.GrandChild" id="child">
+                                                <tr>
+                                                    <td colspan="1"></td>
+                                                    <td>
+                                                        <img style="height:60px;width:80px;" src="{$child.thumb_url}" alt="{$child.goods_name}">
+                                                    </td>
+                                                    <td>{$child.goods_name}</td>
+                                                    <td>{$child.number}</td>
+                                                    <td>{$child.remark}</td>
+                                                    <td>
+                                                        {$region[$child[province]]}/{$region[$child[city]]}
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                            </volist>
+                                        </tbody>
+                                    </notempty>
+                                </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+                        {$page}
+                    </div>
+                </div>
+                <!-- end products table -->
+            </div>
+        </div>
+    </div>
+    <!-- end main container -->
+
+    <!-- scripts -->
+    <script src="{$Think.const.JS_URL}storecenter/jquery-latest.js"></script>
+    <script src="{$Think.const.JS_URL}storecenter/bootstrap.min.js"></script>
+    <script src="{$Think.const.JS_URL}storecenter/theme.js"></script>
+    <script>
+        $('.confirm').click(function(){
+            if(confirm('确认已经收货？')){
+                var id = $(this).data('id');
+                $.ajax({
+                    url:"{:U('confirm_receiving')}",
+                    type:'post',
+                    data:{
+                        id:id
+                    },
+                    dataType:'JSON',
+                    success:function(json){
+                        if(json['code'] == 1){
+                            alert(json['msg']);
+                            window.location.reload();
+                        }else{
+                            alert(json['msg']);
+                        }
+                    }
+                })
+            }else{
+                return false;
+            }
+        })
+
+        $('.order_detail').click(function() {
+            var id = $(this).data('id');
+            var tbodyTag = $('tbody[data-jid="'+id+'"]');
+            tbodyTag.toggle();
+            // 改变箭头class
+            if(tbodyTag.is(':hidden')){
+                $(this).removeClass('icon-chevron-up').addClass('icon-chevron-down');
+            }else{
+                $(this).removeClass('icon-chevron-down').addClass('icon-chevron-up');
+            }
+        });        
+    </script>
+</body>
+</html>

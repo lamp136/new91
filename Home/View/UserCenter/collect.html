@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="/Public/soumu.ico"  type="image/x-icon">
+        <title>个人中心-我的关注_{$Think.config.SITE_NAME}</title>
+        <meta name="keywords" content="个人中心" />
+        <meta name="description" content="个人中心" />
+	<link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 提示框 -->
+<div class="tooltip_box"></div>
+<div class="tooltip_pers">
+    <div class="clearfix">
+        <img src="{$Think.const.IMG_URL}pers_save.png" />
+        <p id="content"></p>
+    </div>
+    
+    <div class="tooltip_pers_btn">
+        <a class="ack_btn" href="javascript:void(0);">关闭</a>
+    </div>
+    <span class="tooltip_cloce"></span>
+</div>
+<!-- 引入头部 -->
+<include file="Common:head_in" />
+<!-- 中间内容部分 -->
+<div class="main">
+	<div class="contain clearfix">
+		<!-- 面包屑导航 -->
+		<div class="breadcrumb">
+			<ul>
+                <li><a href="<?php echo getHomeUrl(); ?>">首页</a></li>
+                <li>></li>
+                <li><a href="{:U('/personal')}">用户中心</a></li>
+                <li>></li>
+                <li>我的关注</li>
+			</ul>
+		</div><!-- breadcrumb面包屑导航结束 -->
+		<!-- 用户中心左侧导航 -->
+		<div class="user_nav">
+			<h1><i></i>用户中心</h1>
+			<ul>
+				<li><a href="myorder.html">我的订单</a></li>
+				<!-- <li><a href="cashback.html">领取返现</a></li> -->
+				<li><a href="personal.html">个人资料</a></li>
+				<li><a class="user_led" href="collect.html">我的关注</a></li>
+				<li><a href="changepassword.html">修改密码</a></li>
+			</ul>
+		</div><!-- user_nav用户中心左侧导航结束 -->
+		<!-- 用户中心右侧 -->
+		<div class="user_right">
+			<h1>我的关注</h1>
+			<!-- 我的关注 -->
+			<div class="collect">
+				<ul class="clearfix">
+                                    <empty name='collectInfo'>
+                                        <h1>&nbsp;&nbsp;&nbsp;&nbsp;亲爱{$Think.session.member_name}用户您好！你暂时还没有关注！</h1>
+                                    <else />
+                                        <volist name="collectInfo" id="vo">
+                                            <li>
+                                                <img src="{$vo.Store.store_banner}"/>
+                                                <h3>{$vo.Store.store_name}</h3>
+                                                <p><a href="javascript:;" class="del_btn" collect_id='{$vo.id}' >取消关注</a><span>{$vo.Store.hits}人浏览</span></p>
+                                            </li>
+                                        </volist>
+                                    </empty>
+				</ul>
+			</div><!-- collect我的关注结束 -->
+		</div><!-- user_right用户中心右侧结束 -->
+	</div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<include file="Common:footer" />
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/common.js"></script>
+<script src="{$Think.const.JS_URL}raty/jquery.raty.js"></script>
+<!--私有JS-->
+<script type="text/javascript" src="{$Think.const.JS_URL}home/collect.js"></script>
+</body>
+</html>

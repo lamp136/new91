@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">购墓退单列表</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>购墓退单列表</h4>
+                                </div>
+                                <div class="widget-body">
+                                    <form id="quickForm" method="post" class="form-horizontal" autocomplete="off" action='{:U("singleBackList")}'>
+                                        <table>
+                                            <tr>
+                                                <td>搜索：</td>
+                                                <td><input type="text" name="store_name" value=''  placeholder="请输入陵园名称"><td/>
+                                                <td>
+                                                    <select name='status' >
+                                                        <option value="">--退单状态--</option>
+                                                        <option value="30"<if condition='30 eq $search[status]'>selected</if>>退单成功</option>
+                                                        <option value="22" <if condition='22 eq $search[status]'>selected</if>>允许退单</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="mobile" class="input-medium" placeholder="订单人手机" value="{$search[mobile]}"/>
+                                                    <button class="btn btn-primary">确定</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                    
+                                    <table class="table table-striped table-bordered" id="sample_1">
+                                        <thead>
+                                            <tr>
+                                                <th width="8%" class="hidden-phone">手机号</th>
+                                                <th width="7%" class="hidden-phone">姓名</th>
+                                                <th width="16%" class="hidden-phone">商家名称</th>
+                                                <th width="6%" class="hidden-phone">墓位价格</th>
+                                                <th width="23%" class="hidden-phone">实收佣金金额|返现金额|应退金额|实退金额</th>
+                                                <th width="6%" class="hidden-phone">佣金支<br/>付时间</th>
+                                                <th width="9%" class="hidden-phone">申请退<br/>单时间</th>
+                                                <th width="12%" class="hidden-phone">退单原因</th>
+                                                <th width="8%" class="hidden-phone">退单状态</th>
+                                                <th width="5%" class="hidden-phone">退款票据</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <volist name="list" id="vo">
+                                                <tr class="odd gradeX">
+                                                    <td>{$vo.mobile}</td>
+                                                    <td>{$vo.buyer}</td>
+                                                    <td>{$vo.store_name}
+                                                         <eq name="vo.store_status" value="14">
+                                                    <img width="28px" src="{$Think.const.IMG_URL}guang.png" title="广告会员">
+                                                </eq>
+                                                <eq name="vo.store_status" value="16">
+                                                    <img width="28px" src="{$Think.const.IMG_URL}ge.png" title="个人会员">
+                                                </eq>
+                                                <eq name="vo.store_status" value="19">
+                                                    <img width="28px" src="{$Think.const.IMG_URL}ge.png" title="个人会员">
+                                                </eq>
+                                                <eq name="vo.store_status" value="20">
+                                                    <img width="28px" src="{$Think.const.IMG_URL}shang.png" title="商家会员">
+                                                </eq>
+
+                                                    </td>
+                                                    <td>{$vo.tomb_price}</td>
+                                                    <td>{$vo.paid_in_amount}|{$vo.return_money}|{$vo.back_money}|{$vo.back_fact_money}</td>
+                                                    <td>
+                                                        <notempty name="vo.payfor_us_time">
+                                                            {$vo.payfor_us_time|date='Y-m-d',###}
+                                                        </notempty>
+                                                    </td>
+                                                    <td>
+                                                        <notempty name="vo.back_apply_time">
+                                                            {$vo.back_apply_time|date='Y-m-d',###}
+                                                        </notempty>
+                                                    </td>
+                                                    <td>{$vo.back_reason}</td>
+                                                    <td>
+                                                        <switch name="vo.status">
+                                                            <case value="30">退单成功</case>
+                                                            <case value="22">允许退单</case>
+                                                            <default/>出现问题请联系开发人员
+                                                        </switch>
+                                                    </td>
+                                                    <td>
+                                                        <empty name="vo['back_bill']">
+                                                            无
+                                                        <else />
+                                                            <span style="color:green;" class='view'>查看
+                                                                <volist name='vo["back_bill"]' id="image" >
+                                                                    <span class='hide'>{$image.bill_image}</span>
+                                                                </volist>
+                                                            </span>
+                                                        </empty> 
+                                                    </td>
+                                                </tr>
+                                            </volist>
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span12 center">
+                                            <div class="pagination" id="sample_1_info" style="text-align: center">
+                                                {$page}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+    
+    <!--模态化弹框-预览票据start-->
+    <div id="viewImage" class="modal hide fade in" style="display: none;width:700px;">
+        <form  method="post" class="form-horizontal"  autocomplete="off">
+            <div id="viewImageForm" class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--模态化弹框-预览票据over-->
+    
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ASSETS_URL}chosen-bootstrap/chosen/chosen.jquery.min.js"></script>
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}zh-CN.js"></script>
+    <script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+        //查看票据
+        $('.view').click(function(){
+            var str = '';
+            $(this).find("span").each(function(){
+                str += '<img src="'+$(this).html()+'"/><br/>';
+            });
+            $('#viewImageForm').empty().append(str);
+            $('#viewImage').modal();
+        });
+    </script>
+</body>
+<!-- END BODY -->
+</html>

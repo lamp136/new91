@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{$storeInfo.store_name}</title>
+    <link href="{$Think.const.CSS_URL}bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="__PUBLIC__/Weixin/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+    </head>
+<body>
+    <!-- 带有返回箭头页面头部 -->
+    <header class="headertop_a">
+        <div class="container">
+            <div class="row">
+                <!-- 返回箭头 -->
+                <div class="col-xs-2">
+                    <a class="getback" href="javascript:history.go(-1)"></a>
+                </div> 
+                <!-- 标题LOGO -->
+                <div class="col-xs-8 title">
+                    <img class="logo" src="__PUBLIC__/Weixin/images/logo.png" alt="LOGO"/>
+                </div><!-- 搜索结束 -->
+            </div><!-- row End -->
+        </div><!-- container End -->
+    </header><!-- headertop_a头部结束 -->
+    <!-- 页面进入主体部分 -->
+    <main class="main cemdet_main">
+        <!-- 陵园图片 -->
+        <div class="cemdet_img">
+            <img src="{$storeInfo.store_banner}" alt="{$storeInfo.store_name}"/>
+        </div><!-- cemdet_img End -->
+        <!-- 陵园名称和价格 -->
+        <div class="container cemdet_price">
+            <h2>
+                <if condition="$storeInfo['member_status'] gt C('DEFAULT_STATUS') && $storeInfo['member_status'] neq C('STOER_MERMBER_PERSON')">
+                    <img alt="会员陵园" src="__PUBLIC__/Weixin/images/member_lg.png" class="member">
+                </if>
+                {$storeInfo.store_name}
+            </h2>
+            <p>参考价<span>{$storeInfo.price_range}</span></p>
+        </div><!-- cemdet_price End -->
+        <!-- 服务保障内容 -->
+        <div class="cemdet_guarantee">
+            <div class="container">
+                <ul>
+                    <li>
+                        <img src="__PUBLIC__/Weixin/images/bao.png" alt="诚信保障"/>
+                        诚信保障
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__/Weixin/images/mian.png" alt="一对一免费服务"/>
+                        一对一免费服务
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__/Weixin/images/hui.png" alt="超值优惠"/>
+                        超值优惠
+                    </li>
+                </ul>
+            </div><!-- container End -->
+        </div><!-- cemdet_guarantee服务保障内容结束 -->
+        <!-- 陵园概要 -->
+        <div class="container cemdet_outline">
+            <h2>陵园概要：</h2>
+            <ul>
+                <li>特&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色：{$storeInfo.feature}</li>
+                <li>陵园风水：{$storeInfo.geomantic}</li>
+                <li>陵园环境：{$storeInfo.environment}</li>
+            </ul>
+        </div><!-- cemdet_outline陵园概要结束 -->
+        <!-- 上下内容间隔 -->
+        <div class="cemdet_interval"></div>
+        <!-- 陵园地址联系方式 -->
+        <div class="cemdet_site">
+            <ul>
+                <!-- 行政区域 -->
+                <li>
+                    <div class="container">
+                        <img src="__PUBLIC__/Weixin/images/cemdet_site_xzqy.png" alt="行政区域"/>
+                        行政区域
+                        <span>{$city.region_name}</span>
+                    </div>
+                </li>
+                <!-- 距离市区 -->
+                <li>
+                    <div class="container">
+                        <img src="__PUBLIC__/Weixin/images/cemdet_site_jlsq.png" alt="距离市区"/>
+                        距离市区
+                        <span>{$storeInfo.distance}</span>
+                    </div>
+                </li>
+                <!-- 陵园地址 -->
+                <li>
+                    <div class="container">
+                        <img src="__PUBLIC__/Weixin/images/cemdet_site_lydz.png" alt="陵园地址"/>
+                        陵园地址
+                        <span>{$storeInfo.address}</span>
+                    </div>
+                </li>
+                <!-- 咨询电话 -->
+                <li>
+                    <div class="container">
+                        <img src="__PUBLIC__/Weixin/images/cemdet_site_zxdh.png" alt="咨询电话"/>
+                        咨询电话
+                        <span>400-8010-344</span>
+                    </div>
+                </li>
+            </ul>
+        </div><!-- cemdet_site陵园地址联系方式结束 -->
+        <!-- 上下内容间隔 -->
+        <div class="cemdet_interval"></div>
+        <!-- 陵园简介 -->
+        <div class="container cemdet_intro">
+            <!-- 陵园简介标题 -->
+            <h2>陵园简介：</h2>
+            <!-- 陵园简介内容，p_main.div又控制一遍段落文字样式 -->
+            <div class="p_main">
+                {$storeInfo.content}
+            </div><!-- p_main End -->
+            <!-- 点击查看更多按钮 -->
+        </div><!-- cemdet_intro陵园简介结束 -->
+    </main><!-- main end -->
+    <!-- 立即预约 -->
+    <div class="order">
+        <div class="container">
+            <a href="tel:4008010344" class="order_btn">立即预约</a>
+        </div>
+    </div><!-- order立即预约结束 -->
+</body>
+</html>

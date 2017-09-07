@@ -1,0 +1,135 @@
+<!-- 顶部 -->
+<div class="navbar_top">
+    <div class="contain">
+        <div class="greet">
+            <empty name="Think.session.member_name">
+                <span>您好，欢迎来到91搜墓网&nbsp;<a href="/" title="返回首页">返回首页</a></span>
+                <a class="login" href="{:U('/login')}" title="登陆">登录</a>
+                <a href="{:U('/register')}" title="注册">注册</a>
+                <else />
+                <span>{$Think.session.member_name}，您好，欢迎来到91搜墓网 &nbsp; <a href="/" title="">返回首页</a></span>
+                <a href="{:U('/logout')}" rel="nofollow">退出登录</a>
+            </empty>
+        </div>
+        <div class="nav_top">
+            <ul>
+                <li class="scan">
+                    <img src="{$Think.const.IMG_URL}saomwei.gif" alt="91搜墓网微信公众号二维码"/>扫描微信<i></i>
+                    <span class="toolbar-layer"></span>
+                </li>
+                <li><a target="_blank" href="{:U('/personal')}" rel="nofollow">用户中心</a></li>
+                <li><a target="_blank" href="{:U('/help/issue/xmjq')}" title="帮助中心">帮助中心</a></li>
+                <li><a target="_blank" href="{:U('/intro/sitemap')}" title="网站地图">网站地图</a></li>
+                <li class="last"><a href="{:U('/Storecenter/login')}" rel="nofollow">商家后台</a></li>
+            </ul>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</div><!-- 顶部结束navbar_top -->
+<!-- 头部header -->
+<div class="header">
+    <div class="contain">
+        <!-- LOGO -->
+        <div class="logo clearfix">
+            <a href="<?php echo getHomeUrl(); ?>">
+                <img src="{$Think.const.IMG_URL}logo.png" alt="91搜墓网_{$regionName}站"/>
+                <img src="{$Think.const.IMG_URL}logo_left.gif" alt="找陵园，买墓地，就上91搜墓网，91一站式服务"/></a>
+        </div>
+        <!-- 选择城市+搜索 -->
+        <div class="search">
+            <!-- 选择城市 -->
+            <div class="city">
+                <span class="sele c_down">{$regionName}<i class="sele_bg"></i></span>
+                <!-- 展开城市列表 -->
+                <div class="city_list search_city">
+                    <div class="ci_title">
+                        <ul id="city_nav">
+                            <li><a href="javascript:void(0)" tab="tabCity1">省份</a></li>
+                        </ul>
+                        <span class="c_close search_close"></span>
+                    </div>
+                    <!-- 展开的城市 -->
+                    <ul class="list_box">
+                        <!-- 热门城市 -->
+                        <li id="tabCity1" class="city_box">
+                            <ul class="clearfix">
+                                <volist name='region' id='vo'>
+                                    <li>
+                                        <a href="{:U('/'.strtolower($vo['abbreviate']))}" title="{$Think.config.SITE_NAME}_{$vo.region_name}站">{$vo.region_name}</a>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </li>
+                    </ul><!-- list_box展开的城市结束 -->
+                </div><!-- city_list展开城市列表结束 -->
+            </div><!-- city选择城市结束 -->
+            <form action="/search" method="get" onsubmit="return search_top()">
+                <input class="tex" type="text" name="wd" value= "<notempty name='wd'>{$wd}</notempty>" placeholder="请输入搜索的陵园名称" />
+                <button class="btn"></button>
+            </form>
+        </div><!-- search选择城市+搜索结束 -->
+        <!-- 热线 -->
+        <div class="header_phone clearfix">
+            <img src="{$Think.const.IMG_URL}header_phone_img.png" alt="客服热线:400-8010-344"/>
+        </div>
+    </div><!-- contain -->
+</div><!-- 头部header结束 -->
+<!-- 导航 -->
+<div class="contain">
+    <div class="news_nav">
+        <ul>
+            <li <eq name='ACTION_NAME' value='index'>class="newsnav_led"</eq>><a href="{:U('/news')}" title="91搜墓网资讯首页">首页</a></li>
+            <li <eq name='menuId' value='$Think.config.CATEGOTY_COMPANY_DYNAMIC'>class="newsnav_led"</eq>>
+                <a href="/news/{$Think.config.CATEGOTY_COMPANY_DYNAMIC}.html" title="商务合作">商务合作</a>
+            </li>
+            <li <eq name='menuId' value='$Think.config.CATEGORY_INDUSTRY_INFORMATION'>class="newsnav_led"</eq>>
+                <a href="/news/{$Think.config.CATEGORY_INDUSTRY_INFORMATION}.html" title=“业界资讯”>业界资讯<i></i></a>
+                <ul class="news_subnav">
+                    <li><a href="/news/{$Think.config.CATEGORY_INDUSTRY_INFORMATION}-{$Think.config.CATEGOTY_COM_CULTURE}.html" title=“企业软文">企业软文</a></li>
+                    <li><a href="/news/{$Think.config.CATEGORY_INDUSTRY_INFORMATION}-{$Think.config.CATEGOTY_STORE_DYNAMIC}.html" title="陵园动态">陵园动态</a></li>
+                    <li><a href="/news/{$Think.config.CATEGORY_INDUSTRY_INFORMATION}-{$Think.config.CATEGOTY_INDUSTRY_DYNAMIC}.html" title="行业新闻">行业新闻</a></li>
+                    <li><a href="/news/{$Think.config.CATEGORY_INDUSTRY_INFORMATION}-{$Think.config.CATEGOTY_LAWS_REGULATIONS}.html" title="政策法规">政策法规</a></li>
+                </ul>
+            </li>
+            <li <eq name='menuId' value='$Think.config.CATEGOEY_FENGSHUI_CULTURE'>class="newsnav_led"</eq>>
+                <a href="/news/{$Think.config.CATEGOEY_FENGSHUI_CULTURE}.html" title="风水文化" title="风水文化">风水文化<i></i></a>
+                <ul class="news_subnav">
+                    <li><a href="/news/{$Think.config.CATEGOEY_FENGSHUI_CULTURE}-{$Think.config.CATEGOTY_FS_FORTUNES}.html" title="风水运势">风水运势</a></li>
+                    <li><a href="/news/{$Think.config.CATEGOEY_FENGSHUI_CULTURE}-{$Think.config.CATEGOTY_FUNERAL_CULTURE}.html" title="殡葬文化">殡葬文化</a></li>
+                </ul>
+            </li>
+            <li <eq name='menuId' value='$Think.config.CATEGORY_SACRIFICE_CUSTOM'>class="newsnav_led"</eq>>
+                <a href="/news/{$Think.config.CATEGORY_SACRIFICE_CUSTOM}.html" title="祭祀习俗">祭祀习俗<i></i></a>
+                <ul class="news_subnav">
+                    <li><a href="/news/{$Think.config.CATEGORY_SACRIFICE_CUSTOM}-{$Think.config.CATEGOTY_SACRIFICE_RITES}.html" title="祭祀活动">祭祀活动</a></li>
+                    <li><a href="/news/{$Think.config.CATEGORY_SACRIFICE_CUSTOM}-{$Think.config.CATEGOTY_BURIAL_CUSTOM}.html" title="丧葬习俗">丧葬习俗</a></li>
+                </ul>
+            </li>
+            <li <eq name='menuId' value='$Think.config.CATEGORY_FUNERAL_SCIENCE'>class="newsnav_led"</eq>>
+                <a href="/news/{$Think.config.CATEGORY_FUNERAL_SCIENCE}.html" title="殡葬科学">殡葬科学<i></i></a>
+                <ul class="news_subnav">
+                    <li><a href="/news/{$Think.config.CATEGORY_FUNERAL_SCIENCE}-{$Think.config.CATEGOTY_KG_CULTURE}.html" title="考古文化">考古文化</a></li>
+                    <li><a href="/news/{$Think.config.CATEGORY_FUNERAL_SCIENCE}-{$Think.config.CATEGOTY_COUPE_KNOWLEDGE}.html" title="科普知识">科普知识</a></li>
+                </ul>            	
+            </li>
+            <li <eq name='menuId' value='$Think.config.CATEGORY_CEMETERY_AMOROUS_FEELINGS'>class="newsnav_led"</eq>>
+                <a href="/news/{$Think.config.CATEGORY_CEMETERY_AMOROUS_FEELINGS}.html" title="陵园风情">陵园风情<i></i></a>
+                <ul class="news_subnav">
+                    <li><a href="/news/{$Think.config.CATEGORY_CEMETERY_AMOROUS_FEELINGS}-{$Think.config.CATEGOTY_LIFE_GNOSIS}.html" title="人生感悟">人生感悟</a></li>
+                    <li><a href="/news/{$Think.config.CATEGORY_CEMETERY_AMOROUS_FEELINGS}-{$Think.config.CATEGOTY_CEMETRY_STORY}.html" title="陵园故事">陵园故事</a></li>
+                    <li><a href="/news/{$Think.config.CATEGORY_CEMETERY_AMOROUS_FEELINGS}-{$Think.config.CATEGOTY_LUCKY_CELEBRITY}.html" title="福地名人">福地名人</a></li>
+                </ul>
+            </li>
+            <li <eq name='menuId' value='$Think.config.CATEGOTY_SENSE'>class="newsnav_led"</eq>>
+                <a href="/news/{$Think.config.CATEGOTY_SENSE}.html" title="白事常识">白事常识</a>
+            </li>
+            <li <eq name='menuId' value='$Think.config.CATEGORY_TRADITIONAL_FESTIVAL'>class="newsnav_led"</eq>>
+                <a href="/news/{$Think.config.CATEGORY_TRADITIONAL_FESTIVAL}.html" title="传统节日">传统节日</a>
+            </li>
+            <li <eq name='menuId' value='$Think.config.CATEGOTY_BURIED_TYPE'>class="newsnav_led"</eq>>
+                <a href="/news/{$Think.config.CATEGOTY_BURIED_TYPE}.html" title="葬式墓型">葬式墓型</a>
+            </li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+</div><!-- nav导航结束 -->

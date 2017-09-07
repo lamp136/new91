@@ -1,0 +1,1 @@
+function estop(e){var e=arguments.callee.caller.arguments[0]||event;return e&&e.stopPropagation?void e.stopPropagation():(window.event.cancelBubble=!0,!1)}img.init(),img.play(0);

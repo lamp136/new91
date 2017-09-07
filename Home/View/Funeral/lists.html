@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="icon" href="/Public/soumu.ico" type="image/x-icon" />
+    <title>{$seoInfo.seo_title}_{$Think.config.SITE_NAME}</title>
+    <meta name="keywords" content="{$seoInfo.seo_keywords}" />
+    <meta name="description" content="{$seoInfo.seo_description}" />
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+    
+    <script type="text/javascript" src="{$Think.const.JS_URL}wap.js"></script>
+    <script type="text/javascript">
+        //var url = window.location.pathname;
+        var newurl = "{$Think.config.WAP_STIE_DOMAIN}"+'/funeral.html';
+        browserRedirect(newurl);
+    </script>
+</head>
+<body>
+<include file="Common:head_in" />
+<!-- 中间内容部分 -->
+<div class="main">
+    <div class="contain clearfix">
+        <!-- 陵园左侧 -->
+        <div class="cem_left">
+            <!-- 筛选条件 -->
+            <div class="cem_sifting">
+                <!-- 筛选条件结果显示 -->
+                <div class="criteria">
+                    <ul>
+                        <li class="sif">筛选条件</li>
+                        <li>></li>
+                         <notempty name="provincename">
+                            <neq name="provinceId" value="$Think.config.CHINA_NUM">
+                            <li class="if"><a href="{:U('/funeral')}">{$provincename}<span></span></a></li>
+                            <else/>
+                            <li>{$provincename}</li>
+                            </neq>
+                        </notempty>
+                        <notempty name="cityname">
+                            <li class="if">
+                                <a rel="nofollow" href="{:U('/funeral')}?province={$provinceId}">{$cityname}<span></span></a>
+                            </li>
+                        </notempty>
+                        <notempty name="selectDistance">
+                            <li class="if">
+                                <a rel="nofollow" href="{:U('/funeral')}?province={$provinceId}&city={$cityId}">{$selectDistance}<span></span></a>
+                            </li>
+                        </notempty>
+                        <li class="number">共<span>{$total}</span>结果</li>
+                    </ul>
+                </div>
+                <!--陵园地区 -->
+                <div class="area">
+                    <ul class="filter clearfix">
+                        <li class="tiel">省份</li>
+                        <volist name="provinces" id="p" offset="0" length='12'>
+                            <li <eq name="provinceId" value="$p['region_id']"> class="fil_led" </eq>>
+                                <a rel="nofollow" href="{:U('funeral/'.strtolower($p['abbreviate']))}" title="{$p.region_name}">{$p.region_name}</a>
+                            </li>
+                        </volist>
+                        <!-- 显示按钮 -->
+                        <gt name="totalProvinces" value="12">
+                        <li class="more_btn"><span></span></li>
+                        </gt>
+                    </ul>
+                  <!-- 陵园地区展开内容 -->
+                    <ul class="filter more_main clearfix">
+                        <li class="tiel"></li>
+                         <volist name="provinces" id="p"  offset="12" length='12'>
+                            <li <eq name="provinceId" value="$p['region_id']"> class="fil_led" </eq> >
+                                <a rel="nofollow" href="{:U('funeral/'.strtolower($p['abbreviate']))}" title="{$p.region_name}">{$p.region_name}</a>
+                            </li>
+                        </volist>
+                    </ul>
+                    <ul class="filter more_main clearfix">
+                        <li class="tiel"></li>
+                         <volist name="provinces" id="p" key="k" offset="24" length='12'>
+                            <li <eq name="provinceId" value="$p['region_id']"> class="fil_led" </eq>>
+                                <a rel="nofollow" href="{:U('funeral/'.strtolower($p['abbreviate']))}" title="{$p.region_name}">{$p.region_name}</a>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+                <!-- 服务地区 -->
+                <notempty name='cities'>
+                <div class="area_main clearfix last">
+                    <div class="area_left" >
+                        <span class="tiel">城区</span>
+                    </div>
+                    <ul class="filter clearfix">
+                        <volist name="cities" id="citiesname" offset="0" length='12'>
+                            <li <eq name="cityId" value="$key"> class="fil_led" </eq>>
+                                <a rel="nofollow" href="{:U('/funeral')}?province={$provinceId}&city={$key}" title="{$citiesname}">{$citiesname}</a>
+                            </li>
+                        </volist>
+                    </ul>					
+                </div><!-- area_main服务地区结束 -->
+                </notempty>
+            </div><!-- cem_sifting筛选条件结束 -->
+            <!-- 殡仪馆列表 -->
+            <div class="cem_list">
+                <volist name='datas' id='vo'>
+                <div class="cem_list_main chap_list_main clearfix">
+                    <!-- 殡仪馆图片 -->
+                    <a target="_blank" href="{:U('/funeral/detail/'.$vo['store_id'])}" class="cem_pho" title="{$vo.store_name}">
+                        <img src="{$vo.store_banner}" alt="{$vo.store_name}"/>
+                    </a>
+                    <!-- 描述 -->
+                    <div class="chap_depict">
+                        <h1><a target="_blank" href="{:U('/funeral/detail/'.$vo['store_id'])}" title="{$vo.store_name}">{$vo.store_name}</a></h1>
+                        <ul class="chap_feature">
+                            <li><span>热线</span><notempty name='vo.StoreContact'>服务热线：{$vo.StoreContact.tel}</notempty></li>
+                            <notempty name='vo.address'><li><span class="chap_spanB">地址</span>地址：{$vo.address}</li></notempty>
+                        </ul>
+                    </div>
+                    <!-- 查看详情 -->
+                    <div class="chap_btn">
+                        <a target="_blank" href="{:U('/funeral/detail/'.$vo['store_id'])}">查看详情</a>
+                    </div>
+                </div>
+                </volist>
+            </div><!-- cem_list殡仪馆列表结束 -->
+            <!-- 分页 -->
+            <div class="pagination"> 
+                {$page}
+            </div><!-- pagination分页结束 -->
+        </div><!-- cem_left殡仪馆左侧结束 -->
+        <!-- 殡仪馆右侧 -->
+        <div class="cem_right">
+            <!-- 附近陵园推荐 -->
+            <div class="nearby">
+                <h2>陵园推荐</h2>
+                <ul>
+                    <volist name="cemetery" id="vo" key="k">
+                    <li class="clearfix">
+                        <h3><a target="_blank" href="{:U('/cemetery/detail/'.$vo['store_id'])}" title="{$vo.store_name}"><span>{$k}</span>{$vo.store_name}</a></h3>
+                        <a target="_blank" class="nearby_img" href="{:U('/cemetery/detail/'.$vo['store_id'])}" title="{$vo.store_name}">
+                            <img src="{$vo.store_banner}" alt="{$vo.store_name}"/>
+                            <in name="vo.member_status" value="$storeMembersYH" >
+                            <span class="favorable_small"></span>
+                            </in>
+                        </a>
+                        <div class="nearby_right">
+                            <p>特色：{$vo.feature|msubstr=0,16}</p>
+                            <p class="lookmap"><a href="{:U('/cemetery/detail/'.$vo['store_id'].'#map')}"><i></i>点击查看地图</a></p>
+                        </div>
+                    </li>
+                    </volist>
+                </ul>
+            </div><!-- nearby附近陵园推荐结束 -->
+            <!-- 广告banner -->
+            <div class="cem_ad">
+                <img src="{$Think.const.IMG_URL}cem_ad.jpg" alt="91搜墓网会员招募"/>
+            </div><!-- cem_ad广告banner结束 -->
+            <!-- 白事常识 -->
+            <div class="huimin">
+                <h2>白事常识</h2>
+                <ul>
+                    <volist name='Newsfuneral' id='vo' key='k'>
+                    <li>
+                        <a href="{:U('news/detail/'.$vo[id])}" title="{$vo.title}" target="_blank">
+                            <span <elt name="k" value="3">class="faq_led"</elt>>{$k}</span>{$vo.title|msubstr=0,16}
+                        </a>
+                    </li>
+                    </volist>
+                </ul>
+            </div><!-- huimin白事常识结束 -->
+        </div><!-- cem_right殡仪馆右侧结束 -->
+    </div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<!-- 底部footer部分 -->
+<include file="Common:footer" />
+    <script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        //陵园地区点击展示更多地区
+        $(".more_btn").click(function() {
+            $(".more_main").toggle();
+        });
+    });
+</script>
+</body>
+</html>

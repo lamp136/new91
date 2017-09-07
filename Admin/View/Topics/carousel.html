@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">轮播图</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>轮播图</h4>
+                                    <php>
+                                        if(showHandle('Topics/addCarouselTopics')){
+                                    </php>
+                                        <span class="tools">
+                                            <a href="javascript:void(0)" class="icon-plus add" >添加轮播图</a>
+                                        </span>
+                                    <php>
+                                        }
+                                    </php>
+                                </div>
+                                <div class="widget-body">
+                                    <form id="quickForm" method="get" class="form-horizontal" autocomplete="off" action='{:U("carousel")}'>
+                                        搜索：
+                                        <input type="text" name="name" class="input" id="newName" placeholder="输入图片名称搜索">
+                                        <button class="btn btn-primary">确定</button>
+                                    </form>
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th width="16%">名称</th>
+                                                <th width="12%">标识</th>
+                                                <th width="25%">图片</th>
+                                                <th width="10%">开始时间</th>
+                                                <th width="10%">结束时间</th>
+                                                <th width="6%">排序</th>
+                                                <th width="6%">状态</th>
+                                                <th width="15%">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <volist name="list" id="vo">
+                                            <tr class="odd gradeX">
+                                                <td>{$vo.name}</td>
+                                                <td>{$vo.tag_name}</td>
+                                                <td><img src="{$vo.thumb_image}"></td>
+                                                <td><neq name="vo.start_time" value="0">{$vo.start_time|date='Y-m-d',###}</neq></td>
+                                                <td><neq name="vo.end_time" value="0">{$vo.end_time|date='Y-m-d',###}</neq></td>
+                                                <td>{$vo.sort}</td>
+                                                <td>
+                                                    <if condition="$vo['status'] eq 1">    <span class="text-success">正常</span>
+                                                    <elseif condition="$vo['status'] eq -1"/>
+                                                    <span class="text-error">下线</span>
+                                                    </if>
+                                                </td>
+                                            <td>
+                                                <php>
+                                                    if(showHandle('Topics/editCarouselTopics')){
+                                                </php>
+                                                <a class="btn btn-small edit" href="javascript:void(0)" data-id="{$vo.id}"><i class="icon-pencil icon-white"> </i>编辑</a>
+                                                <php>
+                                                    }
+                                                    if(showHandle('Topics/del')){
+                                                </php>
+                                                    <eq name="vo.status" value="$Think.config.NORMAL_STATUS">
+                                                        <a class="btn btn-danger btn-small del" href="javascript:void(0)" data-id="{$vo.id}" ><i class="icon-remove  icon-white"> </i>下线</a>
+                                                    <else />
+                                                        <a class="btn btn-success btn-small enable" href="javascript:void(0)" data-id="{$vo.id}" ><i class="icon-ok  icon-white"> </i>上线</a>
+                                                    </eq>
+                                                <php>
+                                                    }
+                                                </php>
+                                            </td>
+                                            </tr>
+                                        </volist>
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span12 center">
+                                            <div class="pagination" id="sample_1_info" style="text-align: center">
+                                                {$page}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+    <!--添加专题横幅开始-->
+    <div id="add" class="modal hide fade in" style="width:800px;">
+        <form id="addForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>添加专题横幅</h3>
+            </div>
+            <div class="modal-body" >
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>专题名称：</td>
+                            <td><input class="input" id="name" name="name" type="text" size="30" data-rule="required" ><span class="hide" name="re_hint"></span> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>标识：</td>
+                            <td><input class="input"  name="tag_name" type="text" data-rule="required" >  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>图片：</td>
+                            <td>
+                                <input class="default" name="image" type="file" data-rule="required"><i style="color:green;">上传230 x 55的图片</i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>在线时间：</td>
+                            <td>
+                                <input onblur="return time()" type="text" size="30" id="start_time" name="start_time" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" class="Wdate"/>至
+                                <input onblur="return time()" type="text" size="30" id="end_time" name="end_time" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" class="Wdate"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>状态：</td>
+                            <td>
+                                <input name="status" value="{$Think.config.NORMAL_STATUS}" type="radio" data-rule="checked" checked> 正常 
+                                <input name="status" value="{$Think.config.DELETE_STATUS}" type="radio" data-rule="checked"> 下线
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>排序：</td>
+                            <td><input type="text" class="input" size="30" value='1' name="sort" data-rule='required'/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">提交</button>
+                <a href="javascript:void(0)" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--添加专题横幅结束-->
+
+    <div id="edit" class="modal hide fade in" style="width:800px;">
+        <form id="editForm" method="post"  class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>编辑专题横幅</h3>
+            </div>
+            <div class="modal-body" >
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>专题名称：</td>
+                            <td><input class="input" id="name" name="name" type="text" size="30" data-rule="required" ><span class="hide" name="re_hint"></span> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>标识：</td>
+                            <td><input class="input"  name="tag_name" type="text" data-rule="required" >  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>图片：</td>
+                            <td>
+                                <img name="old_img"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>更改图片：</td>
+                            <td>
+                                <input class="default" name="image" type="file"/>
+                                <i style="color:green;">上传230 x 55的图片</i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>在线时间：</td>
+                            <td>
+                                <input onblur="return time()" type="text" size="30" id="start_time" name="start_time" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" class="Wdate"/>至
+                                <input onblur="return time()" type="text" size="30" id="end_time" name="end_time" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" class="Wdate"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>状态：</td>
+                            <td>
+                                <input name="status" value="{$Think.config.NORMAL_STATUS}" type="radio" data-rule="checked" checked> 正常 
+                                <input name="status" value="{$Think.config.DELETE_STATUS}" type="radio" data-rule="checked"> 下线
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>排序：</td>
+                            <td><input type="text" class="input" size="30" value='1' name="sort" data-rule='required'/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name='id'/> 
+                <button type="submit"  class="btn btn-success">提交</button>
+                <a href="javascript:void(0)" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}zh-CN.js"></script>
+    <script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+        // 添加陵园横幅专题
+        $('.add').click(function(){
+            $('#addForm span[name="re_hint"]').hide();
+            $('#addForm')[0].reset();
+            $('#add').modal();
+        })
+
+        // 提交添加
+        $('#addForm').bind('valid.form',function(){
+            $('#add').modal('hide');
+            var addFd = new FormData(document.getElementById("addForm"));
+            $.ajax({
+                url:"{:U('addCarouselTopics')}",
+                type:'post',
+                data:addFd,
+                processData: false,
+                contentType: false,
+                success:function(j){
+                    var result = eval("("+j+")");
+                    if(result.flag == 1){
+                        alert(result.msg);
+                        window.location.reload();
+                    }else{
+                        alert(result.msg);
+                    }
+                }
+            })
+        })
+
+        // 编辑
+        $('.edit').click(function(){
+            $('#editForm span[name="re_hint"]').hide();
+            $('#editForm')[0].reset();
+            var id = $(this).attr('data-id');
+            var status = $('#editForm input[name="status"]');
+            $.ajax({
+                url:"{:U('editCarouselTopics')}",
+                type:'get',
+                data:{
+                    id:id,
+                },
+                success:function(val){
+                    var result = eval("("+val+")");
+                    if(result.flag == 1){
+                        var data = result['data'];
+                        $('#editForm input[name="name"]').val(data.name);
+                        $('#editForm input[name="tag_name"]').val(data.tag_name);
+                        $('#editForm img[name="old_img"]').attr('src',data.thumb_image);
+                        if(data.start_time != 0 && data.end_time != 0){
+                            $('#editForm input[name="start_time"]').val(data.start_time);
+                            $('#editForm input[name="end_time"]').val(data.end_time);
+                        }
+
+                        for (var i = 0; i < status.length; i++) {
+                            if(status[i].value == data.status){
+                                status[i].checked = true;
+                                break;
+                            }
+                        }
+                        $('#editForm input[name="sort"]').val(data.sort);
+                        $('#editForm input[name="id"]').val(data.id);
+                        $('#edit').modal();
+                    }
+                }
+            })
+        })
+
+        // 提交编辑
+        $('#editForm').bind('valid.form',function(){
+            $('#edit').modal('hide');
+            var editFd = new FormData(document.getElementById("editForm"))
+            $.ajax({
+                url:"{:U('editCarouselTopics')}",
+                type:'post',
+                data:editFd,
+                processData: false,
+                contentType: false,
+                success:function(v){
+                    var result = eval("("+v+")");
+                    if(result.flag == 1){
+                        alert(result.msg);
+                        window.location.reload();
+                    }else{
+                        alert(result.msg);
+                    }
+                }
+            })
+        })
+
+        //禁用
+        $('.del').click(function () {
+            var id = $(this).attr('data-id');
+            var act = '{$Think.config.DELETE_STATUS}';
+            _del(id,act);
+        });
+
+        //启用
+        $('.enable').click(function () {
+            var id = $(this).attr('data-id');
+            var act = '{$Think.config.NORMAL_STATUS}';
+            _del(id,act);
+        });
+
+        /**
+         * 删除/启用 方法
+         * @param  {int} id  主键id
+         * @param  {int} act 状态: 1/-1
+         */
+        function _del(id,act){
+            $.ajax({
+                url: "{:U('del')}",
+                type: 'post',
+                data: {
+                    id:id,
+                    act:act,
+                },
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        window.location.reload();
+                    }
+                }
+            });
+        }
+
+        function time() {
+            var start_time = $('#start_time').val();
+            var start = new Date(start_time.replace("-", "/").replace("-", "/"));
+            var end_time = $('#end_time').val();
+            var end = new Date(end_time.replace("-", "/").replace("-", "/"));
+            if(start_time!='' && end_time!='' && end<start){
+                alert('结束时间不能小于开始时间');
+                return false;
+            }
+        }
+
+        /**
+         * 重复判断
+         */
+        $('#addForm input[name="name"]').blur(function(){
+            var type = {$Think.config.TOPICS_TYPE.CAROUSEL};
+            var name = $(this).val();
+            var info = {type:type,name:name}
+            if(name != ''){
+                checkRepeat($('#addForm span[name="re_hint"]'),this,info);
+            }
+        })
+
+        $('#editForm input[name="name"]').blur(function(){
+            var type = {$Think.config.TOPICS_TYPE.CAROUSEL};
+            var name = $(this).val();
+            var id = $('#editForm input[name="id"]').val();
+            var info = {type:type,name:name,id:id}
+            if(name != ''){
+                checkRepeat($('#editForm span[name="re_hint"]'),this,info);
+            }
+        })
+        
+        /**
+         * 重复判断
+         * @param  {object} errMsgBox 用于显示错误信息的标签
+         * @param  {object} n         专题名字的文本框
+         * @param  {object} ret       往后台传的参数
+         */
+        function checkRepeat(errMsgBox,n,ret){
+            $.ajax({
+                url:"{:U('checkRepeat')}",
+                type:'post',
+                data:ret,
+                success:function(x){
+                    var data = eval("("+x+")");
+                    if(data.flag == 1){
+                        errMsgBox.text(data.msg).css({'color':'#CC3333','font-size':'12px','font-family':'Microsoft YaHei'}).show();
+                        $(n).val('');
+                    }else{
+                        errMsgBox.hide();
+                    }
+                }
+            })
+        }
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

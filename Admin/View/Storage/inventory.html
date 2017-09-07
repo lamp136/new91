@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+<!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">库存列表</a><span class="divider-last">&nbsp;</span>
+                        </li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-body">
+                                <form method="get" class="form-horizontal" autocomplete="off" action="{:U('Storage/inventory')}">
+                                    搜索：
+                                    <select class="input-medium m-wrap" tabindex="1" name="storage_name">
+                                        <option value="0">--选择仓库--</option>
+                                        <volist name="storage" id="vo">
+                                            <if condition="$Think.get.storage_name  eq $vo[id]">
+                                                <option value="{$vo.id}" selected="selected">{$vo.storage_name}</option>
+                                            <else/>
+                                                <option value="{$vo.id}">{$vo.storage_name}</option>
+                                            </if>
+                                        </volist>
+                                    </select>
+                                    <input type="text" name="service_goods_name" class="input-medium" placeholder="商品名称" value="{$Think.get.service_goods_name}"/>
+                                    <button class="btn btn-primary">确定</button>
+                                </form>
+                                <table class="table table-striped table-bordered" id="sample_1">
+                                    <thead>
+                                    <tr>
+                                        <th class="hidden-phone">仓库名称</th>
+                                        <th class="hidden-phone">商品名称</th>
+                                        <th class="hidden-phone">库存量</th>
+                                        <th class="hidden-phone">进货量</th>
+                                        <th class="hidden-phone">出货量</th>
+<!--                                        <th class="hidden-phone">操作</th>-->
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <volist name="list" id="vo">
+                                            <tr class="odd gradeX">
+                                                <td>{$vo.storage_name}</td>
+                                                <td>{$vo.service_goods_name}</td>
+                                                <td>{$vo.inventory}</td>
+                                                <td>{$vo.purchase}</td>
+                                                <td>{$vo.shipping}</td>
+<!--                                                <td>
+                                                    <php>
+                                                        if (showHandle('Storage/outputInventory')) {
+                                                    </php>
+                                                        <button type="button" class="btn btn-small btn-primary outputInventory" data-id="{$vo.id}" /><i class="icon-pencil icon-white"></i>出库
+                                                    <php>
+                                                        }
+                                                    </php>
+                                                </td>-->
+                                            </tr>
+                                       
+                                        </volist>
+                                    </tbody>
+                                </table>
+                                <div class="row-fluid">
+                                    <div class="span12 center">
+                                        <div class="pagination" id="sample_1_info" style="text-align: center">
+                                            {$page}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- END CONTAINER -->
+
+<!--出库开始-->
+<div id="outputInventory" class="modal hide fade in" style='width:650px;'>
+    <form id="outputInventoryForm" method="post" class="form-horizontal" autocomplete="off">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>填写出库单</h3>
+        </div>
+        <div class="modal-body">
+            <table class="table table-bordered table-hover">
+                <tbody>
+                    <tr>
+                        <td>商品名称</td>
+                        <td ><input type='text' name='service_goods_name' readonly></input></td>
+                    </tr>
+                    <tr>
+                        <td>仓库名称</td>
+                        <td ><input type='text' name='storage_name' readonly></input></td>
+                    </tr>
+                    <tr>
+                        <td>库存数量</td>
+                        <td ><input type='text' name='inventory' class='inventory' readonly></input></td>
+                    <tr>
+                        <td>出库数量</td>
+                        <td ><input type='text' name='info[number]' class="checkNumber" data-rule='required'></input></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <input type="hidden" name="action" value="submit">
+            <input type='hidden' id='id' name='info[id]'></input>
+            <button type="submit" class="btn btn-success">提交</button>
+            <a href="#" class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </form>
+</div>
+<!--出库结束-->
+
+<!-- BEGIN FOOTER -->
+<include file="Public::footer"/>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+<script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+<script src="{$Think.const.JS_URL}scripts.js"></script>
+<script src="{$Think.const.JS_URL}zh-CN.js"></script>
+<script>
+    $('.outputInventory').click(function(){
+        var id = $(this).attr('data-id');
+        var action = 'select';
+        $.ajax({
+            url:'{:U("outputInventory")}',
+            type:'post',
+            data:{'id':id,'action':action},
+            async:false,
+            success : function(res){
+                var result = eval("(" + res + ")");
+                if(result.flag==1){
+                    var data = result.data;
+                    $('#id').val(data.id);
+                    $('#outputInventoryForm input[name="service_goods_name"]').val(data.service_goods_name); 
+                    $('#outputInventoryForm input[name="storage_name"]').val(data.storage_name);
+                    $('#outputInventoryForm input[name="inventory"]').val(data.inventory);  
+                    $('#outputInventory').modal();
+                    //window.location.reload();//刷新当前页面.
+                }else{
+                    alert(result.msg);
+                }
+            }
+        });
+    });
+    $('#outputInventoryForm').bind('valid.form', function () {
+        $.ajax({
+            url:'{:U("outputInventory")}',
+            type:'post',
+            data: $(this).serialize(),
+            async:false,
+            success : function(res){
+                var result = eval("(" + res + ")");
+                if(result.flag==1){
+                    $('#outputInventory').modal('hide');
+                    window.location.reload();//刷新当前页面.
+                }
+            }
+        });
+    });
+    
+    //判断出库数量
+    $('.checkNumber').blur(function(){
+        var inventory = parseInt($('.inventory').val());
+        var number = parseInt($(this).val());
+        if(inventory < number){
+            $(this).attr("value","");
+            alert('库存不足！');
+        }
+    });
+</script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>祭祀服务列表</title>
+	<link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+	<link href="{$Think.const.CSS_URL}select.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<!-- 顶部 -->
+	<include file="Common:head_in" />
+<!-- 顶部结束navbar_top -->
+<!-- 头部header -->
+<!-- 中间内容部分 -->
+<div class="main">
+	<div class="contain clearfix">
+		<!-- 服务左侧 -->
+		<div class="cem_left">
+			<!-- 筛选条件 -->
+			<div class="cem_sifting">
+				<!-- 筛选条件结果显示 -->
+				<div class="criteria">
+					<ul>
+						<li class="sif">所有分类</li>
+						<li>></li>
+						<notempty name="Think.get.storeId">
+                            <volist name="storeName" id="vo">
+                            	<eq name="Think.get.storeId" value="$key">
+                            		<li class="if">
+                            			<a rel="nofollow" href="<?php echo getHomeUrl('service'); ?>?money={$money}">{$vo}<span></span></a>
+                            		</li>
+                            	</eq>
+                            </volist>
+                        </notempty>
+						<notempty name="Think.get.money">
+                            <volist name="Think.config.SERVICE_MONEY" id="vo">
+                            	<eq name="Think.get.money" value="$key">
+                            		<li class="if">
+                            			<a rel="nofollow" href="<?php echo getHomeUrl('service'); ?>?storeId={$storeId}">{$vo}<span></span></a>
+                            		</li>
+                            	</eq>
+                            </volist>
+                        </notempty>	
+						<li class="number">共<span>{$total}</span>结果</li>
+					</ul>
+				</div>
+				<!-- 陵园名称： -->
+				<div class="area_main clearfix">
+					<div class="area_left" >
+						<span class="tiel">陵园名称：</span>
+					</div>
+					<ul class="filter clearfix">
+						<volist name='storeName' id='vo'>
+							<li <eq name="Think.get.storeId" value="$key"> class="fil_led" </eq>>
+								<a href="<?php echo getHomeUrl('service'); ?>?storeId={$key}&money={$money}">{$vo}</a>
+							</li>
+						</volist>
+					</ul>					
+				</div><!-- area_main服务地区结束 -->
+				<!-- 距离市区 -->
+				<ul class="filter clearfix last">
+					<li class="tiel">价格区间：</li>
+					<volist name='Think.config.SERVICE_MONEY' id='vo'>
+						<li <eq name="Think.get.money" value="$key"> class="fil_led" </eq>>
+							<a href="<?php echo getHomeUrl('service'); ?>?storeId={$storeId}&money={$key}">{$vo}</a>
+						</li>
+					</volist>
+				</ul>
+			</div><!-- cem_sifting筛选条件结束 -->
+			<!-- 服务列表 -->
+			<div class="cem_service_list">
+				<if condition='$total eq 0'>
+					<!-- 提示搜索没有数据 -->
+					<div class="search_nodata">
+						您搜索的<span>服务</span>没有数据
+					</div>
+				</if>
+				<!-- 1 -->
+				<volist name='list' id='vo'>
+				<div class="service_list_main clearfix">
+					<!-- 服务图片 -->
+					<a href="{:U('service/detail/'.$vo['store_goods_sn'])}" class="cem_pho"><img src="{$vo.thumb_url}"/><span class="newproduct"></span></a>
+					<!-- 描述 -->
+					<div class="depict clearfix">
+						<h1><a href="{:U('service/detail/'.$vo['store_goods_sn'])}">{$vo.service_goods_name}</a></h1>
+						<ul class="feature">
+							<li><span>属</span>隶属：<strong>{$vo.store_name}</strong></li>
+							<li><span class="yu">寓</span>寓意：{$vo.moral}</li>
+							<notempty name="vo['Single']">
+								<li><span>含</span>包含：
+									<volist name="vo['Single']" id='res'>
+										{$res.service_goods_name}{$res.number}{$unit[$res['skuid']]}&nbsp;
+									</volist>
+								.</li>
+							</notempty>
+							<li><span>销</span>销量：已销售1200套</li>
+						</ul>
+						<div class="pric">
+							<p class="p_yuan"><span>{$vo.sales_price}</span>元</p>
+							<p class="p_pj">已有<span>500</span>人评价</p>
+						</div>
+						<div class="service_btn">
+							<a id="buy-s-1" class="baseBg Q-buy-btn jrgwc" href="javascript:void(0)" goodsSn="{$vo.store_goods_sn}" store_id="{$vo.store_id}">加入购物车</a>
+							<a class="ljgm" href="#">立即购买</a>
+						</div>
+					</div>
+				</div><!-- depict End -->
+				</volist>
+			</div><!-- cem_list服务列表结束 -->
+			<!-- 分页 -->
+			<div class="pagination"> 
+				<div>
+					{$page}
+				</div> 
+			</div><!-- pagination分页结束 -->
+		</div><!-- cem_left服务左侧结束 -->
+		<!-- 服务右侧 -->
+		<div class="cem_right service_list_right">
+			<!-- 习俗 -->
+			<div class="xisu">
+				<img src="{$Think.const.IMG_URL}service_list_xisu.jpg"/>
+			</div><!-- 习俗 -->
+			<!-- 广告banner -->
+			<div class="cem_ad">
+				<img src="{$Think.const.IMG_URL}service_list_ad1.jpg"/>
+			</div><!-- cem_ad广告banner结束 -->
+			<!-- 风水文化 -->
+			<div class="fs">
+				<h1>风水文化</h1>
+				<ul class="geomantic">
+				 	<volist name="fswh" id="vo">
+                        <li>
+                            <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0,16}</a>
+                        </li>
+                    </volist>
+				</ul>
+			</div>
+			<!-- 广告banner -->
+			<div class="cem_ad">
+				<img src="{$Think.const.IMG_URL}service_list_ad2.jpg"/>
+			</div><!-- cem_ad广告banner结束 -->
+			<!-- 最新资讯 -->
+			<div class="nws_latest">
+				<h1><i class="latest_i"></i>最新资讯</h1>
+				<ul>
+					<volist name="latestnews" id="vo">
+                        <li>
+                            <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0,16}</a>
+                        </li>
+                    </volist>
+				</ul>
+			</div><!-- nws_latest最新资讯结束 -->
+			<!-- 热门文章 -->
+			<div class="nws_article">
+				<h1><i class="article_i"></i>热门文章</h1>
+				<ul>
+					<volist name="rdjj" id="vo">
+                        <li>
+                            <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0,16}</a>
+                        </li>
+                    </volist>
+				</ul>
+			</div><!-- nws_article热门文章结束 -->
+		</div><!-- cem_right服务右侧结束 -->
+	</div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<!-- 底部footer部分 -->
+<include file="Common:footer" />
+
+<!-- 搜索提示 -->
+<script type="text/javascript" src="{$Think.const.JS_URL}hit.js"></script>
+<!-- 加入购物车 -->
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}jQuery-shopping.js"></script>
+<!-- 返回顶部JS -->
+<script src="{$Think.const.JS_URL}backtop.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		//陵园地区点击展示更多地区
+		$(".more_btn").click(function() {
+			 $(".more_main").toggle();
+		});
+
+		//选择城市
+		$(document).ready(function(){
+			//头部地址
+			$(".c_down").click(function(){
+				$(".search_city").css("display","block");
+			})
+			//选择城市关闭
+			$(".search_close,.city_box ul li").click(function(){
+				$(".search_city").hide();
+			})
+		});
+
+		//tab切换
+		jQuery.jqtab = function(tabtit,tabcon) {
+		        $(tabcon).hide();
+		        $(tabtit+" li:first").addClass("thistab").show();
+		        $(tabcon+":first").show();
+		    
+		        $(tabtit+" li").click(function() {
+		            $(tabtit+" li").removeClass("thistab");
+		            $(this).addClass("thistab");
+		            $(tabcon).hide();
+		            var activeTab = $(this).find("a").attr("tab");
+		            $("#"+activeTab).fadeIn();
+		            return false;
+		        });
+		        
+		    };
+		    /*调用方法如下：*/
+		    $.jqtab("#city_nav",".city_box");
+
+		// 加入购物车
+		$(function(){
+	   		$('.Q-buy-btn').shoping(); //调用shoping函数
+		});
+	});
+
+	$('.Q-buy-btn').click(function(){
+		var store_goods_sn = $(this).attr('goodsSn');
+		var store_id = $(this).attr('store_id');
+		var number = 1;
+		$.ajax({
+			url:"{:U('addCar')}",
+        	type:'post',
+        	data:{number:number,store_goods_sn:store_goods_sn,store_id:store_id},
+        	dataType:'json',
+            success:function(d){
+            	if(d==0){
+            		window.location.href="{:U('/login')}";
+            	}else{
+            		
+            	}
+	        }
+		});	
+	});
+</script>
+</body>
+</html>

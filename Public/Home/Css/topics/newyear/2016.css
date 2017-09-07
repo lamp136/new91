@@ -1,0 +1,312 @@
+@charset "UTF-8";
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/**
+ * CONTENTS
+ * navbar...........................头部+底部样式
+ * monkey...........................猴年专题样式
+ * 
+ * SETTINGS
+ * 
+ * 
+ * 
+ * 
+ * TOOLS
+ * variables.........................变量集中存储文件
+ * commonmixin.......................mixin集中存储文件和公共样式
+ * icons.............................精灵合图
+ * 
+ * COMPONENTS
+ * reset.............................Compass内置浏览器重置样式文件
+ * typography........................修饰文本列表垂直韵律样式文件
+ * utilities.........................辅助工具类模块(color和精灵合图、打印等模块)
+ * css3..............................CSS3模块
+ *
+ * BUSINESS
+ *
+ * BASE
+ * screen.scss.......................针对当前站点主页的样式修饰
+*/
+/*浏览器样式重置*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+a {
+  color: #333333;
+}
+
+a, a:hover {
+  text-decoration: none;
+}
+
+.clear {
+  clear: both;
+}
+
+.clearfix {
+  overflow: hidden;
+  *zoom: 1;
+}
+
+body, p, h1, h2, h3, h4, h5, h6 {
+  font-family: "宋体";
+  font-size: 14px;
+  color: #333333;
+}
+
+.contain {
+  width: 1110px;
+  margin: 0 auto;
+}
+
+.monkey_banner {
+  width: 100%;
+  height: 669px;
+  background: url(../../../images/topics/newyear/2016/monkey_banner.jpg) center top no-repeat;
+}
+
+/*春节内容*/
+.monkey_main {
+  width: 100%;
+  background: #feeeb3;
+}
+.monkey_main h2 {
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+/*春节来源与传说*/
+.monkey_legend {
+  padding-top: 46px;
+}
+.monkey_legend .legend_left {
+  width: 556px;
+  float: left;
+}
+.monkey_legend .legend_left p {
+  font-size: 16px;
+  font-family: "微软雅黑";
+  line-height: 30px;
+  text-indent: 2em;
+}
+.monkey_legend .legend_left p a {
+  color: #ff4800;
+}
+.monkey_legend .legend_right {
+  width: 493px;
+  float: right;
+}
+
+/*全国各地春节的特色习俗*/
+.monkey_tercel {
+  padding-top: 30px;
+}
+.monkey_tercel .tercel {
+  background: #fc724b;
+  padding: 34px 72px 42px 64px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+}
+.monkey_tercel .tercel .tercel_left {
+  width: 480px;
+  float: left;
+}
+.monkey_tercel .tercel .tercel_left h3 {
+  width: 193px;
+  height: 20px;
+  font-family: "微软雅黑";
+  font-size: 18px;
+  font-weight: bold;
+  background: url(../../../images/topics/newyear/2016/tercel_h3_bg.png);
+  margin-bottom: 20px;
+}
+.monkey_tercel .tercel .tercel_left h3 a {
+  color: #fff;
+}
+.monkey_tercel .tercel .tercel_left p {
+  color: #feeeb3;
+  line-height: 20px;
+}
+.monkey_tercel .tercel .tercel_right {
+  width: 480px;
+  float: right;
+}
+.monkey_tercel .tercel .tercel_right img:last-child {
+  margin-left: 3px;
+}
+.monkey_tercel .tercel .center {
+  margin: 28px 0 0 0;
+}
+.monkey_tercel .tercel .center .tercel_left {
+  float: right;
+}
+.monkey_tercel .tercel .center .tercel_right {
+  float: left;
+}
+.monkey_tercel .tercel li:last-child h3 {
+  margin-top: 40px;
+}
+.monkey_tercel .tercel li:last-child .tercel_right img:first-child {
+  margin-left: 34px;
+}
+
+/*春节祭祀*/
+.monkey_fete {
+  padding-top: 68px;
+}
+.monkey_fete .fete {
+  background: #fc724b;
+  padding: 44px 22px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+}
+.monkey_fete .fete ul {
+  margin-bottom: 56px;
+}
+.monkey_fete .fete ul:last-child {
+  margin-bottom: 0;
+}
+.monkey_fete .fete ul li {
+  width: 492px;
+  float: left;
+  margin-left: 22px;
+}
+.monkey_fete .fete .fete_photo {
+  position: relative;
+  width: 216px;
+  float: left;
+}
+.monkey_fete .fete .fete_photo .photo {
+  border: 3px solid #fff000;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.monkey_fete .fete .fete_photo span {
+  position: absolute;
+  top: 40%;
+  left: -21px;
+  width: 43px;
+  height: 43px;
+  display: inline-block;
+}
+.monkey_fete .fete .fete_text {
+  width: 238px;
+  float: right;
+  border: 3px dotted #fff000;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  padding: 8px;
+  margin-top: 10px;
+}
+.monkey_fete .fete .fete_text p {
+  text-indent: 2em;
+  font-family: "微软雅黑";
+  line-height: 22px;
+  color: #feeeb3;
+}
+.monkey_fete .fete .fete_text p a {
+  color: #fff;
+}
+.monkey_fete .fete .li2 {
+  margin-left: 38px;
+}
+.monkey_fete .fete .li2 .fete_photo {
+  float: right;
+}
+.monkey_fete .fete .li2 .fete_photo span {
+  left: 195px;
+}
+.monkey_fete .fete .li2 .fete_text {
+  float: left;
+}
+
+/*春节传统知识普及*/
+.monkey_knowledge {
+  padding-top: 68px;
+}
+.monkey_knowledge h2 {
+  margin-bottom: 30px;
+}
+.monkey_knowledge .knowledge ul li {
+  width: 363px;
+  float: left;
+  margin: 0 10px 42px 0;
+}
+.monkey_knowledge .knowledge .last {
+  margin-right: 0;
+}
+.monkey_knowledge .knowledge .konw_mian {
+  height: 348px;
+  background: #fc724b;
+  padding: 6px 16px 0 16px;
+  margin-top: 12px;
+}
+.monkey_knowledge .knowledge .konw_mian p {
+  font-family: "微软雅黑";
+  line-height: 24px;
+  color: #fff;
+}
+.monkey_knowledge .knowledge .konw_mian p a {
+  color: #fff;
+}
+.monkey_knowledge .knowledge .konw_mian img {
+  margin: 10px 0;
+}

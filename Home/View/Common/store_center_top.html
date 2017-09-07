@@ -1,0 +1,34 @@
+<!-- navbar -->
+<div class="navbar navbar-inverse">
+    <div class="navbar-inner">
+        <button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        
+        <a class="brand" href="__SELF__">91搜墓网会员中心</a>
+
+        <ul class="nav pull-right">
+            <li class="notification-dropdown hidden-phone">
+                <a class="trigger">
+                    <img width="25px" class="logo" src="{$Think.const.IMG_URL}/storecenter/48x48.png"/>
+                </a>
+            </li>       
+            <li class="dropdown">
+                <a href="javascript:void(0);" class="dropdown-toggle hidden-phone" data-toggle="dropdown">
+                    {$topName}
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="javascript:void(0);">
+                            <i class="icon-user"> {$Think.session.storecenter.store_login_name}</i>
+                        </a>
+                    </li>
+                    <li><a href="{:U('logout')}"><i class="icon-off"> 退出</i></a></li>
+                </ul>
+            </li>
+        </ul>            
+    </div>
+</div>

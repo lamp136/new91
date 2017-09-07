@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>陵园列表</title>
+    <link href="{$Think.const.CSS_URL}bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="__PUBLIC__/Weixin/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <!-- 带有搜索页面头部 -->
+    <header class="headertop_a">
+        <div class="container">
+            <div class="row">
+                <!-- 点击选择地区 -->
+                <div class="col-xs-3">
+                    <a class="city_btn" href="{:U('changeprovince')}">{$provinceName}<span class="city_btn_bg"></span></a>
+                </div> 
+                <!-- 搜索 -->
+                <div class="col-xs-3 col-xs-offset-6 search_btn">
+                    <a href="{:U('search')}"><img src="__PUBLIC__/Weixin/images/search_tex_bg_lg.png" alt="搜索按钮"/></a>
+                </div><!-- 搜索结束 -->
+            </div><!-- row end -->
+        </div><!-- container end -->
+    </header><!-- headertop_a头部结束 -->
+    <!-- 页面进入主体部分 -->
+    <main class="main">
+        <!-- 陵园列表 -->
+        <ul class="cemetery_list">
+            <volist name="storeList" id="vo">
+            <li>
+                <!-- 列表内容部分 -->
+                <div class="container">
+                    <div class="row">
+                        <!-- 陵园图片 -->
+                        <div class="col-xs-5 cemetery_img">
+                            <a href="{:U('detail',array('store_id'=>$vo['store_id']))}">
+                                <img src="{$vo.store_banner}" alt="{$vo.store_name}"/>
+                            </a>
+                        </div><!-- cemetery_img end -->
+                        <!-- 陵园标题特色+参考价 -->
+                        <div class="col-xs-7 list_describe">
+                            <h2>
+                                <a href="{:U('detail',array('store_id'=>$vo['store_id']))}">
+                                    {$vo.store_name}
+                                    <in name="vo.member_status" value="$memberStatusYh">
+                                    <img src="__PUBLIC__/Weixin/images/coupon.png" alt="优惠"/>
+                                    <else/>
+                                    <img src="__PUBLIC__/Weixin/images/vip.png" alt="vip"/>
+                                    </in>
+                                </a>
+                            </h2>
+                            <p>特色：{$vo.feature}</p>
+                            <p>参考价：<span class="price"><strong>{$vo.price_range}</strong></span></p>
+                        </div><!-- list_describe end -->
+                    </div><!-- row end -->
+                </div><!-- container end -->
+            </li>
+            </volist>
+        </ul><!-- cemetery_list陵园列表结束 -->
+    </main><!-- main end -->
+    <!-- 电话按钮定位 -->
+    <div class="cem_phone">
+        <a href="tel:4008010344"></a>
+    </div><!-- cem_phone end -->
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="icon" href="/Public/soumu.ico" type="image/x-icon" />
+    <title>网站优势_{$Think.config.SITE_NAME}</title>
+    <meta name='keywords' content="网站优势" />
+    <meta name='description' content="91搜墓网网站优势" />
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!--引入头部 -->
+<include file="Common:head_in" />
+<!-- 底部页面banner -->
+<div class="aboutus_banner">
+	<img src="{$Think.const.IMG_URL}aboutus_banner.jpg" alt="91搜墓网-订单保障"/>
+</div><!-- 底部页面banner结束 -->
+
+<!-- 底部页面内容导航 -->
+<include file="Common:help_menu" />
+<!-- 中间内容部分 -->
+<div class="main">
+	<div class="contain clearfix">
+		<!-- 底部页面左侧导航 -->
+		<div class="help_leftnav">
+                    <img src="{$Think.const.IMG_URL}help/footer_leftnav_logo.png" alt="91搜墓网-订单保障"/>
+                    <h1>订单保障</h1>
+                    <p>ORDER to ENSURE</p>
+                    <ul>
+                        <li class="help_leftnav_led"><a href="{:U('/help/security/wzys')}" >网站优势</a></li>
+                        <li><a href="{:U('/help/security/hyqy')}" >会员权益</a></li>
+                        <li><a href="{:U('/help/security/yhxy')}" >用户协议</a></li>
+                        <li><a href="{:U('/help/security/yszc')}" >隐私政策</a></li>
+                    </ul>
+		</div><!-- help_leftnav底部页面左侧导航结束 -->
+		<!-- 底部页面右侧 -->
+		<div class="help_right">
+			<h1>网站优势  <span></span></h1>
+			<!-- 网站优势内容 -->
+			<div class="help_adavantage">
+				<img src="{$Think.const.IMG_URL}help/wzys_img1.jpg" alt="预约便捷，超值返利">
+				<ul>
+					<li>自动化IP定位，方便用户简单快捷的检索当地陵园信息；</li>
+					<li>电话、网络、在线客服多种渠道免费预约；</li>
+					<li>超值购墓，在陵园折扣基础上再享平台高额返现。</li>
+				</ul>
+				<img src="{$Think.const.IMG_URL}help/wzys_img2.jpg" alt="智能搜索，云服务">
+				<ul>
+					<li>智能 高效 精准的一键式搜索，让您全方位了解各省市陵园信息；</li>
+					<li>领先的高科技信息化服务，为您解决购墓难题；</li>
+					<li>个性化筛选，给您带来全新的购墓服务体验。</li>
+				</ul>
+				<img src="{$Think.const.IMG_URL}help/wzys_img3.jpg" alt="诚信商家，安全保障">
+				<ul>
+					<li>全国优质的殡葬服务商，中国殡葬协会会员单位，中国青年殡葬协会会员单位；</li>
+					<li>合作过程公开透明化，100%保障客户权益；</li>
+					<li>殡葬专家一对一购墓指导，让您购墓更加放心。</li>
+				</ul>
+			</div><!-- help_adavantage网站优势内容结束 -->
+		</div><!-- help_right底部页面右侧 -->
+	</div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<!--底部代码引入-->
+<include file="Common:footer" />
+
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+</body>
+</html>

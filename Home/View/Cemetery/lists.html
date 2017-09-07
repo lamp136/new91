@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>名人墓地列表_{$Think.config.SITE_NAME}</title>
+	<link rel="icon" href="/Public/soumu.ico"  type="image/x-icon">
+	<meta charset="UTF-8">
+	<link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<include file="Common:head_in" />
+<!-- 中间内容部分 -->
+<div class="main">
+    <div class="contain">
+        <!-- 面包屑导航 -->
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="<?php echo getHomeUrl(); ?>">首页</a></li>
+                <li>></li>
+                <li>名人墓地列表</li>
+            </ul>
+        </div><!-- breadcrumb面包屑导航结束 -->
+        <!-- 名人墓地列表 -->
+        <div class="celebrities_list">
+            <ul class=" clearfix">
+                <volist name='list' id='vo' key='k'>
+                    <li <if condition='$k%3==0'> class='last'</if>>
+                    <a target="_blank" href="{:U('cemetery/famous-d-'.$vo['id'])}"><img src="{$vo.image_url}" /></a>
+                    <div class="cel_abstract">
+                        <h2><a target="_blank" href="{:U('cemetery/famous-d-'.$vo['id'])}">{$vo.name}</a></h2>
+                        <p class="p_led">{$vo.born_in}-{$vo.died_in}</p>
+                        <p>{$vo.summary|msubstr=0,50}</p>
+                    </div>
+                </li>
+                </volist>
+            </ul>
+        </div><!-- celebrities_list名人墓地列表结束 -->
+        <!-- 分页 -->
+        <div class="pagination" id="sample_1_info" style="text-align: center">
+            {$pageshow}
+        </div>
+    </div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<include file="Common:footer" />
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+</body>
+</html>

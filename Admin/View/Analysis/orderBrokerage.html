@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+        <link href="{$Think.const.ASSETS_URL}uniform/css/uniform.default.css" rel="stylesheet" />
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                       
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="javascript:;"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="javascript:;">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:;">购墓订单在各省分布</a><span class="divider-last">&nbsp;</span></li>
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                    <!--表格数据开始-->
+                        <div class="span12">
+                            
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>选择统计条件</h4>
+                                </div>
+                                <div class="widget-body">
+                                <form id="quickForm" method="get" class="form-horizontal" autocomplete="off" action='{:U("Analysis/orderBrokerage")}'>
+                                    <table>
+                                        <tr>
+                                            <td><h4 style="font-weight:bold;">请选择时间：</h4></td>
+                                            <td>
+                                                <input type="text" name="start_time" class="input-medium Wdate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" <notempty name="start_time">value="{$start_time}"<else />value="0000-00-00"</notempty>/>-
+                                                <input type="text" name="end_time" class="input-medium Wdate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" <notempty name="Think.get.end_time">value="{$Think.get.end_time}" <else />  value="{:date('Y-m-d')}" </notempty>/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><h4 style="font-weight:bold;">请选择地区：</h4></td>
+                                            <td>
+                                                <h4>
+                                                    <div id="province" class="checker">
+                                                        <empty name="selectAll">
+                                                            <span >
+                                                                <input class="no-margin" type="checkbox" name="selectAll" value='selectAll' style="opacity: 0;">
+                                                            </span>
+                                                        <else />
+                                                            <span class="checked">
+                                                                <input class="no-margin" type="checkbox" name="selectAll" value='selectAll' style="opacity: 0;">
+                                                            </span>
+                                                        </empty>
+                                                    </div>全选
+                                                </h4>
+                                                <volist name="regionData" id="vo">
+                                                    <if condition="$i%15 eq 0">
+                                                        <div id="uniform-undefined" class="checker">
+                                                            <range name="key" value="$search_province_id" type="in">
+                                                                    <span class="checked">
+                                                                        <input class="no-margin" type="checkbox" checked="checked" name='regionData[]' value="{$key}" style="opacity: 0;">
+                                                                     </span>   
+                                                            </range>
+                                                            <range name="key" value="$search_province_id" type="notin">
+                                                                    <span >
+                                                                        <input class="no-margin" type="checkbox"  name='regionData[]' value="{$key}" style="opacity: 0;">
+                                                                     </span>   
+                                                            </range>
+                                                        </div>{$vo}<br/>
+                                                    <else />
+                                                        <div id="uniform-undefined" class="checker">
+                                                            <range name="key" value="$search_province_id" type="in">
+                                                                    <span class="checked">
+                                                                        <input class="no-margin" type="checkbox" checked="checked" name='regionData[]' value="{$key}" style="opacity: 0;">
+                                                                     </span>   
+                                                            </range>
+                                                            <range name="key" value="$search_province_id" type="notin">
+                                                                    <span >
+                                                                        <input class="no-margin" type="checkbox"  name='regionData[]' value="{$key}" style="opacity: 0;">
+                                                                     </span>   
+                                                            </range>
+                                                        </div>{$vo}
+                                                    </if>
+                                                </volist>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            </td>
+                                            <td>
+                                                <button type="submit" class="btn btn-success">查看统计结果</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                                </div>
+                            </div>
+                            
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>各省订单分布柱状图</h4>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="btn-toolbar">
+                                        <div id="show_chars_orderReturn" style="min-width: 310px; height: 400px; margin: 0 auto">
+                                            <!--陵园统计图表 -->
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>各省订单分布数据列表</h4>
+                                </div>
+                                <div class="widget-body">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>地区名称</th>
+                                                <th>订单总数</th>
+                                                <th>订单成功总数</th>
+                                                <th>有意向订单总数</th>
+                                                <th>待支付订单</th>
+                                                <th>待返现订单</th>
+                                                <th>退单量</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <volist name="lastData" id="vo">
+                                            <tr class="odd gradeX">
+                                                <td>{$regionData[$key]}</td>
+                                                <td>{$vo.order_total}</td>
+                                                <td>{$vo.order_status_success_total}</td>   
+                                                <td>{$vo.order_status_interesting_total}</td>
+                                                <td>{$vo.order_status_sendtofinance_total}</td>
+                                                <td>{$vo.order_status_waitbackmoney_total}</td>
+                                                <td>{$vo.order_status_back_total}</td>
+                                            </tr>
+                                            <php> 
+                                                $order_total_num += $vo[order_total];
+
+                                                $order_status_success_total_num += $vo['order_status_success_total'];
+
+                                                $order_status_interesting_total_num += $vo['order_status_interesting_total'];
+
+                                                $order_status_sendtofinance_total_num += $vo['order_status_sendtofinance_total'];
+
+                                                $order_status_waitbackmoney_total_num += $vo['order_status_waitbackmoney_total'];
+
+
+                                                $order_status_back_total_num += $vo['order_status_back_total'];
+                                            </php>
+                                        </volist>
+                                            <tr style="color:red">
+                                                <td>总和</td>
+                                                <td>{$order_total_num}</td>
+                                                <td>{$order_status_success_total_num}</td>
+                                                <td>{$order_status_interesting_total_num}</td>
+                                                <td>{$order_status_sendtofinance_total_num}</td>
+                                                <td>{$order_status_waitbackmoney_total_num}</td>
+                                                <td>{$order_status_back_total_num}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                   
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}jquery-slimscroll/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+    <!-- ie8 fixes -->
+    <!--[if lt IE 9]>
+    <script src="js/excanvas.js"></script>
+    <script src="js/respond.js"></script>
+    <![endif]-->
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script src="{$Think.const.JS_URL}highchars/highcharts.js"></script>
+    <script type="text/javascript">
+        var infoName=<?php echo $infoName ?>; 
+        var infoTotal=<?php echo $infoTotal ?>;
+        $(function () { 
+            $('#show_chars_orderReturn').highcharts({ 
+                chart: { type: 'column' }, 
+                title: { text: '各省订单分布柱状图' }, 
+                subtitle: { text: '数据来源：www.91soumu.com' },
+                xAxis: { categories: infoName },
+                yAxis: { min: 0, 
+                    title: { text: '数量(个)' } 
+                },
+                tooltip: {  
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' + '<td style="padding:0"><b>{point.y:1f}个</b></td></tr>',
+                    footerFormat: '</table>', 
+                    shared: true, 
+                    useHTML: true 
+                },
+                plotOptions: { 
+                    column: { 
+                        pointPadding: 0.2, borderWidth: 0
+                    } 
+                }, 
+                series: infoTotal 
+            });
+        });
+
+        //地区全选功能
+        $('#province span').click(function(){
+            $(this).toggleClass("checked");
+            if($(this).attr('class')==='checked'){
+                $("#uniform-undefined span").attr({ class: "checked"});
+                $("#uniform-undefined span input").attr({ checked: "checked"});
+                $("#province span input").attr("checked", true);
+            }else{
+                $("#uniform-undefined span").attr({ class: ""});
+                $("#uniform-undefined span input").attr("checked", false);
+                $("#province span input").attr("checked", false);
+            }
+        });
+        
+        //地区单选功能
+        $("#uniform-undefined span").click(function(){
+            $(this).toggleClass("checked");
+            $("#province span").attr({ class: ""});
+            $("#province span input").attr("checked", false);
+        });
+    </script>
+</body>
+<!-- END BODY -->
+</html>

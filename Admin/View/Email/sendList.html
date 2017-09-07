@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">{$title}邮件列表</a><span class="divider-last">&nbsp;</span></li>
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>{$title}邮件列表</h4>
+                                </div>
+                                <div class="widget-body">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:4%;">ID</th>
+                                                <th style="width:20%;">邮箱名称</th>
+                                                <th style="width:16%;">邮件标题</th>
+                                                <th style="width:15%;">邮件内容</th>
+                                                <th style="width:20%;">发送时间</th>
+                                                <th style="width:10%;">状态</th>
+                                                <th style="width:10%;">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <volist name="list" id="vo">
+                                            <tr class="odd gradeX">
+                                                <td>{$vo.id}</td>
+                                                <td>{$vo.email_address}</td>
+                                                <td>{$vo.title}</td>
+                                                <td><a href="javascript:;" class="view" data-content="{$vo.content}" style="color:green;">查看</a></td>
+                                                <td>
+                                                    <neq name="vo.send_time" value="0000-00-00 00:00:00">{$vo.send_time}</neq>
+                                                </td>
+                                                <td>
+                                                    <switch name="vo.status">
+                                                        <case value="1">已发送</case>
+                                                        <case value='0'>未发送</case>
+                                                        <case value="-1">删除</case>
+                                                        <default/>其他
+                                                    </switch>
+                                                </td>
+                                                <td>
+                                                    <php>
+                                                        if(showHandle('Email/sendMail')){
+                                                    </php>
+                                                        <eq name="vo.status" value="0">
+                                                            <a class="btn btn-success btn-small sendEmail" href="javascript:void(0)" data-id="{$vo.id}" ><i class="icon-ok  icon-white"> </i>发送</a>
+                                                        </eq>
+                                                        <eq name="vo.status" value="1">
+                                                            <a class="btn btn-success btn-small sendEmail" href="javascript:void(0)" data-id="{$vo.id}" ><i class="icon-ok  icon-white"> </i>再发送</a>
+                                                        </eq>
+                                                    <php>
+                                                        }
+                                                    </php>
+                                                </td>
+                                            </tr>
+                                        </volist>
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span12 center">
+                                            <div class="pagination" id="sample_1_info" style="text-align: center">
+                                                {$page}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+    
+    <!--邮件信息开始-->
+    <div id="viewEmail" class="modal hide fade in">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>邮件内容信息</h3>
+        </div>
+        <div class="modal-body">
+            <div><h4>邮件内容:</h4></div>
+            <div>
+                <textarea class="content" style="height:80px;width:490px;">
+                </textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </div>
+    <!--邮件信息结束-->
+    
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}zh-CN.js"></script>
+
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+        //发送邮件
+        $('.sendEmail').click(function(){
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url:'{:U("sendMail")}',
+                type:'POST',
+                data:{'id':id},
+                success:function(d){
+                    var result = eval("(" + d + ")");
+                    if(result.flag == 1){
+                        alert(result.msg);
+                        window.location.reload();//刷新当前页面.
+                    }else{
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+        //邮箱内容查看
+        $('.view').click(function(){
+            $('.content').empty().append($(this).attr('data-content'));
+            $('#viewEmail').modal();
+        });
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

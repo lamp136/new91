@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">邮箱管理</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-body">
+                                    <table class="table table-striped table-bordered" id="sample_1">
+                                        <thead>
+                                            <tr>
+                                                <th>邮箱使用处</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <volist name="dataList" id="vo">
+                                                <tr class="odd gradeX">
+                                                    <td>{$vo}</td>
+                                                    <td>
+                                                        <php>
+                                                            if (showHandle('Email/viewList')) {
+                                                        </php>
+                                                            <a class="btn btn-primary btn-small personlist" href="javascript:void(0)" data-type="{$key}"><i class="icon-eye-open  icon-white"> </i>查看收件人员</a>
+                                                        <php>
+                                                            }
+                                                            if (showHandle('Email/addperson')) {
+                                                        </php>
+                                                        <a class="btn btn-warning btn-small addperson" href="javascript:void(0)" data-type="{$key}"><i class="icon-plus  icon-white"> </i>添加人员</a>
+                                                        <php>
+                                                            }
+                                                        </php>    
+                                                    </td>
+                                                </tr>
+                                            </volist>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+    <!--添加邮箱人员开始-->
+    <div id="addperson" class="modal hide fade in ">
+        <form id="addpersonForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>添加邮箱人员</h3>
+            </div>
+            <div class="modal-body">
+                <table  class='table table-bordered table-hover tablefixed'>
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>电子邮箱</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id ="demo">
+                            <td><input style='width:80px;' type="text" name="name[]" value=' ' required="required"/></td>
+                            <td><input  type="text" name="email_address[]" value=' ' required="required"/></td>
+                            <td class='addflag' style="color:green;">[+]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="type" id="addType">
+                <button type="submit"  class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--添加邮箱人员结束-->
+    
+    <!--查看邮箱人员列表开始-->
+    <div id="personlist" class="modal hide fade in ">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>查看邮箱人员列表</h3>
+        </div>
+        <div class="modal-body">
+            <table  class='table table-bordered table-hover tablefixed' id="dep-addUser">
+                <thead>
+                    <tr>
+                        <th align="center">姓名</th>
+                        <th align="center">邮箱</th>
+                        <th align="center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </div>
+    <!--查看邮箱人员列表结束-->
+    
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}zh-CN.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+        //查看收件人员
+        $('.personlist').click(function(){
+            var type = $(this).attr('data-type');
+            $.ajax({
+                url: "{:U('viewList')}",
+                type: 'POST',
+                data: {'type':type},
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    var str = '';
+                    if(result.flag == 1) {
+                        var data = result.data;
+                        for(i in data){
+                            str +='<tr>';
+                            str +='<td align="right">'+data[i].name+'</td>';
+                            str +='<td align="right">'+data[i].email_address+'</td>';
+                            str +='<td align="center">';
+                            str +='<a class="btn btn-danger btn-small delperson" href="javascript:void(0)"  data-id="'+data[i].id+'" ><i class="icon-remove  icon-white"> </i>删除</a>';
+                            str +='</td></tr>';
+                        }
+                    }else if(result.flag == 2){
+                        str += '<tr><td colspan=3>暂无人员记录</td></tr>';
+                    }
+                    $('#dep-addUser tbody').html(str);
+                    $('#personlist').modal();
+                }
+            });
+        });
+        //删除人员
+        $('.delperson').live('click',function(){
+            var dataId = $(this).attr('data-id');
+            var that = $(this);
+            $.ajax({
+                url: "{:U('delEmail')}",
+                type: 'POST',
+                data: {'id':dataId},
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        that.parents('tr').remove();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+        
+        //弹出添加人员表单
+        $('.addperson').click(function(){
+            var type = $(this).attr('data-type');
+            $("#addType").val(type);
+            $('#addperson').modal();
+        });
+        $('.addflag').live('click',function(){
+            var demo = $(this).parent();
+            if($(this).html()=="[+]"){
+                var newDemo = demo.clone();
+                $(newDemo).find(".addflag").html("[-]");
+                $(newDemo).find('input').val("");
+                demo.after(newDemo);
+            }else{
+                demo.remove();
+            }
+        });
+        
+        //提交添加form 表单
+        $('#addpersonForm').bind('valid.form', function () {
+            
+            $.ajax({
+                url: "{:U('addperson')}",
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        $('#addperson').modal('hide');
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+        
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+       <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">平台收支统计</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-body">
+                                    <form id="quickForm" method="get" class="form-horizontal" autocomplete="off" action='{:U("Analysis/cemeteryIncomeExpenditure")}'>
+                                        <table>
+                                            <tr>
+                                                <td>搜索：&nbsp;</td>
+                                                <td>
+                                                    合同时间段：<input type="text" name="start_time" class="input-medium Wdate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" <notempty name="start_time">value="{$start_time}"<else />value="0000-00-00"</notempty>/>-
+                                                    <input type="text" name="end_time" class="input-medium Wdate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" <notempty name="Think.get.end_time">value="{$Think.get.end_time}" <else />  value="{:date('Y-m-d')}" </notempty>/>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-primary">确定</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                    
+                                    <div class="widget-title">
+                                        <h4><i class="icon-reorder"></i>平台购墓收支统计饼状图</h4>
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="btn-toolbar">
+                                            <div id="cemeteryIncomeExpenditure" style="min-width: 310px; height: 400px; margin: 0 auto">
+                                                <!--收支统计柱状图 -->
+                                            </div>
+                                        </div>
+                                    </div>
+                        
+                                    <div class="widget-title">
+                                        <h4><i class="icon-reorder"></i>收支列表</h4>
+                                    </div> 
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>墓地订单总金额</th>
+                                                <th>佣金总金额</th>
+                                                <th>返现总金额</th>
+                                                <th>其他支出</th>
+                                                <th>盈余</th>
+                                                <th>统计时间</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <volist name='list' id='vo'>
+                                            <tr class="odd gradeX">
+                                                <td>{$vo.total_amount_order}</td>
+                                                <td>{$vo.cemetery_income}</td>
+                                                <td>{$vo.cemetery_expenditure}</td>
+                                                <td>{$vo.other_expenditure}</td>
+                                                <td>{$vo.cemetery_surplus}</td>
+                                                <td>
+                                                    <notempty name="start_time">{$start_time}<else />0000-00-00</notempty>---<notempty name="Think.get.end_time">{$Think.get.end_time}<else />{:date('Y-m-d')}</notempty>
+                                                </td>
+                                            </tr>
+                                        </volist>
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span12 center">
+                                            <div class="pagination" id="sample_1_info" style="text-align: center">
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+    <!-- END JAVASCRIPTS -->
+    <script src="{$Think.const.JS_URL}highchars/highcharts.js"></script>
+    <script type="text/javascript">
+        var cemeteryIncome = <?php echo $cemeteryIncome ?>;
+        $(function () { 
+            $('#cemeteryIncomeExpenditure').highcharts({ 
+                chart: { type: 'pie', 
+                    options3d: { enabled: true, alpha: 45 } }, 
+                title: { text: '平台购墓收支统计' },
+                subtitle: { text: '数据来源:www.91soumu.com' },
+                credits: {
+                    enabled: false
+                },
+                // plotOptions: { 
+                //     pie: { innerSize: 100, depth: 45 } }, 
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },  
+                series: [{ 
+                        name: '人民币(元)', 
+                        data: cemeteryIncome
+
+                    }]
+            }); 
+        });
+    </script>
+</body>
+<!-- END BODY -->
+</html>

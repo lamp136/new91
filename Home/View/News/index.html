@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="icon" href="/Public/soumu.ico" type="image/x-icon" />
+    <title>{$seoInfo.seo_title}__{$Think.config.SITE_NAME}</title>
+    <meta name="keywords" content="{$seoInfo.seo_keywords}" />
+    <meta name="description" content="{$seoInfo.seo_description}" />
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!--引入头部 -->
+<include file="Common:head_news" />
+
+<!-- 中间内容部分 -->
+<div class="news_main">
+    <div class="contain">
+        <!-- 热点聚焦 -->
+        <div class="news_hot clearfix">
+            <h1>热点聚焦</h1>
+            <!-- 左侧图片 -->
+            <div class="news_hot_left">
+            <notemty name="rdjjtj">
+                <a href="{:U('news/detail/'.$rdjjtj['id'])}" title="{$rdjjtj.title}">
+                    <img src="{$rdjjtj.Img.image_url}" alt="{$rdjjtj.title}"/>
+                    <p>{$rdjjtj.title|msubstr=0, 22}</p>
+                </a>
+                </notemty>
+            </div>
+            <!-- 右侧新闻 -->
+            <div class="news_hot_right">
+                 <notemty name="rdjj">
+                <h2><a href="{:U('news/detail/'.$rdjj[0]['id'])}"  title="{$rdjj.0.title}">{$rdjj.0.title|msubstr=0, 20}</a></h2>
+                <p><a href="#">{$rdjj.0.summary|msubstr=0, 60}>></a></p>
+                <ul>
+                <volist name="rdjj" id="vo" offset="1">
+                    <li><a href="{:U('news/detail/'.$vo['id'])}">{$vo.title}</a></li>
+                    </volist>
+                </ul>
+                </notemty>
+            </div><!-- news_hot_right end -->
+        </div><!-- news_hot热点聚焦结束 -->
+        <!-- 公司动态 -->
+        <div class="news_dynamic">
+            <h1>商务合作</h1>
+            <div id="dynamic">
+                <ul>
+                    <volist name="gsdt" id="companydyn" mod="2">
+                        <li <eq name="mod" value="1">class="dyn_even"</eq> >
+                            <a href="{:U('news/detail/'.$companydyn['id'])}"  title="{$companydyn.title}">{$companydyn.title}</a>
+                        </li>
+                    </volist>
+                </ul>
+            </div><!-- dynamic end -->
+        </div><!-- news_dynamic公司动态结束 -->
+        <div class="clear"></div>
+        <!-- 广告 -->
+        <div class="news_add">
+            <ul class="clearfix">
+            <notempty name="ads">
+                <volist name="ads" id="vo" key="k">
+                   <li <eq name="k" value="3">class="last"</eq>>
+                       <a href='<empty name="vo.banner_link">{$vo.banner_link}<else/>javascript:void(0)</empty>' title="{$vo.banner_name}">
+                           <img src="{$Think.config.IMG_HOST}{$vo.banner_url}" alt="{$vo.banner_name}"/>
+                       </a>
+                    </li>
+                </volist>
+            <else/>
+                <li>
+                   <a href="javascript:void(0)">
+                       <img src="{$Think.const.IMG_URL}news_addimg1.jpg" alt="IP定位陵园"/>
+                   </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <img src="{$Think.const.IMG_URL}news_addimg2.jpg" alt="预约快捷"/>
+                    </a>
+                </li>
+                <li class="last">
+                    <a href="javascript:void(0)">
+                        <img src="{$Think.const.IMG_URL}news_addimg3.jpg" alt="专业服务"/>
+                    </a>
+                </li>
+                </notempty>
+            </ul>
+        </div><!-- news_add广告 -->
+        <!-- 业界资讯 -->
+        <div class="news_industry clearfix">
+            <!-- 标题 -->
+            <div class="news_h1 clearfix">
+                <h1>业界资讯</h1>
+                <ul class="h1_title">
+                    <li><a href="/news/{$Think.config.CATEGORY_INDUSTRY_INFORMATION}-{$Think.config.CATEGOTY_INDUSTRY_DYNAMIC}.html">行业新闻</a></li>
+                    <li><a href="/news/{$Think.config.CATEGORY_INDUSTRY_INFORMATION}-{$Think.config.CATEGOTY_LAWS_REGULATIONS}.html">政策法规</a></li>
+                    <li><a href="/news/{$Think.config.CATEGORY_INDUSTRY_INFORMATION}-{$Think.config.CATEGOTY_STORE_DYNAMIC}.html">陵园动态</a></li>
+                    <li class="last"><a href="/news/{$Think.config.CATEGORY_INDUSTRY_INFORMATION}-{$Think.config.CATEGOTY_COM_CULTURE}.html">企业软文</a></li>
+                </ul>
+            </div><!-- news_h1 end -->
+            <!-- 左侧图片 -->
+            <notempty name="yjzxtj">
+            <div class="news_indu_left">
+                <a href="{:U('news/detail/'.$yjzxtj[0]['id'])}" title="{$yjzxtj[0].title}">
+                    <empty name="yjzxtj[0].Img.image_url">
+                    <img src="{$Think.const.IMG_URL}news_default.jpg" alt="{$yjzxtj[0].title}"/>
+                    <else/>
+                    <img src="{$yjzxtj[0].Img.image_url}" alt="{$yjzxtj[0].title}"/>
+                    </empty>
+                    <p>{$yjzxtj[0].title|msubstr=0, 18}</p>
+                </a>
+            </div>
+            </notempty>
+            <!-- 中间新闻列表 -->
+            <div class="news_indu_center">
+                <ul class="clearfix">
+                <volist name="yjzx" id="vo">
+                    <li>
+                        <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0, 18}</a>
+                    </li>
+                </volist>
+                </ul>
+            </div><!-- news_indu_center end -->
+            <!-- 右侧最新 -->
+            <div class="news_indu_right">
+                <notempty name="yjzxtj[1]">
+                    <a href="{:U('news/detail/'.$yjzxtj[1]['id'])}">
+                    <empty name="yjzxtj[1].Img.image_url">
+                    <img src="{$Think.const.IMG_URL}news_default.jpg" alt="{$yjzxtj[1].title}" />
+                    <else/>
+                    <img src="{$yjzxtj[1].Img.image_url}" alt="{$yjzxtj[1].title}" />
+                    </empty>
+                    </a>
+                <h2><a href="{:U('news/detail/'.$yjzxtj[1]['id'])}" title="{$yjzxtj[1].title}">{$yjzxtj[1].title|msubstr=0, 13}</a></h2>
+                </notempty>
+                <ul>
+                    <volist name="yjzxtj" id="vo" offset="2">
+                        <li>
+                            <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0,20}</a>
+                        </li>
+                    </volist>
+                </ul>
+            </div><!-- news_indu_right end -->
+        </div><!-- news_industry业界资讯结束 -->
+        <!-- 风水文化 -->
+        <div class="news_industry clearfix">
+            <!-- 标题 -->
+            <div class="news_h1 clearfix">
+                <h1>风水文化</h1>
+                <ul class="h1_title">
+                    <li>
+                        <a href="/news/{$Think.config.CATEGOEY_FENGSHUI_CULTURE}-{$Think.config.CATEGOTY_FUNERAL_CULTURE}.html" title="殡葬文化">殡葬文化</a>
+                    </li>
+                    <li class="last">
+                        <a href="/news/{$Think.config.CATEGOEY_FENGSHUI_CULTURE}-{$Think.config.CATEGOTY_FS_FORTUNES}.html" title="风水运势">风水运势</a>
+                    </li>
+                </ul>
+            </div><!-- news_h1 end -->
+            <!-- 左侧图片 -->
+            <notempty name="fswhtj">
+            <div class="news_indu_left">
+                <notempty name="fswhtj[0]">
+                <a href="{:U('news/detail/'.$fswhtj[0]['id'])}" title="{$fswhtj[0].title}">
+                    <empty name="fswhtj[0].Img.image_url">
+                    <img src="{$Think.const.IMG_URL}news_default.jpg"/>
+                    <else/>
+                    <img src="{$fswhtj[0].Img.image_url}" alt="{$fswhtj[0].title}"/>
+                    </empty>
+                    <p>{$fswhtj[0].title|msubstr=0, 18}</p>
+                </a>
+                </notempty>
+            </div>
+            </notempty>
+            <!-- 中间新闻列表 -->
+            <div class="news_indu_center">
+                <ul class="clearfix">
+                    <volist name="fswh" id="vo">
+                        <li>
+                            <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0, 18}</a>
+                        </li>
+                    </volist>
+                </ul>
+            </div><!-- news_indu_center end -->
+            <!-- 右侧最新 -->
+            <div class="news_indu_right">
+                <notempty name="fswhtj[1]">
+                <a href="{:U('news/detail/'.$fswhtj[1]['id'])}" title="{$fswhtj[1].title}">
+                     <empty name="fswhtj[1].Img.image_url">
+                    <img src="{$Think.const.IMG_URL}news_default.jpg" alt="{$fswhtj[1].title}"/>
+                    <else/>
+                    <img src="{$fswhtj[1].Img.image_url}" alt="{$fswhtj[1].title}"/>
+                    </empty>
+                </a>
+                    <h2><a href="{:U('news/detail/'.$fswhtj[1]['id'])}" title="{$fswhtj[1].title}">{$fswhtj[1].title|msubstr=0,13}</a></h2>
+                </notempty>
+                <ul>
+                    <volist name="fswhtj" id="vo" offset="2">
+                    <li>
+                        <a href="{:U('news/detail/'.$vo['id'])}">{$vo.title|msubstr=0,25}</a>
+                    </li>
+                    </volist>
+                </ul>
+            </div><!-- news_indu_right end -->
+        </div><!-- news_industry风水文化结束 -->
+        <!-- 葬式墓型 -->
+        <div class="news_burialform">
+            <div class="news_h1 clearfix">
+                <h1>葬式墓型</h1>
+                <ul class="burial_title">
+                   <volist name="zsmx" id="vo">
+                    <li class='muxing <eq name="key"  value="0">thistab</eq>' data-id="{$vo.id}">
+                        <a href="javascript:void(0)" title="{$vo.title}" >{$vo.title}</a>
+                    </li>
+                    </volist>
+                </ul>
+            </div><!-- news_h1 end -->
+            <!-- 葬式墓型列表 -->
+            <ul class="burial_list">
+                <li id="tabbur1" class="burial_box">
+                    <ul id='zsmxImg'>
+                    <volist name="zsmxImg" id="vo" key="k">
+                       <li <eq name="key"  value="3"> class="last"</eq> >
+                           <a href="{:U('news/detail/'.$vo['news_id'])}" title="{$vo.title}">
+                               <img src="{$vo.image_url}" alt="{$vo.title}"/>
+                           </a>
+                       </li>
+                    </volist>
+                    </ul>
+                </li>
+              
+            </ul>
+        </div><!-- burialform葬式墓型结束 -->
+        <div class="news_industry clearfix">
+            <!-- 标题 -->
+            <div class="news_h1 clearfix">
+                <h1>陵园风情</h1>
+                <ul class="h1_title">
+                     <li>
+                         <a target="_blank" href="{:U('/cemetery/famous')}">名人墓地</a>
+                     </li>
+                     <li>
+                         <a href="/news/{$Think.config.CATEGORY_CEMETERY_AMOROUS_FEELINGS}-{$Think.config.CATEGOTY_LIFE_GNOSIS}.html">人生感悟</a>
+                     </li>
+                     <li>
+                         <a href="/news/{$Think.config.CATEGORY_CEMETERY_AMOROUS_FEELINGS}-{$Think.config.CATEGOTY_CEMETRY_STORY}.html">陵园故事</a>
+                     </li>
+                     <li class="last">
+                         <a href="/news/{$Think.config.CATEGORY_CEMETERY_AMOROUS_FEELINGS}-{$Think.config.CATEGOTY_LUCKY_CELEBRITY}.html">福地名人</a>
+                     </li>
+                </ul>
+            </div><!-- news_h1 end -->
+            <!-- 左侧图片 -->
+            <div class="news_indu_left">
+                <notempty name="lyfqtj[0]">
+                <a href="{:U('news/detail/'.$lyfqtj[0]['id'])}">
+                    <empty name="lyfqtj[0].Img.image_url">
+                    <img src="{$Think.const.IMG_URL}news_default.jpg" alt="{$lyfqtj[0].title}"/>
+                    <else/>
+                    <img src="{$lyfqtj[0].Img.image_url}" alt="{$lyfqtj[0].title}"/>
+                    </empty>
+                    <p>{$lyfqtj[0].title|msubstr=0, 18}</p>
+                </a>
+                </notempty>
+            </div>
+            <!-- 中间新闻列表 -->
+            <div class="news_indu_center">
+                <ul class="clearfix">
+                    <volist name="lyfq" id="vo">
+                        <li>
+                            <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0, 18}</a>
+                        </li>
+                    </volist>
+                </ul>
+            </div><!-- news_indu_center end -->
+            <!-- 右侧最新 -->
+            <div class="news_indu_right">
+                            <notempty name="lyfqtj[1]">
+                                <a href="{:U('news/detail/'.$lyfqtj[1]['id'])}">
+                                    <empty name="lyfqtj[1].Img.image_url">
+                                    <img src="{$Think.const.IMG_URL}news_default.jpg" alt="{$lyfqtj[1].title}"/>
+                                    <else/>
+                                    <img src="{$lyfqtj[1].Img.image_url}" alt="{$lyfqtj[1].title}"/>
+                                    </empty>
+                                </a>
+                                <h2><a href="{:U('news/detail/'.$lyfqtj[1]['id'])}" title="{$lyfqtj[1].title}">{$lyfqtj[1].title|msubstr=0,13}</a></h2>
+                            </notempty>
+                            <ul>
+                                <volist name="lyfqtj" id="vo" offset="2">
+                                    <li>
+                                        <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0,20}</a>
+                                    </li>
+                                </volist>
+                            </ul>
+            </div><!-- news_indu_right end -->
+        </div><!-- news_industry陵园风情结束 -->
+        <!-- 殡葬科学 -->
+        <div class="news_industry naws_science clearfix">
+            <!-- 标题 -->
+            <div class="news_h1 clearfix">
+                <h1>殡葬科学</h1>
+                <ul class="h1_title">
+                    <li>
+                        <a href="/news/{$Think.config.CATEGORY_FUNERAL_SCIENCE}-{$Think.config.CATEGOTY_COUPE_KNOWLEDGE}.html">科普知识</a>
+                    </li>
+                    <li class="last">
+                        <a href="/news/{$Think.config.CATEGORY_FUNERAL_SCIENCE}-{$Think.config.CATEGOTY_KG_CULTURE}.html">考古文化</a>
+                    </li>
+                </ul>
+            </div><!-- news_h1 end -->
+            <!-- 左侧图片 -->
+            <div class="news_indu_left">
+                <notempty name="bzkxtj[0]">
+                <a href="{:U('news/detail/'.$bzkxtj[0]['id'])}">
+                    <empty name="bzkxtj[0].Img.image_url">
+                    <img src="{$Think.const.IMG_URL}news_default.jpg" alt="{$bzkxtj[0].title}"/>
+                    <else/>
+                    <img src="{$bzkxtj[0].Img.image_url}" alt="{$bzkxtj[0].title}"/>
+                    </empty>
+                    <p>{$bzkxtj[0].title|msubstr=0, 18}</p>
+                </a>
+                </notempty>
+            </div>
+            <!-- 中间新闻列表 -->
+            <div class="news_indu_center">
+                <ul class="clearfix">
+                     <volist name="bzkx" id="vo">
+                        <li>
+                            <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0, 18}</a>
+                        </li>
+                    </volist>
+                </ul>
+            </div><!-- news_indu_center end -->
+            <!-- 右侧最新 -->
+            <div class="news_indu_right">
+                <notempty name="bzkxtj[1]">
+                    <a href="{:U('news/detail/'.$bzkxtj[1]['id'])}">
+                        <empty name="bzkxtj[1].Img.image_url">
+                        <img src="{$Think.const.IMG_URL}news_default.jpg" alt="{$bzkxtj[1].title}"/>
+                        <else/>
+                        <img src="{$bzkxtj[1].Img.image_url}" alt="{$bzkxtj[1].title}"/>
+                        </empty>
+                    </a>
+                    <h2><a href="{:U('news/detail/'.$bzkxtj[1]['id'])}" title="{$bzkxtj[1].title}">{$bzkxtj[1].title|msubstr=0,13}</a></h2>
+                </notempty>
+                <ul>
+                    <volist name="bzkxtj" id="vo" offset="2">
+                        <li>
+                            <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0,20}</a>
+                        </li>
+                    </volist>
+                </ul>
+            </div><!-- news_indu_right end -->
+        </div><!-- news_industry殡葬科学结束 -->
+        <!-- 殡葬习俗 -->
+        <div class="news_industry clearfix">
+            <!-- 标题 -->
+            <div class="news_h1 clearfix">
+                <h1>祭祀习俗</h1>
+                <ul class="h1_title">
+                    <li>
+                        <a href="/news/{$Think.config.CATEGORY_SACRIFICE_CUSTOM}-{$Think.config.CATEGOTY_BURIAL_CUSTOM}.html">丧葬习俗</a>
+                    </li>
+                    <li class="last">
+                        <a href="/news/{$Think.config.CATEGORY_SACRIFICE_CUSTOM}-{$Think.config.CATEGOTY_SACRIFICE_RITES}.html">祭祀活动</a>
+                    </li>
+                </ul>
+            </div><!-- news_h1 end -->
+            <!-- 左侧图片 -->
+            <div class="news_indu_left">
+                <notempty name="jsxstj[0]">
+                <a href="{:U('news/detail/'.$jsxstj[0]['id'])}">
+                    <empty name="jsxstj[0].Img.image_url">
+                    <img src="{$Think.const.IMG_URL}news_default.jpg" alt="{$jsxstj[0].title}"/>
+                    <else/>
+                    <img src="{$jsxstj[0].Img.image_url}" alt="{$jsxstj[0].title}"/>
+                    </empty>
+                    <p>{$jsxstj[0].title|msubstr=0, 18}</p>
+                </a>
+                </notempty>
+            </div>
+            <!-- 中间新闻列表 -->
+            <div class="news_indu_center">
+                <ul class="clearfix">
+                    <volist name="jsxs" id="vo">
+                        <li>
+                            <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0, 18}</a>
+                        </li>
+                    </volist>
+                </ul>
+            </div><!-- news_indu_center end -->
+            <!-- 右侧最新 -->
+            <div class="news_indu_right">
+                <notempty name="jsxstj[1]">
+                    <a href="{:U('news/detail/'.$jsxstj[1]['id'])}">
+                        <empty name="jsxstj[1].Img.image_url">
+                        <img src="{$Think.const.IMG_URL}news_default.jpg" alt="{$jsxstj[1].title}"/>
+                        <else/>
+                        <img src="{$jsxstj[1].Img.image_url}" alt="{$jsxstj[1].title}"/>
+                        </empty>
+                    </a>
+                    <h2><a href="{:U('news/detail/'.$jsxstj[1]['id'])}" title="{$bzkxtj[1].title}">{$jsxstj[1].title|msubstr=0,13}</a></h2>
+                </notempty>
+                <ul>
+                    <volist name="jsxstj" id="vo" offset="2">
+                        <li>
+                            <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0,20}</a>
+                        </li>
+                    </volist>
+                </ul>
+            </div><!-- news_indu_right end -->
+        </div><!-- news_industry殡葬习俗结束 -->
+        <!-- 白事常识+传统节日 -->
+        <div class="news_bottom clearfix">
+            <!-- 白事常识 -->
+            <div class="news_sense">
+                <!-- 标题 -->
+                <div class="news_h1 clearfix">
+                    <h1>白事常识</h1>
+                </div><!-- news_h1 end -->
+                <!-- 左侧图片 -->
+            <notempty name="bscstj">
+            <div class="news_indu_left">
+                <a href="{:U('news/detail/'.$bscstj['id'])}">
+                    <empty name="bscstj.Img.image_url">
+                    <img src="{$Think.const.IMG_URL}news_default.jpg" alt="{$bscstj.title}"/>
+                    <else/>
+                    <img src="{$bscstj.Img.image_url}" alt="{$bscstj.title}"/>
+                    </empty>
+                    <p>{$bscstj.title|msubstr=0, 18}</p>
+                </a>
+            </div>
+            </notempty>
+                <!-- 新闻列表 -->
+                <ul class="news_cen_list">
+                    <volist name="bscs" id="vo">
+                        <li>
+                            <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0, 18}</a>
+                        </li>
+                    </volist>
+                </ul><!-- news_cen_list end -->
+            </div><!-- news_sense白事常识结束 -->
+            <!-- 传统节日 -->
+            <div class="news_festival">
+                <!-- 标题 -->
+                <div class="news_h1 clearfix">
+                    <h1>传统节日</h1>
+                </div><!-- news_h1 end -->
+                <!-- 左侧图片 -->
+                <div class="news_festival_left">
+                    <volist name="ctjrtj" id="vo" key="k">
+                        <a href="{:U('news/detail/'.$vo['id'])}">
+                            <img <eq name="k" value="2">class="imgb"</eq> src="{$vo.Img.image_url}" alt="{$vo.title}"/>
+                        </a>
+                    </volist>
+                </div>
+                <!-- 新闻列表 -->
+                <ul class="news_cen_list">
+                    <volist name="ctjr" id="vo">
+                        <li>
+                            <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0, 18}</a>
+                        </li>
+                    </volist>
+                </ul><!-- news_cen_list end -->
+            </div><!-- news_festival传统节日结束 -->
+        </div><!-- news_bottom白事常识+传统节日结束 -->
+    </div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<!--底部代码引入-->
+<include file="Common:footer" />
+    <script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+	<!-- 公司动态无缝滚动jquery.kxbdMarquee.js -->
+	<script type="text/javascript" src="{$Think.const.JS_URL}jquery.kxbdmarquee.js"></script>
+	<script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+	<script type="text/javascript" src="{$Think.const.JS_URL}home/newsindex.js"></script>
+</body>
+</html>

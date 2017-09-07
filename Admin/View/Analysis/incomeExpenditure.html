@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+       <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">平台收支统计</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-body">
+                                    <form id="quickForm" method="get" class="form-horizontal" autocomplete="off" action='{:U("Analysis/incomeExpenditure")}'>
+                                        <table>
+                                            <tr>
+                                                <td>搜索：&nbsp;</td>
+                                                <td>
+                                                    统计时间段：<input type="text" name="start_time" class="input-medium Wdate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" <notempty name="start_time">value="{$start_time}"<else />value="0000-00-00"</notempty>/>-
+                                                    <input type="text" name="end_time" class="input-medium Wdate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" <notempty name="Think.get.end_time">value="{$Think.get.end_time}" <else />  value="{:date('Y-m-d')}" </notempty>/>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-primary">确定</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                    
+                                    <div class="widget-title">
+                                        <h4><i class="icon-reorder"></i>平台收支统计柱状图</h4>
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="btn-toolbar">
+                                            <div id="show_incomeExpenditure" style="min-width: 310px; height: 400px; margin: 0 auto">
+                                                <!--收支统计柱状图 -->
+                                            </div>
+                                        </div>
+                                    </div>
+                        
+                                    <div class="widget-title">
+                                        <h4><i class="icon-reorder"></i>详细收支统计柱状图</h4>
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="btn-toolbar">
+                                            <div id="incomeExpenditure" style="min-width: 310px; height: 400px; margin: 0 auto">
+                                                <!--收支统计柱状图 -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="widget-title">
+                                        <h4><i class="icon-reorder"></i>收支列表</h4>
+                                    </div> 
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>项目</th>
+                                                <th>收入总金额</th>
+                                                <th>实际支出</th>
+                                                <th>平台盈余</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <volist name='list' id='vo'>
+                                            <tr class="odd gradeX">
+                                                <td>{$vo.name}</td>
+                                                <td>{$vo.income}</td>
+                                                <td>{$vo.expenditure}</td>
+                                                <td>{$vo.surplus}</td>
+                                            </tr>
+                                        </volist>
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span12 center">
+                                            <div class="pagination" id="sample_1_info" style="text-align: center">
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+    <!-- END JAVASCRIPTS -->
+    <script src="{$Think.const.JS_URL}highchars/highcharts.js"></script>
+    <script type="text/javascript">
+        var inoutName = <?php echo $inoutName; ?>;
+        var inoutData = <?php echo $inoutData; ?>;
+        $(function () {
+            $('#show_incomeExpenditure').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                subtitle: { text: '来源: www.91soumu.com' },
+                title: {
+                    text: '平台收支统计'
+                },
+                xAxis: {
+                    categories: inoutName
+                },
+                yAxis: {
+                    title: {
+                        text: '人民币/元'
+                    },
+                    stackLabels: {
+                        enabled: true,
+                        style: {
+                            fontWeight: 'bold',
+                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                        }
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                legend: {
+                    align: 'right',
+                    x: -30,
+                    verticalAlign: 'top',
+                    y: 25,
+                    floating: true,
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+                    borderColor: '#CCC',
+                    borderWidth: 1,
+                    shadow: false
+                },
+                tooltip: { pointFormat: ' <b>{point.y:.2f}元</b>', },
+                plotOptions: {
+                    column: {
+                        stacking: 'normal',
+                        dataLabels: {
+                            enabled: true,
+                            color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                            style: {
+                                textShadow: '0 0 3px black'
+                            }
+                        }
+                    }
+                },
+                series: inoutData
+            });
+        });
+    
+    var detailName = <?php echo $detail_Name; ?>;
+    var detailData = <?php echo $detail_Data; ?>;
+    $(function () { 
+        $('#incomeExpenditure').highcharts({ 
+            chart: { type: 'column' }, 
+            title: { text: '详细统计收支' }, 
+            subtitle: { text: '来源: www.91soumu.com' },
+            xAxis: { categories: detailName }, 
+            yAxis: {
+                allowDecimals:false ,
+                title: {
+                    text: '人民币 (元)',
+                }
+            }, 
+            credits: {
+                enabled: false
+            },
+            tooltip: {  
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' + '<td style="padding:0"><b>{point.y:.2f}元</b></td></tr>', 
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true },
+            plotOptions: {  
+                column: {
+                    pointPadding: 0.2, borderWidth: 0 }
+                }, 
+            series: detailData
+        });
+    });
+    </script>
+</body>
+<!-- END BODY -->
+</html>

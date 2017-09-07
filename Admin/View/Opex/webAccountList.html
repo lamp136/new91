@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">运营推广账号列表</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>运营推广账号列表</h4>
+                                    <php>
+                                        if(showHandle('Opex/webAccountAdd')){
+                                    </php>
+                                        <span class="tools">
+                                            <a href="javascript:;" class="icon-plus add" >添加运营推广账号</a>
+                                        </span>
+                                    <php>
+                                        }
+                                    </php>
+                                </div>
+                                <div class="widget-body">
+                                    <form method="get" action="{:U('webAccountList')}">
+                                        <table>
+                                            <tr>
+                                                <td>网站名称：</td>
+                                                <td>
+                                                    <input type='text'  name='name' value='{$Think.get.name}'>
+                                                </td>
+                                                <td><input type='submit' value='确定'></td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                    
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:3%;">ID</th>
+                                                <th style="width:15%;">网站名称</th>
+                                                <th style="width:10%;">URL</th>
+                                                <th style="width:10%;">账号</th>
+                                                <th style="width:10%;">密码</th>
+                                                <th style="width:10%;">预留手机号</th>
+                                                <th style="width:10%;">预留邮箱</th>
+                                                <th style="width:15%;">备注</th>
+                                                <th style="width:17%;">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <volist name="list" id="vo">
+                                            <tr class="odd gradeX">
+                                                <td>{$vo.id}</td>
+                                                <td>{$vo.web_name}</td>
+                                                <td><a href='{$vo.url}' target='_blank'>{$vo.url}</a></td>
+                                                <td>{$vo.account}</td>
+                                                <td>{$vo.password}</td>
+                                                <td>{$vo.mobile}</td>
+                                                <td>{$vo.email}</td>
+                                                <td>{$vo.remark}</td>
+                                                <td>
+                                                    <php>
+                                                        if(showHandle('Opex/webAccountEdit')){
+                                                    </php>
+                                                        <a class="btn btn-small edit"  href="javascript:void(0)" data-id="{$vo.id}"><i class="icon-pencil icon-white"> </i>编辑</a>
+                                                    <php>
+                                                        }
+                                                        if(showHandle('Opex/webAccountPassword')){
+                                                    </php>
+                                                        <a class="btn btn-success btn-small password" href="javascript:void(0)" data-id="{$vo.id}" ><i class="icon-ok  icon-white"> </i>修改密码</a>
+                                                    <php>
+                                                        }
+                                                    </php>
+                                                </td>
+                                            </tr>
+                                        </volist>
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span12 center">
+                                            <div class="pagination" id="sample_1_info" style="text-align: center">
+                                                {$page}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+    <!--添加运营推广账号开始-->
+    <div id="add" class="modal hide fade in" style="width:500px;">
+        <form id="addForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>添加运营推广账号信息</h3>
+            </div>
+            <div class="modal-body" >
+
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>网站名称：</td>
+                            <td>
+                                <input  type="text" name="web_name" placeholder="网站名称" data-rule="required"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>URL：</td>
+                            <td>
+                                <input  type="text" name="url" value='http://' data-rule="required"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>账号：</td>
+                            <td>
+                                <input  type="text" name="account" placeholder="账号" data-rule="required">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>密码：</td>
+                            <td>
+                                <input  type="text" name="password" placeholder="密码" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>预留手机号：</td>
+                            <td>
+                                <input  type="text" name="mobile" placeholder="预留手机号" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>预留邮箱：</td>
+                            <td>
+                                <input  type="text" name="email" placeholder="预留邮箱" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>备注：</td>
+                            <td>
+                                <textarea name='remark' /> </textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="submit"  class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--添加运营推广账号结束-->
+
+    <!--编辑运营推广账号信息开始-->
+    <div id="edit" class="modal hide fade in" style="width:500px;">
+        <form id="editForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>编辑信息</h3>
+            </div>
+            <div class="modal-body" >
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>网站名称：</td>
+                            <td>
+                                <input  type="text" name="web_name" placeholder="网站名称" data-rule="required">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>URL：</td>
+                            <td>
+                                <input  type="text" name="url" placeholder="URL" data-rule="required">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>账号：</td>
+                            <td>
+                                <input  type="text" name="account" placeholder="账号" data-rule="required">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>密码：</td>
+                            <td>
+                                <input  type="text" name="password" placeholder="密码" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>预留手机号：</td>
+                            <td>
+                                <input  type="text" name="mobile" placeholder="预留手机号" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>预留邮箱：</td>
+                            <td>
+                                <input  type="text" name="email" placeholder="预留邮箱" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>备注：</td>
+                            <td>
+                                <textarea name='remark' /> </textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name='id' /> 
+                <button type="submit"  class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--编辑运营推广账号信息结束-->
+
+    
+    <!--编辑密码开始-->
+    <div id="password" class="modal hide fade in" style="width:500px;">
+        <form id="passwordForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>编辑密码</h3>
+            </div>
+            <div class="modal-body" >
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>请输入原密码：</td>
+                            <td>
+                                <input  type="text" name="password" placeholder="原密码" data-rule="required"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>新密码：</td>
+                            <td>
+                                <input  type="text" name="newpassword" placeholder="新密码" data-rule="required"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>确认新密码：</td>
+                            <td>
+                                <input  type="text" name="renewpassword" placeholder="确认新密码" data-rule="required"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name='id' /> 
+                <button type="submit" class="btn btn-success">提交</button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!--编辑密码结束-->
+    
+    
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}zh-CN.js"></script>
+
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+        //添加运营推广账号
+        $('.add').click(function () {
+            $('#add').modal();
+        });
+        //提交运营推广账号表单
+        $('#addForm').bind('valid.form', function () {
+            $('#add').modal('hide');
+            $.ajax({
+                url: "{:U('webAccountAdd')}",
+                type: 'post',
+                data: $(this).serialize(),
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();//刷新当前页面.
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+
+        //编辑运营推广账号信息
+        $('.edit').click(function () {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url: '/system.php/Opex/webAccountEdit/id/' + id,
+                type: 'get',
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    var data = result.data;
+                    if (result.flag == 1) {
+                        $('#editForm input[name="web_name"]').val(data.web_name);
+                        $('#editForm input[name="url"]').val(data.url);
+                        $('#editForm input[name="account"]').val(data.account);
+                        $('#editForm input[name="password"]').val(data.password);
+                        $('#editForm input[name="mobile"]').val(data.mobile);
+                        $('#editForm input[name="email"]').val(data.email);
+                        $('#editForm textarea[name="remark"]').html(data.remark);
+                        $('#editForm input[name="id"]').val(data.id);
+                        $('#edit').modal();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+        
+        //提交编辑运营推广账号的表单
+        $('#editForm').bind('valid.form', function () {
+            $('#edit').modal('hide');
+            $.ajax({
+                url: "{:U('webAccountEdit')}",
+                type: 'post',
+                data: $(this).serialize(),
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();//刷新当前页面.
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+        
+        //修改运营推广账号密码
+        $('.password').click(function () {
+            var id = $(this).attr('data-id');
+            $('#passwordForm input[name="id"]').val(id);
+            $('#password').modal();
+           
+        });
+        $('#passwordForm input[name="password"]').blur(function(){
+            var password = $(this).val().replace(/(^\s*)|(\s*$)/g,"");
+            var id = $('#passwordForm input[name="id"]').val();
+            $.ajax({
+                url: '/system.php/Opex/webAccountPassword/id/'+id,
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.password != password) {
+                        alert('原密码错误！');
+                    }else{
+                        $('#passwordForm input[name="password"]').attr('data-pass','true');
+                    } 
+                }
+            });
+         });
+        //提交密码表单
+        $('#passwordForm').bind('valid.form', function () {
+            if($('#passwordForm input[name="password"]').attr('data-pass')){
+                var newpassword = $('#passwordForm input[name="newpassword"]').val().replace(/(^\s*)|(\s*$)/g,"");
+                var renewpassword = $('#passwordForm input[name="renewpassword"]').val().replace(/(^\s*)|(\s*$)/g,"");
+                if(newpassword == renewpassword){
+                    $('#password').modal('hide');
+                    $.ajax({
+                        url: "{:U('webAccountPassword')}",
+                        type: 'post',
+                        data: $(this).serialize(),
+                        success: function (d) {
+                            var result = eval("(" + d + ")");
+                            if (result.flag == 1) {
+                                //alert(result.msg);
+                                window.location.reload();//刷新当前页面.
+                            } else {
+                                alert(result.msg);
+                            }
+                        }
+                    });
+                }else{
+                    alert('密码不一致！');
+                }
+            }else{
+                alert('请输入正确的原密码！');
+            }
+        });
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

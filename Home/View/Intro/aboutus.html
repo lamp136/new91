@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="icon" href="/Public/soumu.ico" type="image/x-icon" />
+    <title>关于91搜墓网_{$Think.config.SITE_NAME}</title>
+    <meta name="keywords" content="关于91搜墓网,91搜墓网" />
+    <meta name="description" content="关于91搜墓网简要介绍" />
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!--引入头部 -->
+<include file="Common:head_in" />
+
+<!-- 底部页面banner -->
+<div class="aboutus_banner">
+	<img src="{$Think.const.IMG_URL}aboutus_banner.jpg" alt="关于91搜墓网"/>
+</div><!-- 底部页面banner结束 -->
+<!-- 底部页面内容导航 -->
+<div class="help_nav">
+	<div class="innerhelp_nav">
+		<ul>
+			<li class="help_nav_led"><a href="{:U('/intro/aboutus')}">91搜墓网</a></li>
+			<li><a href="{:U('/help/guide/gmlc')}">购墓指南</a></li>
+                        <li><a href="{:U('/help/security/wzys')}">订单保障</a></li>
+			<li><a href="{:U('/help/issue/xmjq')}">常见问题 </a></li>
+			<li><a href="{:U('/help/common/bzjr')}">殡葬文化</a></li>
+			<li class="last"><a href="{:U('/intro/joinus')}">加盟合作</a></li>
+		</ul>
+	</div>
+</div><!-- help_nav底部页面内容导航结束 -->
+<!-- 中间内容部分 -->
+<div class="main">
+	<div class="contain clearfix">
+		<!-- 底部页面左侧导航 -->
+		<div class="help_leftnav">
+			<img src="{$Think.const.IMG_URL}footer_leftnav_logo.png" alt="关于91搜墓网"/>
+			<h1>关于91搜墓网</h1>
+			<p>ABOUT 91 SOUMU</p>
+			<ul>
+				<li class="help_leftnav_led"><a href="{:U('/intro/aboutus')}">关于我们</a></li>
+				<li><a href="{:U('/intro/contactus')}">联系我们</a></li>
+			</ul>
+		</div><!-- help_leftnav底部页面左侧导航结束 -->
+		<!-- 底部页面右侧 -->
+		<div class="help_right">
+			<h1>公司简介  <span>Company Profile</span></h1>
+			<!-- 关于我们内容 -->
+			<div class="aboutus">
+				<img class="about_img" src="{$Think.const.IMG_URL}aboutus_img.jpg" alt="关于91搜墓网"/>
+				<p>91搜墓网是领先的互联网殡葬服务平台，我们致力于为用户提供全面实时的墓地信息，涵盖陵园的环境、墓型、交通以及最新的陵园动态等。我们拥有一支最专业的顾问团队，对客户咨询的问题进行一一沟通解答，让每一个用户得到最满意的服务。平台的合作伙伴已遍布全国各地，其中包括大型陵园、公墓、殡仪馆及殡葬行业的企业商家等。以互联网的思维， 推动殡葬行业的向前发展，让人们更好的接受殡葬文化，同时提升殡葬行业规范和服务。</p>
+				<p>中国殡葬协会会员单位，中国殡葬协会青年工作委员会主任单位</p>
+				<!-- 四大安心承诺 -->
+				<h2>四大安心承诺</h2>
+				<ul class="clearfix">
+					<li>
+						<img src="{$Think.const.IMG_URL}aboutus_img1.jpg" alt="墓地信息全面真实"/>
+						<p>为您提供全面的墓地信息，涵盖陵园的环境、墓型、交通等，每天实时更新，100%真实有效。我们致力于打造一个专业化的墓地信息平台，让您足不出户即可了解墓地相关信息。</p>
+					</li>
+					<li>
+						<img src="{$Think.const.IMG_URL}aboutus_img2.jpg" alt="简单，透明，有保障"/>
+						<p>客户直接和陵园签订正规购墓合同，墓地价格以陵园挂牌价格为准，整个过程公开透明。我们的资质：中国殡葬协会会员单位，中国殡葬协会青年工作委员会主任单位。</p>
+					</li>
+					<li>
+						<img src="{$Think.const.IMG_URL}aboutus_img3.jpg" alt="免费购墓指导"/>
+						<p>我们有专业的服务团队，为您提供任何与购墓有关的信息，拨打我们的咨询热线，就可免费获得一对一购墓指导，涵盖陵园详情、购墓流程等信息的提供和相关指导。</p>
+					</li>
+					<li class="last">
+						<img src="{$Think.const.IMG_URL}aboutus_img4.jpg" alt="享最高购墓补贴"/>
+						<p>我们已和多家陵园建立合作关系，尽最大可能为客户省钱。我们承诺给予客户最高补贴，截止到目前已累计为客户节省超过上百万元，在行业中处于领先地位。</p>
+					</li>
+				</ul>
+			</div><!-- aboutus关于我们内容结束 -->
+		</div><!-- help_right底部页面右侧 -->
+	</div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<!-- 底部footer部分 -->
+<!--底部代码引入-->
+<include file="Common:footer" />
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+</body>
+</html>

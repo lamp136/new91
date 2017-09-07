@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head" />
+        <link rel="stylesheet" type="text/css" href="{$Think.const.ASSETS_URL}chosen-bootstrap/chosen/chosen.css" />
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">订单委派列表</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>订单委派列表</h4>
+                                </div>
+                                <div class="widget-body">
+                                   <form id="quickForm" method="get" class="form-horizontal" autocomplete="off" action='{:U("Share")}'>
+                                    <table>
+                                         <tr>
+                                            <td>搜索：</td>
+                                            <td>
+                                                <select name='store_id' class='chosen' tabindex="100" data-placeholder="选择商家">
+                                                    <option value=""></option><option value="">所有商家</option>
+                                                    <volist name='store_name' id='vo'>
+                                                        <option value='{$key}' <eq name="key" value="$Think.get.store_id">selected</eq>>{$vo}</option>
+                                                    </volist>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="mobile" class="input-medium" placeholder="预约人手机号" value="{$Think.get.mobile}"/>
+                                                
+                                                <button class="btn btn-primary">确定</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    </form>
+                                <table class="table table-striped table-bordered table-hover">
+                                       <thead>
+                                             <tr>
+                                                <a href="javascript:void(0);" data-id="all">全选</a>&nbsp;
+                                                <a href="javascript:void(0);" data-id="cancel">取消</a>&nbsp;
+                                                <a href="javascript:void(0);" data-id="antiAll">反选</a>&nbsp;
+                                                <input type="button" data-id="batchDel" value="选择跟踪人" style="cursor:pointer;"/>
+                                            </tr>
+                                            <tr>
+                                                <th class="hidden-phone" style=" width:5%;">手机号</th>
+                                                <th class="hidden-phone" style=" width:7%;">姓名</th>
+                                                <th class="hidden-phone" style=" width:9%;">预约时间</th>
+                                                <th class="hidden-phone" style=" width:5%;">客户返现</th>
+                                                <th class="hidden-phone" style=" width:10%;">商家名称</th>
+                                                <th class="hidden-phone" style=" width:9%;">下单时间</th>
+                                                <th class="hidden-phone" style=" width:9%;">订单运作状态</th>
+                                                <th class="hidden-phone" style=" width:7%;">跟踪人</th>
+                                                <th class="hidden-phone" style=" width:9%;">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <volist name="list" id="vo">
+                                            <tr class="odd gradeX">
+                                            <td>
+                                            <input data-name="choice_id" type="checkbox" value="{$vo.id}"/>
+                                                    {$vo.mobile}</a>
+                                            </td>
+                                                <td class='custom'>{$vo.buyer}
+                                                        {$vo.Custom_msg.msg}
+                                                </td>
+                                                <td> <neq name="vo['created_time']" value="0">{$vo.appoint_time|date='Y-m-d',###}</neq></td>
+                                                <td>
+                                                    <eq name="vo['apply_return_status']" value="1">
+                                                    <span class="label label-important">是</span>
+                                                    <else/>
+                                                    否
+                                                    </eq>
+                                                </td>
+                                                <td>{$vo.store_name}
+                                                     <eq name="vo.store_status" value="14">
+                                                    <img width="28px" src="{$Think.const.IMG_URL}guang.png" title="广告会员">
+                                                </eq>
+                                                <eq name="vo.store_status" value="16">
+                                                    <img width="28px" src="{$Think.const.IMG_URL}ge.png" title="个人会员">
+                                                </eq>
+                                                <eq name="vo.store_status" value="19">
+                                                    <img width="28px" src="{$Think.const.IMG_URL}shang.png" title="商家会员V">
+                                                </eq>
+                                                <eq name="vo.store_status" value="20">
+                                                    <img width="28px" src="{$Think.const.IMG_URL}shang.png" title="商家会员">
+                                                </eq>
+
+                                                </td>
+                                                <td>
+                                                <neq name="vo['created_time']" value="0">{$vo.created_time|date='Y-m-d',###}</neq>
+                                                </td>
+                                                <td>
+                                                    <switch name="vo['status']">    
+                                                        <case value="0">默认新订单</case>    
+                                                        <case value="1">陵园与客户达成交易</case>   
+                                                        <case value="2">有意向订单</case>
+                                                        <case value="3">审核中</case>
+                                                        <case value="20">申请退单中</case>  
+                                                        <case value="21">订单退单中</case>    
+                                                    <default />
+                                                    </switch>
+                                                </td>
+                                                <td>
+                                                    <volist name="order_flow" id="flowmans">
+                                                        <if condition="$key eq $vo.order_flow_id ">{$flowmans}</if>
+                                                    </volist>
+                                                </td>
+                                              
+                                                <td>
+
+                                                <php>
+                                                    if (showHandle('OrderGrave/changeFlowMan')) {
+                                                </php>
+                                                <a class="btn btn-small btn-primary flow" href="javascript:void(0)" data-id="{$vo.id}" data-flow="{$vo.order_flow_id}" title=""><i class="icon-user"> </i>跟踪人</a></td>
+
+                                                <php>
+                                                    }
+                                                </php>
+                                                </tr>
+                                                </volist>
+                                            </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span12 center">
+                                            <div class="pagination" id="sample_1_info" style="text-align: center">
+                                                {$page}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+      
+    <div id="flow" class="modal hide fade in">
+        <form id="flowForm" method="post" class="form-horizontal" autocomplete="off" enctype="multipart/form-data">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>选择跟踪人</h3>
+            </div>
+            <div class="modal-body" >
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>跟踪人：</td>
+                            <td>
+                                <select class="input-medium m-wrap" name="flow_man" data-id="flow_man">
+                                    <option value="0">--选择跟踪人--</option>
+                                    <volist name="workmen" id="flowmans">
+                                        <option value="{$key}">{$flowmans}</option>
+                                    </volist>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="id"/>
+                <button type="submit" class="btn btn-success">提交</button>
+                <a href="javascript:void(0)" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+    <!-- END CONTAINER -->
+
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+       
+
+        //全选
+        $('a[data-id="all"]').click(function(){
+            $("input[data-name='choice_id']").each(function(){
+                $(this).attr('checked',true);
+            }); 
+        })
+        //取消全选
+        $('a[data-id="cancel"]').click(function(){
+            $("input[data-name='choice_id']").each(function(){
+                $(this).attr("checked",false);
+            });  
+        })
+        //反选
+        $('a[data-id="antiAll"]').click(function(){
+            $("input[data-name='choice_id']").each(function(){
+                this.checked =! this.checked;
+            });
+        })
+
+        $('input[data-id="batchDel"]').click(function(){
+            var str = '';
+            $("input[data-name='choice_id']:checked").each(function(){
+                str += ($(this).val()+',');
+            });
+            str = str.substring(0,str.lastIndexOf(','));
+            if(str == ''){
+                alert('没有选择');return;
+            }
+            $('#flowForm input[name="id"]').val(str);
+            $('#flow').modal();
+        });
+
+        // 更改跟踪人
+        $('.flow').click(function(){
+            var id = $(this).attr('data-id');
+            var flowMan = $(this).attr('data-flow');
+            $('#flowForm select[data-id="flow_man"]').val(flowMan);
+            $('#flowForm input[name="id"]').val(id);
+            $('#flow').modal();
+        })
+
+        // 提交更改跟踪人
+        $('#flowForm').bind('valid.form',function(){
+            $.ajax({
+                url:"{:U('changeFlowMan')}",
+                type:'post',
+                data:$(this).serialize(),
+                success:function(d){
+                    var result = eval("("+d+")");
+                    if(result['flag'] == 1){
+                        alert(result['msg']);
+                        window.location.reload();
+                    }else{
+                        alert(result['msg']);
+                    }
+                }
+            })
+            $('#flow').modal('hide');
+        })
+      
+
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

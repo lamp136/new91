@@ -1,0 +1,100 @@
+<!-- 顶部 -->
+<div class="navbar_top">
+    <div class="contain">
+        <div class="greet">
+            <empty name="Think.session.member_name">
+            <span>您好! 欢迎来到91搜墓网&nbsp;<a href="{:U('/'.strtolower(C('CHINA_ABBR')))}" title="返回首页">返回首页</a></span>
+            <a class="login" href="{:U('/login')}" >登录</a>
+            <a href="{:U('/register')}">注册</a>
+            <else />
+            <span>{$Think.session.member_name}您好! 欢迎来到91搜墓网&nbsp;<a href="{:U('/'.strtolower(C('CHINA_ABBR')))}" title="返回首页">返回首页</a></span>
+            <a href="{:U('/logout')}" rel="nofollow">退出登录</a>
+            </empty>
+        </div>
+        <div class="nav_top">
+            <ul>
+                <li class="scan">
+                    <img src="{$Think.const.IMG_URL}saomwei.gif" alt="91搜墓网微信公众号二维码"/>扫描微信<i></i>
+                    <span class="toolbar-layer"></span>
+                </li>
+                <li class="gwc">
+                    <div class="J-shoping">
+                        <a href="{:U('/cart')}" class="J-go">
+                            <img src="{$Think.const.IMG_URL}top_gwc.png"/>购物车<span class="J-shoping-num">{$number}</span>件
+                        </a>
+                    </div>
+                </li>
+                <li><a target="_blank" href="{:U('/personal')}" rel="nofollow">用户中心</a></li>
+                <li><a target="_blank" href="{:U('/help/issue/xmjq')}">帮助中心</a></li>
+                <li><a target="_blank" href="{:U('/intro/sitemap')}">网站地图</a></li>
+                <!--<li class="last"><a href="{:U('/Storecenter/login')}" rel="nofollow">商家后台</a></li>-->
+            </ul>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</div><!-- 顶部结束navbar_top -->
+<!-- 头部header -->
+<div class="header">
+    <div class="contain">
+        <!-- LOGO -->
+        <div class="logo clearfix">
+            <a href="<?php echo getHomeUrl(); ?>">
+                <img src="{$Think.const.IMG_URL}logo.png" alt="91搜墓网_{$regionName}站"/>
+                <img src="{$Think.const.IMG_URL}logo_left.gif" alt="搜墓，陵园，墓地-91搜墓网">
+            </a>
+        </div>
+        <!-- 选择城市+搜索 -->
+        <div class="search">
+            <!-- 选择城市 -->
+            <div class="city">
+                <span class="sele c_down">{$regionName}<i class="sele_bg"></i></span>
+                <!-- 展开城市列表 -->
+                <div class="city_list search_city">
+                    <div class="ci_title">
+                        <ul id="city_nav">
+                            <li><a href="javascript:void(0)" tab="tabCity1">省份</a></li>
+                        </ul>
+                        <span class="c_close search_close"></span>
+                    </div>
+                    <!-- 展开的城市 -->
+                    <ul class="list_box">
+                        <!-- 热门城市 -->
+                        <li id="tabCity1" class="city_box">
+                            <ul class="clearfix">
+                                <volist name='region' id='vo'>
+                                    <li>
+                                        <a href="{:U('/'.strtolower($vo['abbreviate']))}" title="{$Think.config.SITE_NAME}_{$vo.region_name}站">{$vo.region_name}</a>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </li>
+                    </ul><!-- list_box展开的城市结束 -->
+                </div><!-- city_list展开城市列表结束 -->
+            </div><!-- city选择城市结束 -->
+            <form id='seacth_top_form' action="/search" method="get" onsubmit="return search_top()">
+                <input class="tex" type="text" name="wd" value= "<notempty name='wd'>{$wd}</notempty>" placeholder="请输入搜索的陵园名称" />
+                <button class="btn"></button>
+            </form>
+        </div><!-- search选择城市+搜索结束 -->
+       <!-- 热线 -->
+        <div class="header_phone clearfix">
+            <img src="{$Think.const.IMG_URL}header_phone_img.png"  alt="客服热线:400-8010-344"/>
+        </div>
+    </div><!-- contain -->
+</div><!-- 头部header结束 -->
+<!-- 导航 -->
+<div class="nav">
+    <div class="contain">
+        <ul class="nav_list clearfix">
+            <li><a href="<?php echo getHomeUrl(); ?>" title="91搜墓网_{$regionName}站">首页</a></li>
+            <li <eq name="controllerName" value="$Think.config.CEMETERY">class="lineheight"</eq>><a href="<?php echo getHomeUrl('cemetery'); ?>" title="{$regionName}陵园">陵园</a></li>
+            <li <eq name="controllerName" value="$Think.config.FIANACING">class="lineheight"</eq>><a href="{$Think.config.LR_URL}" target="_blank" title="91乐融">91乐融</a></li>
+            <li <eq name="controllerName" value="$Think.config.SERVICE">class="lineheight"</eq>><a href="{:U('/service')}" title="祭扫服务">祭扫服务</a></li>
+            <li <eq name="controllerName" value="$Think.config.FUNERAL">class="lineheight"</eq>><a href="<?php echo getHomeUrl('funeral'); ?>" title="殡仪馆">殡仪馆</a></li>
+            <li><a href="{:U('/news')}" title="资讯">资讯</a></li>
+            <li <eq name="controllerName" value="$Think.config.SPECIALTOPICS">class="lineheight"</eq>><a href="{:U('/specialtopics')}" title="会员专栏">会员专栏</a></li>
+            <!--<li <eq name="controllerName" value="$Think.config.FESTIVALS">class="lineheight"</eq>><a href="javascript:void(0)">传统节日</a></li>-->
+            <li <eq name="controllerName" value="$Think.config.NEWS">class="last lineheight" <else/>class="last"</eq>><a href="{:U('/fengshui')}" title="殡葬风水">殡葬风水</a></li>
+        </ul>
+    </div>
+</div><!-- nav导航结束 -->

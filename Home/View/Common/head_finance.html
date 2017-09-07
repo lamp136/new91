@@ -1,0 +1,41 @@
+
+	<!-- 顶部 -->
+	<div class="navbar_top">
+		<div class="contain">
+			<div class="greet">
+                            <span><a href="<?php echo getHomeUrl(); ?>"><i></i>91搜墓网首页</a></span>
+			</div>
+			<div class="nav_top">
+				<ul>
+					<li class="scan">
+						<img src="{$Think.const.IMG_URL}lr/saomwei.gif"/>扫描微信<i></i>
+						<span class="toolbar-layer"></span>
+					</li>
+					<li><a href="javascript:void(0);" >我的返利</a></li>
+                    <li><a target="_blank" href="{:U('/help/issue/xmjq')}" title="帮助中心">帮助中心</a></li>
+                    <li><a target="_blank" href="{:U('/intro/sitemap')}" title="网站地图">网站地图</a></li>
+                    <li class="last"><a href="{:U('/Storecenter/login')}" rel="nofollow" title="商家登录">商家登录</a></li>
+				</ul>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+	</div><!-- 顶部结束navbar_top -->
+
+	<!-- 头部logo + 导航 -->
+	<div class="header clearfix">
+		<div class="contain">
+			<!-- LOGO -->
+			<div class="logo">
+				<img src="{$Think.const.IMG_URL}lr/logo.png" alt="LOGO"/>
+			</div>
+			<!-- 导航 -->
+			<div class="nav">
+				<ul>
+					<li class="active"><a href="{:U('Financing/index')}">首页</a></li>
+					<li><a href="{:U('Financing/lists')}">找项目</a></li>
+					<li><a href="#">找资金</a></li>
+					<li><a href="#">资讯</a></li>
+				</ul>
+			</div><!-- nav导航 End -->
+		</div><!-- contain -->
+	</div><!-- 头部logo + 导航 End -->

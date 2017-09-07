@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>账户中心_91搜墓网</title>
+    <include file="Common::store_center_css"/>
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}storecenter/compiled/tables.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}storecenter/compiled/form-wizard.css" type="text/css" media="screen" />
+</head>
+<body>
+
+    <include file="Common::store_center_top"/>
+    <!-- end navbar -->
+    <include file="Common::store_center_left"/>
+	<!-- main container -->
+    <div class="content">
+        <div class="container-fluid">
+            <div id="pad-wrapper">
+                <div class="products-table section">
+                    <div class="row-fluid head">
+                        <div class="span12">
+                            <h4>账户中心</h4>
+                        </div>
+                    </div>
+                    <div class="row-fluid filter-block">
+                    	<div class="pull-right btn-group">
+	                    	<form action="__SELF__">
+	                    		<input name="storeLoginName" class="search" value="{$Think.get.storeLoginName}" type="text" placeholder="登录账号" />
+	                    		<button class="glow right">
+                                    <i class="icon-search"></i> 搜索
+                                </button>
+	                    	</form>
+                    	</div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>所属陵园</th>
+                                    <th>所属集团</th>
+                                    <th>账号</th>
+                                    <th>创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="trees" id="p">
+                                    <tr>
+                                        <td>{$p.store_name}</td>
+                                        <td>{$group[$p['pid']]['name']}</td>
+                                        <td>{$p.store_login_name}</td>
+                                        <td>
+                                            <neq name="p.created_time" value="0000-00-00 00:00:00">
+                                                {$p.created_time}
+                                            </neq>
+                                        </td>
+                                        <td>
+                                            <php>
+                                                if(in_array('Storecenter/uppwd',session('storecenter.prName')) && session('storecenter.level') == 1){
+                                            </php>
+                                                <eq name="Think.session.storecenter.id" value="$p['id']">
+                                                    <span class="btn-flat editPwd" data-id="{$p.id}" data-name="{$p.store_login_name}"><i class="icon-pencil icon-white"> </i> 修改密码</span>
+                                                </eq>
+                                            <php>
+                                                }
+                                                if(in_array('Storecenter/add_child_id',session('storecenter.prName'))){
+                                            </php>
+                                                <eq name="Think.session.storecenter.id" value="$p['id']">
+                                                    <neq name="p[admin_id]" value="0">   
+                                                        <span class="btn-flat info addChild" data-id="{$p.id}" data-store-id="{$p.store_id}" data-login-name="{$p.store_login_name}" data-store-name="{$p.store_name}"><i class="icon-plus"> </i> 添加子账号</span>
+                                                    </neq>
+                                                </eq>
+                                            <php>
+                                                }
+                                            </php>
+                                        </td>
+                                    </tr>
+                                    <notempty name="p.level">
+                                        <volist name="p.level" id="s">
+                                            <tr>
+                                                <td colspan="2"></td>
+                                                <td>{$s.store_login_name}</td>
+                                                <td>
+                                                    <neq name="s.created_time" value="0000-00-00 00:00:00">
+                                                        {$s.created_time}
+                                                    </neq>
+                                                </td>
+                                                <td>
+                                                    <php>
+                                                        if(in_array('Storecenter/uppwd',session('storecenter.prName')) && (session('storecenter.level') == 1 || session('storecenter.level') == 2)){
+                                                    </php>
+                                                        <if condition="$Think.session.storecenter.id eq $s['id'] || $Think.session.storecenter.id eq $p['id']">
+                                                            <span class="btn-flat editPwd"  data-id="{$s.id}" data-name="{$s.store_login_name}">
+                                                                <i class="icon-pencil icon-white"> </i>修改密码
+                                                            </span>
+                                                        </if>
+                                                    <php>
+                                                        }
+                                                        if(in_array('Storecenter/del_account',session('storecenter.prName')) && (session('storecenter.level') == 1 || session('storecenter.level') == 2)){
+                                                    </php>
+                                                        <if condition="$Think.session.storecenter.id eq $s['id'] || $Think.session.storecenter.id eq $p['id']">   
+                                                            <span data-del="{$s.id}" class="btn-flat danger delChild">
+                                                                <i class="icon-remove-sign"> 删除</i>
+                                                            </span>
+                                                        </if>
+                                                    <php>
+                                                        }
+                                                    </php>
+                                                </td>
+                                            </tr>
+                                        </volist>
+                                    </notempty>
+                                </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+                    	{$page}
+                    </div>
+                </div>
+                <!-- end products table -->
+            </div>
+        </div>
+    </div>
+    <div class="modal hide fade" id="editPwdModal">
+        <form id="editPwdForm">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="editPwdModalLabel">修改密码</h4>
+            </div>
+            <div class="modal-body row-fluid form-wrapper">
+                <div class="form-group">
+                    <i class="fa fa-user"></i>
+                    <input name="login_name" type="text"  class="form-control"  value="" readonly="readonly" />
+                </div>
+                <div class="form-group">
+                    <i class="fa fa-lock"></i>
+                    <input name="pwd" type="password" placeholder="新的密码" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <i class="fa fa-lock"></i>
+                    <input name="repeatpwd" type="password" placeholder="重新输入密码" class="form-control" />
+                    <input type="hidden" name="id" value=""/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn-flat primary">提交</button>
+            </div>
+        </form>
+    </div>
+    <!-- 添加子账号 -->
+    <div class="modal hide fade" id="addChildModal">
+        <form id="addChildForm">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="addChildModalLabel">添加子账号</h4>
+            </div>
+            <div class="modal-body row-fluid form-wrapper">
+                <div class="field-box">
+                    <label>登录账号:</label>
+                    <input type="text" class="form-control" name="store_login_name" placeholder=""/>
+                </div>
+                <div class="field-box">
+                    <label>登录密码:</label>
+                    <input type="password" class="form-control" name="store_login_pwd"  placeholder=""/>
+                    <input type="hidden" name="storeId" value=""/>
+                    <input type="hidden" name="pid" value=""/>
+                    <input type="hidden" name="osln" value=""/>
+                    <input type="hidden" name="store_name" value=""/>
+                </div>
+                <div>
+                    <input type="checkbox" name="parent_privilege" value="1">获取主账号权限
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn-flat primary">提交</button>
+            </div>
+        </form>
+    </div>
+    <!-- end main container -->
+
+	<!-- scripts -->
+    <script src="{$Think.const.JS_URL}storecenter/jquery-latest.js"></script>
+    <script src="{$Think.const.JS_URL}storecenter/jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}storecenter/bootstrap.min.js"></script>
+    <script src="{$Think.const.JS_URL}storecenter/theme.js"></script>
+    <script>
+        $('.delChild').click(function(){
+            if(confirm('确定删除？')){
+                var delId = $(this).data('del');
+                $.post("{:U('del_account')}", 
+                    {id: delId}, 
+                    function(data) {
+                        if(data['code'] == 1){
+                            alert(data['msg']);
+                            window.location.reload();
+                        }else{
+                            alert(data['msg']);
+                        }
+                },'json');
+            }else{
+                return false;
+            }
+        })
+
+        $('.addChild').click(function() {
+            $('#addChildForm')[0].reset();
+            $('#addChildForm .alert-msg').remove();
+            $('#addChildForm div').removeClass('error');
+            $('#addChildForm input[name="storeId"]').val($(this).data('store-id'));
+            $('#addChildForm input[name="pid"]').val($(this).data('id'));
+            $('#addChildForm input[name="osln"]').val($(this).data('login-name'));
+            $('#addChildForm input[name="store_name"]').val($(this).data('store-name'));
+            $('#addChildModal').modal();
+        });
+
+        $('#addChildForm input[name="store_login_name"],#addChildForm input[name="store_login_pwd"]').focus(function() {
+            $(this).next('span').remove();
+            $(this).parent('div').removeClass('error');
+        })
+
+        $('#addChildForm').bind('valid.form',function() {
+            var sln = $('#addChildForm input[name="store_login_name"]');
+            var slp = $('#addChildForm input[name="store_login_pwd"]');
+
+            if(sln.val() == ''){
+                sln.next('span').remove();
+                sln.after('<span style="display:inline;margin-left:5px;" class="alert-msg"><i class="icon-remove-sign"></i> 账号不能为空</span>');
+                sln.parent('div').removeClass('error').addClass('error');
+                return false;
+            }
+            if(slp.val().trim() == ''){
+                slp.next('span').remove();
+                slp.after('<span style="display:inline;margin-left:5px;" class="alert-msg"><i class="icon-remove-sign"></i> 密码不能为空</span>');
+                slp.parent('div').removeClass('error').addClass('error');
+                return false;
+            }
+
+            $.ajax({
+                url:"{:U('add_child_id')}",
+                type:'post',
+                data:$(this).serialize(),
+                dataType:'JSON',
+                success:function(result){
+                    if(result.flag == 1){
+                        $('#addChildModal').modal('hide');
+                        alert(result.msg);
+                        window.location.reload();
+                    }else{
+                        alert(result.msg);
+                    }
+                }
+            })
+        });
+
+        $('.editPwd').click(function() {
+            $('#editPwdForm')[0].reset();
+            $('#editPwdForm .alert-msg').remove();
+            $('#editPwdForm input[name="id"]').val($(this).data('id'));
+            $('#editPwdForm input[name="login_name"]').val($(this).data('name'));
+            $('#editPwdModal').modal();
+        });
+
+        $('#editPwdForm input[name="pwd"],#editPwdForm input[name="repeatpwd"]').focus(function(){
+            $(this).next('span').remove();
+        })
+
+        $("#editPwdForm").bind('valid.form',function(){
+            var pwdRet = $('#editPwdForm input[name="pwd"]');
+            var repeatpwdRet = $('#editPwdForm input[name="repeatpwd"]');
+
+            if (pwdRet.val().trim() == "") {
+                pwdRet.next('span').remove();
+                pwdRet.after('<span style="display:inline;margin-left:5px;color:red;" class="alert-msg"><i class="icon-remove-sign"></i> 新密码不能为空</span>');
+                return false;
+            }
+
+            if(repeatpwdRet.val().trim() == ''){
+                repeatpwdRet.next('span').remove();
+                repeatpwdRet.after('<span style="display:inline;margin-left:5px;color:red;" class="alert-msg"><i class="icon-remove-sign"></i> 请再输入一次新密码</span>');
+                return false;
+            }
+            
+            if (pwdRet.val().trim() != repeatpwdRet.val().trim()) {
+                repeatpwdRet.next('span').remove();
+                repeatpwdRet.after('<span style="display:inline;margin-left:5px;color:red;" class="alert-msg"><i class="icon-remove-sign"></i> 两次输入的密码不一致</span>');
+                return false;
+            }
+            $.ajax({
+                url:"{:U('uppwd')}",
+                type : 'POST',
+                data:$(this).serialize(),
+                dataType: "json",
+                success : function(result) {
+                    alert(result.msg);
+                    window.location.reload();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

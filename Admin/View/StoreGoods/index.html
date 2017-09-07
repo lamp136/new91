@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+<!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">商家商品</a><span class="divider-last">&nbsp;</span>
+                        </li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4><i class="icon-reorder"></i>商家商品列表</h4>
+                                <php>
+                                    if (showHandle('StoreGoods/addStoreGoods')) {
+                                </php>
+                                    <span class="tools">
+                                        <a href="{:U('StoreGoods/addStoreGoods')}" class="icon-plus">
+                                            添加商品
+                                        </a>
+                                    </span>
+                                <php>
+                                    }
+                                </php>
+                            </div>
+                            <div class="widget-body">
+                                <form id="quickForm" method="get" class="form-horizontal" autocomplete="off" action="{:U('StoreGoods/index')}">
+                                    搜索：
+                                    <input type="text" name="name" class="input-large" placeholder="商品名称" value="{$Think.get.name}"/>
+                                    <input type="text" name="store_name" class="input-large" placeholder="商家名称" value="{$Think.get.store_name}"/>
+                                    <select class="input-small m-wrap" tabindex="1" name="category_pid" id="category_pid" data-rule='required'>
+                                        <option value="-1">--请选择--</option>
+                                        <volist name="category" id="cat">
+                                            <if condition="$category_pid eq $cat['cid']">
+                                                <option value="{$cat.cid}" selected="selected">{$cat.name}</option>
+                                            <else/>
+                                                <option value="{$cat.cid}">{$cat.name}</option>
+                                            </if>
+                                        </volist>
+                                    </select>
+                                    <select class="input-small m-wrap" tabindex="1" name="category_id" id="category_id" <if condition="empty($categoryList)">style="display:none"</if> >
+                                        <option value="0">--请选择--</option>
+                                        <volist name="categoryList" id="res">
+                                            <if condition="$category_id eq $res['cid']">
+                                                <option value="{$res.cid}" selected="selected">{$res.name}</option>
+                                            <else/>
+                                                <option value="{$res.cid}">{$res.name}</option>
+                                            </if>
+                                        </volist>
+                                    </select>
+                                    <button class="btn btn-primary">确定</button>
+                                </form>
+                                <table class="table table-striped table-bordered" id="sample_1">
+                                    <thead>
+                                    <tr>
+                                        <th class="hidden-phone">商家名称</th>
+                                        <th class="hidden-phone">商品名称</th>
+                                        <th class="hidden-phone">商品分类</th>
+                                        <th class="hidden-phone">商品SN</th>
+                                        <th class="hidden-phone">商品SKUID</th>
+                                        <th class="hidden-phone">市场价</th>
+                                        <th class="hidden-phone">销售价</th>
+                                        <th class="hidden-phone">状态</th>
+                                        <th class="hidden-phone">创建时间</th>
+                                        <th class="hidden-phone">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <volist name="list" id="vo">
+                                            <tr class="odd gradeX">
+
+                                                <td>{$vo.store_name}</td>
+                                                <td>{$vo.service_goods_name}</td>
+                                                <td>{$vo.Category.name}</td>
+                                                <td>{$vo.store_goods_sn}</td>
+                                                <td>{$vo.skuid}</td>
+                                                <td>{$vo.market_price}</td>
+                                                <td>{$vo.sales_price}</td>
+                                                <td>{$Think.config.SERVICEGOODS_STATUS.$vo[status]}</td>
+                                                <td>{$vo.created_time|date='Y-m-d',###}</td>
+                                                <td>
+                                                <php>
+                                                    if (showHandle('StoreGoods/editStoreGoods')) {
+                                                </php>
+                                                    <a href="{:U('StoreGoods/editStoreGoods',array('storeGoodsId'=>$vo['id'],'p'=>$nowPage))}" class="btn btn-small btn-primary opCat">
+                                                        <i class="icon-pencil icon-white"> </i>编辑
+                                                    </a>
+                                                <php>
+                                                    }
+                                                    if (showHandle('StoreGoods/goodsImage')) {
+                                                </php>
+                                                    <a href="{:U('StoreGoods/goodsImage', array('id'=>$vo['id'],'p'=>$nowPage, 'name'=>$vo['service_goods_name']))}"  class="btn btn-small">
+                                                        <i class="icon-picture"> </i>相册
+                                                    </a>
+                                                <php>
+                                                    }
+                                                    if (showHandle('StoreGoods/delStoreGoods')){ 
+                                                </php> 
+                                                    <if condition="$vo.status eq -1">
+                                                        <button type="button" class="btn btn-success btn-small del" data-id="{$vo.id}" data-status="{$Think.config.NORMAL_STATUS}"/>
+                                                         <i class="icon-ok  icon-white"> </i>启用
+                                                    <else/>
+                                                        <button type="button" class="btn btn-danger btn-small del" data-id="{$vo.id}" data-status="{$Think.config.DELETE_STATUS}"/>
+                                                         <i class="icon-remove  icon-white"> </i>删除
+                                                    </if>
+                                                 <php>
+                                                    }
+                                                </php>
+                                                </td> 
+                                            </tr>
+                                        </volist>
+                                    </tbody>
+                                </table>
+                                <div class="row-fluid">
+                                    <div class="span12 center">
+                                        <div class="pagination" id="sample_1_info" style="text-align: center">
+                                            {$page}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- END CONTAINER -->
+
+<!-- BEGIN FOOTER -->
+<include file="Public::footer"/>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+
+<script src="{$Think.const.JS_URL}scripts.js"></script>
+<script>
+
+    //获取商品分类
+    $(function() {
+        $("#category_pid").change(function() {
+            var categoryPid = $('#category_pid').val();
+            getCategory('#category_id', categoryPid);
+        });
+
+        
+        //获取商品子分类
+        function getCategory(selectId, categoryPid) {
+            $.post("{:U('getCategoryList')}",
+                {categoryPid: categoryPid},
+                function(data) {
+                    if (data.flg=='list') {
+                        var str = "<option value='0'>--请选择--</option>";
+                        for (var i = 0; i < data.res.length; i++) {
+                            str += "<option value='" + data['res'][i]['cid'] + "'>" + data['res'][i]['name'] + "</option>";
+                        }
+                        $(selectId).empty().append(str);
+                        $(selectId).show()
+                    }else{
+                        $(selectId).empty()
+                        $(selectId).hide();
+                    }
+                }, 'json');
+        }
+    });
+
+    $('.del').click(function(){
+        var id = $(this).attr('data-id');
+        var status = $(this).attr('data-status');
+        if(!window.confirm('确定要执行此操作吗？')){
+            event.preventDefault();
+        }else{
+            $.ajax({
+                url:'{:U("delStoreGoods")}',
+                type:'post',
+                data:{'id':id,"status":status},
+                async:false,
+                success : function(data){
+                    var result = eval("(" + data + ")");
+                    if(result.flag==1){
+                        alert(result.msg);
+                        window.location.reload();//刷新当前页面.
+                    }else{
+                        alert(result.msg);
+                    }
+                }
+            });
+        }
+    });
+</script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

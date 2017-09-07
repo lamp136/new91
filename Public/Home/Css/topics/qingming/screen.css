@@ -1,0 +1,331 @@
+@charset "UTF-8";
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/**
+ * Helpers
+ * variables		# 变量集中存储文件
+ * commonmixin      # mixin集中存储文件和公共样式
+ * 
+ * Base
+ * reset             # Compass内置浏览器重置样式文件
+ * typography       # 修饰文本列表垂直韵律样式文件
+ * utilities        # 辅助工具类模块(color和精灵合图、打印等模块)
+ * css3             # CSS3模块
+ * 
+ * Layout(主要布局)
+ * 
+ * Page(页面特定样式)
+ * qingming         # 清明节样式
+*/
+/*浏览器样式重置*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+a {
+  color: #333333;
+}
+
+a, a:hover {
+  text-decoration: none;
+}
+
+.clear {
+  clear: both;
+}
+
+.clearfix {
+  overflow: hidden;
+  *zoom: 1;
+}
+
+body, p, h1, h2, h3, h4, h5, h6 {
+  font-family: "宋体";
+  font-size: 14px;
+  color: #333333;
+}
+
+.contain {
+  width: 1110px;
+  margin: 0 auto;
+}
+
+/*banner*/
+.qm_banner {
+  width: 100%;
+  height: 433px;
+  background: url(../../../images/topics/qingming/qm_banner.jpg) center top no-repeat;
+}
+
+.qm_title {
+  text-align: center;
+  padding-top: 32px;
+}
+
+/*清明节传说由来*/
+.qm_origin {
+  width: 100%;
+  height: 608px;
+  background: url(../../../images/topics/qingming/qm_origin_bg.jpg) center top no-repeat;
+}
+.qm_origin .qm_origin_main {
+  margin-top: 26px;
+}
+.qm_origin .qm_origin_main ul li {
+  width: 323px;
+  height: 378px;
+  float: left;
+  margin-right: 70px;
+  background: url(../../../images/topics/qingming/qm_origin_main_libg.jpg);
+}
+.qm_origin .qm_origin_main ul li h3 {
+  font-family: "微软雅黑";
+  font-weight: normal;
+  color: #fff;
+  line-height: 18px;
+  padding: 7px 30px;
+}
+.qm_origin .qm_origin_main ul li .qm_origin_img_left {
+  width: 50px;
+  float: left;
+}
+.qm_origin .qm_origin_main ul li .qm_origin_img_right {
+  width: 272px;
+  float: right;
+}
+.qm_origin .qm_origin_main ul li .qm_origin_img_right img {
+  margin: 18px 0 0 12px;
+}
+.qm_origin .qm_origin_main .last {
+  margin-right: 0;
+}
+.qm_origin .qm_origin_main p {
+  font-size: 12px;
+  line-height: 15px;
+  color: #666666;
+  padding: 9px 18px;
+}
+.qm_origin .qm_origin_main p a {
+  color: #60c394;
+  font-weight: bold;
+}
+
+/*节日禁忌*/
+.qm_taboos {
+  width: 100%;
+  height: 604px;
+  background: url(../../../images/topics/qingming/qm_taboos_bg.jpg) center top no-repeat;
+}
+.qm_taboos .qm_taboos_main {
+  margin-top: 30px;
+}
+.qm_taboos .qm_taboos_main ul li {
+  width: 323px;
+  height: 378px;
+  float: left;
+  margin-right: 70px;
+  background: url(../../../images/topics/qingming/qm_taboos_main_libg.jpg);
+}
+.qm_taboos .qm_taboos_main ul li .qm_taboos_img_left {
+  width: 50px;
+  float: left;
+}
+.qm_taboos .qm_taboos_main ul li .qm_taboos_img_right {
+  width: 272px;
+  float: right;
+}
+.qm_taboos .qm_taboos_main ul li .qm_taboos_img_right img {
+  margin: 28px 18px;
+}
+.qm_taboos .qm_taboos_main .last {
+  margin-right: 0;
+}
+.qm_taboos .qm_taboos_main p {
+  font-size: 12px;
+  line-height: 15px;
+  color: #fff;
+  padding: 9px 18px;
+}
+.qm_taboos .qm_taboos_main p a {
+  color: #60c394;
+  font-weight: bold;
+}
+
+/*好雨知时节 —— 文化内涵*/
+.qm_connotation {
+  width: 100%;
+  height: 1065px;
+  background: url(../../../images/topics/qingming/qm_connotation_bg.jpg) center top no-repeat;
+}
+.qm_connotation .qm_connotation_maina {
+  width: 998px;
+  height: 310px;
+  margin-top: 16px;
+  padding: 28px 56px;
+  background: url(../../../images/topics/qingming/qm_connotation_maina_bg.jpg);
+}
+.qm_connotation .qm_connotation_maina ul li {
+  width: 279px;
+  height: 311px;
+  float: left;
+  background: url(../../../images/topics/qingming/qm_connotation_maina_libg.jpg);
+}
+.qm_connotation .qm_connotation_maina ul li .qm_connotation_img_left {
+  width: 43px;
+  float: left;
+}
+.qm_connotation .qm_connotation_maina ul li .qm_connotation_img_right {
+  width: 236px;
+  float: right;
+}
+.qm_connotation .qm_connotation_maina ul li .qm_connotation_img_right img {
+  margin: 18px 17px;
+}
+.qm_connotation .qm_connotation_maina .center {
+  margin: 0 76px 0 85px;
+}
+.qm_connotation .qm_connotation_maina p {
+  font-size: 12px;
+  line-height: 15px;
+  color: #fff;
+  padding: 3px 18px;
+}
+.qm_connotation .qm_connotation_maina p a {
+  color: #60c394;
+  font-weight: bold;
+}
+.qm_connotation .qm_connotation_mainb {
+  margin-top: 10px;
+}
+.qm_connotation .qm_connotation_mainb ul li {
+  width: 270px;
+  height: 370px;
+  float: left;
+  margin-right: 7px;
+  border: 1px solid #e2e2e2;
+  background: #fff;
+}
+.qm_connotation .qm_connotation_mainb ul li h3 {
+  font-family: "方正清刻本悦宋简体";
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 40px;
+  text-align: center;
+  border-bottom: 1px solid #e2e2e2;
+}
+.qm_connotation .qm_connotation_mainb ul li img {
+  margin: 10px 13px 6px 13px;
+}
+.qm_connotation .qm_connotation_mainb ul li p {
+  font-family: "微软雅黑";
+  color: #666666;
+  line-height: 16px;
+  margin: 0 13px;
+}
+.qm_connotation .qm_connotation_mainb ul li p a {
+  color: #508f62;
+}
+.qm_connotation .qm_connotation_mainb .last {
+  margin-right: 0;
+}
+
+/*文化习俗*/
+.qm_custom {
+  width: 100%;
+  height: 941px;
+  background: url(../../../images/topics/qingming/qm_custom_bg.jpg) center top no-repeat;
+}
+.qm_custom .qm_custom_main {
+  margin-top: 22px;
+}
+.qm_custom .qm_custom_main ul li {
+  width: 214px;
+  height: 370px;
+  float: left;
+  margin: 0 10px 12px 0;
+  background: #fff;
+}
+.qm_custom .qm_custom_main ul li h3 {
+  font-family: "方正清刻本悦宋简体";
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 40px;
+  text-align: center;
+  border-bottom: 1px solid #e2e2e2;
+}
+.qm_custom .qm_custom_main ul li img {
+  margin: 12px 11px;
+}
+.qm_custom .qm_custom_main ul li p {
+  font-family: "微软雅黑";
+  color: #666666;
+  line-height: 16px;
+  margin: 0 13px;
+}
+.qm_custom .qm_custom_main ul li p a {
+  color: #508f62;
+}
+.qm_custom .qm_custom_main .last {
+  margin-right: 0;
+}
+
+/*底部*/
+.qm_footer {
+  width: 100%;
+  height: 213px;
+  background: url(../../../images/topics/qingming/qm_footer_bg.jpg) center top no-repeat;
+}

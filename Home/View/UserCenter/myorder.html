@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+        <link rel="icon" href="/Public/soumu.ico"  type="image/x-icon">
+        <title>个人中心-我的订单_{$Think.config.SITE_NAME}</title>
+        <meta name="keywords" content="个人中心,个人资料" />
+        <meta name="description" content="个人中心,个人资料" />
+        <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<!-- 弹出评价 -->
+<div class="order_evaluate_bg"></div>
+<div class="order_evaluate_box">
+	<!-- 我的评价 -->
+	<div class="my_order evaluate">
+		<!-- 评价 -->
+		<div class="evaluate_main">
+                    <ul id="star">
+                        <li>环境：<div id='hj'></div></li>
+                        <li>价格：<div id='jg'></div></li>
+                        <li>交通：<div id='jt'></div></li>
+                        <li>服务：<div id='fw'></div></li>
+                    </ul>
+                    <div class="suggest clearfix">
+                            <p id="advice">请您给出建议：</p>
+                            <p id="huifang">您给出的宝贵建议:</p>
+                            <textarea class="suggest_tarea"></textarea>
+                    </div>
+                    <a class="evaluate_submit"  href="#">提交</a>
+		</div><!-- evaluate_main评价结束 -->
+	</div><!-- evaluate我的评价结束 -->
+	<!-- 关闭按钮 -->
+	<span class="order_evaluate_cloce"></span>
+</div>
+<!-- 提示框 -->
+<div class="tooltip_box"></div>
+<div class="tooltip_pers">
+    <div class="clearfix">
+        <img src="{$Think.const.IMG_URL}pers_save.png" />
+        <p id="content"></p>
+    </div>
+    
+    <div class="tooltip_pers_btn">
+        <a class="ack_btn" href="javascript:void(0);">关闭</a>
+    </div>
+    <span class="tooltip_cloce"></span>
+</div>
+
+
+<!-- 引入头部 -->
+<include file="Common:head_in" />
+<!-- 中间内容部分 -->
+<div class="main">
+	<div class="contain clearfix">
+		<!-- 面包屑导航 -->
+		<div class="breadcrumb">
+			<ul>
+				<li><a href="<?php echo getHomeUrl(); ?>">首页</a></li>
+				<li>></li>
+				<li><a href="{:U('/personal')}">用户中心</a></li>
+				<li>></li>
+				<li>我的订单</li>
+			</ul>
+		</div><!-- breadcrumb面包屑导航结束 -->
+		<!-- 用户中心左侧导航 -->
+		<div class="user_nav">
+			<h1><i></i>用户中心</h1>
+			<ul>
+                            <li><a class="user_led" href="myorder.html">我的订单</a></li>
+                            <!-- <li><a href="cashback.html">领取返现</a></li> -->
+                            <li><a href="personal.html">个人资料</a></li>
+                            <li><a href="collect.html">我的关注</a></li>
+                            <li><a href="changepassword.html">修改密码</a></li>
+			</ul>
+		</div><!-- user_nav用户中心左侧导航结束 -->
+		<!-- 用户中心右侧 -->
+		<div class="user_right">
+			<h1>我的订单</h1>
+			<!-- 我的订单 -->
+			<div class="my_order">
+                <!-- 订单表单 -->
+                <table class="order_table">
+                    <thead class="order_thead">
+                        <tr>
+                            <td class="my_cen" width="416">订单信息</td>
+                            <td width="108">联系人</td>
+                            <td width="108">手机号码</td>
+                            <td width="108">订单状态</td>
+                            <td width="108">订单操作</td>
+                        </tr>
+                        <tr class="my_caplle"></tr>
+                    </thead>
+                    <tbody class="order_tbody">
+                        <volist name='orders' id='vo'>
+                            <!-- 订单编号 -->
+                            <tr class="my_number">
+                                <td class="my_cen" colspan="6">订单编号：{$vo.order_grave_sn}    <notempty name="vo.appoint_time">预约时间：{$vo.appoint_time|date='Y-m-d',###}</notempty> 
+                                    <php>
+                                        if($vo['appoint_return_status']==C('APPOINT_RETURN.WAITING') || $vo['appoint_return_status']==C('APPOINT_RETURN.SUCCESS')){
+                                        echo '返现金额：&yen;'.$vo['return_money'];
+                                        }
+                                    </php>
+                                </td>
+                            </tr>
+                            <!-- 订单内容 -->
+                            <tr class="order_main">
+
+                                <td class="my_cen" data-id="store_value" data-value="{$vo['store_id']}"><a href="{:U('/cemetery/detail/'.$vo['store_id'])}"  target='_blank'>{$vo.store_name}</a></td>
+                                <td>{$vo.buyer}</td>
+                                <td>{$vo.mobile}</td>
+                                <td><php>echo orderStatus($vo['status'],$vo['bill_status'],$vo['apply_return_status'],$vo['send_to_finance'])</php></td>
+                                <td id="store_id" store_id="{$vo.store_id}" order_id="{$vo.id}" member_id="{$vo.member_id}">
+
+                                 <if condition="$vo.store_status eq 0 && $vo.status  eq  C('ORDER_STATUS.SUCCESS') && $vo.commend_status eq 0">
+                                     <a href="javascrpit:void(0)" class='order_evaluate order_bill'>待评价</a>
+
+                                 <elseif condition = "$vo.store_status  eq  0 && $vo.status  eq  C('ORDER_STATUS.SUCCESS') && $vo.commend_status eq 1"/>
+                                      <a  href="javascrpit:void(0)" class='comment order_bill'>查看评论</a>
+
+                                <elseif condition="$vo.store_status neq 0 && $vo.status  eq C('ORDER_STATUS.SUCCESS') && $vo.apply_return_status  eq 0 
+                                && $vo.commend_status eq 0"/>
+                                   <a href="javascript:void(0)" class='order_evaluate order_bill'>待评价</a>
+
+                                <elseif condition="$vo.store_status neq 0 && $vo.apply_return_status  eq 0 && $vo.status  eq C('ORDER_STATUS.SUCCESS')&& $vo.commend_status eq 1"/>
+                                    <a href="javascript:void(0)" class='comment order_bill'>查看评论</a>
+
+                                <elseif condition ="$vo.store_status neq 0 &&$vo.apply_return_status neq 0 && $vo.status eq C('ORDER_STATUS.GET_MONEY') && $vo.bill_status eq 0"/> 
+                                <a href="{:U('uploadbill/',array('order_id'=>$vo['id']))}" class='order_bill'>上传票据</a>  
+
+
+                                <elseif condition=" $vo.apply_return_status eq 2 && $vo.status eq C('ORDER_STATUS.SUCCESS') && $vo.commend_status eq 0"/>
+                                    <a href="javascript:void(0)" class='order_evaluate order_bill'>待评价</a>
+
+                                <elseif condition =" $vo.apply_return_status  eq 2 && $vo.status eq C('ORDER_STATUS.SUCCESS') && $vo.commend_status eq 1"/>
+                                    <a href="javascript:void(0)" class='comment order_bill'>查看评论</a>
+                                <else />
+                                 </if>
+                                   
+                                </td>
+                            </tr>
+                        </volist>
+                    </tbody>
+                </table><!-- order_table订单表单结束 -->
+                <!-- 分页 --> 
+                <div class="pagination" id="sample_1_info" style="text-align:center">
+                   {$pageshow}
+                </div>
+		</div><!-- user_right用户中心右侧结束 -->
+	</div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<include file="Common:footer" />
+<script type="text/javascript" src="{$Think.const.JS_URL}home/changepassword.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/common.js"></script>
+<script src="{$Think.const.JS_URL}raty/jquery.raty.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/myorder.js"></script>
+
+
+<!--评论-->
+</body>
+</html>

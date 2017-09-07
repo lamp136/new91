@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="icon" href="/Public/soumu.ico" type="image/x-icon" />
+    <title>{$seoInfo.seo_title}_{$Think.config.SITE_NAME}</title>
+    <meta name="keywords" content="{$seoInfo.seo_keywords}" />
+    <meta name="description" content="{$seoInfo.seo_description}" />
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!--引入头部 -->
+<include file="Common:head_in" />
+
+<!-- 中间内容部分 -->
+<div class="nws_main">
+    <div class="contain clearfix">
+        <!-- 左侧资讯列表 -->
+        <div class="news_list_left nws_left">
+            <!-- 上半部分 -->
+            <div class="geomancy clearfix">
+                <a href="javascript:void(0)">
+                    <img src="{$Think.const.IMG_URL}geomancy_img.jpg" alt="91搜墓网殡葬风水专栏"/>
+                </a>
+                <div class="geo_right">
+                     <notemty name="toplists">
+                    <h2><a href="{:U('news/detail/'.$toplists[0]['id'])}"  title="{$rdjj.0.title}">{$toplists.0.title|msubstr=0, 20}</a></h2>
+                    <p>{$toplists.0.summary|msubstr=0, 80}<a href="{:U('news/detail/'.$toplists[0]['id'])}" > >>查看详情</a></p>
+                    <ul>
+                    <volist name="toplists" id="vo" offset="1">
+                        <li><a href="{:U('news/detail/'.$vo['id'])}">{$vo.title}</a></li>
+                    </volist>
+                </ul>
+                </notemty>
+                </div>
+            </div><!-- geomancy -->
+            <!-- 列表 -->
+            <ul class="news_list_ul">
+                <!-- 标题 -->
+                <div class="news_list_h4">
+                    <h4>风水文化</h4>
+                </div><!-- news_h1 end -->
+                <volist name="lists" id="vo">
+                    <li class="clearfix">
+                        <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">
+                            <notempty name="vo.Img.image_url">
+                            <img src="{$vo.Img.image_url}" alt="{$vo.title}"/>
+                            <else/>
+                            <img src="{$Think.const.IMG_URL}news_default.jpg" alt="{$vo.title}"/>
+                            </notempty>
+                        </a>
+                        <div class="substance">
+                            <h1><a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0,34}</a></h1>
+                            <p>{$vo.summary|msubstr=0,100}<a href="{:U('news/detail/'.$vo['id'])}">...查看详情>></a></p>
+                            <p class="source">来源：<font><notempty name="vo.source">{$vo.source}<else/>91搜墓网</notempty></font><span>时间：{$vo.published_time|date='Y-m-d', ###}</span></p>
+                        </div>
+                    </li>
+                </volist>
+            </ul>
+            <!-- 分页 -->
+            <div style="text-align: center" class="pagination"> 
+                <div>
+                    {$page}
+                </div> 
+            </div><!-- pagination分页结束 -->
+        </div><!-- nws_left左侧资讯列表结束 -->
+        <!-- 右侧内容 -->
+        <div class="nws_right geomancy_right">
+            <!-- 广告 -->
+            <div class="geomancy_add">
+                <empty name="ads" >
+                    <a href="{:U('/intro/joinus')}" title="91搜墓网商家加盟合作" target="_blank">
+                        <img src="{$Think.const.IMG_URL}cem_ad.jpg" alt="91搜墓网商家加盟合作"/>
+                    </a>
+                <else/>
+                    <a href="{$ad.0.banner_link}"  title={$ads.0.banner_name} target="_blank">
+                        <img src="{$Think.config.IMG_HOST}{$ads.0.banner_url}" alt="{$ads.0.banner_name}"/>
+                    </a>
+                </empty>
+            </div><!-- geomancy end -->
+            <!-- 白事常识 -->
+            <div class="huimin">
+                <h2>白事常识</h2>
+                <ul>
+                <volist name="bscs" id="vo" key="k">
+                        <li>
+                            <a href="{:U('news/detail/'.$vo['id'])}" title="{$vo.title}">
+                                <span <elt name="k" value="3"> class="led" </elt>>{$k}</span>{$vo.title|msubstr=0,16}
+                            </a>
+                        </li>
+                </volist>
+                </ul>
+            </div><!-- huimin白事常识结束 -->
+            <!-- 广告banner -->
+            <div class="cem_ad">
+                <empty name="ads.1" >
+                    <a href="{:U('/intro/joinus')}" title="91搜墓网商家加盟合作" target="_blank">
+                        <img src="{$Think.const.IMG_URL}cem_ad.jpg" alt="91搜墓网商家加盟合作"/>
+                    </a>
+                <else/>
+                    <a href="{$ad.1.banner_link}"  title={$ads.1.banner_name} target="_blank">
+                        <img src="{$Think.config.IMG_HOST}{$ads.1.banner_url}" alt="{$ads.1.banner_name}"/>
+                    </a>
+                </empty>
+            </div><!-- cem_ad广告banner结束 -->
+            <!-- 风水宝陵 -->
+            <div class="nearby">
+                <h2>风水宝陵</h2>
+                <ul>
+                <volist name="fstj" id="vo" key="k">
+                    <li class="clearfix">
+                        <h3>
+                            <a target="_blank" href="{:U('cemetery/detail/'.$vo['store_id'])}">
+                                <span>{$k}</span>
+                                {$vo.store_name}
+                            </a>
+                        </h3>
+                        <a target="_blank" class="nearby_img" href="{:U('cemetery/detail/'.$vo['store_id'])}">
+                            <img src="{$vo.store_banner}" alt="{$vo.store_name}"/>
+                        </a>
+                        <div class="nearby_right">
+                            <p>特色：{$vo.feature}</p>
+                            <p class="lookmap"><a href="{:U('/cemetery/detail/'.$vo['store_id'].'#map')}"><i></i>点击查看地图</a></p>
+                        </div>
+                    </li>
+                    </volist>
+                </ul>
+            </div><!-- nearby风水宝陵结束 -->
+        </div><!-- nws_right右侧内容结束 -->
+    </div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<!--底部代码引入-->
+<include file="Common:footer" />
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/news.js"></script>
+
+</body>
+</html>

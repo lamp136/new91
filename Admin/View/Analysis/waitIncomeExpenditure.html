@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+       <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">平台待收佣金/待返现统计</a><span class="divider-last">&nbsp;</span></li>
+
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-body">
+                                   
+                                    <div class="widget-title">
+                                        <h4><i class="icon-reorder"></i>各省购墓收支统计柱状图</h4>
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="btn-toolbar">
+                                            <div id="waitIncomeExpenditure" style="min-width: 310px; height: 400px; margin: 0 auto">
+                                                <!--收支统计柱状图 -->
+                                            </div>
+                                        </div>
+                                    </div>
+                        
+                                    <div class="widget-title">
+                                        <h4><i class="icon-reorder"></i>详细列表</h4>
+                                    </div> 
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>省份</th>
+                                                <th>订单号</th>
+                                                <th>购买人/手机号</th>
+                                                <th>商家名称</th>
+                                                <th>墓价</th>
+                                                <th>佣金金额</th>
+                                                <th>待收佣金</th>
+                                                <th>待返现</th>
+                                                <th>下单时间</th>
+                                                <th>购墓时间</th>
+                                                <th>佣金时间</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <volist name='list' id='vo'>
+                                            <tr class="odd gradeX">
+                                                <td width="5%">{$vo.Analysis_province_name.region_name}</td>
+                                                <td width="9%">{$vo.order_grave_sn}</td>
+                                                <td width="13%">{$vo.buyer}--{$vo.mobile}</td>
+                                                <td>{$vo.store_name}</td>
+                                                <td>{$vo.tomb_price}</td>
+                                                <td>{$vo.paid_in_amount}</td>
+                                                <td>{$vo.brokerage_money}</td>
+                                                <td>{$vo.return_money}</td>
+                                                <td>{$vo.created_time|date="Y-m-d",###}</td>
+                                                <td>{$vo.success_time}</td>
+                                                <td>{$vo.payfor_us_time}</td>
+                                            </tr>
+                                        </volist>
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span12 center">
+                                            <div class="pagination" id="sample_1_info" style="text-align: center">
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+    <!-- END JAVASCRIPTS -->
+    <script src="{$Think.const.JS_URL}highchars/highcharts.js"></script>
+    <script type="text/javascript">
+        var proName = <?php echo $proName; ?>;
+        var data = <?php echo $data; ?>;
+        $(function () { 
+            $('#waitIncomeExpenditure').highcharts({ 
+                chart: { type: 'column' }, 
+                title: { text: '平台待收佣金/待返现统计' }, 
+                subtitle: { text: '来源: www.91soumu.com' },
+                xAxis: { categories: proName }, 
+                yAxis: {
+                    allowDecimals:false ,
+                    title: {
+                        text: '数量(个)',
+                    }
+                }, 
+                credits: {
+                    enabled: false
+                },
+                tooltip: {  
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' + '<td style="padding:0"><b>{point.y}个</b></td></tr>', 
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true },
+                plotOptions: {  
+                    column: {
+                        pointPadding: 0.2, borderWidth: 0 }
+                    }, 
+                series: data
+            });
+        });
+    </script>
+</body>
+<!-- END BODY -->
+</html>

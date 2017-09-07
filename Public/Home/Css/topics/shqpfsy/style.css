@@ -1,0 +1,10 @@
+@charset "utf-8";
+
+/* flexslider */
+.flexslider{position:relative;width:900px;height:232px;overflow:hidden;zoom:1;}
+.flex-viewport{max-height:2000px;-webkit-transition:all 1s ease;-moz-transition:all 1s ease;transition:all 1s ease;}
+.flexslider .slides{zoom:1;}
+.flex-control-nav{width:100%;position:absolute;bottom:10px;text-align:right;}
+.flex-control-nav li{margin:0 5px;display:inline-block;zoom:1;*display:inline;}
+.flex-control-paging li a{display:block;overflow:hidden;width:16px;cursor:pointer; width: 18px; height: 18px; background: #fff; text-align: center;}
+.flex-control-paging li a.flex-active{background: #137702; color: #fff;}

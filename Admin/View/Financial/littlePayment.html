@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+<!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        </li>
+                        <li>
+                            <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                        </li>
+                       
+                        <li>
+                            <a href="javasript:void(0)">未付款列表</a><span class="divider-last">&nbsp;</span>
+                        </li>
+                     
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4><i class="icon-reorder"></i>已付部分款列表</h4>
+                            </div>
+                            <div class="widget-body">
+                                <form id="quickForm" method="get" class="form-horizontal" autocomplete="off" action="__SELF__">搜索：
+                                    <input type="text" name="application_sn" class="input-large" placeholder="申请单号" value="{$Think.get.application_sn}"/>
+                                    <input type="text" name="service_goods_name" class="input-large" placeholder="商品名称" value="{$Think.get.service_goods_name}"/>
+                                    <button class="btn btn-primary">确定</button>
+                                </form>
+                                <table class="table table-striped table-bordered" id="sample_1">
+                                    <thead>
+                                    <tr>
+                                        <th class="hidden-phone">申请单号</th>
+                                        <th class="hidden-phone">商品编号</th>
+                                        <th class="hidden-phone">商品名称</th>
+                                        <th class="hidden-phone">总金额</th>
+                                        <th class="hidden-phone">应付金额</th>
+                                        <th class="hidden-phone">已付金额</th>
+                                        <th class="hidden-phone">欠款金额</th>
+                                        <th class="hidden-phone">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="littlePayList" id="vo">
+                                        <tr class="odd gradeX">
+                                            <td>{$vo.application_sn}</td>
+                                            <td>{$vo.skuid}</td>
+                                            <td>{$vo.service_goods_name}</td>
+                                            <td>{$vo.total_price}</td>
+                                            <td>{$vo.payable}</td>
+                                            <td>{$vo.payment_been}</td>
+                                            <td>{$vo.arrears}</td>
+                                            <td>
+                                                <button  class="btn btn-small btn-primary opCat fukuan" data-id='{$vo.id}'>
+                                                    <i class=""> </i>付款
+                                                </button>
+                                                <button  class="btn btn-small btn-primary opCat recording" data-id='{$vo.id}'>
+                                                    <i class=""> </i>查看付款记录
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </volist>
+
+                                    </tbody>
+                                </table>
+                                <div class="row-fluid">
+                                    <div class="span12 center">
+                                        <div class="pagination" id="sample_1_info" style="text-align: center">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!--模态化弹框支付金额-->
+<div id="updateContact" class="modal hide fade in" style="display: none; ">
+    <form  id="data-form" method="post" class="form-horizontal" autocomplete="off" enctype="multipart/form-data" >
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>支付金额</h3>
+        </div>
+        <div class="modal-body">
+            <table class="table table-bordered table-hover">
+                <tbody>   
+                <tr>
+                    <td>申请单:</td>
+                    <td>
+                        <input type="text" class="input-xlarge" name="info[application_sn]" value="" readonly="readonly">
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>商品名称:</td>
+                    <td>
+                        <input type="text" name="info[service_goods_name]" placeholder="商品名称" class="input-xlarge" value="" readonly="readonly"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td> 总金额:</td>
+                    <td>
+                        <input type="text" name="info[total_price]" placeholder="总金额" class="input-xlarge" value="" readonly="readonly"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>应付金额:</td>
+                    <td>
+                        <input type="text" name="info[payable]" placeholder="应付金额" class="input-xlarge" value="" readonly="readonly"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>已付金额:</td>
+                    <td>
+                        <input type="text" name="info[payment_been]"  class="input-xlarge" value="" readonly="readonly"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>欠款金额:</td>
+                    <td>
+                        <input type="text" name="info[arrears]" class="input-xlarge" value="" readonly="readonly"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>本次实付:</td>
+                    <td>
+                        <input type="text" name="info[payment]" placeholder="本次实付" class="input-xlarge" value="" data-rule='required'/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>付款时间:</td>
+                    <td>
+                        <input size="16" type="text" name="info[pay_time]" value="{:date('Y-m-d H:i:s')}"  onClick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'})" class="Wdate input-medium"> 
+                    </td>
+                </tr>
+                <tr>
+                    <td>收款方:</td>
+                    <td>
+                        <input type="text" name="info[recipient]" placeholder="收款方" class="input-xlarge" value="" data-rule='required'/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>状态:</td>
+                    <td>
+                        <select class="input-medium m-wrap" tabindex="1" name="info[status]" data-rule='required'>
+                            <option value="">---请选择---</option>
+                            <volist name='Think.config.FINANCIAL_STATUS' id='vo'>
+                            <option value="{$key}">{$vo}</option>
+                            </volist> 
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>备注:</td>
+                    <td>
+                        <textarea class="span3" rows="2"  name="info[remark]" style="margin-top: 0px; margin-bottom: 10px; height: 100px;"></textarea>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+        <input type='hidden' name='financialId' value=''>
+        <button type="submit" class="btn btn-success">提交</button>
+            <a href="#" class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </form>
+</div>
+<div id="financialMessage" class="modal hide fade in" style="display: none; ">
+    <form  id="data-form" method="post" class="form-horizontal" autocomplete="off" enctype="multipart/form-data" >
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>支付记录</h3>
+        </div>
+        <div class="modal-body">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>本次实付</th>
+                        <th>收款方</th>
+                        <th>操作人</th>
+                    </tr>
+                </thead>
+                <tbody id='message'>   
+                        
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </form>
+</div>
+<!-- BEGIN FOOTER -->
+
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+<script language="javascript" type="text/javascript" src="{$Think.const.JS_URL}My97DatePicker/WdatePicker.js"></script>
+<script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+<script src="{$Think.const.JS_URL}scripts.js"></script>
+<script>
+    //点击付款弹出摸态框
+    $('.fukuan').click(function(){
+        var id = $(this).attr('data-id');
+        $.ajax({
+            url:"{:U(checkFinancial)}",
+            type:'post',
+            data:{id:id},
+            dataType:'json',
+            success:function(e){
+                if(e){
+                    $('input[name="info[application_sn]"]').val(e['application_sn']);
+                    $('input[name="info[service_goods_name]"]').val(e['service_goods_name']);
+                    $('input[name="info[total_price]"]').val(e['total_price']);
+                    $('input[name="info[payable]"]').val(e['payable']);
+                    $('input[name="info[payment_been]"]').val(e['payment_been']);
+                    $('input[name="info[arrears]"]').val(e['arrears']);
+                    $('input[name="financialId"]').val(id);
+                    $('input[name="info[recipient]"]').val(e['recipient']);
+                    $('#updateContact').modal();  
+                }
+            }
+        })
+    });
+
+    //表单提交
+    $('#data-form').bind('valid.form',function(){
+        $.ajax({
+            url:"{:U(addFinancial)}",
+            type:'post',
+            data:$(this).serialize(),
+            dataType:'json',
+            success:function(e){
+                if(e.flag){
+                    alert(e.msg);
+                    window.location.reload();//刷新当前页面.
+                }else{
+                    alert(e.msg);
+                }
+            }
+        })
+    });
+
+    //查看付款记录
+    $('.recording').click(function(){
+        var id = $(this).attr('data-id');
+        $.ajax({
+            url:"{:U('checkRecording')}",
+            type:'post',
+            data:{id:id},
+            dataType:'json',
+            success:function(d){
+                $('#message').empty();
+                for(var i=0; i<d.msg.length; i++){
+                    var str = '';
+                    str = "<tr><td>"+d.msg[i].pay_time+"</td><td>"+d.msg[i].payment+"</td><td>"+d.msg[i].recipient+"</td><td>"+d.msg[i].operator+"</td></tr>";
+                    $('#message').append(str);
+                }
+                $('#financialMessage').modal();
+            }
+        });
+    });
+</script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

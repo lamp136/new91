@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="/Public/soumu.ico"  type="image/x-icon">
+        <title>个人中心-领取返现_{$Think.config.SITE_NAME}</title>
+        <meta name="keywords" content="个人中心" />
+        <meta name="description" content="个人中心" />
+	<link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<!-- 引入头部 -->
+<include file="Common:head_in" />
+<!-- 中间内容部分 -->
+<div class="main">
+	<div class="contain clearfix">
+		<!-- 面包屑导航 -->
+		<div class="breadcrumb">
+			<ul>
+				<li><a href="index.html">首页</a></li>
+				<li>></li>
+				<li><a href="index.html">用户中心</a></li>
+				<li>></li>
+				<li>领取返现</li>
+			</ul>
+		</div><!-- breadcrumb面包屑导航结束 -->
+		<!-- 用户中心左侧导航 -->
+		<div class="user_nav">
+			<h1><i></i>用户中心</h1>
+			<ul>
+				<li><a href="myorder.html">我的订单</a></li>
+				<li><a class="user_led" href="cashback.html">领取返现</a></li>
+				<li><a href="personal.html">个人资料</a></li>
+				<li><a href="collect.html">我的关注</a></li>
+				<li><a href="changepassword.html">修改密码</a></li>
+			</ul>
+		</div><!-- user_nav用户中心左侧导航结束 -->
+		<!-- 用户中心右侧 -->
+		<div class="user_right">
+                    <h1>领取返现</h1>
+                    <!-- 领取返现 -->
+                    <div class="cashback">
+                            <notempty name="cashback">
+                                <h3>亲爱{$Think.session.member_name}用户，您现有一笔购墓返现，请及时领取！</h3>
+                                <a class="cashback_btn" href="myorder.html">立即领取返现</a>
+                                <h3><strong>领取方法</strong></h3>
+                                <p>1.在个人资料中填写您的银行卡信息，确认无误后提交；</p>
+                                <p>2.确认提交后点击立即领取，确认领取后我们会在一天内，将返现金额，汇入您的银行卡中。</p>
+                            <else />
+                                <ul>
+                                    <h3><strong>{$Think.session.member_name}您好,您目前还没有返现，获得返现方法如下：</strong></h3>
+                                    <li><span>1</span>免费预约商家</li>
+                                    <li><span>2</span>陵园查看墓地</li>
+                                    <li><span>3</span>提交订单审核</li>
+                                    <li><span>4</span>成功领取</li>
+                                </ul>
+                                <!--<a class="cashback_btn" href="#">立即领取返现</a>-->
+                            </notempty>
+                    </div><!-- cashback领取返现结束 -->
+		</div><!-- user_right用户中心右侧结束 -->
+	</div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<include file="Common:footer" />
+<script type="text/javascript" src="{$Think.const.JS_URL}home/changepassword.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/common.js"></script>
+</body>
+</html>

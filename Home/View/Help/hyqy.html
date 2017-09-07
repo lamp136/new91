@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="icon" href="/Public/soumu.ico" type="image/x-icon" />
+    <title>会员权益_{$Think.config.SITE_NAME}</title>
+    <meta name="keywords" content="会员权益，91搜墓网会员权益" />
+    <meta name="description" content="91搜墓网会员权益" />
+    <link href="{$Think.const.CSS_URL}screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!--引入头部 -->
+<include file="Common:head_in" />
+<!-- 底部页面banner -->
+<div class="aboutus_banner">
+	<img src="{$Think.const.IMG_URL}aboutus_banner.jpg" alt="91搜墓网-订单保障"/>
+</div><!-- 底部页面banner结束 -->
+
+<!-- 底部页面内容导航 -->
+<include file="Common:help_menu" />
+
+<!-- 中间内容部分 -->
+<div class="main">
+	<div class="contain clearfix">
+		<!-- 底部页面左侧导航 -->
+		<div class="help_leftnav">
+			<img src="{$Think.const.IMG_URL}help/footer_leftnav_logo.png" alt="91搜墓网-订单保障"/>
+			<h1>订单保障</h1>
+                        <p>ORDER to ENSURE</p>
+			<ul>
+				<li><a href="{:U('/help/security/wzys')}">网站优势</a></li>
+				<li class="help_leftnav_led"><a href="{:U('/help/security/hyqy')}">会员权益</a></li>
+				<li><a href="{:U('/help/security/yhxy')}">用户协议</a></li>
+				<li><a href="{:U('/help/security/yszc')}">隐私政策</a></li>
+			</ul>
+		</div><!-- help_leftnav底部页面左侧导航结束 -->
+		<!-- 底部页面右侧 -->
+		<div class="help_right">
+			<h1>会员权益  <span></span></h1>
+			<!-- 会员权益内容 -->
+			<div class="help_memberrules">
+				<p>1、买墓地，专享会员折扣价</p>
+				<p>2、享受殡葬行业专业人士的一对一咨询服务</p>
+				<p>3、随时掌握所在地的公墓陵园最新信息</p>
+				<p>成为91搜墓网会员，让您超低高额返现，在陵园折扣基础上享受平台返现，让您购墓省时省心！91搜墓网全国最全陵园覆盖，上千家公墓信息任您免费查阅、比对、选购！电话、网络、91搜墓网在线客服多渠道快速线上预约 ，殡葬专家一对一跟您交流、咨询、预订，永久免费班车接送！91搜墓网全国优质殡葬服务商，中国殡葬协会会员单位，保障您购墓权益。</p>
+			</div><!-- help_memberrules会员权益内容结束 -->
+		</div><!-- help_right底部页面右侧 -->
+	</div><!-- contain -->
+</div><!-- main中间内容部分结束 -->
+<!--底部代码引入-->
+<include file="Common:footer" />
+
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}home/commonb.js"></script>
+</body>
+</html>

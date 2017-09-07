@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <include file="Public::head"/>
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body class="fixed-top">
+        <!-- BEGIN HEADER -->
+    <include file="Public::top"/>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <include file="Public::left"/>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN THEME CUSTOMIZER-->
+                        <div id="theme-change" class="hidden-phone">
+                            <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- END THEME CUSTOMIZER-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="{:U('Index/index')}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                            </li>
+                            <li>
+                                <a href="{:U('Index/index')}">91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                            </li>
+                            <li><a href="javascript:void(0)">友情链接列表</a><span class="divider-last">&nbsp;</span></li>
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN RECENT ORDERS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>友情链接列表</h4>
+                                    <span class="tools">
+                                        <php>
+                                            if(showHandle('Friendlink/add')){
+                                        </php>
+                                            <a href="javascript:void(0);" class="icon-plus add">添加友情链接</a>
+                                        <php>
+                                            }
+                                        </php>
+                                    </span>
+                                </div>
+                                <div class="widget-body">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th width="15%">名称</th>
+                                                <th width="50%">所在地区</th>
+                                                <th width="20%">地址</th>
+                                                <th width="15%">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <volist name="list" id="vo">
+                                            <tr class="odd gradeX">
+                                                <td>{$vo.name}</td>
+                                                <td>{$vo.province_id}</td>
+                                                <td>{$vo.url}</td>
+                                                <td>
+                                                    <php>
+                                                        if(showHandle('Friendlink/edit')){
+                                                    </php>
+                                                        <a class="btn btn-small edit" href="javascript:void(0);" data-id="{$vo.id}"><i class="icon-pencil icon-white"> </i>修改</a>
+                                                    <php>
+                                                        }
+                                                        if(showHandle('Friendlink/delete')){
+                                                    </php>
+                                                        <eq name="vo.status" value="$Think.config.NORMAL_STATUS">
+                                                            <a class="btn btn-danger btn-small del" href="javascript:void(0)" data-id="{$vo.id}" ><i class="icon-remove  icon-white"> </i>删除</a>
+                                                        <else />
+                                                            <a class="btn btn-success btn-small enable" href="javascript:void(0)" data-id="{$vo.id}" ><i class="icon-ok  icon-white"> </i>启用</a>
+                                                        </eq>
+                                                    <php>
+                                                        }
+                                                    </php>
+                                                </td>
+                                            </tr>
+                                        </volist>
+
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span12 center">
+                                            <div class="pagination" id="sample_1_info" style="text-align: center">
+                                                {$page}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECENT ORDERS PORTLET-->
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+
+    <div id="add" class="modal hide fade in">
+        <form id="addForm" method="post" class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>添加友情链接</h3>
+            </div>
+            <div class="modal-body">  
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td><span style="color:red">*</span>名称：</td>
+                            <td>
+                                <input type="text" class="input" name="name" data-rule='required'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:red">*</span>地址：</td>
+                            <td>
+                                <input type="text" class="input" value="http://" name="url" data-rule='required'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>地区：</td>
+                            <td>
+                                <input type="checkbox" name="check_all" value="">全选&nbsp;&nbsp;<input type="checkbox" name="un_check" value="">反选<br/>
+                                <p data-id="check_box">
+                                    
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>排序：</td>
+                            <td>
+                                <input type="text" class="input" size="30" value='1' name="sort" data-rule='required'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>是否显示</td>
+                            <td>
+                                <input name="status" value="{$Think.config.NORMAL_STATUS}" type="radio" data-rule="checked" checked> 是 
+                                <input name="status" value="{$Think.config.DELETE_STATUS}" type="radio" data-rule="checked"> 否
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">提交</button>
+                <a href="javascript:void(0)" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+
+    <!--编辑广告位开始-->
+    <div id="edit" class="modal hide fade in">
+        <form id="editForm" method="post"  class="form-horizontal" autocomplete="off">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>编辑信息</h3>
+            </div>
+            <div class="modal-body" >
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td><span style="color:red">*</span>名称：</td>
+                            <td><input type="text" class="input"  name="name" data-rule='required'/></td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:red">*</span>地址：</td>
+                            <td><input type="text" class="input" value="http://" name="url" data-rule='required'/></td>
+                        </tr>
+                        <tr>
+                            <td>地区：</td>
+                            <td>
+                                <input type="checkbox" name="check_all" value="">全选&nbsp;&nbsp;<input type="checkbox" name="un_check" value="">反选<br/>
+                                <p data-id="check_box">
+                                    
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>排序：</td>
+                            <td><input type="text" class="input" size="30" name="sort" data-rule='required'/></td>
+                        </tr>
+                        <tr>
+                            <td>是否显示</td>
+                            <td>
+                                <input name="status" value="{$Think.config.NORMAL_STATUS}" type="radio" data-rule="checked" checked> 是 
+                                <input name="status" value="{$Think.config.DELETE_STATUS}" type="radio" data-rule="checked"> 否
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name='id'/> 
+                <button type="submit" class="btn btn-success">提交</button>
+                <a href="javascript:void(0)" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- BEGIN FOOTER -->
+    <include file="Public::footer"/>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+    <script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+    <script src="{$Think.const.JS_URL}scripts.js"></script>
+    <script>
+        // 全选
+        $('input[name="check_all"]').click(function(){
+            $('input[name="un_check"]').attr('checked',false);
+            $("input[name='province_id[]']").attr('checked',true);
+        })
+
+        // 反选
+        $('input[name="un_check"]').click(function() {
+            $('input[name="check_all"]').attr('checked',false);
+            $('input[name="province_id[]"]').each(function() {
+                this.checked =! this.checked;
+            });
+        });
+
+        $('.add').click(function(){
+            $.ajax({
+                url:"{:U('add')}",
+                type:'get',
+                success:function(o){
+                    var result = eval("("+o+")");
+                    var region = result['province'];
+                    if(result.flag == 1){
+                        if(region.length > 0){
+                            // 省份多选框
+                            provinceBox(region);
+                        }
+                        $('#add').modal();
+                    }
+                }
+            });
+        })
+
+        //提交添加专题 表单
+        $('#addForm').bind('valid.form', function () {
+            $('#add').modal('hide');
+            $.ajax({
+                url: "{:U('add')}",
+                type: "POST",
+                data: $(this).serialize(),
+                success: function(d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();//刷新当前页面.
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+
+        //修改专题信息
+        $('.edit').click(function () {
+            var id = $(this).attr('data-id');
+            var status = $('#editForm input[name="status"]');
+            $.ajax({
+                url: "{:U('edit')}",
+                type: 'get',
+                data:{
+                    id:id,
+                },
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    var city = result.city;
+                    var province = result.province;
+                    var data = result.data;
+                    if (result.flag == 1) {
+                        /**
+                         * 省份多选框
+                         */
+                        provinceBox(province);
+                        // 名称
+                        $('#editForm input[name="name"]').val(data.name);
+                        // url地址
+                        $('#editForm input[name="url"]').val(data.url);
+
+                        // 默认选中省份
+                        var provinces = data.province_id;
+                        $(provinces.split(",")).each(function(index, el) {
+                            $('#editForm input:checkbox[value="'+el+'"]').prop('checked',true);
+                        });
+
+                        // 排序
+                        $('#editForm input[name="sort"]').val(data.sort);
+                        // id
+                        $('#editForm input[name="id"]').val(data.id);
+                        // 状态
+                        for (var i = 0; i < status.length; i++) {
+                            if(status[i].value == data.status){
+                                status[i].checked = true;
+                                break;
+                            }
+                        }
+                        
+                        $('#edit').modal();
+                    } else {
+                        alert('操作失败');
+                    }
+                }
+            });
+        });
+
+        /**
+         * 省份多选框公共函数
+         * @param  {object} region 省份
+         */
+        function provinceBox(region){
+            var str = "";
+            for (var i = 0; i < region.length; i++) {
+                str += "<input type='checkbox' name='province_id[]' value='"+region[i].region_id+"'/>"+region[i].region_name+'&nbsp;&nbsp;';
+                if(!((i+1)%6)){
+                    str += '<br/>';
+                }
+            }
+            $('p[data-id="check_box"]').empty().append(str);
+        }
+
+        //提交修改专题的表单
+        $('#editForm').bind('valid.form', function () {
+            $('#edit').modal('hide');
+            $.ajax({
+                url: "{:U('edit')}",
+                type: "POST",
+                data: $(this).serialize(),
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();//刷新当前页面.
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+
+        //删除
+        $('.del').click(function(){
+            var id = $(this).attr('data-id');
+            var act = 'del';
+            $.ajax({
+                url: "{:U('delete')}",
+                type: 'post',
+                data: 'id='+id+'&act='+act,
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+        
+        //启用
+        $('.enable').click(function(){
+            var id = $(this).attr('data-id');
+            var act = 'enable';
+            $.ajax({
+                url: "{:U('delete')}",
+                type: 'post',
+                data: 'id='+id+'&act='+act,
+                success: function (d) {
+                    var result = eval("(" + d + ")");
+                    if (result.flag == 1) {
+                        alert(result.msg);
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        });
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

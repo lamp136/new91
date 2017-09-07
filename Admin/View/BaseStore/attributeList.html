@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <include file="Public::head"/>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+<!-- BEGIN HEADER -->
+<include file="Public::top"/>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <include file="Public::left"/>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                            <span class="settings">
+                                <span class="text">Theme:</span>
+                                <span class="colors">
+                                    <span class="color-default" data-style="default"></span>
+                                    <span class="color-gray" data-style="gray"></span>
+                                    <span class="color-purple" data-style="purple"></span>
+                                    <span class="color-navy-blue" data-style="navy-blue"></span>
+                                </span>
+                            </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{$Think.config.ADMIN_HOME_URL}"><i class="icon-home"></i>91搜墓网后台</a> <span class="divider">&nbsp;</span>
+                        </li>
+                        <li><a href="{:U('BaseStore/'.$listFunc,array('p'=>$nowPage,'sname'=>$sname,'sprovince'=>$sprovince))}">{$tips}列表</a><span class="divider">&nbsp;</span></li>
+                        <li><a href="javascript:void(0)">{$storename}  属性列表</a><span class="divider-last">&nbsp;</span></li>
+
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div id="page" class="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!-- BEGIN RECENT ORDERS PORTLET-->
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4><i class="icon-reorder"></i>商家属性列表</h4>
+                                <span class="tools">
+                                    <a href="javascript:void(0)" class="icon-plus add">添加商家属性</a>
+                                </span>
+                            </div>
+
+                            <div class="widget-body">
+                                <table class="table table-striped table-bordered" id="sample_1">
+                                    <thead>
+                                    <tr>
+                                        <th>属性编号</th>
+                                        <th class="hidden-phone">属性名称</th>
+                                        <th class="hidden-phone">属性值</th>
+                                        <!--<th class="hidden-phone">是否显示</th>-->
+                                        <th class="hidden-phone">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="list" id="vo">
+                                        <tr class="odd gradeX">
+                                            <td id="store_name">{$vo.id}</td>
+                                            <td>{$vo.attr_name}</td>
+                                            <td>{$vo.current_value}</td>
+                                            <!--<td><if condition="$vo.is_enabled eq 1">是<else/>否</if></td>-->
+                                            <td>
+                                                <a href="javascript:void(0)" class="btn btn-small btn-primary edit" data-id="{$vo.id}">
+                                                    <i class="icon-pencil icon-white"> </i>编辑
+                                                </a>
+                                                <if condition="$vo.is_enabled eq -1">
+                                                    <a href="javascript:void(0)" class="btn btn-success btn-small enable" data-id="{$vo.id}">
+                                                        <i class="icon-ok  icon-white"> </i>启用
+                                                    </a>
+                                                  <else/>
+                                                    <button type="button" class="btn btn-danger btn-small del" onclick="delAttribute({$vo.id},this)">
+                                                        <i class="icon-remove  icon-white"> </i>禁用
+                                                    </button>
+                                                </if>
+
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                                <div class="row-fluid">
+                                    <div class="span12 center">
+                                        <div class="pagination" id="sample_1_info" style="text-align: center">
+                                            {$page}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END RECENT ORDERS PORTLET-->
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- END CONTAINER -->
+
+<div id="add" class="modal hide fade in">
+    <form id="addForm" method="post" class="form-horizontal" autocomplete="off">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>添加/编辑 属性</h3>
+        </div>
+        <div class="modal-body" >
+            <table class="table table-bordered table-hover">
+                <tbody>
+                <tr>
+                    <td>
+                        属性:
+                    </td>
+                    <td>
+                        <select class="input-medium m-wrap" tabindex="1" name="info[attr_id]" data-id="attr_id">
+                            <option value="0">--请选择--</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        属性值:
+                    </td>
+                    <td>
+                        <input type="text" placeholder="属性值" class="input-medium" name="info[current_value]" data-id="current_value" data-rule='required'  value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        排序:
+                    </td>
+                    <td>
+                        <input type="text" placeholder="排序" class="input-medium" name="info[sort]" data-id="sort" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        是否可用:
+                    </td>
+                    <td>
+                        <input type="radio" name="info[is_enabled]" data-id="is_enabled" value="1" checked>
+                            是
+                        <input type="radio" name="info[is_enabled]" data-id="is_enabled" value="-1">
+                            否
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <input type='hidden' name='info[id]' data-name="id"/>
+            <input type='hidden' name='info[category_id]' data-name="category_id"/>
+            <input type="hidden" name="info[store_id]" data-name="store_id"/>
+            <button type="submit" class="btn btn-success">提交</button>
+            <a href="javascript:void(0)" class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </form>
+</div>
+
+<!-- BEGIN FOOTER -->
+<include file="Public::footer"/>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<script src="{$Think.const.JS_URL}jquery-1.8.3.min.js"></script>
+<script src="{$Think.const.ASSETS_URL}bootstrap/js/bootstrap.min.js"></script>
+
+<script src="{$Think.const.JS_URL}jquery.validator.js"></script>
+<script src="{$Think.const.JS_URL}zh-CN.js"></script>
+<!-- ie8 fixes -->
+<!--[if lt IE 9]>
+<script src="js/excanvas.js"></script>
+<script src="js/respond.js"></script>
+<![endif]-->
+
+
+
+<!--地图封装接口 以及一些初始化的数据 -->
+<script src="{$Think.const.JS_URL}scripts.js"></script>
+<script>
+    var category = {$categoryId};
+    if(category == {$Think.config.CATEGORY_FUNERAL_ID}){
+        ajaxUrl = "{:U('addFuneralAttribute')}";
+    }else if(category == {$Think.config.CATEGORY_CEMETERY_ID}){
+        ajaxUrl = "{:U('addCemeteryAttribute')}";
+    }
+
+    $('.add').click(function(){
+        $('input[data-name="id"]').remove();
+        document.getElementById('addForm').reset();
+        $('input[data-name="category_id"]').val(category);
+        $('input[data-name="store_id"]').val({$storeId});
+        $.ajax({
+            url:ajaxUrl,
+            type:'get',
+            success:function(v){
+                var data = eval("("+v+")");
+                var attr = data['attr'];
+                selectInfo(attr);
+                $('#add').modal();
+            }
+        })
+    })
+
+    $('#addForm').bind('valid.form',function(){
+        $.ajax({
+            url:"{:U('saveAttribute')}",
+            type:'post',
+            data:$(this).serialize(),
+            success:function(s){
+                var result = eval("("+s+")");
+                if(result['flag'] == 1){
+                    alert(result['msg']);
+                    window.location.reload();
+                }else{
+                    alert(result['msg']);
+                }
+            }
+        })
+        $('#add').modal('hide');
+    })
+
+    $('.edit').click(function(){
+        $('input[data-name="category_id"]').remove();
+        $('input[data-name="store_id"]').remove();
+        var id = $(this).attr('data-id');
+        $.ajax({
+            url:ajaxUrl,
+            type:'get',
+            data:{
+                id:id,
+            },
+            success:function(o){
+                var info = eval("("+o+")");
+                var data = info['storeAttr'];
+                var attrData = info['attr'];
+                selectInfo(attrData);
+                $('select[data-id="attr_id"]').val(data['attr_id']);
+                $('input[data-id="current_value"]').val(data['current_value']);
+                $('input[data-id="sort"]').val(data['sort']);
+                $('input[data-name="id"]').val(data['id']);
+                var enabled = $('input[data-id="is_enabled"]');
+                for (var i = 0; i < enabled.length; i++) {
+                    if(enabled[i].value == data['is_enabled']){
+                        enabled[i].checked = true;
+                        break;
+                    }
+                }
+                $('#add').modal();
+            }
+        })
+    })
+
+    function selectInfo(attr){
+        if(attr.length > 0){
+            var attrOption = "<option value='0'>--请选择--</option>";
+            for (var i = 0; i < attr.length; i++) {
+                attrOption += "<option value='"+attr[i]['id']+"'>"+attr[i]['attr_name']+"</option>";
+            }
+        }
+        $('select[data-id="attr_id"]').empty().append(attrOption);
+    }
+    //商家属性删除
+    function delAttribute(id,obj){
+        var o = $(obj);
+        if(!window.confirm('确定要删除？')){
+            event.preventDefault();
+        }else{
+            $.ajax({
+                url:'/system.php/BaseStore/delAttribute',
+                type:'post',
+                data:{'id':id},
+                async:false,
+                dataType:'json',
+                success : function(data){
+                    if(data.flg){
+                        
+                        window.location.reload();//刷新当前页面.
+                    }else{
+                        alert('删除失败');
+                    }
+                }
+            });
+        }
+    }
+
+    //启用商家属性
+    $('.enable').click(function(){
+        var id = $(this).attr('data-id');
+        $.ajax({
+            url: "{:U('enableAttribute')}",
+            type: 'post',
+            data: 'id='+id,
+            dataType:'json',
+            success: function (d) {
+                if (d.flg == 1) {
+                    window.location.reload();//刷新当前页面.
+                } else {
+                   alert('启用失败');
+                }
+            }
+        });
+    });
+</script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>
